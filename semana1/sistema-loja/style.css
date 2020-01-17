@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'IM Fell Great Primer SC', serif;
+    font-size: 12px;
+}
+
+nav, footer {
+    background-color:rgb(139, 33, 33) ;
+    text-align: center ;
+    color: rgb(248, 178, 47) ;
+    padding: 10px;
+    list-style-type: none;
+}
+
+nav ul {
+    list-style-type: none;
+}
+  
+nav li {
+    display: inline; /* barra horizontal */
+}
+  
+nav a{
+    text-decoration: none; /* tira as bolinhas */
+    color:black;
+    font-size: 1.2em;
+    padding: 1%;
+}
+
+nav div {
+    display:inline-block; 
+}
+
+#div1 {
+    width:20%;
+}
+
+#div2 {
+    width:75%;
+}
+
+nav img {
+    width: 25%;
+}
+
+.conteudo {
+    padding: 20px;
+    background-color:  rgb(218, 161, 55);
+    color: rgb(139, 33, 33);
+}
+
+.centraliza {
+    text-align: center ;
+}
+
+img {
+    width: 50% ;
+    max-width: 100%;
+}
+
+h1, li {
+    padding: 5px;
+}
+
+h1 {
+    font-size: 6em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+table img {
+    width: 200px ;
+}
+
+
+td {
+    text-align: center;
+}
