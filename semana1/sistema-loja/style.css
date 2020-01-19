@@ -71,6 +71,10 @@ h2 {
     font-size: 2em;
 }
 
+h3{
+    font-size: 1.4em;
+}
+
 p {
     font-size: 1.2em;
 }
@@ -82,4 +86,9 @@ table img {
 
 td {
     text-align: center;
+}
+
+#metade{
+    display:inline-table; 
+    width:40%;
 }
