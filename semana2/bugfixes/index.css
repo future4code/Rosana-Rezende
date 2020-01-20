@@ -121,6 +121,11 @@ td button:hover {
     background-color: #c4ad31;
 }
 
+td img {
+    width: 30px;
+    height: 30px;
+}
+
 .container-do-search {
     margin-top: 20px;
     height: 100px;
