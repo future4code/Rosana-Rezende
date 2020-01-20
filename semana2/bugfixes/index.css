@@ -20,6 +20,11 @@ h2 {
 input {
     height: 20px;
     width: 500px;
+    outline: none;
+}
+
+button {
+    outline: none;
 }
 
 button:focus {
@@ -79,7 +84,6 @@ div>p:first-child {
     width: 30%;
     margin: auto;
 }
-
 
 #container-para-comprar {
     background-color: #e7eb90;
