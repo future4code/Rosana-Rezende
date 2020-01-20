@@ -144,6 +144,11 @@ td img {
     opacity: 100%;
 }
 
+.container-do-search input {
+    border: none;
+    border-bottom: 2px solid black;
+}
+
 #back-button {
     background-color: white;
     width: 100px;
