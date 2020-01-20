@@ -76,7 +76,10 @@ div>p:first-child {
 
 #container-de-descricao>ol {
     padding: 15px 0px;
+    width: 30%;
+    margin: auto;
 }
+
 
 #container-para-comprar {
     background-color: #e7eb90;
