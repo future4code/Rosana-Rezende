@@ -118,6 +118,10 @@ td button {
     color: black;
 }
 
+td button:active {
+    color: white;
+}
+
 td button:hover {
     background-color: #c4ad31;
 }
