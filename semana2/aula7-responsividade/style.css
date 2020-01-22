@@ -1,0 +1,300 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    min-height: 600px;
+    margin: 0;
+}
+
+.menu {
+    background-color: gray;
+}
+
+p {
+    padding-left: 30px;
+}
+
+.conteudo {
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(42);
+}
+
+#vermelho {
+    background-color: red;
+    grid-row-start: 1;
+    grid-row-end: 7;
+    grid-column-start: 1;
+    grid-column-end: 7; 
+}
+
+.item {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+
+#um {
+    background-color: blue;
+    grid-row-start: 7;
+    grid-row-end: 13;
+    grid-column-start: 1;
+    grid-column-end: 3; 
+}
+
+#dois {
+    background-color: yellow;
+    grid-row-start: 7;
+    grid-row-end: 13;
+    grid-column-start: 3;
+    grid-column-end: 5;     
+}
+
+#tres {
+    background-color: green;
+    grid-row-start: 7;
+    grid-row-end: 13;
+    grid-column-start: 5;
+    grid-column-end: 7;     
+}
+
+#quatro {
+    background-color: blue;
+    grid-row-start: 13;
+    grid-row-end: 19;
+    grid-column-start: 1;
+    grid-column-end: 3;     
+}
+
+#cinco {
+    background-color: yellow;
+    grid-row-start: 13;
+    grid-row-end: 19;
+    grid-column-start: 3;
+    grid-column-end: 5;     
+}
+
+#seis {
+    background-color: green;
+    grid-row-start: 13;
+    grid-row-end: 19;
+    grid-column-start: 5;
+    grid-column-end: 7;     
+}
+
+#sete {
+    background-color: black;
+    color: white;
+    grid-row-start: 19;
+    grid-row-end: 36;
+    grid-column-start: 1;
+    grid-column-end: 4;     
+}
+
+#oito {
+    background-color: black;
+    color: white;
+    grid-row-start: 19;
+    grid-row-end: 36;
+    grid-column-start: 4;
+    grid-column-end: 7;     
+}
+
+#nove {
+    grid-row-start: 36;
+    grid-row-end: 42;
+    grid-column-start: 1;
+    grid-column-end: 3;     
+}
+
+#dez {
+    grid-row-start: 36;
+    grid-row-end: 42;
+    grid-column-start: 3;
+    grid-column-end: 5;     
+}
+
+#onze {
+    grid-row-start: 36;
+    grid-row-end: 42;
+    grid-column-start: 5;
+    grid-column-end: 7;     
+}
+
+
+@media screen and (max-device-width: 1400px) {
+    
+    #um {
+        grid-row-start: 7;
+        grid-row-end: 10;
+        grid-column-start: 1;
+        grid-column-end: 4; 
+    }
+    
+    #dois {
+        grid-row-start: 7;
+        grid-row-end: 10;
+        grid-column-start: 4;
+        grid-column-end: 7;     
+    }
+    
+    #tres {
+        grid-row-start: 10;
+        grid-row-end: 13;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+
+    #quatro {
+        grid-row-start: 13;
+        grid-row-end: 16;
+        grid-column-start: 1;
+        grid-column-end: 4;     
+    }
+    
+    #cinco {
+        grid-row-start: 13;
+        grid-row-end: 16;
+        grid-column-start: 4;
+        grid-column-end: 7;     
+    }
+    
+    #seis {
+        grid-row-start: 16;
+        grid-row-end: 19;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+
+    #nove {
+        grid-row-start: 36;
+        grid-row-end: 39;
+        grid-column-start: 1;
+        grid-column-end: 4;     
+    }
+    
+    #dez {
+        grid-row-start: 36;
+        grid-row-end: 39;
+        grid-column-start: 4;
+        grid-column-end: 7;     
+    }
+    
+    #onze {
+        grid-row-start: 39;
+        grid-row-end: 42;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+    
+}
+
+@media screen and (min-device-width: 601px) and (max-device-width: 1000px) {
+
+    .menu {
+        display: none;
+    }
+
+    .container {
+
+        grid-template-columns: 1fr;
+    }
+
+
+}
+
+@media screen and (max-device-width: 600px) {
+
+    .menu {
+        display: none;
+    }
+
+    .container {
+
+        grid-template-columns: 1fr;
+    }
+
+    #um {
+        grid-row-start: 7;
+        grid-row-end: 9;
+        grid-column-start: 1;
+        grid-column-end: 7; 
+    }
+    
+    #dois {
+        grid-row-start: 9;
+        grid-row-end: 11;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+    
+    #tres {
+        grid-row-start: 11;
+        grid-row-end: 13;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+
+    #quatro {
+        grid-row-start: 13;
+        grid-row-end: 15;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+    
+    #cinco {
+        grid-row-start: 15;
+        grid-row-end: 17;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+    
+    #seis {
+        grid-row-start: 17;
+        grid-row-end: 19;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+
+    #sete {
+        background-color: black;
+        color: white;
+        grid-row-start: 19;
+        grid-row-end: 28;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+    
+    #oito {
+        background-color: black;
+        color: white;
+        grid-row-start: 28;
+        grid-row-end: 36;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+
+    #nove {
+        grid-row-start: 36;
+        grid-row-end: 38;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+    
+    #dez {
+        grid-row-start: 38;
+        grid-row-end: 40;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+    
+    #onze {
+        grid-row-start: 40;
+        grid-row-end: 42;
+        grid-column-start: 1;
+        grid-column-end: 7;     
+    }
+    
+}
