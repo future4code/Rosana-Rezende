@@ -1,0 +1,97 @@
+div {
+    color: white;
+}
+
+.container1 {
+    display: flex;
+
+}
+
+
+#header {
+    background-color: #2ECC40;
+    height: 50px;
+    flex-basis: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+#menu {
+    background-color: #FFDC00;
+    height: 50px;
+    flex-basis: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+#content1 {
+    background-color: #F012BE;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container2 {
+    background-color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#content2 {
+    background-color: #0074D9 ;
+    flex-basis: 50%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#vazio {
+    background-color: white ;
+    height: 200px;
+    flex-basis: 25%;
+}
+
+.container3 {
+    height: 200px;
+    flex-basis: 25%;
+    /* PROPRIEDADES DO CONTAINER */
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    /* align-items: baseline; */
+}
+
+#image {
+    background-color: #FF4136 ;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#extra {
+    background-color: #01FF70;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#footer {
+    background-color: #B10DC9;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

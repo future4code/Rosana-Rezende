@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    font-size: 12px;
+    color: #0a0a0a;
+}
+
+nav {
+    background-color: #fdf9f3;
+    margin-top: 0;
+    padding: 2px 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;   
+}
+
+#dev {
+    background-color: black;
+    color: white;
+    width: 30%;
+    text-align: center;
+}
+
+#pesquisar {
+    justify-self: center;
+}
+
+input {
+    height: 5px;
+    max-width: 100%;
+    outline: none;
+    background-color:#e8e7e7;
+    border: none;
+    padding: 5px;
+}
+
+#redes-sociais {
+    justify-self: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 0 10%;
+    padding-top: 26px;
+    background-color: #f9f9fa;
+}
+
+.subtopico {
+    margin: 10px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    min-height: 100px;
+    background-color: #FFFFFF;
+}
+
+.conteudo {
+
+}
+
+.artigos {
+
+}
+
+#controle {
+    max-width: 100%;
+    text-align: center;
+}
+
+#feed {
+    background-color: #cfd7ff;
+    border: 1px solid #4e57ef;
+    box-shadow: 3px 4px 0px #4e57ef;
+    padding: 1px;
+}
+
+#um-artigo {
+   
+}           
+
+#substories {
+    
+}
+            
+.barra-lateral-esquerda
+
+#hastags {
+    
+}
+
+#widget {
+    
+}
+
+#links {
+   
+}
+
+#stickers {
+    
+}
+
+
+
+.barra-lateral-direita {
+
+}
+
+#join {
+    
+}
+
+#listing {
+    
+}
+
+#help {
+    
+}
+
+#ama {
+    
+}
+
+
+  

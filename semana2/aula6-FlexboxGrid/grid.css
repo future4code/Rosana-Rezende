@@ -1,0 +1,77 @@
+div {
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    background-color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 8fr 2fr 2fr 1fr;
+}
+
+#header {
+    background-color: #2ECC40;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+#menu {
+    background-color: #FFDC00;
+    grid-row-start: 1;
+    grid-row-end:2;
+    grid-column-start: 2;
+    grid-column-end: 6;
+}
+
+#content1 {
+    background-color: #F012BE;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    display: grid;
+    align-items: center;
+
+}
+
+#content2 {
+    background-color: #0074D9 ;
+    grid-row-start: 3;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    align-items: center;
+}
+
+#image {
+    background-color: #FF4136 ;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 4;
+    grid-column-end: 6;
+    display: grid;
+    align-items: center;
+}
+
+#extra {
+    background-color: #01FF70;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    grid-column-start: 4;
+    grid-column-end: 6;
+    display: grid;
+    align-items: center;
+}
+
+#footer {
+    background-color: #B10DC9;
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 1;
+    grid-column-end: 6;
+}
