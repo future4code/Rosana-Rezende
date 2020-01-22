@@ -1,0 +1,135 @@
+section {
+    display: flex;
+    min-height: 600px;
+    margin: 0;
+
+}
+
+.menu {
+    width: 20%;
+    background-color: gray;
+}
+
+.conteudo {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.vermelho {
+    background-color: red;
+    color: red;
+    height: 5rem;
+}
+
+.trio {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.dupla {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.item {
+    margin: 10px;
+    width: 31%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.item2 {
+    margin: 10px;
+    width: 50%;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+#um {
+    background-color: blue;
+}
+
+#dois {
+    background-color: yellow;
+}
+
+#tres {
+    background-color: green;
+}
+
+#quatro {
+    background-color: blue;
+}
+
+#cinco {
+    background-color: yellow;
+}
+
+#seis {
+    background-color: green;
+}
+
+#sete {
+    background-color: black;
+    color: white;
+}
+
+#oito {
+    background-color: black;
+    color: white;
+}
+
+@media screen and (max-device-width: 1400px) {
+    .trio {
+        flex-wrap: wrap;
+    }
+
+    .cinquenta {
+        width: 46%;
+    }
+    
+    .cem {
+        width: 96%;
+    }
+}
+
+@media screen and (min-device-width: 601px) and (max-device-width: 1000px) {
+
+    .menu {
+        display: none;
+    }
+
+    .conteudo {
+        width: 100%;
+    }
+
+
+}
+
+@media screen and (max-device-width: 600px) {
+
+    .menu {
+        display: none;
+    }
+
+    .conteudo {
+        width: 100%;
+    }
+
+    .dupla {
+        flex-wrap: wrap;
+    }
+
+    .cinquenta {
+        width: 96%;
+    }
+}
