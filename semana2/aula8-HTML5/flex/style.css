@@ -28,8 +28,6 @@ main {
     margin: 2%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 30%;
-
 }
 
 main section {
@@ -42,9 +40,13 @@ video {
     width: 100%;
 }
 
+section:nth-of-type(-n+2) article {
+    border: 1px solid #80C080;
+}
+
 article {
     margin: 1%;
-    border: 1px solid #80C080;
+    width: 100%;
 }
 
 article img {
@@ -55,12 +57,15 @@ a {
     text-decoration:none;
 }
 
+p {
+    padding: 10px 0;
+}
+
 footer {
     margin: 0;
     background-color: #323B3E;
     color: white;
     padding: 1% 10px;
-
 }
 
 @media screen and (max-device-width: 420px) {
