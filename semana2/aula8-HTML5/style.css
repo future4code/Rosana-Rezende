@@ -21,6 +21,7 @@ main {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     /* gap: 0; */
+    margin-bottom: 30%;
 
 }
 
@@ -30,7 +31,6 @@ main {
 
 video {
     width: 100%;
-    margin-bottom: 30%;
 }
 
 article {
@@ -40,6 +40,10 @@ article {
 
 article img {
     width: 100%;
+}
+
+a {
+    text-decoration:none;
 }
 
 footer {
