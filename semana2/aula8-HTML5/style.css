@@ -1,0 +1,66 @@
+header {
+    margin: 0;
+    background-color: #EF843A;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+}
+
+section:nth-of-type(2) {
+    justify-self: right;
+    padding: 5%;
+}
+
+input {
+    border: none;
+    padding: 5%;
+}
+
+main {
+    margin: 2%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    /* gap: 0; */
+
+}
+
+.main-video {
+    grid-template-columns: 1fr;
+}
+
+video {
+    width: 100%;
+}
+
+article {
+    margin: 1%;
+    border: 1px solid #80C080;
+}
+
+article img {
+    width: 100%;
+}
+
+a {
+    text-decoration:none;
+}
+
+footer {
+    margin: 0;
+    background-color: #323B3E;
+    color: white;
+    padding: 1% 10px;
+
+}
+
+@media screen and (max-device-width: 420px) {
+    /* celulares */
+
+    main {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
