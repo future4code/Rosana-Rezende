@@ -21,7 +21,7 @@
 // VI.  3
 // VII.  1
 
-
+/*
 // Exercícios de escrita de código
 
 // 1
@@ -83,3 +83,44 @@ console.log("b. O valor a ser pago por uma residência que consuma 280 quilowatt
 let desconto = 0.15
 valorFinal = consumoResidencia - (consumoResidencia * desconto)
 console.log("c. Com desconto de 15%, o valor a ser pago pela mesma residência é de: R$", valorFinal)
+
+
+*/
+
+// DESAFIO
+
+// a
+let libra = 20
+let kg1 = libra * 0.453592
+console.log("20lb equivalem a ", kg1, " kg")
+
+// b 
+
+let onca = 10.5
+let kg2 = onca * 0.0283495
+console.log("10.5oz equivalem a ", kg2, " kg")
+
+// c 
+let milha = 100
+let metro1 = milha * 1609.34
+console.log("100mi equivalem a ", metro1, " m")
+
+// d 
+let pes = 50
+let metro2 = pes * 0.3048
+console.log("50ft equivalem a ", metro2, " m")
+
+// e 
+let galao = 103.56
+let litro1 = galao * 3.78541
+console.log("103.56gal equivalem a ", litro1, " l")
+
+// f 
+let xicara = 450
+let litro2 = xicara * 0.25
+console.log("450 xic equivalem a ", litro2, " l")
+
+// g 
+let libra2 = prompt("Insira a quantidade de libras")
+let kg3 = libra2 * 0.453592
+console.log(libra2, "lb equivalem a ", kg3, " kg")
