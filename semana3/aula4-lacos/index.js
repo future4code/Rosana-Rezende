@@ -61,10 +61,12 @@
 // console.log(novaArray)
 
 // d) 
+// let resultado = []
 // for (numero of array) {
 //     i = array.indexOf(numero)
-//     console.log("O elemento do índex " + i + " é " + numero)
+//     resultado.push("\nO elemento do índex " + i + " é " + numero)
 // }
+// console.log(resultado)
 
 
 // DESAFIO 2
@@ -95,25 +97,25 @@
 
 // Achei fácil fazer a alteração, foi só mudar o prompt por uma geração aleatória de números
 
-const numero = Math.floor(Math.random() * 101)
-let chute = Number(prompt("Chute um número:"))
-let qtdChutes = 0
+// const numero = Math.floor(Math.random() * 101)
+// let chute = Number(prompt("Chute um número:"))
+// let qtdChutes = 0
 
-console.log("Vamos jogar!\n")
+// console.log("Vamos jogar!\n")
 
-while (chute !== numero) {
-    while (chute > numero) {
-        console.log("O número chutado foi: " + chute + "\nErrrrrrrrou, é menor")
-        chute = Number(prompt("Chute um número:"))
-        qtdChutes++
-    }     
-    while (chute < numero) {
-        console.log("O número chutado foi: " + chute + "\nErrrrrrrrou, é maior")
-        chute = Number(prompt("Chute um número:"))
-        qtdChutes++
-    } 
-}
+// while (chute !== numero) {
+//     while (chute > numero) {
+//         console.log("O número chutado foi: " + chute + "\nErrrrrrrrou, é menor")
+//         chute = Number(prompt("Chute um número:"))
+//         qtdChutes++
+//     }     
+//     while (chute < numero) {
+//         console.log("O número chutado foi: " + chute + "\nErrrrrrrrou, é maior")
+//         chute = Number(prompt("Chute um número:"))
+//         qtdChutes++
+//     } 
+// }
 
-console.log("O número chutado foi: " + chute + "\nAcertou!!\n O número de tentativas foi: " + (qtdChutes++ + 1))
+// console.log("O número chutado foi: " + chute + "\nAcertou!!\n O número de tentativas foi: " + (qtdChutes++ + 1))
 
 
