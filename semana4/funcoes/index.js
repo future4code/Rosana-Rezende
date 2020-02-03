@@ -98,18 +98,18 @@ const array = [10, 23, 45, 78, 90, 52, 35, 67, 84, 22]
 // console.log(quantidadeElementos(array))
 
 // b.
-// let verificaParidade = (numero) => {
-//     if (numero % 2 === 0) {
-//         return numero + " é par"
-//     } else {
-//         return numero + " é ímpar"
-//     }
-// }
-// console.log(verificaParidade(5))
+let verificaParidade = (numero) => {
+    if (numero % 2 === 0) {
+        return true
+    } else {
+        return false
+    }
+}
+// console.log("É Par? " + verificaParidade(5))
 
 // c.
 // let quantidadeDePares = (arrayDeNumeros) => {
-//     novaArray = []
+//     let novaArray = []
 //     for (numero of arrayDeNumeros) {
 //         if (numero % 2 === 0) {
 //             novaArray.push(numero)
@@ -120,16 +120,13 @@ const array = [10, 23, 45, 78, 90, 52, 35, 67, 84, 22]
 // console.log(quantidadeDePares(array))
 
 // d.
-// let quantidadeDePares = (arrayDeNumeros) => {
-//     novaArray = []
-//     for (numero of arrayDeNumeros) {
-//         if (numero % 2 === 0) {
-//             novaArray.push(numero)
-//             console.log(numero + " é par")
-//         } else {
-//             console.log(numero + " é ímpar")
-//         }
-//     }
-//     return novaArray.length
-// }
-// console.log(quantidadeDePares(array))
+let quantidadeDePares = (arrayDeNumeros) => {
+    let novaArray = []
+    for (numero of arrayDeNumeros) {
+        if (verificaParidade(numero) === true)
+        novaArray.push(numero)
+        }
+    return novaArray.length
+}
+
+console.log(quantidadeDePares(array))
