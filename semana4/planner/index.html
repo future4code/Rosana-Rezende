@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <title>Planner</title>
+</head>
+<body>
+
+    <div class="principal">
+        <header>
+        
+            <img src="img/planner.png" id="logo">
+    
+            <label>Nova Tarefa:</label>
+            <input type="text" style="width:30%">
+            <select name="select">
+              <option value="segunda">Segunda-feira</option>
+              <option value="terca">Terça-feira</option>
+              <option value="quarta" >Quarta-feira</option>
+              <option value="quinta" >Quinta-feira</option>
+              <option value="sexta" >Sexta-feira</option>
+              <option value="sabado" >Sábado</option>
+              <option value="domingo" >Domingo</option>
+            </select>
+            <button onclick="criaTarefa()">Criar tarefa!</button>
+        
+        
+          </header>
+        
+          <main role="main">
+        
+            <section id="section-segunda">
+              <h2>Segunda</h2>
+              <ul class="conteudo"></ul>
+            </section>
+        
+            <section id="section-terca">
+              <h2>Terça</h2>
+              <ul class="conteudo"></ul>
+            </section>
+        
+            <section id="section-quarta">
+              <h2>Quarta</h2>
+              <ul class="conteudo"></ul>
+            </section>
+        
+            <section id="section-quinta">
+              <h2>Quinta</h2>
+              <ul class="conteudo"></ul>
+            </section>
+        
+            <section id="section-sexta">
+              <h2>Sexta</h2>
+              <ul class="conteudo"></ul>
+            </section>
+        
+            <section id="section-sabado">
+              <h2>Sábado</h2>
+              <ul class="conteudo"></ul>
+            </section>
+        
+            <section id="section-domingo">
+              <h2>Domingo</h2>
+              <ul class="conteudo"></ul>
+            </section>
+        
+          </main>
+        
+          <footer>
+            <p>Desenvolvido por <a href="https://github.com/rosanarezende">Rosana Rezende</a></p>
+          </footer>
+    </div>
+
+    
+    
+</body>
+</html>
