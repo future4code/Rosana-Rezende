@@ -29,4 +29,21 @@ const criarPost = () => {
 
     // // TESTES
     // console.log(arrayDePosts[0].titulo)
+
+    colocarPostNaPagina(novoTitulo, novoAutor, novoConteudo, novoHashtags)
+
+}
+
+// function colocarPostNaPagina(titulo, autor, conteudo, hashtags) {
+//     document.getElementById("main-container").innerHTML += "<h4>" + 
+//     hashtags + "</h4><h2>" + titulo + "</h2><p>" + conteudo + 
+//     "</p><h4>" + autor + "</h4>"
+// }
+
+function colocarPostNaPagina(novoTitulo, novoAutor, novoConteudo, novoHashtags) {
+    document.getElementById("main-container").innerHTML += 
+        "<article><h3>" + novoTitulo + 
+        "</h3><h6>" + novoAutor + 
+        "</h6><p>" + novoConteudo + 
+        "</p><p>" + novoHashtags + "</p></article>"
 }
