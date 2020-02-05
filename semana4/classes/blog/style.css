@@ -6,8 +6,9 @@ textarea {
 article {
     background-color: rgb(219, 231, 227);
     padding: 2vh 2vw;
-    margin-bottom: 2vh;
+    margin: 2vh 2vw;
     border-radius: 5%;
+    border: 3px dotted white;
 }
 
 img {
