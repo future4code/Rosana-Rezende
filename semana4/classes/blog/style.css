@@ -7,4 +7,11 @@ article {
     background-color: rgb(219, 231, 227);
     padding: 2vh 2vw;
     margin-bottom: 2vh;
+    border-radius: 5%;
+}
+
+img {
+    max-height: 20vh;
+    display: block;
+    margin: 0 auto;
 }

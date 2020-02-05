@@ -1,7 +1,8 @@
 class Post {
-    constructor(titulo, autor, conteudo, hashtags) {
+    constructor(titulo, autor, imagem, conteudo, hashtags) {
         this.titulo = titulo
         this.autor = autor
+        this.imagem = imagem
         this.conteudo = conteudo
         this.hashtags = hashtags
     }
@@ -12,9 +13,10 @@ let arrayDePosts = []
 const criarPost = () => {
     let novoTitulo = document.getElementById("novo-titulo").value
     let novoAutor = document.getElementById("novo-autor").value
+    let novoImagem = document.getElementById("novo-imagem").value
     let novoConteudo = document.getElementById("novo-conteudo").value
     let novoHashtags = document.getElementById("novo-hashtags").value
-    let publicacao = new Post(novoTitulo, novoAutor, novoConteudo, novoHashtags)
+    let publicacao = new Post(novoTitulo, novoAutor, novoImagem, novoConteudo, novoHashtags)
     arrayDePosts.push(publicacao)
     
     //TESTE
@@ -23,6 +25,7 @@ const criarPost = () => {
     // LIMPAR
     document.getElementById("novo-titulo").value = ""
     document.getElementById("novo-autor").value = ""
+    document.getElementById("novo-imagem").value = ""
     document.getElementById("novo-conteudo").value = ""
     document.getElementById("novo-hashtags").value = ""
     console.log(arrayDePosts)
@@ -30,20 +33,15 @@ const criarPost = () => {
     // // TESTES
     // console.log(arrayDePosts[0].titulo)
 
-    colocarPostNaPagina(novoTitulo, novoAutor, novoConteudo, novoHashtags)
+    colocarPostNaPagina(novoTitulo, novoAutor, novoImagem, novoConteudo, novoHashtags)
 
 }
 
-// function colocarPostNaPagina(titulo, autor, conteudo, hashtags) {
-//     document.getElementById("main-container").innerHTML += "<h4>" + 
-//     hashtags + "</h4><h2>" + titulo + "</h2><p>" + conteudo + 
-//     "</p><h4>" + autor + "</h4>"
-// }
-
-function colocarPostNaPagina(novoTitulo, novoAutor, novoConteudo, novoHashtags) {
+function colocarPostNaPagina(novoTitulo, novoAutor, novoImagem, novoConteudo, novoHashtags) {
     document.getElementById("main-container").innerHTML += 
         "<article><h3>" + novoTitulo + 
         "</h3><h6>" + novoAutor + 
-        "</h6><p>" + novoConteudo + 
+        "</h6><img src=\'" + novoImagem + 
+        "\'><p>" + novoConteudo + 
         "</p><p>" + novoHashtags + "</p></article>"
 }
