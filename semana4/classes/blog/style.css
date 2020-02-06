@@ -1,0 +1,53 @@
+* {
+    margin: 1vh 1vw;
+    font-family: 'Lobster', cursive;
+}
+
+main {
+    display: flex;
+    background-color: rgb(238, 236, 236);
+    padding: 2vh 2vw;;
+}
+
+textarea, input {
+    display: block;
+    margin-bottom: 1vh;
+    width: 25vw;
+}
+
+article {
+    background-color: rgb(219, 231, 227);
+    padding: 2vh 2vw;
+    margin: 2vh 2vw;
+    border-radius: 5%;
+    border: 3px dotted white;
+    width: 70vh;
+}
+
+img {
+    max-height: 20vh;
+    display: block;
+    margin: 0 auto;
+}
+
+sup {
+    color: red;
+    font-size: xx-small;
+    font-style: italic;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 1vh;
+}
+
+@media screen and (max-device-width: 1200px) {
+
+    main {
+        flex-direction: column;
+    }
+
+    textarea, input, article {
+        width: 80vw;
+    }
+}

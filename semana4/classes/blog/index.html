@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+​
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <title>Blog</title>
+</head>
+​
+<body>
+
+    <main>
+
+        <section>
+            <label>Título <sup>*obrigatório</sup></label>
+            <input id="novo-titulo"></input>
+            <label>Autor <sup>*obrigatório</sup></label>
+            <input id="novo-autor"></input>
+            <label>Imagem</label>
+            <input id="novo-imagem"></input>
+            <label>Conteúdo <sup>*obrigatório</sup></label>
+            <textarea id="novo-conteudo" rows="10"></textarea>
+            <label>Hashtags <sup>*obrigatório</sup></label>
+            <input id="novo-hashtags"></input>
+            <button onclick="criarPost()">Publicar</button>
+                <!-- tentei usar window.location='posts.html' , mas não deu certo -->
+    
+        </section>
+        
+        <section id="main-container">
+        
+            <h1>Meu Querido Blog</h1>
+            ​
+        </section>
+
+    </main>
+    ​
+</body>
+
+</html>
