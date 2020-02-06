@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script src="index.js" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        
+    </header>
+
+    <main role="main">
+
+        <section id="principal">
+
+            <article id="controlador-de-despesas">
+
+                <h2>Controlador de Despesas</h2>
+    
+                <h3>Cadastrar despesas</h3>
+    
+                <div class="partes">
+                    <label>Valor </label>
+                    <input type="number" id="novo-valor">
+                </div>
+    
+                <div class="partes">
+                    <label>Tipo</label>
+                    <select id="novo-tipo">
+                        <option value="casa">Casa</option>
+                        <option value="alimentacao">Alimentação</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="educacao">Educação</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+    
+                <div class="partes">
+                    <label>Descrição</label>
+                    <input type="text" id="nova-descricao">
+                </div>
+    
+                <button onclick="cadastraDespesa()">Cadastrar Despesa</button>
+    
+            </article>
+    
+    
+            <article id="despesas-detalhadas">
+    
+                <h2>Despesas Detalhadas</h2>
+    
+                <div class="partes">
+                    <label>Tipo</label>
+                    <select id="filtrar-tipo">
+                        <option value="casa">Casa</option>
+                        <option value="alimentacao">Alimentação</option>
+                        <option value="transporte">Transporte</option>
+                        <option value="educacao">Educação</option>
+                        <option value="outros">Outros</option>
+                    </select>
+                </div>
+    
+                <div class="partes">
+                    <label>Valor Mínimo </label>
+                    <input type="number" id="filtrar-valor-minimo">
+                </div>
+    
+                <div class="partes">
+                    <label>Valor Máximo </label>
+                    <input type="number" id="filtrar-valor-maximo">
+                </div>
+    
+                <button onclick="filtraDespesas()">Filtrar</button>
+                <button>Limpar Filtros</button>
+    
+            </article>
+    
+    
+            <article id="extrato">
+    
+                <h2>Extrato</h2>
+    
+                <h3>Valor Total:</h3>
+    
+            </article>
+            
+        </section>
+
+    <section id="parte2">
+        
+        <section id="filtragem">
+            <h2>Filtragem</h2>
+        </section>
+
+        <section id="exibicao">
+            <h2>Todas as Despesas</h2>
+        </section>
+
+    </section>
+
+        
+
+        
+
+
+        
+
+    </main>
+
+    <footer>
+        
+    </footer>
+
+</body>
+
+</html>
