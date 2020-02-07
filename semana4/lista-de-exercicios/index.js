@@ -75,9 +75,20 @@ Resultado: 1590
 
 // --------------------- EXERCÍCIOS DE LÓGICA DE PROGRAMAÇÃO
 
+/* 1)
+É possível iterar uma lista/array por meio de loops (index ou operador of)
+ ou por meio de funções (forEach, map e filter)
+*/
 
+// const lista1 = [1, 2, 3, 4, 5]
+// let lista2 = []
 
+// for (let numero of lista1) {
+//     let novoNumero = numero * 2
+//     lista2.push(novoNumero)
+// }
 
+// console.log(lista2) // [2, 4, 6, 8, 10]
 
 
 
