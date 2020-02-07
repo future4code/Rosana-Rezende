@@ -274,3 +274,48 @@ e as mais complexas por objetos.
 // }
 // console.log(menorDeVinte(arrayteste))
 
+// 2)
+// Para teste
+// const array = [1, 2, 3, 4, 5, 6]
+
+//a)
+// const multiplicaPorDois = (array) => {
+//     novaArray = []
+//     for(numero of array) {
+//         novoNumero = numero * 2
+//         novaArray.push(novoNumero)
+//     }
+//     return novaArray
+// }
+// console.log(multiplicaPorDois(array))
+
+// b)
+// const multiplicaPorTresEString = (array) => {
+//     novaArray = []
+//     for(numero of array) {
+//         novoNumero = String(numero * 3)
+//         novaArray.push(novoNumero)
+//     }
+//     return novaArray
+// }
+// console.log(multiplicaPorTresEString(array))
+
+// c)
+// const novaString = (array) => {
+//     novaArray = []
+//     for(numero of array) {
+//         if (numero % 2 !== 0) {
+//             novoNumero = `${numero} é ímpar`
+//             novaArray.push(novoNumero)
+//         } else {
+//             novoNumero = `${numero} é par`
+//             novaArray.push(novoNumero)
+//         }        
+//     }
+//     return novaArray
+// }
+// console.log(novaString(array))
+
+
+
+
