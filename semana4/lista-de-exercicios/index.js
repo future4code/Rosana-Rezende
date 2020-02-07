@@ -169,6 +169,12 @@ Além disso, devemos substituir o while, que geraria um loop infinito, por um fo
 // }
 // imprimeSegundoMaiorEMenor([8, 5, 9, 7, 10, 20, 90])
 
+// 2)
+// const olaFuture = () => {
+//     alert("Hello Future4")
+// }
+// olaFuture()
+
 
 
 // --------------------- EXERCÍCIOS DE OBJETOS
