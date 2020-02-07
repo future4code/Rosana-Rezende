@@ -91,6 +91,15 @@ Resultado: 1590
 // console.log(lista2) // [2, 4, 6, 8, 10]
 
 
+/* 2)
+a) false
+b) false
+c) true
+d) true
+e) true
+*/
+
+
 
 
 // --------------------- EXERCÍCIOS DE FUNÇÕES
