@@ -351,4 +351,32 @@ e as mais complexas por objetos.
 // console.log(naoPodeEntrar(pessoas))
 
 
+// 4)
+// const consultas = [
+//     { nome: "João", genero: "masculino", cancelada: true, dataDaConsulta: "01/10/2019" },
+//     { nome: "Pedro", genero: "masculino", cancelada: false, dataDaConsulta: "02/10/2019" },
+//     { nome: "Paula", genero: "feminino", cancelada: true, dataDaConsulta: "03/11/2019" },
+//     { nome: "Márcia", genero: "feminino", cancelada: false, dataDaConsulta: "04/11/2019" }
+// ]
 
+// const filtraEmail = consultas.map( (chave, index, array) => {
+
+//     if (chave.genero === "feminino") {
+//         if (chave.cancelada === false) {
+//             return `Olá, Sra. ${chave.nome}. Estamos enviando esta mensagem para lembrá-la da sua consulta no dia ${chave.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
+//         } else {
+//             return `Olá, Sra. ${chave.nome}. Infelizmente, sua consulta marcada para o dia ${chave.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
+//         }
+//     }
+
+//     if (chave.genero === "masculino") {
+//         if (chave.cancelada === false) {
+//             return `Olá, Sr. ${chave.nome}. Estamos enviando esta mensagem para lembrá-lo da sua consulta no dia ${chave.dataDaConsulta}. Por favor, acuse o recebimento deste e-mail.`
+//         } else {
+//             return `Olá, Sr. ${chave.nome}. Infelizmente, sua consulta marcada para o dia ${chave.dataDaConsulta} foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la`
+//         }
+//     }
+
+// })
+
+// console.log(filtraEmail)
