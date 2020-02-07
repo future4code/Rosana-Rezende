@@ -221,11 +221,24 @@ e as mais complexas por objetos.
 // alert(`Venha assistir ao filme ${meuFilmeFavorito.titulo}, de ${meuFilmeFavorito.ano}, dirigido por ${meuFilmeFavorito.diretor} e estrelado por ${meuFilmeFavorito.elenco[0]}, ${meuFilmeFavorito.elenco[1]} e ${meuFilmeFavorito.elenco[2]} `)
 
 
-
+// 4)
+// const rosana = {
+//     nome: "Rosana",
+//     idade: 32,
+//     email: "rezende_rosana@hotmail.com",
+//     endereco: "Avenida Governador Dias Lopes, 10"
+// }
+// const anonimizarPessoa = (pessoa) => {
+//     const pessoaAnonima = {
+//         ...pessoa,
+//         nome: "ANÔNIMO"
+//     }
+//     return pessoaAnonima
+// }
+// console.log(rosana)
+// console.log(anonimizarPessoa(rosana))
 
 
 
 // --------------------- EXERCÍCIOS DE FUNÇÕES DE ARRAY
-
-
 
