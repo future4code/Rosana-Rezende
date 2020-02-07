@@ -114,6 +114,18 @@ Além disso, devemos substituir o while, que geraria um loop infinito, por um fo
 // qualquerFuncao(5)
 
 
+// 4)
+// const descobreQualTriangulo = (a, b, c) => {
+//     if ((a === b) && (a === c) && (b === c)) {
+//         return "É equilátero"
+//     } else if ( ((a === b) && (a !== c)) || ((a === c) && (a !== b)) || ((b === c) && (b !== a))) {
+//         return "É isósceles"
+//     } else if ((a !== b) && (a !== c) && (b !== c)) {
+//         return "É escaleno"
+//     }
+// }
+// console.log(descobreQualTriangulo(3, 2, 1))
+
 
 
 
