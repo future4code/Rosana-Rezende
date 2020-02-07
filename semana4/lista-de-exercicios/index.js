@@ -382,41 +382,31 @@ alert(`Venha assistir ao filme ${meuFilmeFavorito.titulo}, de ${meuFilmeFavorito
 // console.log(filtraEmail)
 
 // 5)
-// const contas = [
-//     { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
-//     { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
-//     { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
-//     { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
-//     { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
-//     { cliente: "Soter", saldoTotal: 1200, compras: [] }
-// ]
+const contas = [
+    { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
+    { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
+    { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
+    { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
+    { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
+    { cliente: "Soter", saldoTotal: 1200, compras: [] }
+]
 
-// contas.forEach((chave, index, array) => {
+const atualizaSaldo = () => {
 
-//     if (chave.cliente === "João") {
-//         chave.saldoTotal = 400
-//     }
+    const atualiza = contas.map( (conta, index, array) => {
 
-//     if (chave.cliente === "Paula") {
-//         chave.saldoTotal = 6260
-//     }
+        for (i = 0; i < conta.compras.length; i++) {
+            let debito = 0
+            debito += conta.compras[i]
 
-//     if (chave.cliente === "Pedro") {
-//         chave.saldoTotal = -3340
-//     }
+            let novoSaldo = conta.saldoTotal - debito
+            conta.saldoTotal = novoSaldo
+        }
 
-//     if (chave.cliente === "Luciano") {
-//         chave.saldoTotal = -1900
-//     }
+        return conta
 
-//     if (chave.cliente === "Artur") {
-//         chave.saldoTotal = 1300
-//     }
+    })
+    return atualiza
+}
 
-//     if (chave.cliente === "Soter") {
-//         chave.saldoTotal = 1200
-//     }
-
-// })
-
-// console.log(contas)
+console.log(atualizaSaldo())
