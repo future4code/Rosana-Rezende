@@ -99,6 +99,22 @@ d) true
 e) true
 */
 
+/* 3)
+O código não funciona.
+A quantidadeDeNumerosPares deveria ser um parâmetro dentro de uma função.
+Além disso, devemos substituir o while, que geraria um loop infinito, por um for.
+
+*/
+
+// const qualquerFuncao = (quantidadeDeNumerosPares) => {
+//     for(let i = 0; i < quantidadeDeNumerosPares; i++) {
+//         console.log(i*2)
+//     }
+// }
+// qualquerFuncao(5)
+
+
+
 
 
 
