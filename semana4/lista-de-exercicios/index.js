@@ -211,6 +211,18 @@ e as mais complexas por objetos.
 // }
 // console.log(criaRetangulo(10,20))
 
+//3)
+// const meuFilmeFavorito = {
+//     titulo: "O som do coração",
+//     ano: 2008,
+//     diretor: "Kirsten Sheridan",
+//     elenco: ["Freddie Highmore", "Keri Russell", "Jonathan Rhys-Meyers"]
+// }
+// alert(`Venha assistir ao filme ${meuFilmeFavorito.titulo}, de ${meuFilmeFavorito.ano}, dirigido por ${meuFilmeFavorito.diretor} e estrelado por ${meuFilmeFavorito.elenco[0]}, ${meuFilmeFavorito.elenco[1]} e ${meuFilmeFavorito.elenco[2]} `)
+
+
+
+
 
 
 // --------------------- EXERCÍCIOS DE FUNÇÕES DE ARRAY
