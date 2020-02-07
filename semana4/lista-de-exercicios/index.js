@@ -197,6 +197,21 @@ e as mais complexas por objetos.
 
 */
 
+// 2)
+// const criaRetangulo = (lado1, lado2) => {
+//     let perimetroValor = 2 * (lado1 + lado2)
+//     let areaValor = lado1 * lado2
+//     let retangulo = {
+//         largura: lado1,
+//         altura: lado2,
+//         perimetro: perimetroValor,
+//         area: areaValor
+//     }
+//     return retangulo
+// }
+// console.log(criaRetangulo(10,20))
+
+
 
 // --------------------- EXERCÍCIOS DE FUNÇÕES DE ARRAY
 
