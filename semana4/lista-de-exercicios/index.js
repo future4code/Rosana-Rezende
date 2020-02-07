@@ -179,6 +179,23 @@ Além disso, devemos substituir o while, que geraria um loop infinito, por um fo
 
 // --------------------- EXERCÍCIOS DE OBJETOS
 
+/* 1)
+Arrays são variáveis que podem guardar e acessar mais de uma informação 
+ao mesmo tempo, como uma espécie de lista, por exemplo: 
+const array = [1, 2, 3, "a", "b", "c"]
+
+Objetos, por sua vez, permitem que representemos dados mais complexos. São como
+uma estante com muitas gavetas, nas quais podemos colocar propriedades diferentes,
+cada qual contendo uma chave e um valor.
+const sobreMim = {
+    nome: "Rosana",
+    idade: 32,
+}
+
+Estruturas mais simples, portanto, podem ser representadas por arrays
+e as mais complexas por objetos.
+
+*/
 
 
 // --------------------- EXERCÍCIOS DE FUNÇÕES DE ARRAY
