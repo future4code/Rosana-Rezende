@@ -31,6 +31,7 @@ const cadastraDespesa = () => {
         console.log(arrayDeDespesas)
 
         colocarNaPagina(novoValor, novoTipo, novaDescricao)
+        valorTotal(arrayDeDespesas)
     }
 }
 
@@ -54,6 +55,10 @@ const filtraDespesas = () => {
             return despesa.tipo === filtraTipo && despesa.valor >= filtraValorMinimo && despesa.valor <= filtraValorMaximo
         }
     })
+    // LIMPAR
+    document.getElementById("filtrar-tipo").value = ""
+    document.getElementById("filtrar-valor-minimo").value = ""
+    document.getElementById("filtrar-valor-maximo").value = ""
 
     colocarNaPagina2(filtro)
     console.log(filtro)
@@ -64,11 +69,30 @@ function colocarNaPagina2(filtro) {
         let filtradoTipo = despesa.tipo
         let filtradoValor = despesa.valor
         let filtradoDescricao = despesa.descricao
-        document.getElementById("filtragem").innerHTML +=
+        document.getElementById("dentro-filtragem").innerHTML +=
             "<div><p>Valor: <b><i>" + filtradoTipo +
             "</i></b><p>Tipo de despesa: <b><i>" + filtradoValor +
             "</i></b><p>Descrição: <b><i>" + filtradoDescricao + "</i></b></p></div>"
     })
 }
 
+const apagaFiltragem = () => {
+    document.getElementById("dentro-filtragem").innerHTML = ""
+}
 
+
+//
+// document.getElementById("extrato").innerHTML = 
+//     "<h4>Despesas de casa:</h4><i> " + xxx + " </i>"
+
+
+
+function valorTotal(arrayDeDespesas) {
+    let total = 0
+    for (let i = 0; i < arrayDeDespesas.length; i++) {
+        let novoValor = Number(arrayDeDespesas[i].valor)
+        total += novoValor
+    }
+    document.getElementById("total").innerHTML = "<b>Valor Total: </b>" + total
+
+}

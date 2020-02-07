@@ -47,6 +47,10 @@ button {
     margin-bottom: 1vh;
 }
 
+#dentro-filtragem {
+    margin: 0;
+}
+
 #exibicao {
     background-color: rgb(244, 169, 112);
     padding: 5vh 5vw;

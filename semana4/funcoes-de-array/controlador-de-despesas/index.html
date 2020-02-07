@@ -78,16 +78,18 @@
                 </div>
     
                 <button onclick="filtraDespesas()">Filtrar</button>
-                <button>Limpar Filtros</button>
+                <button onclick="apagaFiltragem()">Limpar Filtros</button>
     
             </article>
     
     
-            <article id="extrato">
+            <article>
     
                 <h2>Extrato</h2>
-    
-                <h3>Valor Total:</h3>
+
+                <div id="extrato"></div>
+
+                <div id="total"></div>
     
             </article>
             
@@ -95,21 +97,17 @@
 
     <section id="parte2">
         
-        <section id="filtragem">
-            <h2>Filtragem</h2>
-        </section>
-
         <section id="exibicao">
             <h2>Todas as Despesas</h2>
+
         </section>
 
+        <section id="filtragem">
+            <h2>Filtragem</h2>
+            <section id="dentro-filtragem"></section>
+        </section>       
+
     </section>
-
-        
-
-        
-
-
         
 
     </main>
