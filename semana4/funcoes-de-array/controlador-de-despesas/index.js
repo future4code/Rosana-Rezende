@@ -32,16 +32,114 @@ const cadastraDespesa = () => {
 
         colocarNaPagina(novoValor, novoTipo, novaDescricao)
         valorTotal(arrayDeDespesas)
+        valorDespesa(arrayDeDespesas)
     }
 }
 
 function colocarNaPagina(novoValor, novoTipo, novaDescricao) {
+    // se eu não colo a função na acima, usando aquelas variaveis, retorna [OBJECT OBJECT]
     document.getElementById("exibicao").innerHTML +=
         "<div><p>Valor: <b><i>" + novoValor +
         "</i></b><p>Tipo de despesa: <b><i>" + novoTipo +
         "</i></b><p>Descrição: <b><i>" + novaDescricao + "</i></b></p></div>"
 }
 
+
+function valorTotal(arrayDeDespesas) {
+    let total = 0
+    for (let i = 0; i < arrayDeDespesas.length; i++) {
+        let novoValor = Number(arrayDeDespesas[i].valor)
+        total += novoValor
+    }
+    document.getElementById("total").innerHTML = "<b>Valor Total: </b>" + total
+
+}
+
+
+function valorDespesa(arrayDeDespesas) {
+
+    // -------------------- CASA
+    // filtra casa
+    const filtroCasa = arrayDeDespesas.filter((despesa) => {
+        const filtraTipoCasa = document.getElementById("novo-tipo").value
+        return despesa.tipo === "casa"
+        })
+    //mapear valores de Casa
+    const arrayCasa = filtroCasa.map( (casa, index, array) => {
+        return casa.valor
+    })
+    // somar os valores mapeados
+    let totalCasa = 0
+    for(let i = 0; i < arrayCasa.length; i++) {
+        let novoValorCasa = Number(arrayCasa[i])
+        totalCasa += novoValorCasa
+    }
+    
+    // -------------------- ALIMENTAÇÃO
+    const filtroAlimentacao = arrayDeDespesas.filter((despesa) => {
+        const filtraTipoAlimentacao = document.getElementById("novo-tipo").value
+        return despesa.tipo === "alimentacao"
+        })
+    const arrayAlimentacao = filtroAlimentacao.map( (alimento, index, array) => {
+        return alimento.valor
+    })
+    let totalAlimentacao = 0
+    for(let i = 0; i < arrayAlimentacao.length; i++) {
+        let novoValorAlimentacao = Number(arrayAlimentacao[i])
+        totalAlimentacao += novoValorAlimentacao
+    }
+
+    // -------------------- TRANSPORTE
+    const filtroTransporte = arrayDeDespesas.filter((despesa) => {
+        const filtraTipoTransporte = document.getElementById("novo-tipo").value
+        return despesa.tipo === "transporte"
+        })
+    const arrayTransporte = filtroTransporte.map( (transporte, index, array) => {
+        return transporte.valor
+    })
+    let totalTransporte = 0
+    for(let i = 0; i < arrayTransporte.length; i++) {
+        let novoValorTransporte = Number(arrayTransporte[i])
+        totalTransporte += novoValorTransporte
+    }
+
+    // -------------------- EDUCAÇÃO
+    const filtroEducacao = arrayDeDespesas.filter((despesa) => {
+        const filtraTipoEducacao = document.getElementById("novo-tipo").value
+        return despesa.tipo === "educacao"
+        })
+    const arrayEducacao = filtroEducacao.map( (educacao, index, array) => {
+        return educacao.valor
+    })
+    let totalEducacao = 0
+    for(let i = 0; i < arrayEducacao.length; i++) {
+        let novoValorEducacao = Number(arrayEducacao[i])
+        totalEducacao += novoValorEducacao
+    }
+
+    // -------------------- OUTROS
+    const filtroOutros = arrayDeDespesas.filter((despesa) => {
+        const filtraTipoOutros = document.getElementById("novo-tipo").value
+        return despesa.tipo === "outros"
+        })
+    const arrayOutros = filtroOutros.map( (outros, index, array) => {
+        return outros.valor
+    })
+    let totalOutros = 0
+    for(let i = 0; i < arrayOutros.length; i++) {
+        let novoValorOutros = Number(arrayOutros[i])
+        totalOutros += novoValorOutros
+    }
+
+    // -------------------- jogar no HTML
+    document.getElementById("extrato").innerHTML = 
+        "<i>Despesas Casa: </i>" + totalCasa + "<br>"
+        + "<i>Despesas Alimentação: </i>" + totalAlimentacao + "<br>"
+        + "<i>Despesas Transporte: </i>" + totalTransporte + "<br>"
+        + "<i>Despesas Educação: </i>" + totalEducacao + "<br>"
+        + "<i>Outras despesas: </i>" + totalOutros
+
+}
 
 const filtraDespesas = () => {
     const filtro = arrayDeDespesas.filter((despesa) => {
@@ -65,6 +163,7 @@ const filtraDespesas = () => {
 }
 
 function colocarNaPagina2(filtro) {
+    // usei forEach pq estava retornando UNDEFINED
     filtro.forEach((despesa, index, array) => {
         let filtradoTipo = despesa.tipo
         let filtradoValor = despesa.valor
@@ -78,21 +177,4 @@ function colocarNaPagina2(filtro) {
 
 const apagaFiltragem = () => {
     document.getElementById("dentro-filtragem").innerHTML = ""
-}
-
-
-//
-// document.getElementById("extrato").innerHTML = 
-//     "<h4>Despesas de casa:</h4><i> " + xxx + " </i>"
-
-
-
-function valorTotal(arrayDeDespesas) {
-    let total = 0
-    for (let i = 0; i < arrayDeDespesas.length; i++) {
-        let novoValor = Number(arrayDeDespesas[i].valor)
-        total += novoValor
-    }
-    document.getElementById("total").innerHTML = "<b>Valor Total: </b>" + total
-
 }
