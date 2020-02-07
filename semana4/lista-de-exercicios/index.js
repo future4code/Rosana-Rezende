@@ -128,37 +128,46 @@ Além disso, devemos substituir o while, que geraria um loop infinito, por um fo
 
 
 //5)
-const tudoSobreDoisNumeros = (n1, n2) => {
-    if (n1 > n2) {
-        console.log(`O maior é ${n1}`)
-    } else if (n2 > n1){
-        console.log(`O maior é ${n2}`)
-    }
+// const tudoSobreDoisNumeros = (n1, n2) => {
+//     if (n1 > n2) {
+//         console.log(`O maior é ${n1}`)
+//     } else if (n2 > n1){
+//         console.log(`O maior é ${n2}`)
+//     }
 
-    if (n1 % n2 === 0) {
-        console.log(`${n1} é divisível por ${n2}`)
-    } else {
-        console.log(`${n1} náo é divisível por ${n2}`)
-    }
+//     if (n1 % n2 === 0) {
+//         console.log(`${n1} é divisível por ${n2}`)
+//     } else {
+//         console.log(`${n1} náo é divisível por ${n2}`)
+//     }
 
-    if (n2 % n1 === 0) {
-        console.log(`${n2} é divisível por ${n1}`)
-    } else {
-        console.log(`${n2} náo é divisível por ${n1}`)
-    }
+//     if (n2 % n1 === 0) {
+//         console.log(`${n2} é divisível por ${n1}`)
+//     } else {
+//         console.log(`${n2} náo é divisível por ${n1}`)
+//     }
 
-    if (n1 > n2) {
-        console.log(`A diferença entre eles é ${n1 - n2}`)
-    } else if (n2 > n1){
-        console.log(`A diferença entre eles é ${n2 - n1}`)
-    }
-}
-tudoSobreDoisNumeros(15,30)
-
+//     if (n1 > n2) {
+//         console.log(`A diferença entre eles é ${n1 - n2}`)
+//     } else if (n2 > n1){
+//         console.log(`A diferença entre eles é ${n2 - n1}`)
+//     }
+// }
+// tudoSobreDoisNumeros(15,30)
 
 
 // --------------------- EXERCÍCIOS DE FUNÇÕES
 
+//1)
+// const imprimeSegundoMaiorEMenor = (array) => {
+//     function comparaNumeros(n1, n2) {
+//         return n1 - n2
+//     }
+//     novaArray = array.sort(comparaNumeros)
+//     console.log("O segundo menor é " + novaArray[1])
+//     console.log("O segundo maior é " + novaArray[novaArray.length - 2])
+// }
+// imprimeSegundoMaiorEMenor([8, 5, 9, 7, 10, 20, 90])
 
 
 
