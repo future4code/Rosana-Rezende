@@ -127,6 +127,33 @@ Além disso, devemos substituir o while, que geraria um loop infinito, por um fo
 // console.log(descobreQualTriangulo(3, 2, 1))
 
 
+//5)
+const tudoSobreDoisNumeros = (n1, n2) => {
+    if (n1 > n2) {
+        console.log(`O maior é ${n1}`)
+    } else if (n2 > n1){
+        console.log(`O maior é ${n2}`)
+    }
+
+    if (n1 % n2 === 0) {
+        console.log(`${n1} é divisível por ${n2}`)
+    } else {
+        console.log(`${n1} náo é divisível por ${n2}`)
+    }
+
+    if (n2 % n1 === 0) {
+        console.log(`${n2} é divisível por ${n1}`)
+    } else {
+        console.log(`${n2} náo é divisível por ${n1}`)
+    }
+
+    if (n1 > n2) {
+        console.log(`A diferença entre eles é ${n1 - n2}`)
+    } else if (n2 > n1){
+        console.log(`A diferença entre eles é ${n2 - n1}`)
+    }
+}
+tudoSobreDoisNumeros(15,30)
 
 
 
