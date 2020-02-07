@@ -380,3 +380,43 @@ e as mais complexas por objetos.
 // })
 
 // console.log(filtraEmail)
+
+// 5)
+// const contas = [
+//     { cliente: "João", saldoTotal: 1000, compras: [100, 200, 300] },
+//     { cliente: "Paula", saldoTotal: 7500, compras: [200, 1040] },
+//     { cliente: "Pedro", saldoTotal: 10000, compras: [5140, 6100, 100, 2000] },
+//     { cliente: "Luciano", saldoTotal: 100, compras: [100, 200, 1700] },
+//     { cliente: "Artur", saldoTotal: 1800, compras: [200, 300] },
+//     { cliente: "Soter", saldoTotal: 1200, compras: [] }
+// ]
+
+// contas.forEach((chave, index, array) => {
+
+//     if (chave.cliente === "João") {
+//         chave.saldoTotal = 400
+//     }
+
+//     if (chave.cliente === "Paula") {
+//         chave.saldoTotal = 6260
+//     }
+
+//     if (chave.cliente === "Pedro") {
+//         chave.saldoTotal = -3340
+//     }
+
+//     if (chave.cliente === "Luciano") {
+//         chave.saldoTotal = -1900
+//     }
+
+//     if (chave.cliente === "Artur") {
+//         chave.saldoTotal = 1300
+//     }
+
+//     if (chave.cliente === "Soter") {
+//         chave.saldoTotal = 1200
+//     }
+
+// })
+
+// console.log(contas)
