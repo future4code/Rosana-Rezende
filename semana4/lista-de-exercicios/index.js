@@ -52,6 +52,25 @@ Em seguida imprime-se no console:
 - a quantidade de números na array array2: 8
 
 
+4)
+Declara-se 3 variáveis: 
+- numeros, uma array com diversos números dentro, inclusive negativo e float
+- numero1, coma propriedade Infinity (acredito que sejam números infinitos)
+- numero2 igual a 0
+
+Em seguida usa-se o laço for... of... na array numeros para analisar se cada número nela é maior ou menor que o numero1 e numero2.
+Se o numero na array for menor que numero1, o numero1 será substituído pelo numero.
+E se o numero na array for maior que o numero2, o numero2 será substituído pelo numero.
+
+Em seguida imprime-se no console:
+- como o numero1 é infinito, ele é maior que todos os numeros positivos dentro da array.
+Contudo, em relação ao negativos ele será menor, logo será substituído pelo negativo. 
+Resultado: -10
+
+- como o numero2 é 0, os numeros positivos dentro da array são maiores que ele e o substituirão 
+sequencialmente.
+Resultado: 1590
+
 */
 
 // --------------------- EXERCÍCIOS DE LÓGICA DE PROGRAMAÇÃO
