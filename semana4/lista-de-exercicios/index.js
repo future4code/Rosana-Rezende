@@ -317,5 +317,38 @@ e as mais complexas por objetos.
 // console.log(novaString(array))
 
 
+// 3)
+// Para teste
+// const pessoas = [
+//     { nome: "Paula", idade: 12, altura: 1.8 },
+//     { nome: "João", idade: 20, altura: 1.3 },
+//     { nome: "Pedro", idade: 15, altura: 1.9 },
+//     { nome: "Luciano", idade: 22, altura: 1.8 },
+//     { nome: "Artur", idade: 10, altura: 1.2 },
+//     { nome: "Soter", idade: 70, altura: 1.9 }
+// ]
+
+// a)
+// const podeEntrar = (X) => {
+//     array1 = []
+//     const filtro = X.filter((chave) => {
+//         return chave.altura >= 1.5 && chave.idade > 14 && chave.idade < 60
+//     })  
+//     array1.push(filtro)
+//     return array1
+// }
+// console.log(podeEntrar(pessoas))
+
+// b)
+// const naoPodeEntrar = (X) => {
+//     array1 = []
+//     const filtro = X.filter((chave) => {
+//         return !(chave.altura >= 1.5 && chave.idade > 14 && chave.idade < 60)
+//     })  
+//     array1.push(filtro)
+//     return array1
+// }
+// console.log(naoPodeEntrar(pessoas))
+
 
 
