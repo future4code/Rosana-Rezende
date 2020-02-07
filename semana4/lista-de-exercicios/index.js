@@ -37,6 +37,21 @@ Imprime-se a variável segundoMontante no console. Resultado:
 abre-se um alert com a mensagem "TIPO DE INVESTIMENTO INFORMADO INCORRETO!"
 aparece undefined no console
 
+
+3) 
+Declara-se três variáveis de arrays: 
+- numeros, com array de números dentro
+- array1 e array2 vazias.
+
+Em seguida usa-se o laço for... of... na array numeros para analisar se seus números são pares ou ímpares.
+Se par, insere na array1, se ímpar, insere na aaray2.
+
+Em seguida imprime-se no console:
+- a quantidade de números na array numeros concatenando com uma string: Quantidade total de números 14
+- a quantidade de números na array array1: 6
+- a quantidade de números na array array2: 8
+
+
 */
 
 // --------------------- EXERCÍCIOS DE LÓGICA DE PROGRAMAÇÃO
