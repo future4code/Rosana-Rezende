@@ -67,6 +67,10 @@ button {
     padding-bottom: 2px;
 }
 
+#extrato p {
+    padding-bottom: 5px;
+}
+
 #total {
     padding-top: 10px;
 }

@@ -59,85 +59,60 @@ function valorTotal(arrayDeDespesas) {
 function valorDespesa(arrayDeDespesas) {
 
     // -------------------- CASA
-    // filtra casa
+    // filtra 
     const filtroCasa = arrayDeDespesas.filter((despesa) => {
-        const filtraTipoCasa = document.getElementById("novo-tipo").value
-        return despesa.tipo === "casa"
-        })
-    //mapear valores de Casa
+        return despesa.tipo === "casa"})
+    //mapear valores
     const arrayCasa = filtroCasa.map( (casa, index, array) => {
-        return casa.valor
-    })
+        return casa.valor})
     // somar os valores mapeados
     let totalCasa = 0
     for(let i = 0; i < arrayCasa.length; i++) {
-        let novoValorCasa = Number(arrayCasa[i])
-        totalCasa += novoValorCasa
-    }
+        totalCasa += Number(arrayCasa[i])}    
     
     // -------------------- ALIMENTAÇÃO
     const filtroAlimentacao = arrayDeDespesas.filter((despesa) => {
-        const filtraTipoAlimentacao = document.getElementById("novo-tipo").value
-        return despesa.tipo === "alimentacao"
-        })
+        return despesa.tipo === "alimentacao"})
     const arrayAlimentacao = filtroAlimentacao.map( (alimento, index, array) => {
-        return alimento.valor
-    })
+        return alimento.valor})
     let totalAlimentacao = 0
     for(let i = 0; i < arrayAlimentacao.length; i++) {
-        let novoValorAlimentacao = Number(arrayAlimentacao[i])
-        totalAlimentacao += novoValorAlimentacao
-    }
-
+        totalAlimentacao += Number(arrayAlimentacao[i])}
+    
     // -------------------- TRANSPORTE
     const filtroTransporte = arrayDeDespesas.filter((despesa) => {
-        const filtraTipoTransporte = document.getElementById("novo-tipo").value
-        return despesa.tipo === "transporte"
-        })
+        return despesa.tipo === "transporte"})
     const arrayTransporte = filtroTransporte.map( (transporte, index, array) => {
-        return transporte.valor
-    })
+        return transporte.valor})
     let totalTransporte = 0
     for(let i = 0; i < arrayTransporte.length; i++) {
-        let novoValorTransporte = Number(arrayTransporte[i])
-        totalTransporte += novoValorTransporte
-    }
+        totalTransporte += Number(arrayTransporte[i])}
 
     // -------------------- EDUCAÇÃO
     const filtroEducacao = arrayDeDespesas.filter((despesa) => {
-        const filtraTipoEducacao = document.getElementById("novo-tipo").value
-        return despesa.tipo === "educacao"
-        })
+        return despesa.tipo === "educacao"})
     const arrayEducacao = filtroEducacao.map( (educacao, index, array) => {
-        return educacao.valor
-    })
+        return educacao.valor})
     let totalEducacao = 0
     for(let i = 0; i < arrayEducacao.length; i++) {
-        let novoValorEducacao = Number(arrayEducacao[i])
-        totalEducacao += novoValorEducacao
-    }
+        totalEducacao += Number(arrayEducacao[i])}
 
     // -------------------- OUTROS
     const filtroOutros = arrayDeDespesas.filter((despesa) => {
-        const filtraTipoOutros = document.getElementById("novo-tipo").value
-        return despesa.tipo === "outros"
-        })
+        return despesa.tipo === "outros"})
     const arrayOutros = filtroOutros.map( (outros, index, array) => {
-        return outros.valor
-    })
+        return outros.valor})
     let totalOutros = 0
     for(let i = 0; i < arrayOutros.length; i++) {
-        let novoValorOutros = Number(arrayOutros[i])
-        totalOutros += novoValorOutros
-    }
+        totalOutros += Number(arrayOutros[i])}
 
     // -------------------- jogar no HTML
     document.getElementById("extrato").innerHTML = 
-        "<i>Despesas Casa: </i>" + totalCasa + "<br>"
-        + "<i>Despesas Alimentação: </i>" + totalAlimentacao + "<br>"
-        + "<i>Despesas Transporte: </i>" + totalTransporte + "<br>"
-        + "<i>Despesas Educação: </i>" + totalEducacao + "<br>"
-        + "<i>Outras despesas: </i>" + totalOutros
+        "<p><i>Despesas Casa: </i>" + totalCasa + "</p>"
+        + "<p><i>Despesas Alimentação: </i>" + totalAlimentacao + "</p>"
+        + "<p><i>Despesas Transporte: </i>" + totalTransporte + "</p>"
+        + "<p><i>Despesas Educação: </i>" + totalEducacao + "</p>"
+        + "<p><i>Outras despesas: </i>" + totalOutros + "</p>"
 
 }
 
