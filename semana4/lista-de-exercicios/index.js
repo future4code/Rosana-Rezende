@@ -243,36 +243,31 @@ alert(`Venha assistir ao filme ${meuFilmeFavorito.titulo}, de ${meuFilmeFavorito
 // --------------------- EXERCÍCIOS DE FUNÇÕES DE ARRAY
 
 // 1)
-// // Para teste
-// let arrayteste = [
-//     { nome: "Pedro", idade: 20 },
-//     { nome: "João", idade: 10 },
-//     { nome: "Paula", idade: 12 },
-//     { nome: "Artur", idade: 89 }
-// ]
+// Para teste
+let arrayteste = [
+    { nome: "Pedro", idade: 20 },
+    { nome: "João", idade: 10 },
+    { nome: "Paula", idade: 12 },
+    { nome: "Artur", idade: 89 }
+]
 
-// // a) 
-// const adultoIgualOuMaisDeVinte = (array) => {
-//     novoArray = []
-//     const filtroMaior = array.filter((chave) => {
-//         return chave.idade >= 20
-//     })
-//     novoArray.push(filtroMaior)
-//     return novoArray
-// }
-// console.log(adultoIgualOuMaisDeVinte(arrayteste))
+// a) 
+const adultoIgualOuMaisDeVinte = (array) => {
+    const filtroMaior = array.filter((chave) => {
+        return chave.idade >= 20
+    })
+    return filtroMaior
+}
+console.log(adultoIgualOuMaisDeVinte(arrayteste))
 
-// //b)
-// const menorDeVinte = (array) => {
-//     novoArray = []
-//     const filtroMenor = array.filter((chave) => {
-//         return chave.idade < 20
-//     })
-//     novoArray.push(filtroMenor)
-
-//     return novoArray
-// }
-// console.log(menorDeVinte(arrayteste))
+//b)
+const menorDeVinte = (array) => {
+    const filtroMenor = array.filter((chave) => {
+        return chave.idade < 20
+    })
+    return filtroMenor
+}
+console.log(menorDeVinte(arrayteste))
 
 // 2)
 // Para teste
