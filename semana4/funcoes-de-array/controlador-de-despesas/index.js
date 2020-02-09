@@ -59,49 +59,36 @@ function valorTotal(arrayDeDespesas) {
 function valorDespesa(arrayDeDespesas) {
 
     // -------------------- CASA
-    // filtra 
-    const filtroCasa = arrayDeDespesas.filter((despesa) => {
-        return despesa.tipo === "casa"})
-    //mapear valores
-    const arrayCasa = filtroCasa.map( (casa, index, array) => {
-        return casa.valor})
+    // map + filter
+    const arrayCasa = arrayDeDespesas.filter(despesa => despesa.tipo === "casa").map(despesa => despesa.valor)
     // somar os valores mapeados
     let totalCasa = 0
     for(let i = 0; i < arrayCasa.length; i++) {
-        totalCasa += Number(arrayCasa[i])}    
+        totalCasa += Number(arrayCasa[i])}
+    
+    // seria mais simples usar FILTER + REDUCE (ainda não estudamos)
+    // const totalCasa = arrayDeDespesas.filter(despesa => despesa.tipo === "casa").reduce( (prevVal, elem) => prevVal + Number(elem.valor), 0)
     
     // -------------------- ALIMENTAÇÃO
-    const filtroAlimentacao = arrayDeDespesas.filter((despesa) => {
-        return despesa.tipo === "alimentacao"})
-    const arrayAlimentacao = filtroAlimentacao.map( (alimento, index, array) => {
-        return alimento.valor})
+    const arrayAlimentacao = arrayDeDespesas.filter(despesa => despesa.tipo === "alimentacao").map(despesa => despesa.valor)
     let totalAlimentacao = 0
     for(let i = 0; i < arrayAlimentacao.length; i++) {
         totalAlimentacao += Number(arrayAlimentacao[i])}
     
     // -------------------- TRANSPORTE
-    const filtroTransporte = arrayDeDespesas.filter((despesa) => {
-        return despesa.tipo === "transporte"})
-    const arrayTransporte = filtroTransporte.map( (transporte, index, array) => {
-        return transporte.valor})
+    const arrayTransporte = arrayDeDespesas.filter(despesa => despesa.tipo === "transporte").map(despesa => despesa.valor)
     let totalTransporte = 0
     for(let i = 0; i < arrayTransporte.length; i++) {
         totalTransporte += Number(arrayTransporte[i])}
 
     // -------------------- EDUCAÇÃO
-    const filtroEducacao = arrayDeDespesas.filter((despesa) => {
-        return despesa.tipo === "educacao"})
-    const arrayEducacao = filtroEducacao.map( (educacao, index, array) => {
-        return educacao.valor})
+    const arrayEducacao = arrayDeDespesas.filter(despesa => despesa.tipo === "educacao").map(despesa => despesa.valor)
     let totalEducacao = 0
     for(let i = 0; i < arrayEducacao.length; i++) {
         totalEducacao += Number(arrayEducacao[i])}
 
     // -------------------- OUTROS
-    const filtroOutros = arrayDeDespesas.filter((despesa) => {
-        return despesa.tipo === "outros"})
-    const arrayOutros = filtroOutros.map( (outros, index, array) => {
-        return outros.valor})
+    const arrayOutros = arrayDeDespesas.filter(despesa => despesa.tipo === "outros").map(despesa => despesa.valor)
     let totalOutros = 0
     for(let i = 0; i < arrayOutros.length; i++) {
         totalOutros += Number(arrayOutros[i])}
