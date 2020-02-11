@@ -1,0 +1,11 @@
+.SmallCard {
+    border: 1px solid black;
+    margin: 2% 25%;
+    padding: 1%;
+    display: flex;
+    align-items: center;
+}
+
+#conteudo-SmallCard {
+    margin: 0 2%;
+}
