@@ -3,7 +3,9 @@
 }
 
 .Post > div {
-    border: 1px solid black;
+    border: 1px solid rgba(var(--b6a,219,219,219),1);
+    background-color: #FFFFFF;
+    border-radius: 2px;
     margin: 2vh auto;
     width: 40vw;
 }
@@ -26,7 +28,7 @@
     width: 100%;
 }
 
-.curtidas-comentarios, .aparece-comentario div {
+.curtidas-comentarios, .aparece-comentario div, .comentario-enviado {
     display: flex;
     justify-content: space-between;
     padding: 1vh 1vw;
@@ -49,4 +51,10 @@
 .aparece-comentario button {
     width: 30%;
     font-size: 70%;
+}
+
+.comentario-enviado img {
+    width: 5%;
+    border-radius: 50%;
+    padding: 0 1vw;
 }
