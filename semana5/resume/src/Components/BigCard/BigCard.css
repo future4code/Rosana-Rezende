@@ -1,6 +1,7 @@
 .BigCard {
     border: 1px solid black;
-    margin: 1% 25%;
+    width: 60vw;
+    margin: 1vh auto;
     padding: 1%;
     display: flex;
     align-items: center;
@@ -16,4 +17,12 @@
     margin: auto;
     width: 10vw;
     padding: 5%;
+}
+
+@media screen and (max-device-width: 800px) {
+
+    .BigCard {
+        width: 80vw;
+    }
+
 }

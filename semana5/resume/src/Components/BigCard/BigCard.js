@@ -11,7 +11,9 @@ function BigCard(props) {
             </div>
             
             <div id='conteudo-BigCard'>
-                <h4> { props.subtitulo } </h4>
+            
+                <strong> { props.subtitulo } </strong>
+                (<a href={ props.link } target="_blank" rel="noopener noreferrer"><span>{ props.linkExterno}</span></a>)
                 <p> { props.texto } </p>
                 <p> { props.texto2 } </p>
             </div>
@@ -21,7 +23,9 @@ function BigCard(props) {
 
 BigCard.protoTypes = {
     imagem: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
+    alt: PropTypes.string,
+    link: PropTypes.string,
+    linkExterno: PropTypes.string,
     subtitulo: PropTypes.string,
     texto: PropTypes.string,
     texto2: PropTypes.string,

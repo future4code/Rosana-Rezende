@@ -1,0 +1,9 @@
+.InnerCardContent {
+    padding: 1%;
+    margin-bottom: 1px;
+}
+
+
+.InnerCardContent p{
+    margin: 0;
+}

@@ -1,6 +1,7 @@
 .SmallCard {
     border: 1px solid black;
-    margin: 2% 25%;
+    width: 60vw;
+    margin: 1vh auto;
     padding: 1%;
     display: flex;
     align-items: center;
@@ -8,4 +9,12 @@
 
 #conteudo-SmallCard {
     margin: 0 2%;
+}
+
+@media screen and (max-device-width: 800px) {
+
+    .SmallCard {
+        width: 80vw;
+    }
+
 }

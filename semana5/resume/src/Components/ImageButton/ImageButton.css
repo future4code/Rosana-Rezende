@@ -1,25 +1,17 @@
-.ImageButton {
+#conteudo-ImageButton {
     border: 1px solid black;
-    border-radius: 25%;
-    margin: 2% 40%;
+    border-radius: 60px;
+    width: 25vw;
+    margin: 1vh auto;
     padding: 1%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#conteudo-ImageButton {
-    margin: 0 5%;
-    padding: 1%;
-    border: none;
     background-color: white;
 }
 
-
 .ImageButton img {
-    border-radius: 100%;
     display: block;
-    margin: auto;
+    margin: auto 3%;
     width: 3vw;
-    padding: 5%;
 }

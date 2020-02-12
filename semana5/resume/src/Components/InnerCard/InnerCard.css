@@ -1,0 +1,25 @@
+.InnerCard {
+    /* display: flex;
+    align-items: center; */
+    border: 1px solid black;
+    width: 60vw;
+    margin: 1vh auto;
+    padding: 1%;
+}
+
+
+.InnerCard h3 {
+    background-color: rgb(41, 41, 41);
+    color: white;
+    padding: 1vh 2vw;
+    margin: 0;
+    margin-bottom: 1vh;
+}
+
+@media screen and (max-device-width: 800px) {
+
+    .InnerCard {
+        width: 80vw;
+    }
+
+}

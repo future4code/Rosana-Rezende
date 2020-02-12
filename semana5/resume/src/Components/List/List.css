@@ -1,0 +1,10 @@
+.List {
+    /* display: flex;
+    justify-content: center; */
+    margin-left: 30%;
+}
+
+.List ul {
+    margin: 0;
+    margin-bottom: 5px;
+}
