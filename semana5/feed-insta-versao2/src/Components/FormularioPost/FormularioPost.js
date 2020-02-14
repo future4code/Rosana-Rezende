@@ -26,15 +26,15 @@ class FormularioPost extends React.Component {
     }
 
     onChangeAutor = (event) => {
-        this.setState({autorForm: event.target.value})
+        this.setState({autor: event.target.value})
       }
     
       onChangeImagemPerfil = (event) => {
-        this.setState({imagemPerfilForm: event.target.value})
+        this.setState({imagemPerfil: event.target.value})
       }
     
       onChangePost = (event) => {
-        this.setState({imagemPostForm: event.target.value})
+        this.setState({imagemPost: event.target.value})
       }
     
       criaPost = (event) => {
@@ -43,12 +43,14 @@ class FormularioPost extends React.Component {
         // console.log(this.state.imagemPerfilForm)
         // console.log(this.state.imagemPostForm)
         this.props.onCriaPost({
-            autor: this.state.autorForm,
-            imagemPerfil: this.state.imagemPerfilForm,
-            imagemPost: this.state.imagemPostForm
+            autor: this.state.autor,
+            imagemPerfil: this.state.imagemPerfil,
+            imagemPost: this.state.imagemPost
         })
       
       }
+
+
 
     render() {
         return (

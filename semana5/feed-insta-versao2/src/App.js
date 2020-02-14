@@ -24,26 +24,42 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      posts: []
+      
+      /* ================== FINS DIDÁTICOS
+      Se eu quisesse uma lista de post começando com um, por exemplo:
       posts: [{
-        imagemPerfilForm: '',
-        autorForm: '',
-        imagemPostForm: ''
+        imagemPerfil: 'https://cdn.pixabay.com/photo/2019/10/21/08/28/couple-4565429__480.jpg',
+        autor: 'casal_legal',
+        imagemPost: 'https://cdn.pixabay.com/photo/2019/06/22/18/26/woman-4292185__480.jpg'
       }]
+      */
     }
-  }  
-
-  onCriaPost = (novoPost) => {
-    console.log(novoPost)
   }
 
+  onCriaPost = (event) => {
+    //console.log(novoPost)
+
+    const maisUmPost = {
+      imagemPerfil: event.imagemPerfil,
+      autor: event.autor,
+      imagemPost: event.imagemPost
+    }
+
+    this.setState({
+      posts: [...this.state.posts, maisUmPost]
+    })
+
+  }
 
   render() {
 
-    const listaDePost = this.state.posts.map((cadapost) => {
-      return (<Post 
-        imagemPerfil={cadapost.imagemPerfilForm} 
-        autor={cadapost.autorForm} 
-        imagemPost={cadapost.imagemPostForm}
+    let listaDePost = this.state.posts.map((cadapost, index) => {
+      return (<Post
+        key={index}
+        imagemPerfil={cadapost.imagemPerfil}
+        autor={cadapost.autor}
+        imagemPost={cadapost.imagemPost}
       />)
     })
 
@@ -54,7 +70,7 @@ class App extends React.Component {
         <Header />
 
         <MainEstilo>
-          <FormularioPost onCriaPost={this.onCriaPost}/>
+          <FormularioPost onCriaPost={this.onCriaPost} />
           {listaDePost}
         </MainEstilo>
 
