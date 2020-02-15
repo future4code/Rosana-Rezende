@@ -24,7 +24,7 @@ const Avatar = styled.img`
 
 const PostMain = styled.div``
 
-const ImagemPrincipal = styled.div`
+const ImagemPrincipal = styled.img`
     display: block;
     margin: auto;
     width: 100%;
@@ -74,47 +74,34 @@ class Post extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            iconeFavorite: 'favorite_border',
-            curtidas: true,
+            
+            curtidas: false,
             quantidadeDeCurtidas: 0,
+            iconeFavorite: 'favorite_border',
             cor: { color: "black" },
-            quantidadeDeComentarios: 0,
+            
             comentario: false,
+            quantidadeDeComentarios: 0,
+
+            inputComentario: ''
+
         }
     }
 
     clicouNoCurtir = () => {
-        if (this.state.curtidas) {
+        if (this.state.curtidas === false) {
             this.setState({
                 quantidadeDeCurtidas: this.state.quantidadeDeCurtidas + 1,
                 iconeFavorite: 'favorite',
                 cor: { color: "red" },
-                curtidas: false
+                curtidas: true
             })
         } else {
             this.setState({
                 quantidadeDeCurtidas: this.state.quantidadeDeCurtidas - 1,
                 iconeFavorite: 'favorite_border',
                 cor: { color: "black" },
-                curtidas: true
-            })
-        }
-    }
-
-    DuploClique = () => {
-        if (this.state.curtidas) {
-            this.setState({
-                quantidadeDeCurtidas: this.state.quantidadeDeCurtidas + 1,
-                iconeFavorite: 'favorite',
-                cor: { color: "red" },
                 curtidas: false
-            })
-        } else {
-            this.setState({
-                quantidadeDeCurtidas: this.state.quantidadeDeCurtidas - 1,
-                iconeFavorite: 'favorite_border',
-                cor: { color: "black" },
-                curtidas: true
             })
         }
     }
@@ -129,8 +116,15 @@ class Post extends React.Component {
         if (this.state.comentario) {
             return (
                 <InputEBotao>
-                    <Input placeholder='Escreva seu comentário' onChange={this.conteudoInput} value={this.state.meucomentario}/>
-                    <Button onClick={this.criaComentario}>Enviar</Button>
+                    <Input 
+                        placeholder='Escreva seu comentário' 
+                        value={this.state.meucomentario}
+                        onChange={this.conteudoInput} 
+                        onKeyDown={this.apertouEnter}
+                    />
+                    <Button onClick={this.criaComentario}>
+                        Enviar
+                    </Button>
                 </InputEBotao>
             )
         }
@@ -142,6 +136,12 @@ class Post extends React.Component {
         })
     }
 
+    apertouEnter = (event) => {
+        
+        if(event.keyCode === 13){
+            this.criaComentario()
+        }
+    }
 
     criaComentario = (event) => {
         this.setState({
@@ -163,7 +163,7 @@ class Post extends React.Component {
 
 
                 <PostMain>
-                    <ImagemPrincipal src={this.props.imagemPost} alt='' onDoubleClick={this.DuploClique} />
+                    <ImagemPrincipal src={this.props.imagemPost} alt='' onDoubleClick={this.clicouNoCurtir} />
                 </PostMain>
 
 
