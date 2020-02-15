@@ -23,6 +23,12 @@ class FormularioPost extends React.Component {
 
     constructor(props) {
         super(props)
+        this.state ={
+          autor: '',
+          imagemPerfil: '',
+          imagemPost: ''
+
+        }
     }
 
     onChangeAutor = (event) => {
@@ -47,9 +53,13 @@ class FormularioPost extends React.Component {
             imagemPerfil: this.state.imagemPerfil,
             imagemPost: this.state.imagemPost
         })
+        this.setState({
+          autor: '',
+          imagemPerfil: '',
+          imagemPost: ''
+        })
       
       }
-
 
 
     render() {
@@ -58,11 +68,11 @@ class FormularioPost extends React.Component {
 
         <FormularioEstilo>
             <label>Nome do Usuário: </label>
-            <InputEstilo value={this.props.autor} onChange={ this.onChangeAutor }/>
+            <InputEstilo value={this.state.autor} onChange={ this.onChangeAutor }/>
             <label>Foto de perfil (url): </label>
-            <InputEstilo value={this.props.imagemPerfil} onChange={ this.onChangeImagemPerfil }/>
+            <InputEstilo value={this.state.imagemPerfil} onChange={ this.onChangeImagemPerfil }/>
             <label>Foto do Post (url): </label>
-            <InputEstilo value={this.props.imagemPost} onChange={ this.onChangePost }/>
+            <InputEstilo value={this.state.imagemPost} onChange={ this.onChangePost }/>
             <BotaoEstilo onClick={this.criaPost}>Criar Post</BotaoEstilo>
           </FormularioEstilo>
                 

@@ -1,6 +1,4 @@
 import React from 'react';
-import './App.css';
-
 import styled from 'styled-components'
 
 import Header from './Components/Header/Header'
@@ -14,7 +12,7 @@ const Container = styled.div`
 `
 
 const MainEstilo = styled.div`
-  margin-top: 7vh;
+  margin-top: 8vh;
   padding: 1vh 1vw;
   min-height: 91vh;
 `
