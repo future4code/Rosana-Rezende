@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Comentarios from '../Comentarios/Comentarios'
 
 const PostContainer = styled.div`
     border: 1px solid rgba(var(--b6a,219,219,219),1);
@@ -83,7 +84,8 @@ class Post extends React.Component {
             comentario: false,
             quantidadeDeComentarios: 0,
 
-            inputComentario: ''
+            inputComentario: '',
+            comentarios: []
 
         }
     }
@@ -118,7 +120,7 @@ class Post extends React.Component {
                 <InputEBotao>
                     <Input 
                         placeholder='Escreva seu comentário' 
-                        value={this.state.meucomentario}
+                        value={this.state.inputComentario}
                         onChange={this.conteudoInput} 
                         onKeyDown={this.apertouEnter}
                     />
@@ -132,26 +134,36 @@ class Post extends React.Component {
 
     conteudoInput = (event) => {
         this.setState({
-            meucomentario: event.target.value
+            inputComentario: event.target.value
         })
     }
 
     apertouEnter = (event) => {
-        
         if(event.keyCode === 13){
             this.criaComentario()
         }
     }
 
-    criaComentario = (event) => {
+    criaComentario = () => {
+                
+        const maisUmComentario = this.state.inputComentario
+        const copiaDeComentarios = this.state.comentarios
+        copiaDeComentarios.push(maisUmComentario)
+        
         this.setState({
             comentario: false,
             quantidadeDeComentarios: this.state.quantidadeDeComentarios + 1,
+            inputComentario: '',
+            comentarios: copiaDeComentarios
         })
     }
 
-
     render() {
+    
+        const listaDeComentarios = this.state.comentarios.map( (cadaComentario, index) => {
+            return <Comentarios key={index} comment={cadaComentario}></Comentarios>
+            // se eu não fosse colocar tb curtir e tal, bastava <div key={index}>{cadaComentario}</div>
+        })
 
         return (
             <PostContainer>
@@ -190,7 +202,7 @@ class Post extends React.Component {
                     <ComentariosInputEBotao>
                         
                         <ApareceComentarios>
-                            {this.state.meucomentario}
+                            {listaDeComentarios}
                         </ApareceComentarios>
                         
                         {this.apareceInputEBotao()}
