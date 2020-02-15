@@ -1,0 +1,60 @@
+.Post {
+    margin: 0;
+}
+
+.Post > div {
+    border: 1px solid rgba(var(--b6a,219,219,219),1);
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    margin: 2vh auto;
+    width: 40vw;
+}
+
+.cabeçalho {
+    display: flex;
+    align-items: center;
+    padding: 1vh 0;
+}
+
+.cabeçalho img {
+    width: 10%;
+    border-radius: 50%;
+    padding: 0 1vw;
+}
+
+.imagem-post img {
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+.curtidas-comentarios, .aparece-comentario div, .comentario-enviado {
+    display: flex;
+    justify-content: space-between;
+    padding: 1vh 1vw;
+}
+
+.curtidas, .comentarios {
+    display: flex;
+    align-items: center;
+}
+
+.curtidas p, .comentarios p {
+    margin: 0;
+}
+
+.aparece-comentario input {
+    width: 65%;
+    font-size: 70%;
+}
+
+.aparece-comentario button {
+    width: 30%;
+    font-size: 70%;
+}
+
+.comentario-enviado img {
+    width: 5%;
+    border-radius: 50%;
+    padding: 0 1vw;
+}
