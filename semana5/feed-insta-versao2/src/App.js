@@ -12,7 +12,7 @@ const Container = styled.div`
 `
 
 const MainEstilo = styled.div`
-  margin-top: 8vh;
+  margin-top: 6vh;
   padding: 1vh 1vw;
   min-height: 91vh;
 `
