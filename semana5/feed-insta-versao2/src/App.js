@@ -9,6 +9,7 @@ const Container = styled.div`
   background-color: #FAFAFA;
   color: rgba(var(--i1d,38,38,38),1);
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 `
 
 const MainEstilo = styled.div`
