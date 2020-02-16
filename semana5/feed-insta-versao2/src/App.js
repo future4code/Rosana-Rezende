@@ -45,7 +45,7 @@ class App extends React.Component {
     }
 
     this.setState({
-      posts: [...this.state.posts, maisUmPost]
+      posts: [maisUmPost, ...this.state.posts]
     })
 
   }
