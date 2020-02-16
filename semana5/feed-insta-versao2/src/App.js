@@ -35,18 +35,21 @@ class App extends React.Component {
     }
   }
 
-  onCriaPost = (event) => {
-    //console.log(novoPost)
+  onCriaPost = ({autor, imagemPerfil, imagemPost}) => {
 
-    const maisUmPost = {
-      imagemPerfil: event.imagemPerfil,
-      autor: event.autor,
-      imagemPost: event.imagemPost
-    }
-
-    this.setState({
-      posts: [maisUmPost, ...this.state.posts]
-    })
+    if(autor && imagemPerfil && imagemPost ) {
+      const maisUmPost = {
+        imagemPerfil: imagemPerfil,
+        autor: autor,
+        imagemPost: imagemPost
+      }
+  
+      this.setState({
+        posts: [maisUmPost,...this.state.posts]
+      })
+    } else {
+      alert('Preencha todos os campos para Postar')
+    }    
 
   }
 

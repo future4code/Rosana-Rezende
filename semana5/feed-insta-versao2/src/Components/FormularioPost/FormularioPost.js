@@ -18,6 +18,12 @@ const InputEstilo = styled.input`
 
 const BotaoEstilo = styled.button``
 
+const Alerta = styled.sup`
+  color: red;
+  font-size: xx-small;
+  font-style: italic;
+`
+
 
 class FormularioPost extends React.Component {
 
@@ -68,11 +74,11 @@ class FormularioPost extends React.Component {
 
         <FormularioEstilo>
             <label>Nome do Usuário: </label>
-            <InputEstilo value={this.state.autor} onChange={ this.onChangeAutor }/>
-            <label>Foto de perfil (url): </label>
-            <InputEstilo value={this.state.imagemPerfil} onChange={ this.onChangeImagemPerfil }/>
-            <label>Foto do Post (url): </label>
-            <InputEstilo value={this.state.imagemPost} onChange={ this.onChangePost }/>
+            <InputEstilo type='text' value={this.state.autor} onChange={ this.onChangeAutor }/>
+            <label>Foto de perfil <Alerta>URL</Alerta> : </label>
+            <InputEstilo type='url' value={this.state.imagemPerfil} onChange={ this.onChangeImagemPerfil }/>
+            <label>Foto do Post <Alerta>URL</Alerta> : </label>
+            <InputEstilo type='url' value={this.state.imagemPost} onChange={ this.onChangePost }/>
             <BotaoEstilo onClick={this.criaPost}>Criar Post</BotaoEstilo>
           </FormularioEstilo>
                 
