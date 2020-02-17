@@ -4,6 +4,8 @@ import styled from 'styled-components'
 const MainContainer = styled.div`
     margin-top:6vh;
     background-color: #f7fff9;
+    height: 94vh;
+    padding: 2vh 0;
 `
 
 class Main extends React.Component {
