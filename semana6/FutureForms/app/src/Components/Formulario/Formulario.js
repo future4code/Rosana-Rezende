@@ -21,7 +21,15 @@ class Formulario extends React.Component {
         super(props)
         this.state = {
             etapaAtual: 0,
+            escolaridade: '',
         }
+    }
+
+    changeEscolaridade = (event) => {
+        // console.log(event.target.value)
+        this.setState({
+            escolaridade: event.target.value
+        })
     }
 
     proximaEtapa = () => {
@@ -31,26 +39,24 @@ class Formulario extends React.Component {
         })
     }
 
-
     render() {
 
         let etapa
-        
         if (this.state.etapaAtual === 0) {
             etapa = (
                 <FormularioContainer>
-                    <Etapa1/>
+                    <Etapa1 changeEscolaridade={this.changeEscolaridade} /> 
                     <Botao onClick={this.proximaEtapa}>Próxima etapa</Botao>
                 </FormularioContainer>
             )
-        } else if (this.state.etapaAtual === 1) {
+        } else if ((this.state.etapaAtual === 1) && (this.state.escolaridade === 'medio')) {
             etapa = (
                 <FormularioContainer>
                     <Etapa2/>
                     <Botao onClick={this.proximaEtapa}>Próxima etapa</Botao>
                 </FormularioContainer>
             )
-        } else if (this.state.etapaAtual === 2) {
+        } else if ((this.state.etapaAtual === 1) && (this.state.escolaridade === 'superior')) {
             etapa = (
                 <FormularioContainer>
                     <Etapa3/>
