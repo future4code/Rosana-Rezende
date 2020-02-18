@@ -46,7 +46,7 @@ class Formulario extends React.Component {
             (this.state.email === '') ||
             (this.state.escolaridade === '')
         ) {
-            alert('Você deve preencher todas as perguntas antes de continuar')
+            alert('Você deve preencher todas as perguntas da ETAPA 1 antes de continuar')
         } else {
             this.setState({
                 etapaAtual: novaEtapa
@@ -60,7 +60,7 @@ class Formulario extends React.Component {
             (this.state.curso === '') ||
             (this.state.unidade === '')
         ) {
-            alert('Você deve preencher todas as perguntas antes de continuar')
+            alert('Você deve preencher todas as perguntas da ETAPA 2 antes de continuar')
         } else {
             this.setState({
                 etapaAtual: novaEtapa
@@ -74,7 +74,7 @@ class Formulario extends React.Component {
             (this.state.cursoComplementar === '') ||
             (this.state.graduacao === '')
         ) {
-            alert('Você deve preencher todas as perguntas antes de continuar')
+            alert('Você deve preencher todas as perguntas da ETAPA 3 antes de continuar')
         } else {
             this.setState({
                 etapaAtual: novaEtapa
