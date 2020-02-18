@@ -14,6 +14,8 @@ const Botao = styled.button`
     display: flex;
     margin: 3vh auto;
     padding: 1vh 1vw;
+    border-radius: 25px;
+    outline: 0;
 `
 
 class Formulario extends React.Component {

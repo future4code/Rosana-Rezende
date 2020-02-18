@@ -50,29 +50,29 @@ Criar concorrente para o GoogleForms, implementando um formulário de processo s
     - Ensino Superior Completo
 <br>
 
-[] *ETAPA 2: Informações educacionais para quem está cursando (ou já terminou) o ensino superior*
+[x] *ETAPA 2: Informações educacionais para quem está cursando (ou já terminou) o ensino superior*
 1. Qual o curso? [pergunta aberta]
 2. Qual a unidade de ensino? [pergunta aberta]
 <br>
 
-[] *ETAPA 3: Informações sobre quem não se formou no ensino superior nem está cursando*
+[x] *ETAPA 3: Informações sobre quem não se formou no ensino superior nem está cursando*
 1. Por que você não terminou um curso de graduação? [pergunta aberta]
 2. Você fez algum curso complementar? [pergunta com seleção]
     - Curso técnico
     - Cursos de inglês
     - Não fiz curso complementar
 
-[] *ETAPA FINAL: O formulário acabou*
+[x] *ETAPA FINAL: O formulário acabou*
 1. Deve conter alguma frase agradecendo ao usuário por ter respondido o formulário.
 
 
 <br><br>
 #### Desafios
 
-[] 1. *O usuário só deve responder a Etapa 2, se ele tiver respondido "Ensino Superior Completo" ou "Ensino Superior Incompleto" (na pergunta 4 da etapa 1); e a etapa 3, se a resposta for "Ensino Médio Completo" ou "Ensino Médio Incompleto".*
+[x] 1. *O usuário só deve responder a Etapa 2, se ele tiver respondido "Ensino Superior Completo" ou "Ensino Superior Incompleto" (na pergunta 4 da etapa 1); e a etapa 3, se a resposta for "Ensino Médio Completo" ou "Ensino Médio Incompleto".*
 <br>
 
-[] 2. *Faça com que o usuário não consiga prosseguir para a próxima etapa até que todas as perguntas da etapa atual estejam respondidas. Mostre um alert com a mensagem "Você deve preencher todas as perguntas antes de continuar" *
+[x] 2. *Faça com que o usuário não consiga prosseguir para a próxima etapa até que todas as perguntas da etapa atual estejam respondidas. Mostre um alert com a mensagem "Você deve preencher todas as perguntas antes de continuar" *
 <br>
 
 [] 3. *Faça com que só algumas perguntas sejam obrigatórias. Se o usuário não a preencher, um erro deve ser mostrado acima da pergunta, indicando que deve ser preenchida. O usuário não pode prosseguir nas etapas até que todas as perguntas obrigatórias da etapa atual estejam respondidas. Mantenha o alert que pedimos no item anterior. *
