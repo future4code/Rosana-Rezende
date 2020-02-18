@@ -160,7 +160,7 @@ class Formulario extends React.Component {
 
         } else if (this.state.etapaAtual === 1) {
 
-            if (this.state.escolaridade === 'medio') {
+            if (this.state.escolaridade === 'superior') {
                 etapa = (
                     <FormularioContainer>
                         <Etapa2
@@ -172,7 +172,7 @@ class Formulario extends React.Component {
                 )
             }
 
-            else if (this.state.escolaridade === 'superior') {
+            else if (this.state.escolaridade === 'medio') {
                 etapa = (
                     <FormularioContainer>
                         <Etapa3
