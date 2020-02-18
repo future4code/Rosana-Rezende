@@ -1,5 +1,4 @@
 import React from 'react';
-import './Header.css'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -15,36 +14,76 @@ const Container = styled.div`
   width: 100%;
 `
 
+const DivPontas = styled.div`
+  display: flex;
+`
+
+const Logo = styled.img`
+  max-width: 50%;
+  display: block;
+  margin: auto 0;
+`
+
+const Icone = styled.i`
+  display: block;
+  margin: auto 0;
+  padding: 0 1vw;
+`
+
+const DivCentro = styled.div`
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: #FAFAFA;
+  border: 1px solid #A8A8A8;
+  border-radius: 2px;
+`
+const IconeCentro = styled.i`
+  font-size: 90%;
+  align-self: center;
+`
+
+const InputPesquisar = styled.input`
+  display: block;
+  margin: auto;
+  height: 70%;
+  width: 90%;
+  /* background-color: #FAFAFA; */
+  border: none;
+  outline:0;
+`
+
+
 class Header extends React.Component {
 
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props)
+  }
 
-    render() {
-        return (
-            <Container>
+  render() {
+    return (
+      <Container>
 
-        <div className='esquerda'>
-          <i className="fab fa-instagram"></i>
-          <img src={require('./insta.png')} alt='' />
+        <DivPontas>
+          <Icone className="fab fa-instagram"/>
+          <Logo src={require('./insta.png')} alt='' />
 
-        </div>
+        </DivPontas>
 
-        <div className='pesquisar'>
-          <i className="material-icons" style={{ color: "#A8A8A8" }}>search</i>
-          <input type="text" placeholder=" Pesquisar"></input>
-        </div>
+        <DivCentro>
+          <IconeCentro className="material-icons" style={{ color: "#A8A8A8" }}>search</IconeCentro>
+          <InputPesquisar type="text" placeholder=" Pesquisar"/>
+        </DivCentro>
 
-        <div className='direita'>
-          <i className="material-icons">explore</i>
-          <i className="material-icons">favorite_border</i>
-          <i className="material-icons">perm_identity</i>
-        </div>
-                
-            </Container>
-        )
-    }
+        <DivPontas>
+          <Icone className="material-icons">explore</Icone>
+          <Icone className="material-icons">favorite_border</Icone>
+          <Icone className="material-icons">perm_identity</Icone>
+        </DivPontas>
+
+      </Container>
+    )
+  }
 
 }
 

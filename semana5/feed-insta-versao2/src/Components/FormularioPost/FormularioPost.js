@@ -18,11 +18,23 @@ const InputEstilo = styled.input`
 
 const BotaoEstilo = styled.button``
 
+const Alerta = styled.sup`
+  color: red;
+  font-size: xx-small;
+  font-style: italic;
+`
+
 
 class FormularioPost extends React.Component {
 
     constructor(props) {
         super(props)
+        this.state ={
+          autor: '',
+          imagemPerfil: '',
+          imagemPost: ''
+
+        }
     }
 
     onChangeAutor = (event) => {
@@ -47,9 +59,13 @@ class FormularioPost extends React.Component {
             imagemPerfil: this.state.imagemPerfil,
             imagemPost: this.state.imagemPost
         })
+        this.setState({
+          autor: '',
+          imagemPerfil: '',
+          imagemPost: ''
+        })
       
       }
-
 
 
     render() {
@@ -58,11 +74,11 @@ class FormularioPost extends React.Component {
 
         <FormularioEstilo>
             <label>Nome do Usuário: </label>
-            <InputEstilo value={this.props.autor} onChange={ this.onChangeAutor }/>
-            <label>Foto de perfil (url): </label>
-            <InputEstilo value={this.props.imagemPerfil} onChange={ this.onChangeImagemPerfil }/>
-            <label>Foto do Post (url): </label>
-            <InputEstilo value={this.props.imagemPost} onChange={ this.onChangePost }/>
+            <InputEstilo type='text' value={this.state.autor} onChange={ this.onChangeAutor }/>
+            <label>Foto de perfil <Alerta>URL</Alerta> : </label>
+            <InputEstilo type='url' value={this.state.imagemPerfil} onChange={ this.onChangeImagemPerfil }/>
+            <label>Foto do Post <Alerta>URL</Alerta> : </label>
+            <InputEstilo type='url' value={this.state.imagemPost} onChange={ this.onChangePost }/>
             <BotaoEstilo onClick={this.criaPost}>Criar Post</BotaoEstilo>
           </FormularioEstilo>
                 

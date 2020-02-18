@@ -1,6 +1,4 @@
 import React from 'react';
-import './App.css';
-
 import styled from 'styled-components'
 
 import Header from './Components/Header/Header'
@@ -11,10 +9,11 @@ const Container = styled.div`
   background-color: #FAFAFA;
   color: rgba(var(--i1d,38,38,38),1);
   margin: 0;
+  font-family: 'Roboto', sans-serif;
 `
 
 const MainEstilo = styled.div`
-  margin-top: 7vh;
+  margin-top: 6vh;
   padding: 1vh 1vw;
   min-height: 91vh;
 `
@@ -37,18 +36,21 @@ class App extends React.Component {
     }
   }
 
-  onCriaPost = (event) => {
-    //console.log(novoPost)
+  onCriaPost = ({autor, imagemPerfil, imagemPost}) => {
 
-    const maisUmPost = {
-      imagemPerfil: event.imagemPerfil,
-      autor: event.autor,
-      imagemPost: event.imagemPost
-    }
-
-    this.setState({
-      posts: [...this.state.posts, maisUmPost]
-    })
+    if(autor && imagemPerfil && imagemPost ) {
+      const maisUmPost = {
+        imagemPerfil: imagemPerfil,
+        autor: autor,
+        imagemPost: imagemPost
+      }
+  
+      this.setState({
+        posts: [maisUmPost,...this.state.posts]
+      })
+    } else {
+      alert('Preencha todos os campos para Postar')
+    }    
 
   }
 
