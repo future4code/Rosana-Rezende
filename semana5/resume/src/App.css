@@ -1,0 +1,23 @@
+.App {
+  margin: 0;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+#meuh4 {
+  padding: 1% 3%;
+  background-color: rgb(190, 185, 185);
+  margin: 1vh 25%;
+  border-radius: 50px;
+  text-align: center;
+}
+
+@media screen and (max-device-width: 800px) {
+
+  #meuh4 {
+    margin: 1vh 10%;
+  }
+
+}
