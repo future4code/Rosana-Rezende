@@ -5,29 +5,42 @@ const Etapa1Container = styled.div`
     text-align: center;
 `
 
-function Etapa1(props) {
-    return (
-        <Etapa1Container>
-            <h2>ETAPA 1 - DADOS GERAIS</h2>
+class Etapa1 extends React.Component {
+    
+    constructor(props) {
+        super(props)
+        this.state = {
+        }
+    }
 
-            <p>1. Qual o seu nome?</p>
-            <input type='text'></input>
 
-            <p>2. Qual sua idade?</p>
-            <input type='text'></input>
+    render() {
+        return (
+            <Etapa1Container>
+                <h2>ETAPA 1 - DADOS GERAIS</h2>
+    
+                <p>1. Qual o seu nome?</p>
+                <input value={this.state.nome} onChange={ this.props.aoMudarOInputNome } type='text'></input>
+    
+                <p>2. Qual sua idade?</p>
+                <input value={this.state.idade} onChange={ this.props.aoMudarOInputIdade } type='text'></input>
+    
+                <p>3. Qual seu email?</p>
+                <input value={this.state.email} onChange={ this.props.aoMudarOInputEmail } type='text'></input>
 
-            <p>3. Qual seu email?</p>
-            <input type='text'></input>
-
-            <p>4. Qual sua escolaridade?</p>
-            <select onChange={props.changeEscolaridade}>
-                <option value='medio'>Ensino médio incompleto</option>
-                <option value='medio'>Ensino médio completo</option>
-                <option value='superior'>Ensino superior incompleto</option>
-                <option value='superior'>Ensino superior completo</option>
-            </select>
-        </Etapa1Container>
-    )
+                <p>4. Qual sua escolaridade?</p>
+                <select onChange={this.props.changeEscolaridade} required>
+                    <option value=''></option>
+                    <option value='medio'>Ensino médio incompleto</option>
+                    <option value='medio'>Ensino médio completo</option>
+                    <option value='superior'>Ensino superior incompleto</option>
+                    <option value='superior'>Ensino superior completo</option>
+                </select>
+            </Etapa1Container>
+        )
+    }
+    
+    
 }
 
 export default Etapa1

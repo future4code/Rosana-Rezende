@@ -21,52 +21,171 @@ class Formulario extends React.Component {
         super(props)
         this.state = {
             etapaAtual: 0,
+
+            // Etapa 1
             escolaridade: '',
+            nome: '',
+            idade: '',
+            email: '',
+
+            // Etapa 2
+            curso: '',
+            unidade: '',
+
+            // Etapa 3
+            cursoComplementar: '',
+            graduacao: '',
         }
     }
 
+    naEtapa1 = () => {
+        const novaEtapa = this.state.etapaAtual + 1
+        if (
+            (this.state.nome === '') ||
+            (this.state.idade === '') ||
+            (this.state.email === '') ||
+            (this.state.escolaridade === '')
+        ) {
+            alert('Você deve preencher todas as perguntas antes de continuar')
+        } else {
+            this.setState({
+                etapaAtual: novaEtapa
+            })
+        }
+    }
+
+    naEtapa2 = () => {
+        const novaEtapa = this.state.etapaAtual + 1
+        if (
+            (this.state.curso === '') ||
+            (this.state.unidade === '')
+        ) {
+            alert('Você deve preencher todas as perguntas antes de continuar')
+        } else {
+            this.setState({
+                etapaAtual: novaEtapa
+            })
+        }
+    }
+
+    naEtapa3 = () => {
+        const novaEtapa = this.state.etapaAtual + 1
+        if (
+            (this.state.cursoComplementar === '') ||
+            (this.state.graduacao === '')
+        ) {
+            alert('Você deve preencher todas as perguntas antes de continuar')
+        } else {
+            this.setState({
+                etapaAtual: novaEtapa
+            })
+        }
+    }
+
+    // Etapa 1
+
     changeEscolaridade = (event) => {
-        // console.log(event.target.value)
         this.setState({
             escolaridade: event.target.value
         })
     }
 
-    proximaEtapa = () => {
-        const novaEtapa = this.state.etapaAtual + 1
+    aoMudarOInputNome = (event) => {
         this.setState({
-            etapaAtual: novaEtapa
+            nome: event.target.value
         })
     }
 
+    aoMudarOInputIdade = (event) => {
+        this.setState({
+            idade: event.target.value
+        })
+    }
+
+    aoMudarOInputEmail = (event) => {
+        this.setState({
+            email: event.target.value
+        })
+    }
+
+    // Etapa 2
+
+    aoMudarOInputCurso = (event) => {
+        this.setState({
+            curso: event.target.value
+        })
+    }
+
+    aoMudarOInputUnidade = (event) => {
+        this.setState({
+            unidade: event.target.value
+        })
+    }
+
+    // Etapa 3
+
+    changeCursoComplementar = (event) => {
+        this.setState({
+            cursoComplementar: event.target.value
+        })
+    }
+
+    aoMudarOInputGraduacao  = (event) => {
+        this.setState({
+            graduacao: event.target.value
+        })
+    }
+
+
+
     render() {
 
+
         let etapa
+
         if (this.state.etapaAtual === 0) {
             etapa = (
                 <FormularioContainer>
-                    <Etapa1 changeEscolaridade={this.changeEscolaridade} /> 
-                    <Botao onClick={this.proximaEtapa}>Próxima etapa</Botao>
+                    <Etapa1
+                        aoMudarOInputNome={this.aoMudarOInputNome}
+                        aoMudarOInputIdade={this.aoMudarOInputIdade}
+                        aoMudarOInputEmail={this.aoMudarOInputEmail}
+                        changeEscolaridade={this.changeEscolaridade}
+                    />
+                    <Botao onClick={this.naEtapa1}>Próxima etapa</Botao>
                 </FormularioContainer>
             )
-        } else if ((this.state.etapaAtual === 1) && (this.state.escolaridade === 'medio')) {
+
+        } else if (this.state.etapaAtual === 1) {
+
+            if (this.state.escolaridade === 'medio') {
+                etapa = (
+                    <FormularioContainer>
+                        <Etapa2
+                            aoMudarOInputCurso={this.aoMudarOInputCurso}
+                            aoMudarOInputUnidade={this.aoMudarOInputUnidade}
+                        />
+                        <Botao onClick={this.naEtapa2}>Próxima etapa</Botao>
+                    </FormularioContainer>
+                )
+            }
+
+            else if (this.state.escolaridade === 'superior') {
+                etapa = (
+                    <FormularioContainer>
+                        <Etapa3
+                            aoMudarOInputGraduacao ={this.aoMudarOInputGraduacao}
+                            changeCursoComplementar={this.changeCursoComplementar}
+                        />
+                        <Botao onClick={this.naEtapa3}>Próxima etapa</Botao>
+                    </FormularioContainer>
+                )
+            }
+
+        } else if (this.state.etapaAtual === 2) {
             etapa = (
                 <FormularioContainer>
-                    <Etapa2/>
-                    <Botao onClick={this.proximaEtapa}>Próxima etapa</Botao>
-                </FormularioContainer>
-            )
-        } else if ((this.state.etapaAtual === 1) && (this.state.escolaridade === 'superior')) {
-            etapa = (
-                <FormularioContainer>
-                    <Etapa3/>
-                    <Botao onClick={this.proximaEtapa}>Próxima etapa</Botao>
-                </FormularioContainer>
-            )
-        } else {
-            etapa = (
-                <FormularioContainer>
-                    <EtapaFinal/>
+                    <EtapaFinal />
                 </FormularioContainer>
             )
         }
