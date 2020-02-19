@@ -66,13 +66,18 @@ class CriaTarefas extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     console.log('3. Acabei de ser montado')
+    componentDidMount() {
+        // console.log('Acabei de ser montado')
+        const inputArmazenandosString = localStorage.getItem("valoresDosInputs");
+        const novoEstado = JSON.parse(inputArmazenandosString);
+        this.setState(novoEstado);
+    }
 
-    //     const inputArmazenandosString = localStorage.getItem("inputAtual");
-    //     const novoEstado = JSON.parse(inputArmazenandosString);
-    //     this.setState({maisUmaTarefa: novoEstado});
-    // }
+    componentDidUpdate() {
+        // console.log('Acabei de ser atualizado')
+        const estadoComoString = JSON.stringify(this.state);
+        localStorage.setItem("valoresDosInputs", estadoComoString);
+    } 
 
 
     mudaCompleta = (id) => {

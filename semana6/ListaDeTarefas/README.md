@@ -7,9 +7,9 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Projeto: Lista de Tarefas
 
-[Site do projeto](http://xxx.surge.sh/)
+[Site do projeto](http://listadetarefas-rosana.surge.sh/)
 
-![listaDeTarefas](https://xxx.gif)
+![lista-de-tarefas](https://user-images.githubusercontent.com/45580434/74882640-38940280-534e-11ea-8b2e-ceda4590c9a2.gif)
 
 **Desenvolvido por:** [Rosana Rezende](https://www.linkedin.com/in/rosanarezende/)
 <br><br>
@@ -29,7 +29,7 @@ O usuário deve ser capaz de:
 
 3. [x] *Filtrar as tarefas por completas e pendentes*
 
-4. [] *Persistir as tarefas utilizando* `LocalStorage`
+4. [x] *Persistir as tarefas utilizando* `LocalStorage`
 
 
 <br><br>
