@@ -27,7 +27,7 @@ O usuário deve ser capaz de:
 
 2. [x] *Marcar tarefas como completas*
 
-3. [] *Filtrar as tarefas por completas e pendentes*
+3. [x] *Filtrar as tarefas por completas e pendentes*
 
 4. [] *Persistir as tarefas utilizando* `LocalStorage`
 

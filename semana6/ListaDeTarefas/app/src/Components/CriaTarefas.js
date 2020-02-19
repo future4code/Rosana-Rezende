@@ -20,6 +20,7 @@ const Span = styled.span`
     margin: 0 1vh;
 `
 
+// SEM DICA DO DANILO
 const Li = styled.li`
     margin:auto;
 `
@@ -28,13 +29,19 @@ const LiRiscada = styled.li`
     text-decoration: line-through;
 `
 
+// COM DICA DO DANILO
+// const Li = styled.li`
+//     margin:auto;
+//     text-decoration: ${props => props.riscado ? "line-through" : "inherit"};
+// `
+
 class CriaTarefas extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             inputAtual: '',
             tarefas: [],
-            mudaFiltro: ''
+            filtro: 'nenhum'
         }
 
     }
@@ -46,51 +53,71 @@ class CriaTarefas extends React.Component {
     }
 
     apareceTarefa = () => {
-        const maisUmaTarefa = {
-            id: Date.now(),
-            texto: this.state.inputAtual,
-            completa: false
+        if (this.state.inputAtual !== '') {
+            const maisUmaTarefa = {
+                id: Date.now(),
+                texto: this.state.inputAtual,
+                completa: false
+            }
+            this.setState({
+                tarefas: [...this.state.tarefas, maisUmaTarefa],
+                inputAtual: ''
+            })
         }
+    }
+
+    mudaCompleta = (id) => {
+        let copiaLista = this.state.tarefas.map((elemento, index, array) => {
+            if (elemento.id === id) {
+              return { id: elemento.id, texto: elemento.texto, completa: !elemento.completa }
+            }
+            else {
+              return elemento
+            }
+          })
+          this.setState({
+            tarefas: copiaLista
+          })
+    }
+
+    mudaFiltro = (event) => {
+        
+        const novoFiltro = event.target.value
+        
+        const listaFiltrada = this.state.tarefas.filter((elemento) => {
+            if (novoFiltro === "pendentes") {
+              return !elemento.completa
+            } else if (novoFiltro === "completas") {
+              return elemento.completa
+            }
+            else {
+              return true
+            }
+          })
         this.setState({
-            tarefas: [...this.state.tarefas, maisUmaTarefa],
-            inputAtual: ''
+            fitro: novoFiltro,
+            tarefas: listaFiltrada
         })
     }
 
-    riscaTarefa = (tarefaClicada) => {
-        if (tarefaClicada.id) {
-            tarefaClicada.completa = true
-        }
-        const novaTarefas = this.state.tarefas
-        this.setState({
-            tarefas: novaTarefas
-        })
-    }
-
-
-    render() {
-
-       
-        let listaDeTarefas = this.state.tarefas.map((cadaTarefa, index) => {
-            let semRisco = <Li key={index} onClick={() => this.riscaTarefa(cadaTarefa)}>{cadaTarefa.texto}</Li>
+    
+    render() {        
+        
+        let listaTexto = this.state.tarefas.map((cadaTarefa, index) => {
+            let semRisco = <Li key={index} onClick={() => this.mudaCompleta(cadaTarefa.id)}>{cadaTarefa.texto}</Li>
             let riscado = <LiRiscada key={index}>{cadaTarefa.texto}</LiRiscada>
             if (cadaTarefa.completa === false) {
-                return semRisco
-            } else {
-                return riscado
-            }
+                    return semRisco
+                } else {
+                    return riscado
+                }  
         })
 
-        // let listaFiltrada = this.state.tarefas.filter((cadaTarefa, index) => {
-        //     if (this.state.mudaFiltro === 'completas') {
-        //         return <Li key={index}>{cadaTarefa.texto}</Li>
-        //     } else if (this.state.mudaFiltro === 'pendentes') {
-        //         return  <Li key={index}>{cadaTarefa.texto}</Li>
-        //     } else {
-        //         return <Li key={index}>{cadaTarefa.texto}</Li>
-        //     }
-            
-        // })
+        // DICA DO DANILO
+        // let listaTexto = listaFiltrada.map((elemento, index, array) => {
+        //     return <Li riscado={elemento.completa} key={index} onClick={() => this.mudaCompleta(elemento.id)}> {elemento.texto} </Li>
+        //   })
+
 
         return (
             <CriaTarefasContainer>
@@ -106,14 +133,15 @@ class CriaTarefas extends React.Component {
 
                 <DivCriarTarefas>
                     <Span>Filtro</Span>
-                    <select onChange={this.mudaFiltro}>
-                        <option value=''>Nenhum</option>
+                    <select onChange={this.mudaFiltro} value={this.state.filtro}> 
+                            {/* cuidado com state .... coloquei setState sem querer */}
+                        <option value='nenhum'>Nenhum</option>
                         <option value='pendentes'>Pendentes</option>
                         <option value='completas'>Completas</option>
                     </select>
                 </DivCriarTarefas>
-
-                {listaDeTarefas}
+                
+                {listaTexto}
                 
 
 
