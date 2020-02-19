@@ -14,7 +14,9 @@ const Input = styled.input`
     width: 30%;
 `
 
-const Botao = styled.button``
+const Botao = styled.button`
+    margin-right: 1vh;
+`
 
 const Span = styled.span`
     margin: 0 1vh;
@@ -34,6 +36,11 @@ const LiRiscada = styled.li`
 //     margin:auto;
 //     text-decoration: ${props => props.riscado ? "line-through" : "inherit"};
 // `
+
+const DivAparece = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
 
 class CriaTarefas extends React.Component {
     constructor(props) {
@@ -74,58 +81,64 @@ class CriaTarefas extends React.Component {
     }
 
     componentDidUpdate() {
-        // console.log('Acabei de ser atualizado')
+        // console.log('Acabei de ser atualizado  ... nesse caso, mudei o state')
         const estadoComoString = JSON.stringify(this.state);
         localStorage.setItem("valoresDosInputs", estadoComoString);
-    } 
+    }
 
 
     mudaCompleta = (id) => {
         let copiaLista = this.state.tarefas.map((elemento, index, array) => {
             if (elemento.id === id) {
-              return { id: elemento.id, texto: elemento.texto, completa: !elemento.completa }
+                return { id: elemento.id, texto: elemento.texto, completa: !elemento.completa }
             }
             else {
-              return elemento
+                return elemento
             }
-          })
-          this.setState({
+        })
+        this.setState({
             tarefas: copiaLista
-          })
+        })
     }
 
     mudaFiltro = (event) => {
-        
         const novoFiltro = event.target.value
-        
-        console.log(novoFiltro)
+        // console.log(novoFiltro)
         this.setState({
             filtro: novoFiltro,
         })
     }
 
-    
-    render() {        
-        
+    apagaTudo = () => {
+        if (window.confirm('Essa ação é definitiva.\nRealmente deseja apagar todas as tarefas?')) {
+            this.setState({
+                tarefas: []
+            })
+        }
+    }
+
+
+    render() {
+
         let listaFiltrada = this.state.tarefas.filter((elemento) => {
-            if(this.state.filtro === "pendentes") {
+            if (this.state.filtro === "pendentes") {
                 return !elemento.completa
-            } else if (this.state.filtro === "completas")  {
+            } else if (this.state.filtro === "completas") {
                 return elemento.completa
             } else {
                 return true
-            }            
-          })
+            }
+        })
 
-        
+
         let listaTexto = listaFiltrada.map((cadaTarefa, index) => {
             let semRisco = <Li key={index} onClick={() => this.mudaCompleta(cadaTarefa.id)}>{cadaTarefa.texto}</Li>
             let riscado = <LiRiscada key={index}>{cadaTarefa.texto}</LiRiscada>
             if (cadaTarefa.completa === false) {
-                    return semRisco
-                } else {
-                    return riscado
-                }  
+                return semRisco
+            } else {
+                return riscado
+            }
         })
 
         // DICA DO DANILO
@@ -144,20 +157,36 @@ class CriaTarefas extends React.Component {
                         onChange={this.lidaComMudancaTarefa}
                     />
                     <Botao onClick={this.apareceTarefa}>Adicionar</Botao>
+                    <Botao onClick={this.apagaTudo}>Apagar Tudo</Botao>
                 </DivCriarTarefas>
 
                 <DivCriarTarefas>
                     <Span>Filtro</Span>
-                    <select onChange={this.mudaFiltro} value={this.state.filtro}> 
-                            {/* cuidado com state .... coloquei setState sem querer */}
+                    <select onChange={this.mudaFiltro} value={this.state.filtro}>
+                        {/* cuidado com state .... coloquei setState sem querer */}
                         <option value="nenhum">Nenhum</option>
                         <option value="pendentes">Pendentes</option>
                         <option value="completas">Completas</option>
                     </select>
                 </DivCriarTarefas>
-                
-                {listaTexto}
-                
+
+                <DivAparece>
+                    
+                    <div>
+                        <h3>Todas as tarefas</h3>
+                        {listaTexto}
+                    </div>
+
+                    <div>
+                        <h3>Tarefas pendentes</h3>
+                    </div>
+
+                    <div>
+                        <h3>Tarefas completas</h3>
+                    </div>
+
+                </DivAparece>
+
             </CriaTarefasContainer>
         )
     }
