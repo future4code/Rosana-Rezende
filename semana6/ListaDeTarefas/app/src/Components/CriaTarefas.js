@@ -66,6 +66,15 @@ class CriaTarefas extends React.Component {
         }
     }
 
+    // componentDidMount() {
+    //     console.log('3. Acabei de ser montado')
+
+    //     const inputArmazenandosString = localStorage.getItem("inputAtual");
+    //     const novoEstado = JSON.parse(inputArmazenandosString);
+    //     this.setState({maisUmaTarefa: novoEstado});
+    // }
+
+
     mudaCompleta = (id) => {
         let copiaLista = this.state.tarefas.map((elemento, index, array) => {
             if (elemento.id === id) {
@@ -84,26 +93,27 @@ class CriaTarefas extends React.Component {
         
         const novoFiltro = event.target.value
         
-        const listaFiltrada = this.state.tarefas.filter((elemento) => {
-            if (novoFiltro === "pendentes") {
-              return !elemento.completa
-            } else if (novoFiltro === "completas") {
-              return elemento.completa
-            }
-            else {
-              return true
-            }
-          })
+        console.log(novoFiltro)
         this.setState({
-            fitro: novoFiltro,
-            tarefas: listaFiltrada
+            filtro: novoFiltro,
         })
     }
 
     
     render() {        
         
-        let listaTexto = this.state.tarefas.map((cadaTarefa, index) => {
+        let listaFiltrada = this.state.tarefas.filter((elemento) => {
+            if(this.state.filtro === "pendentes") {
+                return !elemento.completa
+            } else if (this.state.filtro === "completas")  {
+                return elemento.completa
+            } else {
+                return true
+            }            
+          })
+
+        
+        let listaTexto = listaFiltrada.map((cadaTarefa, index) => {
             let semRisco = <Li key={index} onClick={() => this.mudaCompleta(cadaTarefa.id)}>{cadaTarefa.texto}</Li>
             let riscado = <LiRiscada key={index}>{cadaTarefa.texto}</LiRiscada>
             if (cadaTarefa.completa === false) {
@@ -135,16 +145,14 @@ class CriaTarefas extends React.Component {
                     <Span>Filtro</Span>
                     <select onChange={this.mudaFiltro} value={this.state.filtro}> 
                             {/* cuidado com state .... coloquei setState sem querer */}
-                        <option value='nenhum'>Nenhum</option>
-                        <option value='pendentes'>Pendentes</option>
-                        <option value='completas'>Completas</option>
+                        <option value="nenhum">Nenhum</option>
+                        <option value="pendentes">Pendentes</option>
+                        <option value="completas">Completas</option>
                     </select>
                 </DivCriarTarefas>
                 
                 {listaTexto}
                 
-
-
             </CriaTarefasContainer>
         )
     }
