@@ -1,0 +1,2475 @@
+{
+	"info": {
+		"_postman_id": "6779eaac-3de5-4384-be6b-8c47dfa2c4d8",
+		"name": "semana7-aula24",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1.createPlaylist1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Folk-pop Brasil\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/createPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"createPlaylist"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createPlaylist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "auth",
+								"value": "authentication-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"playlist-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/playlists/createPlaylist",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"playlists",
+								"createPlaylist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "1.createPlaylist2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Acústico MPB\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/createPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"createPlaylist"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createPlaylist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "auth",
+								"value": "authentication-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"playlist-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/playlists/createPlaylist",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"playlists",
+								"createPlaylist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "1.createPlaylist3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Pop Brasil\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/createPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"createPlaylist"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createPlaylist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "auth",
+								"value": "authentication-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"playlist-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/playlists/createPlaylist",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"playlists",
+								"createPlaylist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "2.getAllPlaylists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getAllPlaylists",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getAllPlaylists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.addMusicToPlaylist1a",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"11b0c441-174c-41e9-9738-8e6af4694358\",\n\t\"music\": {\n\t\t\"name\": \"Tangerina\",\n\t\t\"artist\": \"Tiago Iorc\",\n\t\t\"url\": \"http://spoti4.future4.com.br/1.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.addMusicToPlaylist1b",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"11b0c441-174c-41e9-9738-8e6af4694358\",\n\t\"music\": {\n\t\t\"name\": \"Ai, amor\",\n\t\t\"artist\": \"AnaVitória\",\n\t\t\"url\": \"http://spoti4.future4.com.br/2.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.addMusicToPlaylist2a",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"b467f2f4-34ce-412d-b063-0b823c6b4fd2\",\n\t\"music\": {\n\t\t\"name\": \"Linda Rosana\",\n\t\t\"artist\": \"Maria Gadú\",\n\t\t\"url\": \"http://spoti4.future4.com.br/3.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.addMusicToPlaylist2b",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"b467f2f4-34ce-412d-b063-0b823c6b4fd2\",\n\t\"music\": {\n\t\t\"name\": \"Se...\",\n\t\t\"artist\": \"Djavan\",\n\t\t\"url\": \"http://spoti4.future4.com.br/4.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.addMusicToPlaylist3a",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"c7f0a178-199b-4b52-9b4c-a8894952e249\",\n\t\"music\": {\n\t\t\"name\": \"Briza\",\n\t\t\"artist\": \"Iza\",\n\t\t\"url\": \"http://spoti4.future4.com.br/5.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.addMusicToPlaylist3b",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"c7f0a178-199b-4b52-9b4c-a8894952e249\",\n\t\"music\": {\n\t\t\"name\": \"Amor de Que\",\n\t\t\"artist\": \"Pabllo Vittar\",\n\t\t\"url\": \"http://spoti4.future4.com.br/6.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.getAllPlaylists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getAllPlaylists",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getAllPlaylists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.getPlaylistMusics/:playlistId1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/11b0c441-174c-41e9-9738-8e6af4694358",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"11b0c441-174c-41e9-9738-8e6af4694358"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.getPlaylistMusics/:playlistId2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/b467f2f4-34ce-412d-b063-0b823c6b4fd2",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"b467f2f4-34ce-412d-b063-0b823c6b4fd2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.getPlaylistMusics/:playlistId3",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/c7f0a178-199b-4b52-9b4c-a8894952e249",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"c7f0a178-199b-4b52-9b4c-a8894952e249"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.searchPlaylist",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/searchPlaylist?playlistName=Pop Brasil",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"searchPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistName",
+							"value": "Pop Brasil"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.addMusicToPlaylist1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"c7f0a178-199b-4b52-9b4c-a8894952e249\",\n\t\"music\": {\n\t\t\"name\": \"Contatinho\",\n\t\t\"artist\": \"Léo Santana\",\n\t\t\"url\": \"http://spoti4.future4.com.br/7.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.addMusicToPlaylist2",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"c7f0a178-199b-4b52-9b4c-a8894952e249\",\n\t\"music\": {\n\t\t\"name\": \"Tudo Ok\",\n\t\t\"artist\": \"Thiaguinho MT & Mila\",\n\t\t\"url\": \"http://spoti4.future4.com.br/8.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.getPlaylistMusics/:playlistId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/c7f0a178-199b-4b52-9b4c-a8894952e249",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"c7f0a178-199b-4b52-9b4c-a8894952e249"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7.addMusicToPlaylist",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"11b0c441-174c-41e9-9738-8e6af4694358\",\n\t\"music\": {\n\t\t\"name\": \"Sentadão\",\n\t\t\"artist\": \"Pedro Sampaio\",\n\t\t\"url\": \"http://spoti4.future4.com.br/9.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8.getPlaylistMusics/:playlistId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/11b0c441-174c-41e9-9738-8e6af4694358",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"11b0c441-174c-41e9-9738-8e6af4694358"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9.removeMusicFromPlaylist",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/removeMusicFromPlaylist?playlistId=11b0c441-174c-41e9-9738-8e6af4694358&musicId=e35d4e25-168e-474d-a6ff-1591c4b52f2e",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"removeMusicFromPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "11b0c441-174c-41e9-9738-8e6af4694358"
+						},
+						{
+							"key": "musicId",
+							"value": "e35d4e25-168e-474d-a6ff-1591c4b52f2e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9.addMusicToPlaylist1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"11b0c441-174c-41e9-9738-8e6af4694358\",\n\t\"music\": {\n\t\t\"name\": \"A noite\",\n\t\t\"artist\": \"Tiê\",\n\t\t\"url\": \"http://spoti4.future4.com.br/10.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9.addMusicToPlaylist2",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"11b0c441-174c-41e9-9738-8e6af4694358\",\n\t\"music\": {\n\t\t\"name\": \"Aliança\",\n\t\t\"artist\": \"Tribalistas\",\n\t\t\"url\": \"http://spoti4.future4.com.br/11.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10.getPlaylistMusics/:playlistId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/11b0c441-174c-41e9-9738-8e6af4694358",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"11b0c441-174c-41e9-9738-8e6af4694358"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.a.deletePlaylist1",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/deletePlaylist?playlistId=11b0c441-174c-41e9-9738-8e6af4694358",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"deletePlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "11b0c441-174c-41e9-9738-8e6af4694358"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.a.deletePlaylist2",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/deletePlaylist?playlistId=b467f2f4-34ce-412d-b063-0b823c6b4fd2",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"deletePlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "b467f2f4-34ce-412d-b063-0b823c6b4fd2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.a.deletePlaylist3",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/deletePlaylist?playlistId=c7f0a178-199b-4b52-9b4c-a8894952e249",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"deletePlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "c7f0a178-199b-4b52-9b4c-a8894952e249"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.a.getAllPlaylists4",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getAllPlaylists",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getAllPlaylists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.b.createPlaylist1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Folk-pop Brasil - 2\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/createPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"createPlaylist"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createPlaylist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "auth",
+								"value": "authentication-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"playlist-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/playlists/createPlaylist",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"playlists",
+								"createPlaylist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "11.b.getAllPlaylists2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getAllPlaylists",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getAllPlaylists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.c.addMusicToPlaylist1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"9660e95e-c267-4f08-82ec-dd38e3cf4921\",\n\t\"music\": {\n\t\t\"name\": \"Tangerina\",\n\t\t\"artist\": \"Tiago Iorc\",\n\t\t\"url\": \"http://spoti4.future4.com.br/12.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.c.addMusicToPlaylist2",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"9660e95e-c267-4f08-82ec-dd38e3cf4921\",\n\t\"music\": {\n\t\t\"name\": \"Ai, amor\",\n\t\t\"artist\": \"AnaVitória\",\n\t\t\"url\": \"http://spoti4.future4.com.br/13.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.c.addMusicToPlaylist3",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"9660e95e-c267-4f08-82ec-dd38e3cf4921\",\n\t\"music\": {\n\t\t\"name\": \"A noite\",\n\t\t\"artist\": \"Tiê\",\n\t\t\"url\": \"http://spoti4.future4.com.br/14.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.c.getPlaylistMusics/:playlistId4",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/9660e95e-c267-4f08-82ec-dd38e3cf4921",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"9660e95e-c267-4f08-82ec-dd38e3cf4921"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.d.removeMusicFromPlaylist1",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/removeMusicFromPlaylist?playlistId=9660e95e-c267-4f08-82ec-dd38e3cf4921&musicId=8033a7d0-0ce7-490c-8001-6343601832c1",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"removeMusicFromPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "9660e95e-c267-4f08-82ec-dd38e3cf4921"
+						},
+						{
+							"key": "musicId",
+							"value": "8033a7d0-0ce7-490c-8001-6343601832c1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.d.getPlaylistMusics/:playlistId2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/9660e95e-c267-4f08-82ec-dd38e3cf4921",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"9660e95e-c267-4f08-82ec-dd38e3cf4921"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.e.createPlaylist 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Acústico MPB - 2\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/createPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"createPlaylist"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createPlaylist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "auth",
+								"value": "authentication-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"playlist-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/playlists/createPlaylist",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"playlists",
+								"createPlaylist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "11.e.createPlaylist 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Pop Brasil - 2\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/createPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"createPlaylist"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createPlaylist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "auth",
+								"value": "authentication-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"playlist-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/playlists/createPlaylist",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"playlists",
+								"createPlaylist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "11.e.getAllPlaylists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getAllPlaylists",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getAllPlaylists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.e.addMusicToPlaylist 1",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"e777a1ff-618c-49e8-ae25-f74b29437be7\",\n\t\"music\": {\n\t\t\"name\": \"Linda Rosa\",\n\t\t\"artist\": \"Maria Gadú\",\n\t\t\"url\": \"http://spoti4.future4.com.br/15.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.e.addMusicToPlaylist 2",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"c7984199-65c1-4bdb-b7db-9589bed0e93a\",\n\t\"music\": {\n\t\t\"name\": \"Briza\",\n\t\t\"artist\": \"Iza\",\n\t\t\"url\": \"http://spoti4.future4.com.br/16.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.e.getPlaylistMusics/:playlistId 1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/e777a1ff-618c-49e8-ae25-f74b29437be7",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"e777a1ff-618c-49e8-ae25-f74b29437be7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11.e.getPlaylistMusics/:playlistId 2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getPlaylistMusics/c7984199-65c1-4bdb-b7db-9589bed0e93a",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getPlaylistMusics",
+						"c7984199-65c1-4bdb-b7db-9589bed0e93a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DESAFIO - getAllPlaylists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getAllPlaylists",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getAllPlaylists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.getPlaylistMusics/:playlistId 1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/getPlaylistMusics/9660e95e-c267-4f08-82ec-dd38e3cf4921",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"getPlaylistMusics",
+						"9660e95e-c267-4f08-82ec-dd38e3cf4921"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.getPlaylistMusics/:playlistId 2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/getPlaylistMusics/e777a1ff-618c-49e8-ae25-f74b29437be7",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"getPlaylistMusics",
+						"e777a1ff-618c-49e8-ae25-f74b29437be7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1. addMusicToPlaylist 2",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"e777a1ff-618c-49e8-ae25-f74b29437be7\",\n\t\"music\": {\n\t\t\"name\": \"Ai, amor\",\n\t\t\"artist\": \"AnaVitória\",\n\t\t\"url\": \"http://spoti4.future4.com.br/17.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.getPlaylistMusics/:playlistId 2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/getPlaylistMusics/e777a1ff-618c-49e8-ae25-f74b29437be7",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"getPlaylistMusics",
+						"e777a1ff-618c-49e8-ae25-f74b29437be7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.getPlaylistMusics/:playlistId 3",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/getPlaylistMusics/c7984199-65c1-4bdb-b7db-9589bed0e93a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"getPlaylistMusics",
+						"c7984199-65c1-4bdb-b7db-9589bed0e93a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1. addMusicToPlaylist 3",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playlistId\": \"c7984199-65c1-4bdb-b7db-9589bed0e93a\",\n\t\"music\": {\n\t\t\"name\": \"Amor de Que\",\n\t\t\"artist\": \"Pabllo Vittar\",\n\t\t\"url\": \"http://spoti4.future4.com.br/17.mp3\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/addMusicToPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"addMusicToPlaylist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.getPlaylistMusics/:playlistId 3",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/getPlaylistMusics/c7984199-65c1-4bdb-b7db-9589bed0e93a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"getPlaylistMusics",
+						"c7984199-65c1-4bdb-b7db-9589bed0e93a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. createPlaylist",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Folk-pop Brasil - 2\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/createPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"createPlaylist"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createPlaylist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "auth",
+								"value": "authentication-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"playlist-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/playlists/createPlaylist",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"playlists",
+								"createPlaylist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "3.searchPlaylist",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/searchPlaylist?playlistName=funk",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"searchPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistName",
+							"value": "funk"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.getPlaylistMusics/:playlistId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/getPlaylistMusics/c7984199-65c1-4bdb-b7db-9589bed0e93a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"getPlaylistMusics",
+						"c7984199-65c1-4bdb-b7db-9589bed0e93a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.removeMusicFromPlaylist - id inexistente",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/removeMusicFromPlaylist?playlistId=c7984199-65c1-4bdb-b7db-9589bed0e93a&musicId=1234",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"removeMusicFromPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "c7984199-65c1-4bdb-b7db-9589bed0e93a"
+						},
+						{
+							"key": "musicId",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.removeMusicFromPlaylist - sem id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/removeMusicFromPlaylist?playlistId=c7984199-65c1-4bdb-b7db-9589bed0e93a&musicId=",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"removeMusicFromPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "c7984199-65c1-4bdb-b7db-9589bed0e93a"
+						},
+						{
+							"key": "musicId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.searchPlaylist - id inexistente",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/searchPlaylist?playlistName=123",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"searchPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistName",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.searchPlaylist - sem id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/searchPlaylist?playlistName=",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"searchPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistName",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6.createPlaylist",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/createPlaylist",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"createPlaylist"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createPlaylist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "auth",
+								"value": "authentication-token",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"playlist-name\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/playlists/createPlaylist",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"playlists",
+								"createPlaylist"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "7.getAllPlaylists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://us-central1-spotif4.cloudfunctions.net/api/playlists/getAllPlaylists",
+					"protocol": "https",
+					"host": [
+						"us-central1-spotif4",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"api",
+						"playlists",
+						"getAllPlaylists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7.deletePlaylist 1",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/deletePlaylist?playlistId=9660e95e-c267-4f08-82ec-dd38e3cf4921",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"deletePlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "9660e95e-c267-4f08-82ec-dd38e3cf4921"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7.deletePlaylist 2",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/deletePlaylist?playlistId=e777a1ff-618c-49e8-ae25-f74b29437be7",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"deletePlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "e777a1ff-618c-49e8-ae25-f74b29437be7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7.deletePlaylist 3",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/deletePlaylist?playlistId=c7984199-65c1-4bdb-b7db-9589bed0e93a",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"deletePlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistId",
+							"value": "c7984199-65c1-4bdb-b7db-9589bed0e93a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7.searchPlaylist",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"type": "text",
+						"value": "rosana"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/searchPlaylist?playlistName=pop",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"searchPlaylist"
+					],
+					"query": [
+						{
+							"key": "playlistName",
+							"value": "pop"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7.getPlaylistMusics/:playlistId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "rosana",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/playlists/getPlaylistMusics/1234",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"playlists",
+						"getPlaylistMusics",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
