@@ -8,11 +8,19 @@ const TelaCadastroContainer = styled.div`
   text-align: center;
 `
 
-const H2 = styled.h2``
+const BotaoCadastrar = styled.button`
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    border-radius: 50px;
+    outline: 0;
+    padding: 5px 10px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+`
 
 const baseUrl = "https://us-central1-future4-users.cloudfunctions.net/api";
 
-const authToken = "string"; // Só para evitar repetição.
+const authToken = "rosanarezende"; // Só para evitar repetição.
 
 class TelaCadastro extends Component {
     constructor(props) {
@@ -64,7 +72,7 @@ class TelaCadastro extends Component {
         return (
             <TelaCadastroContainer>
 
-                <H2>Cadastro de Usuários</H2>
+                <h2>Cadastro de Usuários</h2>
                 <p>
                     <input
                         type="text"
@@ -83,9 +91,9 @@ class TelaCadastro extends Component {
                     />
                 </p>
 
-                <button onClick={this.cadastraUsuario}>
-                    Cadastrar o Usuário
-                </button>
+                <BotaoCadastrar onClick={this.cadastraUsuario}>
+                    Cadastrar Usuário
+                </BotaoCadastrar>
 
             </TelaCadastroContainer>
         )

@@ -25,13 +25,13 @@ const BotaoDeletar = styled.button`
     border-radius: 50px;
     outline: 0;
     padding: 5px 10px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.9);
     color: white;
 `
 
 const baseUrl = "https://us-central1-future4-users.cloudfunctions.net/api";
 
-const authToken = "string"; // Só para evitar repetição.
+const authToken = "rosanarezende"; // Só para evitar repetição.
 
 class TelaListaDeUsuarios extends Component {
 
