@@ -7,26 +7,9 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Projeto: FutureForms
 
-[Site do projeto](http://futureforms1-rosana.surge.sh/)
+[Site do projeto](http://futureforms-rosana1.surge.sh/)
 
 ![futureforms](https://user-images.githubusercontent.com/45580434/74693970-df509580-51cc-11ea-8bac-2bbb96aaef8d.gif)
-
-<p align="center">
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/future4code/Rosana-Rezende/semana6/FutureForms">
-
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/future4code/Rosana-Rezende/semana6/FutureForms">
-
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/future4code/Rosana-Rezende/semana6/FutureForms">
-
-  <a href="https://github.com/future4code/Rosana-Rezende/semana6/FutureForms/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/future4code/Rosana-Rezende/semana6/FutureForms">
-  </a>
-
-  <a href="https://github.com/future4code/Rosana-Rezende/semana6/FutureForms/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/future4code/Rosana-Rezende/semana6/FutureForms">
-  </a>
-</p>
-<br>
 
 **Desenvolvido por:** [Rosana Rezende](https://www.linkedin.com/in/rosanarezende/)
 <br>
@@ -72,10 +55,10 @@ Criar concorrente para o GoogleForms, implementando um formulário de processo s
 [x] 1. *O usuário só deve responder a Etapa 2, se ele tiver respondido "Ensino Superior Completo" ou "Ensino Superior Incompleto" (na pergunta 4 da etapa 1); e a etapa 3, se a resposta for "Ensino Médio Completo" ou "Ensino Médio Incompleto".*
 <br>
 
-[x] 2. *Faça com que o usuário não consiga prosseguir para a próxima etapa até que todas as perguntas da etapa atual estejam respondidas. Mostre um alert com a mensagem "Você deve preencher todas as perguntas antes de continuar" *
+[x] 2. *Faça com que o usuário não consiga prosseguir para a próxima etapa até que todas as perguntas da etapa atual estejam respondidas. Mostre um alert com a mensagem "Você deve preencher todas as perguntas antes de continuar"*
 <br>
 
-[] 3. *Faça com que só algumas perguntas sejam obrigatórias. Se o usuário não a preencher, um erro deve ser mostrado acima da pergunta, indicando que deve ser preenchida. O usuário não pode prosseguir nas etapas até que todas as perguntas obrigatórias da etapa atual estejam respondidas. Mantenha o alert que pedimos no item anterior. *
+[] 3. *Faça com que só algumas perguntas sejam obrigatórias. Se o usuário não a preencher, um erro deve ser mostrado acima da pergunta, indicando que deve ser preenchida. O usuário não pode prosseguir nas etapas até que todas as perguntas obrigatórias da etapa atual estejam respondidas. Mantenha o alert que pedimos no item anterior.*
 <br>
 
 
