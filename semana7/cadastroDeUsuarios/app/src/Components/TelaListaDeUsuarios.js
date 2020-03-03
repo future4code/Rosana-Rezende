@@ -68,17 +68,21 @@ class TelaListaDeUsuarios extends Component {
     }
 
     deletaUsuario = (idDoUsuario) => {
+            
+        const deletar = window.confirm('Tem certeza de que deseja deletar?')
 
-        const usuarioDeletaPromessa = axios.delete(
-            `${baseUrl}/users/deleteUser?id=${idDoUsuario}`,
-            {
-                headers: {
-                    'api-token': authToken
+        if (deletar) {
+
+            const usuarioDeletaPromessa = axios.delete(
+                `${baseUrl}/users/deleteUser?id=${idDoUsuario}`,
+                {
+                    headers: {
+                        'api-token': authToken
+                    }
                 }
-            }
-        )
+                )
 
-        usuarioDeletaPromessa
+            usuarioDeletaPromessa
             .then(response => {
                 alert('Usuário deletado com sucesso')
                 this.buscarTodosOsUsuarios();
@@ -86,6 +90,9 @@ class TelaListaDeUsuarios extends Component {
             .catch(error => {
                 alert(error)
             })
+        }
+
+        
     }
 
     render() {
