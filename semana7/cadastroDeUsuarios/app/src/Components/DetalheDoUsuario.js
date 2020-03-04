@@ -18,103 +18,144 @@ const BotaoDeletar = styled.button`
 	color: white;
 `
 
+const DivBotoes = styled.div`
+    display: flex;
+    justify-content: space-around;
+    width: 40vw;
+    margin: auto;
+
+`
+
 const baseUrl = "https://us-central1-future4-users.cloudfunctions.net/api";
 
 const authToken = "rosanarezende"; // Só para evitar repetição.
 
 class DetalheDoUsuario extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            usuarioClicado: [],
-        }
-    }
+	constructor(props) {
+		super(props)
+		this.state = {
+			usuarioClicado: [],
+			editar: false,
+		}
+	}
 
-    componentDidMount() {
-        this.buscarUsuarioClicado()
-    }
+	componentDidMount() {
+		this.buscarUsuarioClicado()
+	}
 
-    buscarUsuarioClicado = () => {
+	buscarUsuarioClicado = () => {
 
-        const usuarioClicadosPromessa = axios.get(
-            `${baseUrl}/users/getUser/${this.props.usuarioClicadoId}`,
-            {
-                headers: {
-                    'api-token': authToken
-                }
-            }
-        )
+		const usuarioClicadosPromessa = axios.get(
+			`${baseUrl}/users/getUser/${this.props.usuarioClicadoId}`,
+			{
+				headers: {
+					'api-token': authToken
+				}
+			}
+		)
 
-        usuarioClicadosPromessa
-            .then(response => {
-                this.setState({ usuarioClicado: response.data.result })
-            })
-            .catch(error => {
-                console.log(error)
-                this.setState({ usuarioClicado: [] })
-            })
+		usuarioClicadosPromessa
+			.then(response => {
+				this.setState({ usuarioClicado: response.data.result })
+			})
+			.catch(error => {
+				console.log(error)
+				this.setState({ usuarioClicado: [] })
+			})
 
-    }
+	}
 
-    deletaUsuario = () => {
+	deletaUsuario = () => {
 
-        const deletar = window.confirm('Tem certeza de que deseja deletar?')
+		const deletar = window.confirm('Tem certeza de que deseja deletar?')
 
-        if (deletar) {
+		if (deletar) {
 
-            const usuarioDeletaPromessa = axios.delete(
-                `${baseUrl}/users/deleteUser?id=${this.props.usuarioClicadoId}`,
-                {
-                    headers: {
-                        'api-token': authToken
-                    }
-                }
-            )
+			const usuarioDeletaPromessa = axios.delete(
+				`${baseUrl}/users/deleteUser?id=${this.props.usuarioClicadoId}`,
+				{
+					headers: {
+						'api-token': authToken
+					}
+				}
+			)
 
-            usuarioDeletaPromessa
-                .then(response => {
-                    alert('Usuário deletado com sucesso')
-                    this.buscarUsuarioClicado();
-                })
-                .catch(error => {
-                    alert(error)
-                })
-        }
+			usuarioDeletaPromessa
+				.then(response => {
+					alert('Usuário deletado com sucesso')
+					this.buscarUsuarioClicado();
+				})
+				.catch(error => {
+					alert(error)
+				})
+		}
 
-    }
+	}
 
-    render() {
+	apareceEditarUsuario = () => {
+		this.setState({ editar: !this.state.editar })
+	}
 
-        const usuarioClicadoInfo = (
-            <div>
+	render() {
 
-                 <p>
-                     <span><em>Nome:</em> {this.state.usuarioClicado.name}</span>
-                 </p>
+		const usuarioClicadoInfo = (
+			<div>
 
-                 <p>
-                     <span><em>Email:</em>  {this.state.usuarioClicado.email}</span>
-                 </p>
+				<p>
+					<span><strong>Nome:</strong> {this.state.usuarioClicado.name}</span>
+				</p>
 
-                 <BotaoDeletar onClick={() => this.deletaUsuario(this.state.usuarioClicado.id)}>
-                     X
+				<p>
+					<span><strong>Email:</strong>  {this.state.usuarioClicado.email}</span>
+				</p>
+
+				<DivBotoes>
+					<BotaoDeletar onClick={() => this.deletaUsuario(this.state.usuarioClicado.id)}>
+						Deletar Usuário
+		 		    </BotaoDeletar>
+
+					<BotaoDeletar onClick={() => this.apareceEditarUsuario(this.state.usuarioClicado.id)}>
+						Editar Usuário
+		 		    </BotaoDeletar>
+				</DivBotoes>
+
+			</div>
+		)
+
+		const usuarioClicadoEdicoes = (
+			<div>
+
+				<p>
+					<span><strong>Nome:</strong> <input />
+					</span>
+				</p>
+
+				<p>
+					<span><strong>Email:</strong>  <input />
+					</span>
+				</p>
+
+				<BotaoDeletar onClick={() => this.deletaUsuario(this.state.usuarioClicado.id)}>
+					Deletar Usuário
 		 		</BotaoDeletar>
 
-             </div>
-        )
+			</div>
+		)
 
 
 
-        return (
-            <DetalheDoUsuarioContainer>
-                <h2>Detalhe do Usuário</h2>
+		return (
+			<DetalheDoUsuarioContainer>
+				<h2>Detalhe do Usuário</h2>
 
-                {usuarioClicadoInfo}
+				{this.state.editar ? usuarioClicadoEdicoes : usuarioClicadoInfo}
 
-            </DetalheDoUsuarioContainer>
-        )
-    }
+
+
+			</DetalheDoUsuarioContainer>
+		)
+	}
 
 }
 
