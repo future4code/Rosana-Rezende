@@ -96,8 +96,8 @@ class TelaListaDeUsuarios extends Component {
 
 	}
 
-	mostraDetalheDoUsuario = (usuario) => {
-		this.props.aoClicarNoUsuario(usuario)
+	mostraDetalheDoUsuario = (idDoUsuario) => {
+		this.props.aoClicarNoUsuario(idDoUsuario)
 	}
 
 	render() {
@@ -106,7 +106,7 @@ class TelaListaDeUsuarios extends Component {
 			<ul>
 				{this.state.todosOsUsuarios.map(usuario => (
 					<LI key={usuario.id}>
-						<span onClick={() => this.mostraDetalheDoUsuario(usuario)}>{usuario.name}  </span>
+						<span onClick={() => this.mostraDetalheDoUsuario(usuario.id)}>{usuario.name}  </span>
 						<BotaoDeletar
 							onClick={() => this.deletaUsuario(usuario.id)}
 						>

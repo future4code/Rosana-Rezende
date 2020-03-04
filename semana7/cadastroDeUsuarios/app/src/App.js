@@ -30,7 +30,7 @@ class App extends Component {
     super(props)
     this.state = {
       mostraTela: 'cadastro',
-      idDoUsuarioClicado: {}
+      idDoUsuarioClicado: ''
     }
   }
 
@@ -49,13 +49,14 @@ class App extends Component {
     this.setState({ mostraTela: estadoAtual })
   }
 
-  detalhaUsuario = (usuario) => {
-    const usuarioDetalhes = usuario
-    // console.log(usuarioDetalhes)
+  detalhaUsuario = (idDoUsuario) => {
+    console.log(idDoUsuario)
+    
     this.setState({ 
       mostraTela: 'detalhe',
-      idDoUsuarioClicado: usuarioDetalhes
+      idDoUsuarioClicado: idDoUsuario
     })
+
     console.log(this.state.idDoUsuarioClicado)
   }
    
