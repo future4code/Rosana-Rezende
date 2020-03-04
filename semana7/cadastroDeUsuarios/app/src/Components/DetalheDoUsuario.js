@@ -38,7 +38,7 @@ const DivBotoes = styled.div`
 
 const baseUrl = "https://us-central1-future4-users.cloudfunctions.net/api";
 
-const authToken = "rosanarezende"; // Só para evitar repetição.
+const authToken = "rosanarezende";
 
 class DetalheDoUsuario extends React.Component {
 
@@ -120,12 +120,14 @@ class DetalheDoUsuario extends React.Component {
 	salvaUsuario = () => {
 
 		const dadosNovoUsuario = {
-			id: this.state.usuarioClicado.id,
-			name: this.state.novoNome,
-			email: this.state.novoEmail
+			user: {
+				id: this.state.usuarioClicado.id,
+				name: this.state.novoNome,
+				email: this.state.novoEmail
+			}
 		}
 
-		const usuarioPromessa = axios.post(
+		const usuarioPromessa = axios.put(
 			`${baseUrl}/users/editUser`,
 			dadosNovoUsuario,
 			{
@@ -138,14 +140,17 @@ class DetalheDoUsuario extends React.Component {
 		usuarioPromessa
 			.then(response => {
 				alert('Usuário editado com sucesso')
-				// this.setState({ nome: '' })
-				// this.setState({ email: '' })
+				this.setState({ 
+					novoNome: '',
+					novoEmail: '',
+					editar: false
+				})
+				this.buscarUsuarioClicado();
 			})
 			.catch(error => {
 				alert("Ops, algo deu errado na edição do usuário.")
-        console.log(error.response.data.message)
+        		console.log(error)
 			})
-
 
 	}
 
@@ -181,8 +186,6 @@ class DetalheDoUsuario extends React.Component {
 				<p>
 					<span><strong>Nome:</strong> <input
 						type="text"
-						// placeholder="Nome"
-						// value={this.state.usuarioClicado.name}
 						placeholder={this.state.usuarioClicado.name}
 						value={this.state.novoNome}
 						onChange={this.mudaNome}
@@ -193,8 +196,6 @@ class DetalheDoUsuario extends React.Component {
 				<p>
 					<span><strong>Email:</strong>  <input
 						type="email"
-						// placeholder="Email"
-						// value={this.state.usuarioClicado.email}
 						placeholder={this.state.usuarioClicado.email}
 						value={this.state.novoEmail}
 						onChange={this.mudaEmail}
@@ -216,15 +217,11 @@ class DetalheDoUsuario extends React.Component {
 			</div>
 		)
 
-
-
 		return (
 			<DetalheDoUsuarioContainer>
 				<h2>Detalhe do Usuário</h2>
 
 				{this.state.editar ? usuarioClicadoEdicoes : usuarioClicadoInfo}
-
-
 
 			</DetalheDoUsuarioContainer>
 		)
