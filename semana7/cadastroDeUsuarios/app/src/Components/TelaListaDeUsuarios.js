@@ -129,14 +129,16 @@ class TelaListaDeUsuarios extends Component {
 		usuarioPesquisadoPromessa
 			.then(response => {
 				this.setState({ 
-					usuarioPesquisado: response.data.result[0],
+					usuarioPesquisado: response.data.result,
 					apareceLista: false,
 					usuarioPesquisadoNome: ''
 				})
+				// if (response.data.results[0].length === 0) {
+				// 	alert('Erro')
+				// }				
 			})
 			.catch(error => {
 				console.log(error)
-				this.setState({ usuarioPesquisado: [] })
 			})
 
 	}
@@ -162,19 +164,27 @@ class TelaListaDeUsuarios extends Component {
 			</div>
 		)
 		
-		const usuarioPesquisadoNaTela = (
-			<DivResultado>
-				<H2>Resultado da Busca</H2>
-				<p>
-					<span><strong>Nome:</strong>  {this.state.usuarioPesquisado.name}</span>
-				</p>
-				<p>
-					<span><strong>Id:</strong>   {this.state.usuarioPesquisado.id}</span>
-				</p>
-			</DivResultado>
-		)
-
-
+		let usuarioPesquisadoNaTela
+		if(this.state.usuarioPesquisado.length > 0) {
+			usuarioPesquisadoNaTela = (
+				<DivResultado>
+					<H2>Resultado da Busca</H2>
+					<p>
+						<span><strong>Nome:</strong>  {this.state.usuarioPesquisado[0].name}</span>
+					</p>
+					<p>
+						<span><strong>Id:</strong>   {this.state.usuarioPesquisado[0].id}</span>
+					</p>
+				</DivResultado>
+			)
+		} else {
+			usuarioPesquisadoNaTela = (
+				<DivResultado>
+					<H2>Não foi encontrado resultado</H2>
+				</DivResultado>
+			)
+		}
+		
 		return (
 			<TelaListaDeUsuariosContainer>
 				
