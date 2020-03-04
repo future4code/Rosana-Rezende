@@ -111,7 +111,7 @@ class TelaListaDeUsuarios extends Component {
 							onClick={() => this.deletaUsuario(usuario.id)}
 						>
 							X
-							</BotaoDeletar>
+						</BotaoDeletar>
 					</LI>
 					
 				))}

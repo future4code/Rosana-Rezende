@@ -49,20 +49,16 @@ class App extends Component {
     this.setState({ mostraTela: estadoAtual })
   }
 
-  detalhaUsuario = (idDoUsuario) => {
-    console.log(idDoUsuario)
-    
+  detalhaUsuario = (idDoUsuario) => {    
     this.setState({ 
       mostraTela: 'detalhe',
       idDoUsuarioClicado: idDoUsuario
     })
-
-    console.log(this.state.idDoUsuarioClicado)
   }
-   
 
   render() {
 
+    // console.log(this.state.idDoUsuarioClicado)
     let nomeBotao
     if (this.state.mostraTela === 'cadastro') {
       nomeBotao = 'LISTA'
@@ -84,9 +80,7 @@ class App extends Component {
     if (this.state.mostraTela === 'detalhe') {
       telaAtual = 
         <DetalheDoUsuario 
-          // mandar alguma coisa
           usuarioClicadoId={this.state.idDoUsuarioClicado}
-
         />
     }
 

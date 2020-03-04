@@ -22,9 +22,6 @@ const baseUrl = "https://us-central1-future4-users.cloudfunctions.net/api";
 
 const authToken = "rosanarezende"; // Só para evitar repetição.
 
-const idDoUsuarioClicadoIdExemplo = 'da5d6588-9955-473b-bcc7-a8fe66768994'
-// const idDoUsuarioClicado = this.props.usuarioClicadoId
-
 class DetalheDoUsuario extends React.Component {
 
     constructor(props) {
@@ -41,7 +38,7 @@ class DetalheDoUsuario extends React.Component {
     buscarUsuarioClicado = () => {
 
         const usuarioClicadosPromessa = axios.get(
-            `${baseUrl}/users/getUser/${idDoUsuarioClicadoIdExemplo}`,
+            `${baseUrl}/users/getUser/${this.props.usuarioClicadoId}`,
             {
                 headers: {
                     'api-token': authToken
@@ -60,14 +57,14 @@ class DetalheDoUsuario extends React.Component {
 
     }
 
-    deletaUsuario = (idDoUsuario) => {
+    deletaUsuario = () => {
 
         const deletar = window.confirm('Tem certeza de que deseja deletar?')
 
         if (deletar) {
 
             const usuarioDeletaPromessa = axios.delete(
-                `${baseUrl}/users/deleteUser?id=${idDoUsuario}`,
+                `${baseUrl}/users/deleteUser?id=${this.props.usuarioClicadoId}`,
                 {
                     headers: {
                         'api-token': authToken
@@ -78,7 +75,7 @@ class DetalheDoUsuario extends React.Component {
             usuarioDeletaPromessa
                 .then(response => {
                     alert('Usuário deletado com sucesso')
-                    this.buscarTodosOsUsuarios();
+                    this.buscarUsuarioClicado();
                 })
                 .catch(error => {
                     alert(error)
