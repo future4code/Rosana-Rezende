@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import TelaCadastro from './Components/TelaCadastro';
 import TelaListaDeUsuarios from './Components/TelaListaDeUsuarios';
 import Header from './Components/Header';
 
 import styled from 'styled-components'
+import DetalheDoUsuario from './Components/DetalheDoUsuario';
 
 const AppContainer = styled.div`
   font-family: 'Roboto', sans-serif;
@@ -28,26 +29,76 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mostraCadastro: true,
+      mostraTela: 'cadastro',
+      idDoUsuarioClicado: {}
     }
   }
 
   mostraCadastroLista = () => {
-    this.setState({mostraCadastro: !this.state.mostraCadastro})
+    let estadoAtual
+    if (this.state.mostraTela === 'cadastro') {
+      estadoAtual = 'lista'
+    }
+    if (this.state.mostraTela === 'lista') {
+      estadoAtual = 'cadastro'
+    }
+    if (this.state.mostraTela === 'detalhe') {
+      estadoAtual = 'lista'
+    }
+
+    this.setState({ mostraTela: estadoAtual })
   }
 
+  detalhaUsuario = (usuario) => {
+    const usuarioDetalhes = usuario
+    // console.log(usuarioDetalhes)
+    this.setState({ 
+      mostraTela: 'detalhe',
+      idDoUsuarioClicado: usuarioDetalhes
+    })
+    console.log(this.state.idDoUsuarioClicado)
+  }
+   
+
   render() {
-       
+
+    let nomeBotao
+    if (this.state.mostraTela === 'cadastro') {
+      nomeBotao = 'LISTA'
+    }
+    if (this.state.mostraTela === 'lista' || this.state.mostraTela === 'detalhe') {
+      nomeBotao = 'VOLTAR'
+    }
+
+    let telaAtual
+    if (this.state.mostraTela === 'cadastro') {
+      telaAtual = <TelaCadastro />
+    }
+    if (this.state.mostraTela === 'lista') {
+      telaAtual = 
+        <TelaListaDeUsuarios 
+          aoClicarNoUsuario={this.detalhaUsuario} 
+        />
+    }
+    if (this.state.mostraTela === 'detalhe') {
+      telaAtual = 
+        <DetalheDoUsuario 
+          // mandar alguma coisa
+          usuarioClicadoId={this.state.idDoUsuarioClicado}
+
+        />
+    }
+
     return (
       <AppContainer>
-        <Header/>
+        <Header />
 
         <AppBotao onClick={this.mostraCadastroLista}>
-          {this.state.mostraCadastro ? 'LISTA' : 'VOLTAR'}
+          {nomeBotao}
         </AppBotao>
 
-        {this.state.mostraCadastro ? <TelaCadastro/> : <TelaListaDeUsuarios/>}
-  
+        {telaAtual}
+
       </AppContainer>
     );
   }

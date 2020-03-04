@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components'
 import axios from 'axios'
-import DetalheDoUsuario from './DetalheDoUsuario';
+// import DetalheDoUsuario from './DetalheDoUsuario';
 
 const TelaListaDeUsuariosContainer = styled.div`
 	padding: 1vh 1vw;    
@@ -40,8 +40,6 @@ class TelaListaDeUsuarios extends Component {
 		super(props)
 		this.state = {
 			todosOsUsuarios: [],
-			// mostraLista: true,
-			mostraDetalhes: false,
 		}
 	}
 
@@ -98,8 +96,8 @@ class TelaListaDeUsuarios extends Component {
 
 	}
 
-	mostraDetalheDoUsuario = () => {
-		this.setState({ mostraDetalhes: !this.state.mostraDetalhes })
+	mostraDetalheDoUsuario = (usuario) => {
+		this.props.aoClicarNoUsuario(usuario)
 	}
 
 	render() {
@@ -108,7 +106,7 @@ class TelaListaDeUsuarios extends Component {
 			<ul>
 				{this.state.todosOsUsuarios.map(usuario => (
 					<LI key={usuario.id}>
-						<span onClick={() => this.mostraDetalheDoUsuario(usuario.id)}>{usuario.name}   </span>
+						<span onClick={() => this.mostraDetalheDoUsuario(usuario)}>{usuario.name}  </span>
 						<BotaoDeletar
 							onClick={() => this.deletaUsuario(usuario.id)}
 						>
@@ -126,10 +124,7 @@ class TelaListaDeUsuarios extends Component {
 
 				{this.state.todosOsUsuarios.length === 0 && <p>Carregando...</p>}
 
-				{/* {this.state.mostraLista ? listaDeUsuarios : ""} */}
 				{listaDeUsuarios}
-
-				{this.state.mostraDetalhes  && <DetalheDoUsuario/>}
 
 			</TelaListaDeUsuariosContainer>
 		);
