@@ -26,8 +26,8 @@ const BotaoDeletar = styled.button`
 	border-radius: 50px;
 	outline: 0;
 	padding: 5px 10px;
-	background-color: rgba(0, 0, 0, 0.9);
-	color: white;
+	background-color: red;
+	color: black;
 `
 
 const baseUrl = "https://us-central1-future4-users.cloudfunctions.net/api";

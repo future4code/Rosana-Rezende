@@ -63,7 +63,8 @@ class TelaCadastro extends Component {
                 this.setState({ email: '' })
             })
             .catch(error => {
-                alert(error)
+                alert("Ops, algo deu errado na criação do usuário.")
+                console.log(error.response.data.message)
             })
 
     }

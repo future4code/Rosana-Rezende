@@ -14,6 +14,16 @@ const BotaoDeletar = styled.button`
 	border-radius: 50px;
 	outline: 0;
 	padding: 5px 10px;
+	background-color: red;
+	color: black;
+`
+
+const BotaoComum = styled.button`
+	font-family: 'Roboto', sans-serif;
+	font-size: 1rem;
+	border-radius: 50px;
+	outline: 0;
+	padding: 5px 10px;
 	background-color: rgba(0, 0, 0, 0.9);
 	color: white;
 `
@@ -35,8 +45,10 @@ class DetalheDoUsuario extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			usuarioClicado: [],
+			usuarioClicado: {},
 			editar: false,
+			novoNome: '',
+			novoEmail: ''
 		}
 	}
 
@@ -61,7 +73,7 @@ class DetalheDoUsuario extends React.Component {
 			})
 			.catch(error => {
 				console.log(error)
-				this.setState({ usuarioClicado: [] })
+				this.setState({ usuarioClicado: {} })
 			})
 
 	}
@@ -97,6 +109,46 @@ class DetalheDoUsuario extends React.Component {
 		this.setState({ editar: !this.state.editar })
 	}
 
+	mudaNome = (event) => {
+		this.setState({ novoNome: event.target.value })
+	}
+
+	mudaEmail = (event) => {
+		this.setState({ novoEmail: event.target.value })
+	}
+
+	salvaUsuario = () => {
+
+		const dadosNovoUsuario = {
+			id: this.state.usuarioClicado.id,
+			name: this.state.novoNome,
+			email: this.state.novoEmail
+		}
+
+		const usuarioPromessa = axios.post(
+			`${baseUrl}/users/editUser`,
+			dadosNovoUsuario,
+			{
+				headers: {
+					'api-token': authToken
+				}
+			}
+		)
+
+		usuarioPromessa
+			.then(response => {
+				alert('Usuário editado com sucesso')
+				// this.setState({ nome: '' })
+				// this.setState({ email: '' })
+			})
+			.catch(error => {
+				alert("Ops, algo deu errado na edição do usuário.")
+        console.log(error.response.data.message)
+			})
+
+
+	}
+
 	render() {
 
 		const usuarioClicadoInfo = (
@@ -113,11 +165,11 @@ class DetalheDoUsuario extends React.Component {
 				<DivBotoes>
 					<BotaoDeletar onClick={() => this.deletaUsuario(this.state.usuarioClicado.id)}>
 						Deletar Usuário
-		 		    </BotaoDeletar>
+		 		  </BotaoDeletar>
 
-					<BotaoDeletar onClick={() => this.apareceEditarUsuario(this.state.usuarioClicado.id)}>
+					<BotaoComum onClick={() => this.apareceEditarUsuario(this.state.usuarioClicado.id)}>
 						Editar Usuário
-		 		    </BotaoDeletar>
+		 		    </BotaoComum>
 				</DivBotoes>
 
 			</div>
@@ -127,18 +179,39 @@ class DetalheDoUsuario extends React.Component {
 			<div>
 
 				<p>
-					<span><strong>Nome:</strong> <input />
+					<span><strong>Nome:</strong> <input
+						type="text"
+						// placeholder="Nome"
+						// value={this.state.usuarioClicado.name}
+						placeholder={this.state.usuarioClicado.name}
+						value={this.state.novoNome}
+						onChange={this.mudaNome}
+					/>
 					</span>
 				</p>
 
 				<p>
-					<span><strong>Email:</strong>  <input />
+					<span><strong>Email:</strong>  <input
+						type="email"
+						// placeholder="Email"
+						// value={this.state.usuarioClicado.email}
+						placeholder={this.state.usuarioClicado.email}
+						value={this.state.novoEmail}
+						onChange={this.mudaEmail}
+					/>
 					</span>
 				</p>
 
-				<BotaoDeletar onClick={() => this.deletaUsuario(this.state.usuarioClicado.id)}>
-					Deletar Usuário
-		 		</BotaoDeletar>
+				<DivBotoes>
+
+					<BotaoDeletar onClick={() => this.deletaUsuario(this.state.usuarioClicado.id)}>
+						Deletar Usuário
+		 		  </BotaoDeletar>
+
+					<BotaoComum onClick={() => this.salvaUsuario(this.state.usuarioClicado.id)}>
+						Salvar Usuário
+		 		  </BotaoComum>
+				</DivBotoes>
 
 			</div>
 		)
