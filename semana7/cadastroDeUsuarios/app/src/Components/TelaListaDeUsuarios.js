@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components'
 import axios from 'axios'
-// import DetalheDoUsuario from './DetalheDoUsuario';
 
 const TelaListaDeUsuariosContainer = styled.div`
-	padding: 1vh 1vw;    
+	padding: 1vh 1vw;
 `
 
 const H2 = styled.h2`
@@ -30,9 +29,18 @@ const BotaoDeletar = styled.button`
 	color: black;
 `
 
+const InputBusca = styled.input`
+	margin: 1vh 1vw;
+`
+
+const DivResultado = styled.div`
+	width: 50vh;
+	margin: auto;
+`
+
 const baseUrl = "https://us-central1-future4-users.cloudfunctions.net/api";
 
-const authToken = "rosanarezende"; // Só para evitar repetição.
+const authToken = "rosanarezende";
 
 class TelaListaDeUsuarios extends Component {
 
@@ -40,6 +48,9 @@ class TelaListaDeUsuarios extends Component {
 		super(props)
 		this.state = {
 			todosOsUsuarios: [],
+			apareceLista: true,
+			usuarioPesquisadoNome: '',
+			usuarioPesquisado: []
 		}
 	}
 
@@ -100,31 +111,85 @@ class TelaListaDeUsuarios extends Component {
 		this.props.aoClicarNoUsuario(idDoUsuario)
 	}
 
+	mudaNomeUsuarioPesquisado = (event) => {
+		this.setState({usuarioPesquisadoNome: event.target.value})
+	}
+
+	buscaUsuarioNome = () => {
+
+		const usuarioPesquisadoPromessa = axios.get(
+			`${baseUrl}/users/searchUsers?name=${this.state.usuarioPesquisadoNome}`,
+			{
+				headers: {
+					'api-token': authToken
+				}
+			}
+		)
+
+		usuarioPesquisadoPromessa
+			.then(response => {
+				this.setState({ 
+					usuarioPesquisado: response.data.result[0],
+					apareceLista: false,
+					usuarioPesquisadoNome: ''
+				})
+			})
+			.catch(error => {
+				console.log(error)
+				this.setState({ usuarioPesquisado: [] })
+			})
+
+	}
+
 	render() {
 
+		
 		const listaDeUsuarios = (
+			<div>
+			<H2>Lista de Usuários</H2>
 			<ul>
 				{this.state.todosOsUsuarios.map(usuario => (
 					<LI key={usuario.id}>
 						<span onClick={() => this.mostraDetalheDoUsuario(usuario.id)}>{usuario.name}  </span>
 						<BotaoDeletar
 							onClick={() => this.deletaUsuario(usuario.id)}
-						>
+							>
 							X
 						</BotaoDeletar>
 					</LI>
-					
 				))}
 			</ul>
+			</div>
 		)
+		
+		const usuarioPesquisadoNaTela = (
+			<DivResultado>
+				<H2>Resultado da Busca</H2>
+				<p>
+					<span><strong>Nome:</strong>  {this.state.usuarioPesquisado.name}</span>
+				</p>
+				<p>
+					<span><strong>Id:</strong>   {this.state.usuarioPesquisado.id}</span>
+				</p>
+			</DivResultado>
+		)
+
 
 		return (
 			<TelaListaDeUsuariosContainer>
-				<H2>Lista de Usuários</H2>
+				
+				<InputBusca
+					type='text'
+					placeholder='Buscar Usuário'
+					value={this.state.usuarioPesquisadoNome}
+					onChange={this.mudaNomeUsuarioPesquisado}
+				/>
+				<button onClick={this.buscaUsuarioNome}>Buscar</button>
+
 
 				{this.state.todosOsUsuarios.length === 0 && <p>Carregando...</p>}
 
-				{listaDeUsuarios}
+				{this.state.apareceLista ? listaDeUsuarios : usuarioPesquisadoNaTela}
 
 			</TelaListaDeUsuariosContainer>
 		);
