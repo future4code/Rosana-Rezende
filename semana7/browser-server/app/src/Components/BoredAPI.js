@@ -11,12 +11,13 @@ const BoredAPIWrapper = styled.div`
     box-shadow: -2px 2px 8px rgb(118, 201, 171, 0.5);
 `
 const H2 = styled.h2`
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.1rem;
+		font-weight: 700;
+		text-align: center;
 `
 
 
-const DivSuperior = styled.div`
+const DivHeader = styled.div`
 	display: flex;
 	justify-content: space-around;
 	margin: 1rem;
@@ -25,8 +26,23 @@ const DivSuperior = styled.div`
 const DivSearch = styled.div`
 	display: flex;
 	align-content: center;
-	`
-const Input = styled.input``
+	margin-bottom: 2rem;
+`
+
+const Input = styled.input`
+	width: 10rem;
+`
+
+const Icon = styled.div`
+	margin-left: 0.5rem;
+	cursor: pointer;
+`
+
+const DivFooter = styled.div`
+	width: 50vw;
+	margin: auto;
+	text-align: center;
+`
 
 
 const baseUrl = 'http://www.boredapi.com/api/activity/'
@@ -38,30 +54,35 @@ class BoredAPI extends React.Component {
 		this.state = {
 			currentActivity: undefined,
 
-			numberOfParticipants: undefined,
-			tipeOfActivity: undefined,
-			accessibility: undefined,
-			price: undefined,
+			numberOfParticipants: '',
+			tipeOfActivity: '',
+			accessibility: '',
+			price: '',
 		}
 	}
 
-	// componentDidMount() {
-	// 	/// chamar as atividades
-	// 	this.getActivity()
-	// }
-
 	getActivity = async () => {
 
-		try {
+		if (this.state.numberOfParticipants === '') {
+			alert('It is not possible to search without filling the input')
+		} else {
 
-			const response = await axios.get(`${baseUrl}?participants=${this.state.numberOfParticipants}`)
-
-			this.setState({ currentActivity: response.data })
-
-		} catch (error) {
-			alert('Não foi possível encontrar uma atividade')
-			console.log(error)
+			if (this.state.numberOfParticipants > 5 || this.state.numberOfParticipants < 1) {
+				alert('Enter a number between 1 and 5')
+			} else {
+				try {
+	
+					const response = await axios.get(`${baseUrl}?participants=${this.state.numberOfParticipants}`)
+		
+					this.setState({ currentActivity: response.data })
+		
+				} catch (error) {
+					alert('Não foi possível encontrar uma atividade')
+					console.log(error)
+				}
+			}
 		}
+		
 
 	}
 
@@ -69,17 +90,17 @@ class BoredAPI extends React.Component {
 		this.setState({ numberOfParticipants: event.target.value })
 	}
 
-	handleChangeTipeOfActivity = (event) => {
-		this.setState({ tipeOfActivity: event.target.value })
-	}
+	// handleChangeTipeOfActivity = (event) => {
+	// 	this.setState({ tipeOfActivity: event.target.value })
+	// }
 
-	handleChangeAccessibility = (event) => {
-		this.setState({ accessibility: event.target.value })
-	}
+	// handleChangeAccessibility = (event) => {
+	// 	this.setState({ accessibility: event.target.value })
+	// }
 
-	handleChangePrice = (event) => {
-		this.setState({ price: event.target.value })
-	}
+	// handleChangePrice = (event) => {
+	// 	this.setState({ price: event.target.value })
+	// }
 
 
 	render() {
@@ -87,15 +108,16 @@ class BoredAPI extends React.Component {
 		const searchAppears = (
 			<>
 				<H2>Fill in the fields to find the best activity for tedious days</H2>
-				<DivSuperior>
+				<DivHeader>
 
 					<DivSearch>
 						<Input
-							placeholder='Number Of Participants (1 to 5)'
+							placeholder='Number of participants'
 							value={this.state.numberOfParticipants}
 							onChange={this.handleChangeNumberOfParticipants}
 						/>
-						<i class="material-icons" onClick={this.getActivity}>search</i>
+						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
+						
 					</DivSearch>
 
 					{/* <DivSearch>
@@ -104,7 +126,7 @@ class BoredAPI extends React.Component {
 							value={this.state.tipeOfActivity}
 							onChange={this.handleChangeTipeOfActivity}
 						/>
-						<i class="material-icons" onClick={this.getActivity}>search</i>
+						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
 					</DivSearch>
 
 					<DivSearch>
@@ -113,7 +135,7 @@ class BoredAPI extends React.Component {
 							value={this.state.accessibility}
 							onChange={this.handleChangeAccessibility}
 						/>
-						<i class="material-icons" onClick={this.getActivity}>search</i>
+						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
 					</DivSearch>
 
 					<DivSearch>
@@ -122,28 +144,25 @@ class BoredAPI extends React.Component {
 							value={this.state.price}
 							onChange={this.handleChangePrice}
 						/>
-						<i class="material-icons" onClick={this.getActivity}>search</i>
+					<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
 					</DivSearch> */}
 
-				</DivSuperior>
+				</DivHeader>
 			</>
 		)
 
 		let answerApperars
-		console.log(this.state.currentActivity)
 		if (this.state.currentActivity) {
 			answerApperars = (
-				<div>
-
-					<p>Atividade: {this.state.currentActivity.activity}</p>
-					<p>Participantes: {this.state.currentActivity.participants}</p>
-					<p>Acessibilidade: {this.state.currentActivity.accessibility}</p>
-					<p>Tipo: {this.state.currentActivity.type}</p>
-					<p>Preço: {this.state.currentActivity.price}</p>
-				</div>
+				<DivFooter>
+					<p><strong>Activity</strong>: {this.state.currentActivity.activity}</p>
+					<p><strong>Particpants</strong>: {this.state.currentActivity.participants}</p>
+					<p><strong>Acessibility</strong>: {this.state.currentActivity.accessibility}</p>
+					<p><strong>Type</strong>: {this.state.currentActivity.type}</p>
+					<p><strong>Price</strong>: {this.state.currentActivity.price}</p>
+				</DivFooter>
 			)
 		}
-
 
 		return (
 			<BoredAPIWrapper>
@@ -151,9 +170,7 @@ class BoredAPI extends React.Component {
 				{searchAppears}
 
 				{this.state.currentActivity && answerApperars}
-				{/* {answerApperars} */}
-
-
+	
 			</BoredAPIWrapper>
 		)
 	}
