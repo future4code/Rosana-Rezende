@@ -10,6 +10,10 @@ const FooterWrapper = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 `
 
 const P = styled.p`
