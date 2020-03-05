@@ -20,85 +20,121 @@ const BotaoCadastrar = styled.button`
 
 const baseUrl = "https://us-central1-future4-users.cloudfunctions.net/api";
 
-const authToken = "rosanarezende"; // Só para evitar repetição.
+const authToken = "rosanarezende";
 
 class TelaCadastro extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            nome: "",
-            email: ""
-        }
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			nome: "",
+			email: ""
+		}
+	}
 
-    mudaNome = (event) => {
-        this.setState({ nome: event.target.value })
-    }
+	mudaNome = (event) => {
+		this.setState({ nome: event.target.value })
+	}
 
-    mudaEmail = (event) => {
-        this.setState({ email: event.target.value })
-    }
+	mudaEmail = (event) => {
+		this.setState({ email: event.target.value })
+	}
 
-    cadastraUsuario = () => {
+	// cadastraUsuario = () => {
 
-        const dadosNovoUsuario = {
-            name: this.state.nome,
-            email: this.state.email
-        }
+	//     const dadosNovoUsuario = {
+	//         name: this.state.nome,
+	//         email: this.state.email
+	//     }
 
-        const usuarioPromessa = axios.post(
-            `${baseUrl}/users/createUser`,
-            dadosNovoUsuario,
-            {
-                headers: {
-                    'api-token': authToken
-                }
-            }
-        )
+	//     const usuarioPromessa = axios.post(
+	//         `${baseUrl}/users/createUser`,
+	//         dadosNovoUsuario,
+	//         {
+	//             headers: {
+	//                 'api-token': authToken
+	//             }
+	//         }
+	//     )
 
-        usuarioPromessa
-            .then(response => {
-                alert('Usuário cadastrado com sucesso')
-                this.setState({ nome: '' })
-                this.setState({ email: '' })
-            })
-            .catch(error => {
-                alert("Ops, algo deu errado na criação do usuário.")
-                console.log(error.response.data.message)
-            })
+	//     usuarioPromessa
+	//         .then(response => {
+	//             alert('Usuário cadastrado com sucesso')
+	//             this.setState({ nome: '' })
+	//             this.setState({ email: '' })
+	//         })
+	//         .catch(error => {
+	//             alert("Ops, algo deu errado na criação do usuário.")
+	//             console.log(error.response)
+	//         })
 
-    }
+	// }
 
-    render() {
-        return (
-            <TelaCadastroContainer>
+	cadastraUsuario = async () => {
 
-                <h2>Cadastro de Usuários</h2>
-                <p>
-                    <input
-                        type="text"
-                        placeholder="Nome"
-                        value={this.state.nome}
-                        onChange={this.mudaNome}
-                    />
-                </p>
+		const dadosNovoUsuario = {
+			name: this.state.nome,
+			email: this.state.email
+		}
 
-                <p>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChange={this.mudaEmail}
-                    />
-                </p>
+		try {
 
-                <BotaoCadastrar onClick={this.cadastraUsuario}>
-                    Cadastrar Usuário
-                </BotaoCadastrar>
+			await axios.post(
+				`${baseUrl}/users/createUser`,
+				dadosNovoUsuario,
+				{
+					headers: {
+						'api-token': authToken
+					}
+				}
+			)
 
-            </TelaCadastroContainer>
-        )
-    }
+			alert('Usuário cadastrado com sucesso')
+			this.setState({
+				nome: '',
+				email: ''
+			})
+
+		} catch (error) {
+			alert("Ops, algo deu errado na criação do usuário.")
+			console.log(error.response)
+			this.setState({
+				nome: '',
+				email: ''
+			})
+		}
+
+	}
+
+	render() {
+		return (
+			<TelaCadastroContainer>
+
+				<h2>Cadastro de Usuários</h2>
+				<p>
+					<input
+						type="text"
+						placeholder="Nome"
+						value={this.state.nome}
+						onChange={this.mudaNome}
+					/>
+				</p>
+
+				<p>
+					<input
+						type="email"
+						placeholder="Email"
+						value={this.state.email}
+						onChange={this.mudaEmail}
+					/>
+				</p>
+
+				<BotaoCadastrar onClick={this.cadastraUsuario}>
+					Cadastrar Usuário
+        </BotaoCadastrar>
+
+			</TelaCadastroContainer>
+		)
+	}
 }
 
 export default TelaCadastro

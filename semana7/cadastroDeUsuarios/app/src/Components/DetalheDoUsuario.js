@@ -56,36 +56,34 @@ class DetalheDoUsuario extends React.Component {
 		this.buscarUsuarioClicado()
 	}
 
-	buscarUsuarioClicado = () => {
+	// buscarUsuarioClicado = () => {
 
-		const usuarioClicadosPromessa = axios.get(
-			`${baseUrl}/users/getUser/${this.props.usuarioClicadoId}`,
-			{
-				headers: {
-					'api-token': authToken
-				}
-			}
-		)
+	// 	const usuarioClicadosPromessa = axios.get(
+	// 		`${baseUrl}/users/getUser/${this.props.usuarioClicadoId}`,
+	// 		{
+	// 			headers: {
+	// 				'api-token': authToken
+	// 			}
+	// 		}
+	// 	)
 
-		usuarioClicadosPromessa
-			.then(response => {
-				this.setState({ usuarioClicado: response.data.result })
-			})
-			.catch(error => {
-				console.log(error)
-				this.setState({ usuarioClicado: {} })
-			})
+	// 	usuarioClicadosPromessa
+	// 		.then(response => {
+	// 			this.setState({ usuarioClicado: response.data.result })
+	// 		})
+	// 		.catch(error => {
+	// 			console.log(error)
+	// 			this.setState({ usuarioClicado: {} })
+	// 		})
 
-	}
+	// }
 
-	deletaUsuario = () => {
+	buscarUsuarioClicado = async () => {
 
-		const deletar = window.confirm('Tem certeza de que deseja deletar?')
+		try {
 
-		if (deletar) {
-
-			const usuarioDeletaPromessa = axios.delete(
-				`${baseUrl}/users/deleteUser?id=${this.props.usuarioClicadoId}`,
+			const response = await axios.get(
+				`${baseUrl}/users/getUser/${this.props.usuarioClicadoId}`,
 				{
 					headers: {
 						'api-token': authToken
@@ -93,14 +91,64 @@ class DetalheDoUsuario extends React.Component {
 				}
 			)
 
-			usuarioDeletaPromessa
-				.then(response => {
-					alert('Usuário deletado com sucesso')
-					this.buscarUsuarioClicado();
-				})
-				.catch(error => {
-					alert(error)
-				})
+			this.setState({ usuarioClicado: response.data.result })
+
+		} catch (error) {
+			console.log(error)
+			this.setState({ usuarioClicado: {} })
+		}
+	}
+
+	// deletaUsuario = () => {
+
+	// 	const deletar = window.confirm('Tem certeza de que deseja deletar?')
+
+	// 	if (deletar) {
+
+	// 		const usuarioDeletaPromessa = axios.delete(
+	// 			`${baseUrl}/users/deleteUser?id=${this.props.usuarioClicadoId}`,
+	// 			{
+	// 				headers: {
+	// 					'api-token': authToken
+	// 				}
+	// 			}
+	// 		)
+
+	// 		usuarioDeletaPromessa
+	// 			.then(response => {
+	// 				alert('Usuário deletado com sucesso')
+	// 				this.buscarUsuarioClicado();
+	// 			})
+	// 			.catch(error => {
+	// 				alert(error)
+	// 			})
+	// 	}
+
+	// }
+
+	deletaUsuario = async () => {
+
+		const deletar = window.confirm('Tem certeza de que deseja deletar?')
+
+		if (deletar) {
+
+			try {
+
+				await axios.delete(
+					`${baseUrl}/users/deleteUser?id=${this.props.usuarioClicadoId}`,
+					{
+						headers: {
+							'api-token': authToken
+						}
+					}
+				)
+
+				alert('Usuário deletado com sucesso')
+				this.buscarUsuarioClicado();
+
+			} catch (error) {
+				alert(error)
+			}
 		}
 
 	}
@@ -119,11 +167,41 @@ class DetalheDoUsuario extends React.Component {
 
 	salvaUsuario = () => {
 
-		const dadosNovoUsuario = {
-			user: {
-				id: this.state.usuarioClicado.id,
-				name: this.state.novoNome,
-				email: this.state.novoEmail
+		let dadosNovoUsuario
+		if (this.state.novoNome === '' && this.state.novoEmail === '') {
+			dadosNovoUsuario = {
+				user: {
+					id: this.state.usuarioClicado.id,
+					name: this.state.usuarioClicado.name,
+					email: this.state.usuarioClicado.email
+				}
+			}
+		}
+		else if (this.state.novoNome === '') {
+			dadosNovoUsuario = {
+				user: {
+					id: this.state.usuarioClicado.id,
+					name: this.state.usuarioClicado.name,
+					email: this.state.novoEmail
+				}
+			}
+		} 
+		else if (this.state.novoEmail === '') {
+			dadosNovoUsuario = {
+				user: {
+					id: this.state.usuarioClicado.id,
+					name: this.state.novoNome,
+					email: this.state.usuarioClicado.email
+				}
+			}
+		} 
+		else {
+			dadosNovoUsuario = {
+				user: {
+					id: this.state.usuarioClicado.id,
+					name: this.state.novoNome,
+					email: this.state.novoEmail
+				}
 			}
 		}
 
@@ -140,7 +218,7 @@ class DetalheDoUsuario extends React.Component {
 		usuarioPromessa
 			.then(response => {
 				alert('Usuário editado com sucesso')
-				this.setState({ 
+				this.setState({
 					novoNome: '',
 					novoEmail: '',
 					editar: false
@@ -149,10 +227,47 @@ class DetalheDoUsuario extends React.Component {
 			})
 			.catch(error => {
 				alert("Ops, algo deu errado na edição do usuário.")
-        		console.log(error)
+				console.log(error)
 			})
 
 	}
+
+	// salvaUsuario = async () => {
+
+	// 	const dadosNovoUsuario = {
+	// 		user: {
+	// 			id: this.state.usuarioClicado.id,
+	// 			name: this.state.novoNome,
+	// 			email: this.state.novoEmail
+	// 		}
+	// 	}
+
+	// 	try {
+
+	// 		await axios.put(
+	// 			`${baseUrl}/users/editUser`,
+	// 			dadosNovoUsuario,
+	// 			{
+	// 				headers: {
+	// 					'api-token': authToken
+	// 				}
+	// 			}
+	// 		)
+
+	// 		alert('Usuário editado com sucesso')
+	// 		this.setState({
+	// 			novoNome: '',
+	// 			novoEmail: '',
+	// 			editar: false
+	// 		})
+	// 		this.buscarUsuarioClicado();
+
+	// 	} catch (error) {
+	// 		alert("Ops, algo deu errado na edição do usuário.")
+	// 		console.log(error)
+	// 	}
+
+	// }
 
 	render() {
 

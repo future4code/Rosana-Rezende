@@ -36,21 +36,25 @@ class App extends Component {
 
   mostraCadastroLista = () => {
     let estadoAtual
-    if (this.state.mostraTela === 'cadastro') {
-      estadoAtual = 'lista'
+    switch (this.state.mostraTela) {
+      case 'cadastro':
+        estadoAtual = 'lista'
+        break;
+      case 'lista':
+        estadoAtual = 'cadastro'
+        break;
+      case 'detalhe':
+        estadoAtual = 'lista'
+        break;
+      default:
+        alert('Desculpe, não encontramos páginas para exibir')
+        break;
     }
-    if (this.state.mostraTela === 'lista') {
-      estadoAtual = 'cadastro'
-    }
-    if (this.state.mostraTela === 'detalhe') {
-      estadoAtual = 'lista'
-    }
-
     this.setState({ mostraTela: estadoAtual })
   }
 
-  detalhaUsuario = (idDoUsuario) => {    
-    this.setState({ 
+  detalhaUsuario = (idDoUsuario) => {
+    this.setState({
       mostraTela: 'detalhe',
       idDoUsuarioClicado: idDoUsuario
     })
@@ -58,30 +62,30 @@ class App extends Component {
 
   render() {
 
-    // console.log(this.state.idDoUsuarioClicado)
     let nomeBotao
-    if (this.state.mostraTela === 'cadastro') {
-      nomeBotao = 'LISTA'
-    }
-    if (this.state.mostraTela === 'lista' || this.state.mostraTela === 'detalhe') {
-      nomeBotao = 'VOLTAR'
-    }
-
     let telaAtual
-    if (this.state.mostraTela === 'cadastro') {
-      telaAtual = <TelaCadastro />
-    }
-    if (this.state.mostraTela === 'lista') {
-      telaAtual = 
-        <TelaListaDeUsuarios 
-          aoClicarNoUsuario={this.detalhaUsuario} 
-        />
-    }
-    if (this.state.mostraTela === 'detalhe') {
-      telaAtual = 
-        <DetalheDoUsuario 
-          usuarioClicadoId={this.state.idDoUsuarioClicado}
-        />
+    switch (this.state.mostraTela) {
+      
+      case 'cadastro':
+        telaAtual = <TelaCadastro />
+        nomeBotao = 'LISTA'
+        break;
+
+      case 'lista':
+        telaAtual =
+          <TelaListaDeUsuarios aoClicarNoUsuario={this.detalhaUsuario}/>
+          nomeBotao = 'VOLTAR'
+        break;
+
+      case 'detalhe':
+        telaAtual =
+          <DetalheDoUsuario usuarioClicadoId={this.state.idDoUsuarioClicado}/>
+          nomeBotao = 'VOLTAR'
+        break;
+
+      default:
+        alert('Desculpe, não encontramos páginas para exibir')
+        break;
     }
 
     return (

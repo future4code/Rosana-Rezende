@@ -29,8 +29,19 @@ const BotaoDeletar = styled.button`
 	color: black;
 `
 
+const BotaoBusca = styled.button`
+  border-radius: 50px;
+  outline: 0;
+  font-family: 'Roboto', sans-serif;
+  padding: 5px 10px;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+`
+
 const InputBusca = styled.input`
 	margin: 1vh 1vw;
+	outline: 0;
 `
 
 const DivResultado = styled.div`
@@ -58,36 +69,33 @@ class TelaListaDeUsuarios extends Component {
 		this.buscarTodosOsUsuarios()
 	}
 
-	buscarTodosOsUsuarios = () => {
+	// buscarTodosOsUsuarios = () => {
 
-		const todosOsUsuariosPromessa = axios.get(
-			`${baseUrl}/users/getAllUsers`,
-			{
-				headers: {
-					'api-token': authToken
-				}
-			}
-		)
+	// 	const todosOsUsuariosPromessa = axios.get(
+	// 		`${baseUrl}/users/getAllUsers`,
+	// 		{
+	// 			headers: {
+	// 				'api-token': authToken
+	// 			}
+	// 		}
+	// 	)
 
-		todosOsUsuariosPromessa
-			.then(response => {
-				this.setState({ todosOsUsuarios: response.data.result })
-			})
-			.catch(error => {
-				console.log(error.response.data.message)
-				this.setState({ todosOsUsuarios: [] })
-			})
+	// 	todosOsUsuariosPromessa
+	// 		.then(response => {
+	// 			this.setState({ todosOsUsuarios: response.data.result })
+	// 		})
+	// 		.catch(error => {
+	// 			console.log(error.response.data.message)
+	// 			this.setState({ todosOsUsuarios: [] })
+	// 		})
 
-	}
+	// }
 
-	deletaUsuario = (idDoUsuario) => {
+	buscarTodosOsUsuarios = async () => {
 
-		const deletar = window.confirm('Tem certeza de que deseja deletar?')
-
-		if (deletar) {
-
-			const usuarioDeletaPromessa = axios.delete(
-				`${baseUrl}/users/deleteUser?id=${idDoUsuario}`,
+		try {
+			const response = await axios.get(
+				`${baseUrl}/users/getAllUsers`,
 				{
 					headers: {
 						'api-token': authToken
@@ -95,14 +103,64 @@ class TelaListaDeUsuarios extends Component {
 				}
 			)
 
-			usuarioDeletaPromessa
-				.then(response => {
-					alert('Usuário deletado com sucesso')
-					this.buscarTodosOsUsuarios();
-				})
-				.catch(error => {
-					alert(error)
-				})
+			this.setState({ todosOsUsuarios: response.data.result })
+		} catch (error) {
+			console.log(error.response.data.message)
+			this.setState({ todosOsUsuarios: [] })
+		}
+
+	}
+
+	// deletaUsuario = (idDoUsuario) => {
+
+	// 	const deletar = window.confirm('Tem certeza de que deseja deletar?')
+
+	// 	if (deletar) {
+
+	// 		const usuarioDeletaPromessa = axios.delete(
+	// 			`${baseUrl}/users/deleteUser?id=${idDoUsuario}`,
+	// 			{
+	// 				headers: {
+	// 					'api-token': authToken
+	// 				}
+	// 			}
+	// 		)
+
+	// 		usuarioDeletaPromessa
+	// 			.then(response => {
+	// 				alert('Usuário deletado com sucesso')
+	// 				this.buscarTodosOsUsuarios();
+	// 			})
+	// 			.catch(error => {
+	// 				alert(error)
+	// 			})
+	// 	}
+
+	// }
+
+	deletaUsuario = async (idDoUsuario) => {
+
+		const deletar = window.confirm('Tem certeza de que deseja deletar?')
+
+		if (deletar) {
+
+			try {
+				await axios.delete(
+					`${baseUrl}/users/deleteUser?id=${idDoUsuario}`,
+					{
+						headers: {
+							'api-token': authToken
+						}
+					}
+				)
+
+				alert('Usuário deletado com sucesso')
+				this.buscarTodosOsUsuarios()
+
+			} catch (error) {
+				alert(error)
+			}
+
 		}
 
 	}
@@ -112,60 +170,82 @@ class TelaListaDeUsuarios extends Component {
 	}
 
 	mudaNomeUsuarioPesquisado = (event) => {
-		this.setState({usuarioPesquisadoNome: event.target.value})
+		this.setState({ usuarioPesquisadoNome: event.target.value })
 	}
 
-	buscaUsuarioNome = () => {
+	// buscaUsuarioNome = () => {
 
-		const usuarioPesquisadoPromessa = axios.get(
-			`${baseUrl}/users/searchUsers?name=${this.state.usuarioPesquisadoNome}`,
-			{
-				headers: {
-					'api-token': authToken
+	// 	const usuarioPesquisadoPromessa = axios.get(
+	// 		`${baseUrl}/users/searchUsers?name=${this.state.usuarioPesquisadoNome}`,
+	// 		{
+	// 			headers: {
+	// 				'api-token': authToken
+	// 			}
+	// 		}
+	// 	)
+
+	// 	usuarioPesquisadoPromessa
+	// 		.then(response => {
+	// 			this.setState({ 
+	// 				usuarioPesquisado: response.data.result,
+	// 				apareceLista: false,
+	// 				usuarioPesquisadoNome: ''
+	// 			})
+	// 			// if (response.data.results[0].length === 0) {
+	// 			// 	alert('Erro')
+	// 			// }				
+	// 		})
+	// 		.catch(error => {
+	// 			console.log(error)
+	// 		})
+
+	// }
+
+	buscaUsuarioNome = async () => {
+
+		try {
+			let response = await axios.get(
+				`${baseUrl}/users/searchUsers?name=${this.state.usuarioPesquisadoNome}`,
+				{
+					headers: {
+						'api-token': authToken
+					}
 				}
-			}
-		)
+			)
 
-		usuarioPesquisadoPromessa
-			.then(response => {
-				this.setState({ 
-					usuarioPesquisado: response.data.result,
-					apareceLista: false,
-					usuarioPesquisadoNome: ''
-				})
-				// if (response.data.results[0].length === 0) {
-				// 	alert('Erro')
-				// }				
+			this.setState({
+				usuarioPesquisado: response.data.result,
+				apareceLista: false,
+				usuarioPesquisadoNome: ''
 			})
-			.catch(error => {
-				console.log(error)
-			})
+		} catch (error) {
+			console.log(error)
+		}
 
 	}
 
 	render() {
-
 		
 		const listaDeUsuarios = (
 			<div>
-			<H2>Lista de Usuários</H2>
-			<ul>
-				{this.state.todosOsUsuarios.map(usuario => (
-					<LI key={usuario.id}>
-						<span onClick={() => this.mostraDetalheDoUsuario(usuario.id)}>{usuario.name}  </span>
-						<BotaoDeletar
-							onClick={() => this.deletaUsuario(usuario.id)}
+				<H2>Lista de Usuários</H2>
+				<ul>
+					{this.state.todosOsUsuarios.map(usuario => (
+						<LI key={usuario.id}>
+							<span onClick={() => this.mostraDetalheDoUsuario(usuario.id)}>{usuario.name}  </span>
+							<BotaoDeletar
+								onClick={() => this.deletaUsuario(usuario.id)}
 							>
-							X
+								X
 						</BotaoDeletar>
-					</LI>
-				))}
-			</ul>
+						</LI>
+					))}
+				</ul>
 			</div>
 		)
-		
+
 		let usuarioPesquisadoNaTela
-		if(this.state.usuarioPesquisado.length > 0) {
+		if (this.state.usuarioPesquisado.length > 0) {
 			usuarioPesquisadoNaTela = (
 				<DivResultado>
 					<H2>Resultado da Busca</H2>
@@ -184,18 +264,17 @@ class TelaListaDeUsuarios extends Component {
 				</DivResultado>
 			)
 		}
-		
+
 		return (
 			<TelaListaDeUsuariosContainer>
-				
+
 				<InputBusca
 					type='text'
 					placeholder='Buscar Usuário'
 					value={this.state.usuarioPesquisadoNome}
 					onChange={this.mudaNomeUsuarioPesquisado}
 				/>
-				<button onClick={this.buscaUsuarioNome}>Buscar</button>
-
+				<BotaoBusca onClick={this.buscaUsuarioNome}>Buscar</BotaoBusca>
 
 				{this.state.todosOsUsuarios.length === 0 && <p>Carregando...</p>}
 

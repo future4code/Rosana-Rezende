@@ -9,12 +9,18 @@ const HeaderContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.3);
 `
 
 const HeaderH1 = styled.h1`
     padding: 0;
     margin: 0;
     color: white;
+
+    @media screen and (max-device-width: 800px) {
+        font-size: 1.5rem;
+    }
+
 `
 
 class Header extends Component {
