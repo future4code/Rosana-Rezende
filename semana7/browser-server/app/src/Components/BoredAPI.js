@@ -9,7 +9,7 @@ const BoredAPIWrapper = styled.div`
     border-radius: 20px;
     /* min-height: 20rem; */
     padding: 1rem;
-    box-shadow: -2px 2px 8px rgb(118, 201, 171, 0.5);
+    box-shadow: -2px 2px 8px rgba(118, 201, 171, 0.5);
 `
 
 const H2 = styled.h2`
@@ -84,6 +84,16 @@ const InputRange = styled.input`
 	}
 `
 
+const PError = styled.p`
+	background-color: #fbfbdf;
+	border-radius: 10px;
+	box-shadow: -2px 2px 8px rgba(251, 251, 223, 0.8);
+	font-weight: 700;
+	font-size: 1.2rem;
+	margin-top: 2rem;
+
+`
+
 const baseUrl = 'http://www.boredapi.com/api/activity/'
 
 class BoredAPI extends React.Component {
@@ -96,20 +106,22 @@ class BoredAPI extends React.Component {
 			tipeOfActivity: '',
 			price: '',
 			accessibility: '',
+
+			errorMessage: ''
 		}
 	}
 
 	getActivity = async () => {
 
-		if (this.state.numberOfParticipants === '' && this.state.tipeOfActivity === '' && this.state.price === '' && this.state.accessibility === '') {
-			alert('It is not possible to search without filling the input')
+		if (this.state.numberOfParticipants === '' && this.state.tipeOfActivity === '' && this.state.price === '' && this.state.accessibility === '') {			
+			this.setState({errorMessage: '1'})
 		}
 
 		else {
 
 			if (this.state.numberOfParticipants) {
 				if (this.state.numberOfParticipants > 5 || this.state.numberOfParticipants < 1) {
-					alert('Enter a number between 1 and 5')
+					this.setState({errorMessage: '2'})
 				} else {
 					try {
 
@@ -121,7 +133,7 @@ class BoredAPI extends React.Component {
 						})
 
 					} catch (error) {
-						alert('Could not find an activity')
+						this.setState({errorMessage: '3'})
 						console.log(error)
 					}
 				}
@@ -137,7 +149,7 @@ class BoredAPI extends React.Component {
 					})
 
 				} catch (error) {
-					alert('Could not find an activity')
+					this.setState({errorMessage: '3'})
 					console.log(error)
 				}
 			}
@@ -152,7 +164,7 @@ class BoredAPI extends React.Component {
 					})
 
 				} catch (error) {
-					alert('Could not find an activity')
+					this.setState({errorMessage: '3'})
 					console.log(error)
 				}
 			}
@@ -167,7 +179,7 @@ class BoredAPI extends React.Component {
 					})
 
 				} catch (error) {
-					alert('Could not find an activity')
+					this.setState({errorMessage: '3'})
 					console.log(error)
 				}
 			}
@@ -271,12 +283,33 @@ class BoredAPI extends React.Component {
 			)
 		}
 
+		const message1 = 'It is not possible to search without filling the input'
+		const message2 = 'Enter a number between 1 and 5'
+		const message3 = 'Could not find an activity'
+
+		let message
+		if (this.state.errorMessage) {
+			if (this.state.errorMessage === '1') {
+				message = message1
+			}
+			if (this.state.errorMessage === '2') {
+				message = message2
+			}
+			if (this.state.errorMessage === '3') {
+				message = message3
+			}
+		}
+
 		return (
 			<BoredAPIWrapper>
 
 				{searchAppears}
 
 				{this.state.currentActivity && answerApperars}
+
+				<DivFooter><PError>
+					{this.state.errorMessage && message}
+				</PError></DivFooter>
 
 			</BoredAPIWrapper>
 		)
