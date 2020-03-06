@@ -5,35 +5,40 @@ export const Wrapper = styled.div`
     box-shadow: -1px 1px 4px rgba(118, 201, 171, 0.5);
     border-radius: 10px;
     padding: 1rem;
-    min-height: 25rem;
+    min-height: 83vh;
     display: flex;
     flex-direction: column;
 `
 
 export const H2 = styled.h2`
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     text-align: center;
 `
 
-export const Qtd = styled.p`
-    margin-bottom: 1rem;
+export const Qtd = styled.div`
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
 `
 
 export const Playlist = styled.div`
     text-align: center;
-    width: 70%;
+    width: 40%;
     margin: 0 auto 0.7rem;
     display: flex;
     justify-content: space-around;
 
     @media screen and (max-device-width: 1200px) {
-        width: 80%;
+        width: 60%;
     }
 `
 
 export const Nome = styled.span`
     cursor: pointer;
     font-weight: 600;
+    :hover {
+        color:blue;
+    }
 `
 
 export const P = styled.p`
@@ -44,5 +49,10 @@ export const Icone = styled.div`
     :hover {
         color:red;
     }
-    width: 5%;
+    width: 8%;
+`
+
+export const Resposta = styled.div`
+    margin-top: 2rem;
+    text-align: center;
 `

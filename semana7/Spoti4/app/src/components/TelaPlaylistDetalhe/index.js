@@ -15,7 +15,8 @@ class TelaPlaylistDetalhe extends React.Component {
 			nomeMusica: '',
 			nomeArtista: '',
 			url: 'http://spoti4.future4.com.br/1.mp3',
-			adicionarMusica: false
+			adicionarMusica: false,
+			returnMessageAddMusic: ''
 		}
 	}
 
@@ -25,7 +26,6 @@ class TelaPlaylistDetalhe extends React.Component {
 
 	getPlaylistMusics = async () => {
 		try {
-
 			const response = await axios.get(
 				`${baseUrl}/playlists/getPlaylistMusics/${this.props.playlistId}`,
 				{
@@ -34,11 +34,11 @@ class TelaPlaylistDetalhe extends React.Component {
 					}
 				}
 			)
-
 			this.setState({ playlistSelected: response.data.result })
 
 		} catch (error) {
 			console.log(error.message)
+			this.setState({ returnMessageAddMusic: '1' })
 		}
 	}
 
@@ -63,20 +63,17 @@ class TelaPlaylistDetalhe extends React.Component {
 					}
 				}
 			)
-
-			alert('Usuário adicionado com sucesso')
 			this.setState({
 				nomeMusica: '',
 				nomeArtista: '',
-				url: 'http://spoti4.future4.com.br/1.mp3'
+				url: 'http://spoti4.future4.com.br/1.mp3',
+				returnMessageAddMusic: '2'
 			})
 			this.getPlaylistMusics()
 
-
-
-
 		} catch (error) {
 			console.log(error)
+			this.setState({ returnMessageAddMusic: '1' })
 		}
 	}
 
@@ -96,34 +93,32 @@ class TelaPlaylistDetalhe extends React.Component {
 		this.setState({ url: event.target.value })
 	}
 
-
 	render() {
 
 		let musicas
 		if (this.state.playlistSelected.quantity > 0) {
 			musicas = this.state.playlistSelected.musics.map(music => (
 				<S.DivDetalheMusica key={music.id}>
-					<p>
-						{music.name} - {music.artist}
-					</p>
-					<audio controls='controls'>
-						<source src={music.url} type="audio/mpeg"/>
-					</audio>
+					<S.P>
+						<strong>{music.name}</strong> - <i>{music.artist}</i>
+					</S.P>
+					<S.Audio controls='controls'>
+						<source src={music.url} type="audio/mpeg" />
+					</S.Audio>
 
-					{/* <a href={music.url}>Link</a> */}
 				</S.DivDetalheMusica>
 			))
 		}
 
 		let listaDeMusicas = (
 			<div>
-				<S.H2>Detalhes da playlist '{this.props.playlistName}'</S.H2>
-				<p>
+				<S.Titulo>{this.props.playlistName}</S.Titulo>
+				<S.P>
 					{this.state.playlistSelected.quantity} músicas na playlist
-				</p><br></br>
-				
-					{musicas}
-				
+				</S.P><br></br>
+
+				{musicas}
+
 				<br />
 				<S.Botao onClick={this.clicaAdicionarMusica}>Adicionar Música</S.Botao>
 			</div>
@@ -131,7 +126,10 @@ class TelaPlaylistDetalhe extends React.Component {
 
 		let telaAdicionarMusica = (
 			<S.DivAddMusic>
-				<S.H3>Adicionar música na playlist '{this.props.playlistName}'</S.H3>
+				<p><strong>Adicionar música na playlist</strong></p>
+				<S.Titulo>{this.props.playlistName}</S.Titulo>
+				
+				<S.DivInterna>
 				<S.Input
 					placeholder='Nome da música'
 					value={this.state.nomeMusica}
@@ -146,19 +144,34 @@ class TelaPlaylistDetalhe extends React.Component {
 					value={this.state.url}
 					onChange={this.mudaUrl}
 				/>
+				</S.DivInterna>
 
-				<div>
-					<S.Botao onClick={this.addMusicToPlaylist}>Adicionar música</S.Botao>
-					<S.Botao onClick={this.clicaAdicionarMusica}>Voltar</S.Botao>
-				</div>
+				<S.DivBotoes>
+					<S.Botao2 onClick={this.addMusicToPlaylist}>Adicionar música</S.Botao2>
+					<S.Botao2 onClick={this.clicaAdicionarMusica}>Voltar</S.Botao2>
+				</S.DivBotoes>
 
 			</S.DivAddMusic>
 		)
+
+		let message
+		if (this.state.returnMessageAddMusic) {
+			if (this.state.returnMessageAddMusic === '1') {
+				message = 'Não foi possível efetuar essa operação. Tente novamente mais tarde'
+			}
+			if (this.state.returnMessageAddMusic === '2') {
+				message = 'Música adicionada com sucesso'
+			}
+		}
 
 		return (
 			<S.Wrapper>
 
 				{this.state.adicionarMusica ? telaAdicionarMusica : listaDeMusicas}
+
+				<S.Resposta>
+					<h4>{this.state.returnMessageAddMusic && message}</h4>
+				</S.Resposta>
 
 			</S.Wrapper>
 		)

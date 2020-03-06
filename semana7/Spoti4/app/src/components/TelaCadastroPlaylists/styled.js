@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     padding: 1rem;
 
-    min-height: 25rem;
+    min-height: 83vh;
     display: flex;
     flex-direction: column;
 
@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 `
 
 export const H2 = styled.h2`
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 `
 
 export const Input = styled.input`

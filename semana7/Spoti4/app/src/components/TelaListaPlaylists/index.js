@@ -15,6 +15,8 @@ class TelaListaPlaylists extends React.Component {
 		super(props)
 		this.state = {
 			allPlaylists: [],
+			returnMessageList: ''
+
 		}
 	}
 
@@ -35,6 +37,7 @@ class TelaListaPlaylists extends React.Component {
 			this.setState({ allPlaylists: response.data.result })
 		} catch (error) {
 			console.log(error.response)
+			this.setState({ returnMessageList: '1' })
 		}
 	}
 
@@ -50,10 +53,11 @@ class TelaListaPlaylists extends React.Component {
 						}
 					}
 				)
-				alert('Usuário deletado com sucesso')
-				this.getAllPlaylists();				
+				this.setState({ returnMessageList: '2' })
+				this.getAllPlaylists();
 			} catch (error) {
 				console.log(error.response)
+				this.setState({ returnMessageList: '1' })
 			}
 		}
 	}
@@ -73,17 +77,22 @@ class TelaListaPlaylists extends React.Component {
 						{playlist.name}
 					</S.Nome>
 
-						<S.Icone onClick={() => this.playlistSelected(playlist.id, playlist.name)}>
-							<Detail/>
-						</S.Icone>
-
-						<S.Icone onClick={() => this.deletePlaylist(playlist.id)}>
-							<Delete />
-						</S.Icone>
-
+					<S.Icone onClick={() => this.deletePlaylist(playlist.id)}>
+						<Delete />
+					</S.Icone>
 
 				</S.Playlist>
 			))
+		}
+
+		let message
+		if (this.state.returnMessageList) {
+			if (this.state.returnMessageList === '1') {
+				message = 'Não foi possível efetuar essa operação. Tente novamente mais tarde'
+			}
+			if (this.state.returnMessageList === '2') {
+				message = 'Usuário deletado com sucesso'
+			}
 		}
 
 		return (
@@ -91,9 +100,18 @@ class TelaListaPlaylists extends React.Component {
 
 				<S.H2>Lista de Playlists</S.H2>
 
-				<S.Qtd><strong>Quantidade: </strong> {this.state.allPlaylists.quantity}</S.Qtd>
+				<S.Qtd>
+					<p>Clique na playlist para mais detalhes</p>
+					<p>
+						<strong>Quantidade: </strong> {this.state.allPlaylists.quantity}
+					</p>
+				</S.Qtd>
 
 				{lista}
+
+				<S.Resposta>
+					<h4>{this.state.returnMessageList && message}</h4>
+				</S.Resposta>
 
 			</S.Wrapper>
 		)
