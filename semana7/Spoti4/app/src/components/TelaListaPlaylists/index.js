@@ -2,7 +2,9 @@ import React from 'react'
 
 import axios from 'axios'
 import * as S from './styled'
+
 import { Delete } from '@styled-icons/material/Delete'
+import { Detail } from '@styled-icons/boxicons-regular/Detail'
 
 const baseUrl = 'https://us-central1-spotif4.cloudfunctions.net/api'
 
@@ -21,9 +23,7 @@ class TelaListaPlaylists extends React.Component {
 	}
 
 	getAllPlaylists = async () => {
-
 		try {
-
 			const response = await axios.get(
 				`${baseUrl}/playlists/getAllPlaylists`,
 				{
@@ -32,24 +32,16 @@ class TelaListaPlaylists extends React.Component {
 					}
 				}
 			)
-
 			this.setState({ allPlaylists: response.data.result })
-
-
 		} catch (error) {
 			console.log(error.response)
 		}
-
 	}
 
 	deletePlaylist = async (playlistId) => {
-
 		const deletar = window.confirm('Tem certeza de que deseja deletar?')
-
 		if (deletar) {
-
 			try {
-
 				await axios.delete(
 					`${baseUrl}/playlists/deletePlaylist?playlistId=${playlistId}`,
 					{
@@ -58,29 +50,37 @@ class TelaListaPlaylists extends React.Component {
 						}
 					}
 				)
-
 				alert('Usuário deletado com sucesso')
 				this.getAllPlaylists();				
-
 			} catch (error) {
 				console.log(error.response)
 			}
-
 		}
 	}
 
-	render() {
+	playlistSelected = (playlistId, playlistName) => {
+		this.props.onClickPlaylist(playlistId, playlistName)
+	}
 
-		// console.log(this.state.allPlaylists.list)
+	render() {
 
 		let lista
 		if (this.state.allPlaylists.list) {
 			lista = this.state.allPlaylists.list.map(playlist => (
 				<S.Playlist key={playlist.id}>
 
-					<S.Nome>{playlist.name}</S.Nome>
+					<S.Nome onClick={() => this.playlistSelected(playlist.id, playlist.name)}>
+						{playlist.name}
+					</S.Nome>
 
-					<S.Icone onClick={() => this.deletePlaylist(playlist.id)}><Delete /></S.Icone>
+						<S.Icone onClick={() => this.playlistSelected(playlist.id, playlist.name)}>
+							<Detail/>
+						</S.Icone>
+
+						<S.Icone onClick={() => this.deletePlaylist(playlist.id)}>
+							<Delete />
+						</S.Icone>
+
 
 				</S.Playlist>
 			))

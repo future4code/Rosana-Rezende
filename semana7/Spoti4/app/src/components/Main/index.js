@@ -4,13 +4,16 @@ import * as S from './styled'
 import TelaBoasVindas from '../TelaBoasVindas'
 import TelaCadastroPlaylists from '../TelaCadastroPlaylists'
 import TelaListaPlaylists from '../TelaListaPlaylists'
+import TelaPlaylistDetalhe from '../TelaPlaylistDetalhe'
 
 
 class Main extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            telaClicada: 'lista'
+            telaClicada: '',
+            playlistId: '',
+            playlistName: ''
         }
     }
 
@@ -22,8 +25,16 @@ class Main extends React.Component {
         this.setState({ telaClicada: 'lista' })
     }
 
+    detailPlaylist = (playlistIdClick, playlistNameClick) => {
+        this.setState({
+            telaClicada: 'detalhe',
+            playlistId: playlistIdClick,
+            playlistName: playlistNameClick
+        })
+    }
+
     render() {
-        
+
         let telaAtual
         switch (this.state.telaClicada) {
             case '':
@@ -33,7 +44,15 @@ class Main extends React.Component {
                 telaAtual = <TelaCadastroPlaylists />
                 break;
             case 'lista':
-                telaAtual = <TelaListaPlaylists />
+                telaAtual = <TelaListaPlaylists 
+                    onClickPlaylist={this.detailPlaylist} 
+                />
+                break;
+            case 'detalhe':
+                telaAtual = <TelaPlaylistDetalhe 
+                    playlistId={this.state.playlistId} 
+                    playlistName={this.state.playlistName}
+                />
                 break;
             default:
                 telaAtual = <TelaBoasVindas />
@@ -42,12 +61,12 @@ class Main extends React.Component {
 
         return (
             <>
-            <S.Wrapper>
-                <S.Botao onClick={this.mudaTelaCadastro}>Cadastrar Playlist</S.Botao>
-                <S.Botao onClick={this.mudaTelaLista}>Visualizar Playlists</S.Botao>
-            </S.Wrapper>
+                <S.Wrapper>
+                    <S.Botao onClick={this.mudaTelaCadastro}>Cadastrar Playlist</S.Botao>
+                    <S.Botao onClick={this.mudaTelaLista}>Visualizar Playlists</S.Botao>
+                </S.Wrapper>
 
-            {telaAtual}
+                {telaAtual}
             </>
 
         )

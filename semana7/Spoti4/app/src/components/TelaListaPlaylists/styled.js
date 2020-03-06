@@ -21,7 +21,7 @@ export const Qtd = styled.p`
 
 export const Playlist = styled.div`
     text-align: center;
-    width: 40%;
+    width: 70%;
     margin: 0 auto 0.7rem;
     display: flex;
     justify-content: space-around;
@@ -36,10 +36,13 @@ export const Nome = styled.span`
     font-weight: 600;
 `
 
-export const Icone = styled.span`
-    width: 1.5rem;
+export const P = styled.p`
+`
+
+export const Icone = styled.div`
     cursor: pointer;
     :hover {
         color:red;
     }
+    width: 5%;
 `
