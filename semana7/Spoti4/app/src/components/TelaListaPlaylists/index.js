@@ -91,7 +91,7 @@ class TelaListaPlaylists extends React.Component {
 				message = 'Não foi possível efetuar essa operação. Tente novamente mais tarde'
 			}
 			if (this.state.returnMessageList === '2') {
-				message = 'Usuário deletado com sucesso'
+				message = 'Playlist deletada com sucesso'
 			}
 		}
 
