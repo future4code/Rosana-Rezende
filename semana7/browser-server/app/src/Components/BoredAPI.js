@@ -248,6 +248,7 @@ class BoredAPI extends React.Component {
 							max='0.8'
 							step='0.05'
 						/>
+
 						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
 					</DivSearch>
 
