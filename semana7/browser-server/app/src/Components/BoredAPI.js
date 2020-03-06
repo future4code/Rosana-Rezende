@@ -206,8 +206,6 @@ class BoredAPI extends React.Component {
 
 	render() {
 
-		console.log(this.state.price)
-
 		const searchAppears = (
 			<>
 				<H2>Fill in one of the fields to find the best activity for tedious days</H2>
@@ -224,7 +222,7 @@ class BoredAPI extends React.Component {
 
 					<DivSearch>
 						<Select onChange={this.handleChangeTipeOfActivity}>
-							<option>· Tipe Of Activity ·</option>
+							<option>Tipe Of Activity</option>
 							<option value='education'>education</option>
 							<option value='recreational'>recreational</option>
 							<option value='social'>social</option>
@@ -250,7 +248,6 @@ class BoredAPI extends React.Component {
 							max='0.8'
 							step='0.05'
 						/>
-
 						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
 					</DivSearch>
 
