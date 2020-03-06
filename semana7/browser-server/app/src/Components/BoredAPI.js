@@ -18,18 +18,15 @@ const H2 = styled.h2`
 		text-align: center;
 		margin-bottom: 1rem;
 `
-
-
 const DivHeader = styled.div`
 	display: flex;
 	justify-content: space-around;
 	margin: 0.5rem;
+	flex-wrap: wrap;
 
 	@media screen and (max-device-width: 1200px) {
 		display: grid;
 		grid-auto-columns: 1fr;
-		/* width: 80%;
-		margin: 1rem auto; */
 		justify-items: center;
 	}
 	`
@@ -37,7 +34,7 @@ const DivHeader = styled.div`
 const DivSearch = styled.div`
 	display: flex;
 	align-content: center;
-	margin-bottom: 0.5rem;
+	margin: 0.5rem;
 `
 
 const Input = styled.input`
@@ -67,6 +64,25 @@ const DivFooter = styled.div`
 	margin: 1rem auto;
 `
 
+const InputRange = styled.input`
+	margin-left: 15px;
+	width: 20rem;
+
+	-webkit-appearance: none;
+  height: 25px;
+  background: #e1e9ec;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+	transition: opacity .2s;
+	:hover {
+  	opacity: 1;
+	}
+
+	@media screen and (max-device-width: 1200px) {
+		width: 6rem;
+	}
+`
 
 const baseUrl = 'http://www.boredapi.com/api/activity/'
 
@@ -78,33 +94,32 @@ class BoredAPI extends React.Component {
 			currentActivity: undefined,
 			numberOfParticipants: '',
 			tipeOfActivity: '',
-
-			accessibility: '',
 			price: '',
+			accessibility: '',
 		}
 	}
 
 	getActivity = async () => {
 
-		if (this.state.numberOfParticipants === '' && this.state.tipeOfActivity  === '') {
+		if (this.state.numberOfParticipants === '' && this.state.tipeOfActivity === '' && this.state.price === '' && this.state.accessibility === '') {
 			alert('It is not possible to search without filling the input')
-		} 
-		
+		}
+
 		else {
-			
+
 			if (this.state.numberOfParticipants) {
 				if (this.state.numberOfParticipants > 5 || this.state.numberOfParticipants < 1) {
 					alert('Enter a number between 1 and 5')
 				} else {
 					try {
-		
+
 						const response = await axios.get(`${baseUrl}?participants=${this.state.numberOfParticipants}`)
-			
-						this.setState({ 
+
+						this.setState({
 							currentActivity: response.data,
 							numberOfParticipants: ''
-						 })
-			
+						})
+
 					} catch (error) {
 						alert('Could not find an activity')
 						console.log(error)
@@ -115,12 +130,42 @@ class BoredAPI extends React.Component {
 			if (this.state.tipeOfActivity) {
 				try {
 					const response = await axios.get(`${baseUrl}?type=${this.state.tipeOfActivity}`)
-		
-					this.setState({ 
+
+					this.setState({
 						currentActivity: response.data,
 						tipeOfActivity: ''
 					})
-		
+
+				} catch (error) {
+					alert('Could not find an activity')
+					console.log(error)
+				}
+			}
+
+			if (this.state.price) {
+				try {
+					const response = await axios.get(`${baseUrl}?price=${this.state.price}`)
+
+					this.setState({
+						currentActivity: response.data,
+						price: ''
+					})
+
+				} catch (error) {
+					alert('Could not find an activity')
+					console.log(error)
+				}
+			}
+
+			if (this.state.accessibility) {
+				try {
+					const response = await axios.get(`${baseUrl}?accessibility=${this.state.accessibility}`)
+
+					this.setState({
+						currentActivity: response.data,
+						accessibility: ''
+					})
+
 				} catch (error) {
 					alert('Could not find an activity')
 					console.log(error)
@@ -128,7 +173,6 @@ class BoredAPI extends React.Component {
 			}
 
 		}
-		
 
 	}
 
@@ -140,20 +184,21 @@ class BoredAPI extends React.Component {
 		this.setState({ tipeOfActivity: event.target.value })
 	}
 
-	// handleChangeAccessibility = (event) => {
-	// 	this.setState({ accessibility: event.target.value })
-	// }
+	handleChangePrice = (event) => {
+		this.setState({ price: event.target.value })
+	}
 
-	// handleChangePrice = (event) => {
-	// 	this.setState({ price: event.target.value })
-	// }
-
+	handleChangeAccessibility = (event) => {
+		this.setState({ accessibility: event.target.value })
+	}
 
 	render() {
 
+		console.log(this.state.price)
+
 		const searchAppears = (
 			<>
-				<H2>Fill in the fields to find the best activity for tedious days</H2>
+				<H2>Fill in one of the fields to find the best activity for tedious days</H2>
 				<DivHeader>
 
 					<DivSearch>
@@ -164,8 +209,6 @@ class BoredAPI extends React.Component {
 						/>
 						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
 					</DivSearch>
-
-					<H2>OR</H2>
 
 					<DivSearch>
 						<Select onChange={this.handleChangeTipeOfActivity}>
@@ -183,23 +226,33 @@ class BoredAPI extends React.Component {
 						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
 					</DivSearch>
 
-					{/* <DivSearch>
-						<Input
-							placeholder='Accessibility'
-							value={this.state.accessibility}
-							onChange={this.handleChangeAccessibility}
-						/>
-						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
-					</DivSearch> */}
 
-					{/* <DivSearch>
-						<Input
-							placeholder='Price'
+					<DivSearch>
+
+						<span>Price range:  {this.state.price} </span>
+						<InputRange
+							type='range'
 							value={this.state.price}
 							onChange={this.handleChangePrice}
+							min='0'
+							max='0.8'
+							step='0.05'
 						/>
-					<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
-					</DivSearch> */}
+
+						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
+					</DivSearch>
+
+					<DivSearch>
+						<span>Accessibility:  {this.state.accessibility} </span><InputRange
+							type='range'
+							value={this.state.accessibility}
+							onChange={this.handleChangeAccessibility}
+							min='0'
+							max='1'
+							step='0.05'
+						/>
+						<Icon onClick={this.getActivity}><i className="material-icons" >search</i></Icon>
+					</DivSearch>
 
 				</DivHeader>
 			</>
@@ -224,7 +277,7 @@ class BoredAPI extends React.Component {
 				{searchAppears}
 
 				{this.state.currentActivity && answerApperars}
-	
+
 			</BoredAPIWrapper>
 		)
 	}
