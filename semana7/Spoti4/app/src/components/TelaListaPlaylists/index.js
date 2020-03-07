@@ -4,7 +4,6 @@ import axios from 'axios'
 import * as S from './styled'
 
 import { Delete } from '@styled-icons/material/Delete'
-import { Detail } from '@styled-icons/boxicons-regular/Detail'
 
 const baseUrl = 'https://us-central1-spotif4.cloudfunctions.net/api'
 

@@ -22,11 +22,11 @@ export const Qtd = styled.div`
 `
 
 export const Playlist = styled.div`
-    text-align: center;
+    /* text-align: center; */
     width: 40%;
-    margin: 0 auto 0.7rem;
+    margin: 0 auto 1rem;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 
     @media screen and (max-device-width: 1200px) {
         width: 60%;
@@ -39,6 +39,7 @@ export const Nome = styled.span`
     :hover {
         color:blue;
     }
+    padding-top: 0.2rem;
 `
 
 export const P = styled.p`
@@ -50,6 +51,7 @@ export const Icone = styled.div`
         color:red;
     }
     width: 8%;
+    margin-left: 1rem;
 `
 
 export const Resposta = styled.div`

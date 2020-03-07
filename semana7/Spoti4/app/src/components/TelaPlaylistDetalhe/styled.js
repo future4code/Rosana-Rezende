@@ -22,7 +22,11 @@ export const DivDetalheMusica = styled.div`
 `
 
 export const P = styled.p`
-    margin: 0.5rem;
+    margin-bottom: 0.5rem;
+`
+
+export const P2 = styled.p`
+    margin-bottom: 2rem;
 `
 
 export const Audio = styled.audio`
@@ -56,7 +60,7 @@ export const Input = styled.input`
 
 export const Botao = styled.button`
     width: 20%;
-    margin: 0.5rem auto;
+    margin: 1.5rem auto;
     background-color: #b8bfc2;
     border: none;
     padding: 0.3rem 0.5rem;
@@ -68,6 +72,27 @@ export const Botao = styled.button`
     @media screen and (max-device-width: 1200px) {
         width: 40%;
     }
+`
+
+export const DivDelete = styled.div`
+    /* text-align: center; */
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+
+    @media screen and (max-device-width: 1200px) {
+        width: 60%;
+    }
+`
+
+export const Icone = styled.div`
+    cursor: pointer;
+    :hover {
+        color:red;
+    }
+    width: 8%;
+    margin-left: 1rem;
 `
 
 export const DivBotoes = styled.div`

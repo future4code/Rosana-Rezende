@@ -2,6 +2,7 @@ import React from 'react'
 
 import axios from 'axios'
 import * as S from './styled'
+import { Delete } from '@styled-icons/material/Delete'
 
 const baseUrl = 'https://us-central1-spotif4.cloudfunctions.net/api'
 
@@ -78,7 +79,10 @@ class TelaPlaylistDetalhe extends React.Component {
 	}
 
 	clicaAdicionarMusica = () => {
-		this.setState({ adicionarMusica: !this.state.adicionarMusica })
+		this.setState({ 
+			adicionarMusica: !this.state.adicionarMusica,
+			returnMessageAddMusic: ''
+		})
 	}
 
 	mudaMusica = (event) => {
@@ -93,15 +97,45 @@ class TelaPlaylistDetalhe extends React.Component {
 		this.setState({ url: event.target.value })
 	}
 
+	deleteMusic = async (musicId) => {
+		const deletar = window.confirm('Tem certeza de que deseja deletar a música?')
+		if (deletar) {
+			try {
+				await axios.delete(
+					`${baseUrl}/playlists/removeMusicFromPlaylist?playlistId=${this.props.playlistId}&musicId=${musicId}`,
+					{
+						headers: {
+							auth: myauth
+						}
+					}
+				)
+				this.setState({ returnMessageAddMusic: '3' })
+				this.getPlaylistMusics();
+			} catch (error) {
+				console.log(error.response)
+				this.setState({ returnMessageAddMusic: '1' })
+			}
+		}
+	}
+
 	render() {
 
 		let musicas
 		if (this.state.playlistSelected.quantity > 0) {
 			musicas = this.state.playlistSelected.musics.map(music => (
 				<S.DivDetalheMusica key={music.id}>
+
+					<S.DivDelete>
+
 					<S.P>
 						<strong>{music.name}</strong> - <i>{music.artist}</i>
 					</S.P>
+
+					<S.Icone onClick={() => this.deleteMusic(music.id)}>
+						<Delete />
+					</S.Icone>
+					</S.DivDelete>
+
 					<S.Audio controls='controls'>
 						<source src={music.url} type="audio/mpeg" />
 					</S.Audio>
@@ -115,12 +149,12 @@ class TelaPlaylistDetalhe extends React.Component {
 				<S.Titulo>{this.props.playlistName}</S.Titulo>
 				<S.P>
 					{this.state.playlistSelected.quantity} músicas na playlist
-				</S.P><br></br>
+				</S.P>
 
+				<S.Botao onClick={this.clicaAdicionarMusica}>Adicionar Música</S.Botao>
+				
 				{musicas}
 
-				<br />
-				<S.Botao onClick={this.clicaAdicionarMusica}>Adicionar Música</S.Botao>
 			</div>
 		)
 
@@ -161,6 +195,9 @@ class TelaPlaylistDetalhe extends React.Component {
 			}
 			if (this.state.returnMessageAddMusic === '2') {
 				message = 'Música adicionada com sucesso'
+			}
+			if (this.state.returnMessageAddMusic === '3') {
+				message = 'Música deletada com sucesso'
 			}
 		}
 
