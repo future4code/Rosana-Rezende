@@ -15,16 +15,20 @@ export const H2 = styled.h2`
     text-align: center;
 `
 
+export const Div = styled.div`
+    margin-bottom: 1rem;
+`
+
 export const Input = styled.input`
     width: 25%;
-    margin: 1rem auto;
     border: none;
     border-radius: 10px;
     outline: 0;
     padding: 0.5rem;
 
     @media screen and (max-device-width: 1200px) {
-        width: 70%;
+        width: 38%;
+        margin: 0;
     }
 `
 
@@ -40,7 +44,9 @@ export const Botao = styled.button`
     cursor: pointer;
 
     @media screen and (max-device-width: 1200px) {
-        width: 25%;
+        width: 28%;
+        margin-left: 0.5rem;
+        font-size: 0.7rem;
     }
 `
 
@@ -82,6 +88,11 @@ export const Icone = styled.div`
     }
     width: 8%;
     margin-left: 1rem;
+`
+
+export const DivCarregando = styled.div`
+    display: block;
+    margin: 0 auto;
 `
 
 export const Resposta = styled.div`

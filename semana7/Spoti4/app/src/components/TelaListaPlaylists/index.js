@@ -159,12 +159,19 @@ class TelaListaPlaylists extends React.Component {
 			)
 		}
 
+		const carregando = (
+			<S.DivCarregando>
+				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			</S.DivCarregando>
+		)
+		
+
 		return (
 			<S.Wrapper>
 
 				<S.H2>Lista de Playlists</S.H2>
 
-				<div>
+				<S.Div>
 					<S.Input
 						type='text'
 						placeholder='Buscar Playlist'
@@ -173,7 +180,7 @@ class TelaListaPlaylists extends React.Component {
 					/>
 					<S.Botao onClick={this.searchPlaylist}>Buscar</S.Botao>
 					<S.Botao onClick={this.limparBusca}>Limpar Busca</S.Botao>
-				</div>
+				</S.Div>
 
 				<S.Qtd>
 					<p>Clique na playlist para mais detalhes</p>
@@ -182,6 +189,8 @@ class TelaListaPlaylists extends React.Component {
 						this.state.allPlaylists.quantity : this.state.playlistSearch.quantity}
 					</p>
 				</S.Qtd>
+
+				{this.state.allPlaylists.length === 0 && carregando}
 
 				{this.state.appearsList ? lista : playlistSearchResult}
 
