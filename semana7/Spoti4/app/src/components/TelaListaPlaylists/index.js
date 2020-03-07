@@ -142,10 +142,12 @@ class TelaListaPlaylists extends React.Component {
 					</S.Playlist>
 				))
 			)
-			// console.log(this.state.playlistSearch)
 		} else {
-			playlistSearchResult = 'nada'
-			console.log(this.state.playlistSearch)
+			playlistSearchResult = (
+				<S.Resposta>
+					<h4>Não há playlists com o nome pesquisado. Favor tentar novamente!</h4>
+				</S.Resposta>
+			)
 		}
 
 

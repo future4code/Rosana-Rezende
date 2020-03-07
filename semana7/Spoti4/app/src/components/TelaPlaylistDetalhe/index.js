@@ -149,7 +149,7 @@ class TelaPlaylistDetalhe extends React.Component {
 			<div>
 				<S.Titulo>{this.props.playlistName}</S.Titulo>
 				<S.P>
-					{this.state.playlistSelected.quantity} músicas na playlist
+				{this.state.playlistSelected.quantity} {this.state.playlistSelected.quantity === 1 ? 'música' : 'músicas'} na playlist
 				</S.P>
 
 				<S.Botao onClick={this.clicaAdicionarMusica}>Adicionar Música</S.Botao>
