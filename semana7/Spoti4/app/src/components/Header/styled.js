@@ -7,21 +7,24 @@ export const HeaderWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1rem;
+    padding: 0 2rem;
+    @media screen and (max-device-width: 1200px) {
+        padding: 0 0.5rem;
+    }
 `
 
 export const DivBotoes = styled.div`
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: space-between;
 
     @media screen and (max-device-width: 1200px) {
-        width: 70%;
+        width: 72%;
     }
 `
 
 export const Botao = styled.button`
-    width: 30%;
+    width: 24%;
     margin: 0 auto;
     background-color: #b8bfc2;
     border: none;

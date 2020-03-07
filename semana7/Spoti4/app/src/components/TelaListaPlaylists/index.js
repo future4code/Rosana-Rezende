@@ -100,6 +100,11 @@ class TelaListaPlaylists extends React.Component {
 		}
 	}
 
+	limparBusca = () => {
+		this.setState({ playlistSearch: [], appearsList: true})
+		this.getAllPlaylists()
+	}
+
 	render() {
 
 		let message
@@ -154,8 +159,6 @@ class TelaListaPlaylists extends React.Component {
 			)
 		}
 
-
-
 		return (
 			<S.Wrapper>
 
@@ -169,6 +172,7 @@ class TelaListaPlaylists extends React.Component {
 						onChange={this.handleNamePlaylist}
 					/>
 					<S.Botao onClick={this.searchPlaylist}>Buscar</S.Botao>
+					<S.Botao onClick={this.limparBusca}>Limpar Busca</S.Botao>
 				</div>
 
 				<S.Qtd>

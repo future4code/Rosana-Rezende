@@ -7,86 +7,96 @@ import TelaCadastroPlaylists from '../TelaCadastroPlaylists'
 import TelaListaPlaylists from '../TelaListaPlaylists'
 import TelaPlaylistDetalhe from '../TelaPlaylistDetalhe'
 import TelaAdicionaMusica from '../TelaAdicionarMusica'
+import TelaBuscarMusicas from '../TelaBuscarMusicas'
 
 class Header extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            telaClicada: '',
-            playlistId: '',
-            playlistName: ''
-        }
-    }
-
-    mudaTelaCadastro = () => {
-        this.setState({ telaClicada: 'cadastro' })
-    }
-
-    mudaTelaLista = () => {
-        this.setState({ telaClicada: 'lista' })
+	constructor(props) {
+		super(props)
+		this.state = {
+			telaClicada: '',
+			playlistId: '',
+			playlistName: '',
 		}
-		
-		mudaTelaAdicionarMusica = () => {
-			this.setState({ telaClicada: 'adicionaMusica'})
+	}
+
+	mudaTelaCadastro = () => {
+		this.setState({ telaClicada: 'cadastro' })
+	}
+
+	mudaTelaLista = () => {
+		this.setState({ telaClicada: 'lista' })
+	}
+
+	mudaTelaAdicionarMusica = () => {
+		this.setState({ telaClicada: 'adicionaMusica' })
+	}
+
+	mudaTelaBurcarMusicas = () => {
+		this.setState({ telaClicada: 'buscaMusicas' })
+	}
+
+	detailPlaylist = (playlistIdClick, playlistNameClick) => {
+		this.setState({
+			telaClicada: 'detalhe',
+			playlistId: playlistIdClick,
+			playlistName: playlistNameClick
+		})
+	}
+
+	render() {
+
+		let telaAtual
+		switch (this.state.telaClicada) {
+			case '':
+				telaAtual = <TelaBoasVindas />
+				break;
+			case 'cadastro':
+				telaAtual = <TelaCadastroPlaylists />
+				break;
+			case 'lista':
+				telaAtual = <TelaListaPlaylists
+					onClickPlaylist={this.detailPlaylist}
+					allPlaylistsHere={this.getAllPlaylistsHere}
+				/>
+				break;
+			case 'detalhe':
+				telaAtual = <TelaPlaylistDetalhe
+					playlistId={this.state.playlistId}
+					playlistName={this.state.playlistName}
+				/>
+				break;
+			case 'adicionaMusica':
+				telaAtual = <TelaAdicionaMusica	/>
+				break;
+			case 'buscaMusicas':
+				telaAtual = <TelaBuscarMusicas
+				// playlistId={this.state.playlistId}
+				// playlistName={this.state.playlistName}
+				/>
+				break;
+			default:
+				telaAtual = <TelaBoasVindas />
+				break;
 		}
 
-    detailPlaylist = (playlistIdClick, playlistNameClick) => {
-        this.setState({
-            telaClicada: 'detalhe',
-            playlistId: playlistIdClick,
-            playlistName: playlistNameClick
-        })
-    }
+		return (
+			<>
+				<S.HeaderWrapper>
+					<h1>Spoti4</h1>
+					<S.DivBotoes>
+						<S.Botao onClick={this.mudaTelaCadastro}>Cadastrar Playlist</S.Botao>
+						<S.Botao onClick={this.mudaTelaLista}>Visualizar Playlists</S.Botao>
+						<S.Botao onClick={this.mudaTelaAdicionarMusica}>Adicionar Música</S.Botao>
+						<S.Botao onClick={this.mudaTelaBurcarMusicas}>Buscar Músicas</S.Botao>
+					</S.DivBotoes>
+				</S.HeaderWrapper>
+				<S.DivMain>
 
-    render() {
-
-        let telaAtual
-        switch (this.state.telaClicada) {
-            case '':
-                telaAtual = <TelaBoasVindas />
-                break;
-            case 'cadastro':
-                telaAtual = <TelaCadastroPlaylists />
-                break;
-            case 'lista':
-                telaAtual = <TelaListaPlaylists 
-                    onClickPlaylist={this.detailPlaylist} 
-                />
-                break;
-            case 'detalhe':
-                telaAtual = <TelaPlaylistDetalhe 
-                    playlistId={this.state.playlistId} 
-                    playlistName={this.state.playlistName}
-                />
-								break;
-						case 'adicionaMusica':
-									telaAtual = <TelaAdicionaMusica 
-											playlistId={this.state.playlistId} 
-											playlistName={this.state.playlistName}
-									/>
-									break;
-            default:
-                telaAtual = <TelaBoasVindas />
-                break;
-        }
-
-        return (
-            <>
-            <S.HeaderWrapper>
-                <h1>Spoti4</h1>
-                <S.DivBotoes>
-                    <S.Botao onClick={this.mudaTelaCadastro}>Cadastrar Playlist</S.Botao>
-                    <S.Botao onClick={this.mudaTelaLista}>Visualizar Playlists</S.Botao>
-										<S.Botao onClick={this.mudaTelaAdicionarMusica}>Adicionar Música</S.Botao>
-                </S.DivBotoes>
-            </S.HeaderWrapper>
-            <S.DivMain>
-
-            {telaAtual}
-            </S.DivMain>
-            </>
-        )
-    }
+					{telaAtual}
+				</S.DivMain>
+			</>
+		)
+	}
 }
 
 export default Header
