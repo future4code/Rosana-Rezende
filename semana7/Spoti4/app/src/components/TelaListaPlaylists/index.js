@@ -54,8 +54,10 @@ class TelaListaPlaylists extends React.Component {
 						}
 					}
 				)
-				this.setState({ returnMessageList: '2' })
+								
+				this.setState({ returnMessageList: '2', appearsList: true })
 				this.getAllPlaylists();
+
 			} catch (error) {
 				console.log(error.response)
 				this.setState({ returnMessageList: '1' })
@@ -88,7 +90,7 @@ class TelaListaPlaylists extends React.Component {
 				appearsList: false
 			})
 
-		} catch(error) {
+		} catch (error) {
 			console.log(error.response)
 			this.setState({ returnMessageList: '1' })
 		}
@@ -127,23 +129,31 @@ class TelaListaPlaylists extends React.Component {
 		if (this.state.playlistSearch.quantity > 0) {
 			playlistSearchResult = (
 				this.state.playlistSearch.playlist.map(playlist => (
-					<p key={playlist.id}>
-						{playlist.name}
-					</p>
+					<S.Playlist key={playlist.id}>
+
+						<S.Nome onClick={() => this.playlistSelected(playlist.id, playlist.name)}>
+							{playlist.name}
+						</S.Nome>
+
+						<S.Icone onClick={() => this.deletePlaylist(playlist.id)}>
+							<Delete />
+						</S.Icone>
+
+					</S.Playlist>
 				))
 			)
-			console.log(this.state.playlistSearch)
+			// console.log(this.state.playlistSearch)
 		} else {
 			playlistSearchResult = 'nada'
 			console.log(this.state.playlistSearch)
 		}
 
-		
+
 
 		return (
 			<S.Wrapper>
 
-					<S.H2>Lista de Playlists</S.H2>
+				<S.H2>Lista de Playlists</S.H2>
 
 				<div>
 					<S.Input
@@ -151,14 +161,15 @@ class TelaListaPlaylists extends React.Component {
 						placeholder='Buscar Playlist'
 						value={this.state.playlistSearchName}
 						onChange={this.handleNamePlaylist}
-						/>
+					/>
 					<S.Botao onClick={this.searchPlaylist}>Buscar</S.Botao>
 				</div>
 
 				<S.Qtd>
 					<p>Clique na playlist para mais detalhes</p>
 					<p>
-						<strong>Quantidade: </strong> {this.state.allPlaylists.quantity}
+						<strong>Quantidade: </strong> {this.state.appearsList ?
+						this.state.allPlaylists.quantity : this.state.playlistSearch.quantity}
 					</p>
 				</S.Qtd>
 
