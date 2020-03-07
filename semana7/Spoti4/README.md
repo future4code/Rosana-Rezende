@@ -7,11 +7,11 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Projeto: Spoti4
 
-[Site do projeto](xxx/)
+[Site do projeto](http://spoti4-rosana.surge.sh/)
 
 <p align="center">
-  <img  height='320' src='xxx'>
-  <img  height='320' src='xxx'>
+  <img  height='320' src='https://user-images.githubusercontent.com/45580434/76128847-469b8180-5fe4-11ea-8877-85ee691040a0.gif'>
+  <!-- <img  height='320' src='xxx'> -->
 </p>
 
 
@@ -26,17 +26,18 @@ Realizar uma integração com a API Spotif4, que permite o gerenciamento básico
 
 <br><br>
 
-
 #### Requisitos obrigatórios
 
 - [x] O usuário deve ser capaz de criar uma playlist de músicas. Para isso, ele só precisa passar um nome. Não podem existir playlists com o mesmo nome.
-- [x] Deve haver a possibilidade do usuário visualizar todas as suas playlists, em uma lista específica. Nesta lista, o usuário também pode deletar alguma playlist.
-- [] O usuário deve ser capaz de visualizar os detalhes de uma playlist: o seu nome e as músicas que fazem parte dela
-- [] Para adicionar músicas à playlist, o usuário deve informar: o nome, os artistas relacionados (que pode ser só um cantor ou uma banda) e um link com o arquivo de áudio correspondente a esta música
-    - Subimos algumas músicas neste site (igual fizemos com os vídeos do FutureTube):
-        - [http://spoti4.future4.com.br/1.mp3](http://spoti4.future4.com.br/1.mp3) → Vocês podem escolher entre 100 músicas que separamos, só ir trocando o nome do arquivo na URL.
 
-- [] Por fim, quando o usuário abrir o detalhe da playlist, ele deve ser capaz de ouvir à cada uma das músicas que estiverem inseridas na playlist. Um botão de 'play' e 'pause' é essencial para isto
+- [x] Deve haver a possibilidade do usuário visualizar todas as suas playlists, em uma lista específica. Nesta lista, o usuário também pode deletar alguma playlist.
+
+- [x] O usuário deve ser capaz de visualizar os detalhes de uma playlist: o seu nome e as músicas que fazem parte dela.
+
+- [x] Para adicionar músicas à playlist, o usuário deve informar: o nome, os artistas relacionados (que pode ser só um cantor ou uma banda) e um link com o arquivo de áudio correspondente a esta música
+    - Subimos algumas músicas neste site: [http://spoti4.future4.com.br/1.mp3](http://spoti4.future4.com.br/1.mp3) → Vocês podem escolher entre 100 músicas que separamos, só ir trocando o nome do arquivo na URL.
+
+- [x] Por fim, quando o usuário abrir o detalhe da playlist, ele deve ser capaz de ouvir à cada uma das músicas que estiverem inseridas na playlist. Um botão de 'play' e 'pause' é essencial para isto
 
 <br><br>
 

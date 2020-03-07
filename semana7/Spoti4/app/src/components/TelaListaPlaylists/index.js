@@ -14,8 +14,10 @@ class TelaListaPlaylists extends React.Component {
 		super(props)
 		this.state = {
 			allPlaylists: [],
-			returnMessageList: ''
-
+			returnMessageList: '',
+			playlistSearchName: '',
+			playlistSearch: [],
+			appearsList: true
 		}
 	}
 
@@ -65,7 +67,44 @@ class TelaListaPlaylists extends React.Component {
 		this.props.onClickPlaylist(playlistId, playlistName)
 	}
 
+	handleNamePlaylist = (event) => {
+		this.setState({ playlistSearchName: event.target.value })
+	}
+
+	searchPlaylist = async () => {
+		try {
+			const response = await axios.get(
+				`${baseUrl}/playlists/searchPlaylist?playlistName=${this.state.playlistSearchName}`,
+				{
+					headers: {
+						auth: myauth
+					}
+				}
+			)
+
+			this.setState({
+				playlistSearch: response.data.result,
+				playlistSearchName: '',
+				appearsList: false
+			})
+
+		} catch(error) {
+			console.log(error.response)
+			this.setState({ returnMessageList: '1' })
+		}
+	}
+
 	render() {
+
+		let message
+		if (this.state.returnMessageList) {
+			if (this.state.returnMessageList === '1') {
+				message = 'Não foi possível efetuar essa operação. Tente novamente mais tarde'
+			}
+			if (this.state.returnMessageList === '2') {
+				message = 'Playlist deletada com sucesso'
+			}
+		}
 
 		let lista
 		if (this.state.allPlaylists.list) {
@@ -84,20 +123,37 @@ class TelaListaPlaylists extends React.Component {
 			))
 		}
 
-		let message
-		if (this.state.returnMessageList) {
-			if (this.state.returnMessageList === '1') {
-				message = 'Não foi possível efetuar essa operação. Tente novamente mais tarde'
-			}
-			if (this.state.returnMessageList === '2') {
-				message = 'Playlist deletada com sucesso'
-			}
+		let playlistSearchResult
+		if (this.state.playlistSearch.quantity > 0) {
+			playlistSearchResult = (
+				this.state.playlistSearch.playlist.map(playlist => (
+					<p key={playlist.id}>
+						{playlist.name}
+					</p>
+				))
+			)
+			console.log(this.state.playlistSearch)
+		} else {
+			playlistSearchResult = 'nada'
+			console.log(this.state.playlistSearch)
 		}
+
+		
 
 		return (
 			<S.Wrapper>
 
-				<S.H2>Lista de Playlists</S.H2>
+					<S.H2>Lista de Playlists</S.H2>
+
+				<div>
+					<S.Input
+						type='text'
+						placeholder='Buscar Playlist'
+						value={this.state.playlistSearchName}
+						onChange={this.handleNamePlaylist}
+						/>
+					<S.Botao onClick={this.searchPlaylist}>Buscar</S.Botao>
+				</div>
 
 				<S.Qtd>
 					<p>Clique na playlist para mais detalhes</p>
@@ -106,11 +162,12 @@ class TelaListaPlaylists extends React.Component {
 					</p>
 				</S.Qtd>
 
-				{lista}
+				{this.state.appearsList ? lista : playlistSearchResult}
 
 				<S.Resposta>
 					<h4>{this.state.returnMessageList && message}</h4>
 				</S.Resposta>
+
 
 			</S.Wrapper>
 		)

@@ -21,9 +21,7 @@ export const DivDetalheMusica = styled.div`
     margin: 1rem 0;
 `
 
-export const P = styled.p`
-    margin-bottom: 0.5rem;
-`
+export const P = styled.p``
 
 export const P2 = styled.p`
     margin-bottom: 2rem;
@@ -76,13 +74,13 @@ export const Botao = styled.button`
 
 export const DivDelete = styled.div`
     /* text-align: center; */
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
     display: flex;
     justify-content: center;
 
     @media screen and (max-device-width: 1200px) {
-        width: 60%;
+        width: 80%;
     }
 `
 
@@ -91,7 +89,7 @@ export const Icone = styled.div`
     :hover {
         color:red;
     }
-    width: 8%;
+    width: 6%;
     margin-left: 1rem;
 `
 

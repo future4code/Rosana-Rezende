@@ -11,14 +11,44 @@ export const Wrapper = styled.div`
 `
 
 export const H2 = styled.h2`
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
     text-align: center;
+`
+
+export const Input = styled.input`
+    width: 25%;
+    margin: 1rem auto;
+    border: none;
+    border-radius: 10px;
+    outline: 0;
+    padding: 0.5rem;
+
+    @media screen and (max-device-width: 1200px) {
+        width: 70%;
+    }
+`
+
+export const Botao = styled.button`
+    width: 15%;
+    margin-left: 1rem;
+    background-color: #b8bfc2;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 10px;
+    box-shadow: -2px 2px 2px rgba(0, 0, 0, .2);
+    outline: 0;
+    cursor: pointer;
+
+    @media screen and (max-device-width: 1200px) {
+        width: 25%;
+    }
 `
 
 export const Qtd = styled.div`
     margin-bottom: 2rem;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 `
 
 export const Playlist = styled.div`

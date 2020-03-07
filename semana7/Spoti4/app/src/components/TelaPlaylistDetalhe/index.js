@@ -138,6 +138,7 @@ class TelaPlaylistDetalhe extends React.Component {
 
 					<S.Audio controls='controls'>
 						<source src={music.url} type="audio/mpeg" />
+						Seu navegador não suporta o elemento de áudio.
 					</S.Audio>
 
 				</S.DivDetalheMusica>
