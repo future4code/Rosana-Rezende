@@ -6,6 +6,7 @@ import TelaBoasVindas from '../TelaBoasVindas'
 import TelaCadastroPlaylists from '../TelaCadastroPlaylists'
 import TelaListaPlaylists from '../TelaListaPlaylists'
 import TelaPlaylistDetalhe from '../TelaPlaylistDetalhe'
+import TelaAdicionaMusica from '../TelaAdicionarMusica'
 
 class Header extends React.Component {
     constructor(props) {
@@ -23,7 +24,11 @@ class Header extends React.Component {
 
     mudaTelaLista = () => {
         this.setState({ telaClicada: 'lista' })
-    }
+		}
+		
+		mudaTelaAdicionarMusica = () => {
+			this.setState({ telaClicada: 'adicionaMusica'})
+		}
 
     detailPlaylist = (playlistIdClick, playlistNameClick) => {
         this.setState({
@@ -53,7 +58,13 @@ class Header extends React.Component {
                     playlistId={this.state.playlistId} 
                     playlistName={this.state.playlistName}
                 />
-                break;
+								break;
+						case 'adicionaMusica':
+									telaAtual = <TelaAdicionaMusica 
+											playlistId={this.state.playlistId} 
+											playlistName={this.state.playlistName}
+									/>
+									break;
             default:
                 telaAtual = <TelaBoasVindas />
                 break;
@@ -66,6 +77,7 @@ class Header extends React.Component {
                 <S.DivBotoes>
                     <S.Botao onClick={this.mudaTelaCadastro}>Cadastrar Playlist</S.Botao>
                     <S.Botao onClick={this.mudaTelaLista}>Visualizar Playlists</S.Botao>
+										<S.Botao onClick={this.mudaTelaAdicionarMusica}>Adicionar Música</S.Botao>
                 </S.DivBotoes>
             </S.HeaderWrapper>
             <S.DivMain>

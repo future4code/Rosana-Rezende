@@ -70,7 +70,10 @@ class TelaListaPlaylists extends React.Component {
 	}
 
 	handleNamePlaylist = (event) => {
-		this.setState({ playlistSearchName: event.target.value })
+		this.setState({ 
+			playlistSearchName: event.target.value,
+			returnMessageList: '',
+		})
 	}
 
 	searchPlaylist = async () => {
@@ -87,7 +90,8 @@ class TelaListaPlaylists extends React.Component {
 			this.setState({
 				playlistSearch: response.data.result,
 				playlistSearchName: '',
-				appearsList: false
+				appearsList: false, 
+				returnMessageList: '',
 			})
 
 		} catch (error) {

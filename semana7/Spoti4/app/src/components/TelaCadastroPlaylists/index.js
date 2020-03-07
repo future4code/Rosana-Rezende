@@ -17,7 +17,10 @@ class TelaCadastroPlaylists extends React.Component {
 	}
 
 	handleChangeName = (event) => {
-		this.setState({ newName: event.target.value })
+		this.setState({ 
+			newName: event.target.value,
+			returnMessage: ''
+		})
 	}
 
 	createPlaylist = async () => {

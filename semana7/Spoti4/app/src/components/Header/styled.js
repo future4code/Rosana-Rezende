@@ -7,21 +7,21 @@ export const HeaderWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 1rem;
 `
 
 export const DivBotoes = styled.div`
-    width: 30%;
+    width: 50%;
     display: flex;
     justify-content: space-between;
 
     @media screen and (max-device-width: 1200px) {
-        width: 60%;
+        width: 70%;
     }
 `
 
 export const Botao = styled.button`
-    width: 40%;
+    width: 30%;
     margin: 0 auto;
     background-color: #b8bfc2;
     border: none;
@@ -30,10 +30,6 @@ export const Botao = styled.button`
     box-shadow: -2px 2px 2px rgba(0, 0, 0, .2);
     outline: 0;
     cursor: pointer;
-
-    @media screen and (max-device-width: 1200px) {
-        width: 40%;
-    }
 `
 
 export const DivMain = styled.div`

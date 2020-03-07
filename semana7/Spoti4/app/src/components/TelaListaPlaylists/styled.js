@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `
 
 export const H2 = styled.h2`
-    /* margin-bottom: 2rem; */
+    margin: 2rem 0 1rem;
     text-align: center;
 `
 
