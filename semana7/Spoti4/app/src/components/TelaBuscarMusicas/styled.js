@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 `
 
 export const H2 = styled.h2`
-    margin: 2rem 0;
+    margin-top: 2rem;
 `
 
 export const Div = styled.div`
@@ -33,19 +33,18 @@ export const Div = styled.div`
 // `
 
 export const Input = styled.input`
-    width: 30%;
-    /* margin: 0.5rem auto; */
+    width: 40%;
     border: none;
     border-radius: 10px;
     outline: 0;
-    padding: 0.2rem;
+    padding: 0.2rem 0.5rem;
     @media screen and (max-device-width: 1200px) {
         width: 60%;
     }
 `
 
 export const Botao = styled.button`
-    width: 10%;
+    width: 15%;
     margin-left: 0.5rem;
     background-color: #b8bfc2;
     border: none;
@@ -55,8 +54,12 @@ export const Botao = styled.button`
     outline: 0;
     cursor: pointer;
     @media screen and (max-device-width: 1200px) {
-        width: 20%;
+        width: 30%;
     }
+`
+
+export const Audio = styled.audio`
+    outline: 0;
 `
 
 // export const Resposta = styled.div`

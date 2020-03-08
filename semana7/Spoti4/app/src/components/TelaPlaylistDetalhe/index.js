@@ -4,9 +4,10 @@ import axios from 'axios'
 import * as S from './styled'
 import { Delete } from '@styled-icons/material/Delete'
 
-const baseUrl = 'https://us-central1-spotif4.cloudfunctions.net/api'
-
-const myauth = 'rosana'
+import { BASEURL } from '../../shared/baseUrl'
+import { MYAUTH } from '../../shared/myAuth'
+const baseUrl = BASEURL
+const myauth = MYAUTH
 
 class TelaPlaylistDetalhe extends React.Component {
 	constructor(props) {

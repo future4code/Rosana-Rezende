@@ -1,0 +1,1 @@
+export const BASEURL = 'https://us-central1-spotif4.cloudfunctions.net/api'

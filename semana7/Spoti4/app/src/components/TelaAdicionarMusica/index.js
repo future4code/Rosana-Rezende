@@ -3,9 +3,10 @@ import React from 'react'
 import axios from 'axios'
 import * as S from './styled'
 
-const baseUrl = 'https://us-central1-spotif4.cloudfunctions.net/api'
-
-const myauth = 'rosana'
+import { BASEURL } from '../../shared/baseUrl'
+import { MYAUTH } from '../../shared/myAuth'
+const baseUrl = BASEURL
+const myauth = MYAUTH
 
 class TelaAdicionaMusica extends React.Component {
 	constructor(props) {
