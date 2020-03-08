@@ -7,7 +7,14 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Projeto: Spoti4
 
-[Site do projeto](http://spoti4-rosana.surge.sh/)
+[Site do projeto - SEM integração do Spotify](http://spoti4-rosana.surge.sh/)
+
+<p align="center">
+  <img  height='320' src='https://user-images.githubusercontent.com/45580434/76128847-469b8180-5fe4-11ea-8877-85ee691040a0.gif'>
+  <!-- <img  height='320' src='xxx'> -->
+</p>
+
+[Site do projeto - COM integração do Spotify](http://spoti4-v2-rosana.surge.sh/)
 
 <p align="center">
   <img  height='320' src='https://user-images.githubusercontent.com/45580434/76128847-469b8180-5fe4-11ea-8877-85ee691040a0.gif'>
@@ -16,15 +23,18 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 
 **Desenvolvido por:** [Rosana Rezende](https://www.linkedin.com/in/rosanarezende/)
+
 <br>
+
 
 ### Escopo do projeto
 Realizar uma integração com a API Spotif4, que permite o gerenciamento básico de playlist de músicas.
 <br>
 
-[Documentação da API](https://documenter.getpostman.com/view/4233568/SVtWvmod?version=latest)
+[Documentação da API do Spoti4](https://documenter.getpostman.com/view/4233568/SVtWvmod?version=latest)
 
-<br><br>
+[Documentação da API do Spotify](https://developer.spotify.com/documentation/web-api/)
+<br>
 
 #### Requisitos obrigatórios
 
@@ -41,9 +51,9 @@ Realizar uma integração com a API Spotif4, que permite o gerenciamento básico
 
 <br><br>
 
-#### Desafios
+#### Desafio
 
-Como desafio, queríamos que vocês tivessem a ~~diversão~~ experiência de testar a API do Spotify (sim sim, nosso principal concorrente 😢). A ideia é a seguinte:
+[x] Como desafio, queríamos que vocês tivessem a ~~diversão~~ experiência de testar a API do Spotify (sim sim, nosso principal concorrente 😢). A ideia é a seguinte:
 
 Nós queremos criar uma funcionalidade em que o usuário possa pesquisar uma música (através do seu nome e/ou do autor dela). O resultado desta pesquisa deve ser mostrado em uma lista. No momento em que ele clicar em alguma música da lista, devemos pedir para o usuário escolher uma playlist para que esta música possa ser adicionada nela. 
 

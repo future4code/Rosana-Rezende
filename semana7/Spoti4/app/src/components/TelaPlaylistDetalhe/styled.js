@@ -90,7 +90,8 @@ export const Icone = styled.div`
     :hover {
         color:red;
     }
-    width: 3%;
+    width: 6%;
+    max-width: 30px;
     margin-left: 0.2rem;
 `
 

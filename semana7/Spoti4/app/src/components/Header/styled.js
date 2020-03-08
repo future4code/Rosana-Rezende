@@ -28,12 +28,12 @@ export const Botao = styled.button`
     margin: 0 auto;
     background-color: #b8bfc2;
     border: none;
-    padding: 0.3rem 0.5rem;
-    border-radius: 10px;
+    padding: 0.2rem 0.3rem;
+    border-radius: 5px;
     box-shadow: -2px 2px 2px rgba(0, 0, 0, .2);
     outline: 0;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 550;
 
     @media screen and (max-device-width: 1200px) {
         font-size: 0.6rem;

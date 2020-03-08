@@ -87,6 +87,7 @@ export const Icone = styled.div`
         color:red;
     }
     width: 8%;
+    max-width: 30px;
     margin-left: 1rem;
 `
 
