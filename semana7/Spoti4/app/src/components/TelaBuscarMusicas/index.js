@@ -9,7 +9,6 @@ import { MYAUTH } from '../../shared/myAuth'
 
 import SpotifyWebApi from 'spotify-web-api-js';
 
-
 const baseUrl = BASEURL
 const myauth = MYAUTH
 
@@ -123,10 +122,7 @@ class TelaBuscarMusicas extends React.Component {
 			console.log(error)
 			this.setState({ returnMessageAddMusic: '1' })
 		}
-
 	}
-
-	
 
 	render() {
 
@@ -181,11 +177,6 @@ class TelaBuscarMusicas extends React.Component {
 			))
 		}
 
-		
-
-		
-
-
 		return (
 			<S.Wrapper>
 				<S.DivLogin>
@@ -211,9 +202,6 @@ class TelaBuscarMusicas extends React.Component {
 				</S.Resposta>
 
 				<S.Div>
-					{/* {this.state.musicFind && 
-						this.state.appearsAddMusic ? addMusicToPlaylist : listMusic
-					} */}
 					{this.state.musicFind && listMusic}
 				</S.Div>
 
