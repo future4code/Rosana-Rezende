@@ -80,7 +80,7 @@ class TelaPlaylistDetalhe extends React.Component {
 	}
 
 	clicaAdicionarMusica = () => {
-		this.setState({ 
+		this.setState({
 			adicionarMusica: !this.state.adicionarMusica,
 			returnMessageAddMusic: ''
 		})
@@ -128,19 +128,24 @@ class TelaPlaylistDetalhe extends React.Component {
 
 					<S.DivDelete>
 
-					<S.P>
-						<strong>{music.name}</strong> - <i>{music.artist}</i>
-					</S.P>
+						<S.P>
+							<strong>{music.name}</strong> - <i>{music.artist}</i>
+						</S.P>
 
-					<S.Icone onClick={() => this.deleteMusic(music.id)}>
-						<Delete />
-					</S.Icone>
+						<S.Icone onClick={() => this.deleteMusic(music.id)}>
+							<Delete />
+						</S.Icone>
 					</S.DivDelete>
 
-					<S.Audio controls='controls'>
-						<source src={music.url} type="audio/mpeg" />
-						Seu navegador não suporta o elemento de áudio.
-					</S.Audio>
+					{music.url.includes('open.spotify') ?
+						(<p>
+							<strong>Link externo:</strong> <a href={music.url} target='_blank' rel="noopener noreferrer">Tocar no Spotify</a>
+						</p>) :
+						(<S.Audio controls='controls'>
+							<source src={music.url} type="audio/mpeg" />
+							Seu navegador não suporta o elemento de áudio.
+						</S.Audio>)}
+
 
 				</S.DivDetalheMusica>
 			))
@@ -150,11 +155,11 @@ class TelaPlaylistDetalhe extends React.Component {
 			<div>
 				<S.Titulo>{this.props.playlistName}</S.Titulo>
 				<S.P>
-				{this.state.playlistSelected.quantity} {this.state.playlistSelected.quantity === 1 ? 'música' : 'músicas'} na playlist
+					{this.state.playlistSelected.quantity} {this.state.playlistSelected.quantity === 1 ? 'música' : 'músicas'} na playlist
 				</S.P>
 
 				<S.Botao onClick={this.clicaAdicionarMusica}>Adicionar Música</S.Botao>
-				
+
 				{musicas}
 
 			</div>
@@ -164,22 +169,22 @@ class TelaPlaylistDetalhe extends React.Component {
 			<S.DivAddMusic>
 				<p><strong>Adicionar música na playlist</strong></p>
 				<S.Titulo>{this.props.playlistName}</S.Titulo>
-				
+
 				<S.DivInterna>
-				<S.Input
-					placeholder='Nome da música'
-					value={this.state.nomeMusica}
-					onChange={this.mudaMusica}
-				/>
-				<S.Input
-					placeholder='Artista'
-					value={this.state.nomeArtista}
-					onChange={this.mudaArtista}
-				/>
-				<S.Input
-					value={this.state.url}
-					onChange={this.mudaUrl}
-				/>
+					<S.Input
+						placeholder='Nome da música'
+						value={this.state.nomeMusica}
+						onChange={this.mudaMusica}
+					/>
+					<S.Input
+						placeholder='Artista'
+						value={this.state.nomeArtista}
+						onChange={this.mudaArtista}
+					/>
+					<S.Input
+						value={this.state.url}
+						onChange={this.mudaUrl}
+					/>
 				</S.DivInterna>
 
 				<S.DivBotoes>

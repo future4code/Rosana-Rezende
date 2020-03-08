@@ -17,9 +17,6 @@ export const Titulo = styled.span`
     margin-bottom: 0.5rem;
 `
 
-export const DivDetalheMusica = styled.div`
-    margin: 1rem 0;
-`
 
 export const P = styled.p``
 
@@ -72,10 +69,14 @@ export const Botao = styled.button`
     }
 `
 
+export const DivDetalheMusica = styled.div`
+    margin-bottom: 2rem;
+`
+
 export const DivDelete = styled.div`
     /* text-align: center; */
     width: 60%;
-    margin: 0 auto;
+    margin: 0 auto 0.2rem;
     display: flex;
     justify-content: center;
 
@@ -89,8 +90,8 @@ export const Icone = styled.div`
     :hover {
         color:red;
     }
-    width: 6%;
-    margin-left: 1rem;
+    width: 3%;
+    margin-left: 0.2rem;
 `
 
 export const DivBotoes = styled.div`

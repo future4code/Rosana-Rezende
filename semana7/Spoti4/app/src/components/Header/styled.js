@@ -33,6 +33,11 @@ export const Botao = styled.button`
     box-shadow: -2px 2px 2px rgba(0, 0, 0, .2);
     outline: 0;
     cursor: pointer;
+    font-weight: 600;
+
+    @media screen and (max-device-width: 1200px) {
+        font-size: 0.6rem;
+    }
 `
 
 export const DivMain = styled.div`

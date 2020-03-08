@@ -83,8 +83,8 @@ class Header extends React.Component {
 					<S.DivBotoes>
 						<S.Botao onClick={this.mudaTelaCadastro}>Cadastrar Playlist</S.Botao>
 						<S.Botao onClick={this.mudaTelaLista}>Visualizar Playlists</S.Botao>
-						<S.Botao onClick={this.mudaTelaAdicionarMusica}>Adicionar Música</S.Botao>
-						<S.Botao onClick={this.mudaTelaBurcarMusicas}>Buscar Músicas</S.Botao>
+						<S.Botao onClick={this.mudaTelaAdicionarMusica}>Adicionar músicas com LINK</S.Botao>
+						<S.Botao onClick={this.mudaTelaBurcarMusicas}>Adicionar músicas do SPOTIFY</S.Botao>
 					</S.DivBotoes>
 				</S.HeaderWrapper>
 				<S.DivMain>
