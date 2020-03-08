@@ -162,7 +162,7 @@ class TelaListaPlaylists extends React.Component {
 
 		const carregando = (
 			<S.DivCarregando>
-				<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+				<i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 			</S.DivCarregando>
 		)
 		

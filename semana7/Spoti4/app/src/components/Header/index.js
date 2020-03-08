@@ -13,7 +13,7 @@ class Header extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			telaClicada: 'buscaMusicas',
+			telaClicada: '',
 			playlistId: '',
 			playlistName: '',
 		}
@@ -69,10 +69,7 @@ class Header extends React.Component {
 				telaAtual = <TelaAdicionaMusica	/>
 				break;
 			case 'buscaMusicas':
-				telaAtual = <TelaBuscarMusicas
-				// playlistId={this.state.playlistId}
-				// playlistName={this.state.playlistName}
-				/>
+				telaAtual = <TelaBuscarMusicas/>
 				break;
 			default:
 				telaAtual = <TelaBoasVindas />

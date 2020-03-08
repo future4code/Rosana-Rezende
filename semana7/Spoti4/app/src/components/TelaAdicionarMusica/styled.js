@@ -22,7 +22,7 @@ export const Div = styled.div`
 `
 
 export const Select = styled.select`
-    width: 40%;
+    width: 30%;
     margin: 0.5rem auto;
     border: none;
     border-radius: 10px;
@@ -30,7 +30,7 @@ export const Select = styled.select`
     padding: 0.2rem;
     text-align-last:center;
     @media screen and (max-device-width: 1200px) {
-        width: 80%;
+        width: 50%;
     }
 `
 
@@ -58,6 +58,21 @@ export const Botao = styled.button`
     cursor: pointer;
     @media screen and (max-device-width: 1200px) {
         width: 40%;
+    }
+`
+
+export const Botao2 = styled.button`
+    width: 60%;
+    margin: 0.5rem auto;
+    background-color: #b8bfc2;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    border-radius: 10px;
+    box-shadow: -2px 2px 2px rgba(0, 0, 0, .2);
+    outline: 0;
+    cursor: pointer;
+    @media screen and (max-device-width: 1200px) {
+        width: 60%;
     }
 `
 

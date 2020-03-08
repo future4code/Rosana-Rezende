@@ -2,14 +2,17 @@ import React from 'react'
 
 import * as S from './styled'
 
-// import axios from 'axios'
+import axios from 'axios'
 
-// import { BASEURL } from '../../shared/baseUrl'
-// import { MYAUTH } from '../../shared/myAuth'
-// const baseUrl = BASEURL
-// const myauth = MYAUTH
+import { BASEURL } from '../../shared/baseUrl'
+import { MYAUTH } from '../../shared/myAuth'
 
 import SpotifyWebApi from 'spotify-web-api-js';
+
+
+const baseUrl = BASEURL
+const myauth = MYAUTH
+
 const spotifyApi = new SpotifyWebApi()
 
 
@@ -23,9 +26,11 @@ class TelaBuscarMusicas extends React.Component {
 		}
 		this.state = {
 			loggedIn: token ? true : false,
-			// nowPlaying: { name: 'Not Checked', albumArt: '' },
 			musicSearch: '',
-			musicFind: []
+			musicFind: [],
+			IdPlaylist: '',
+			allPlaylists: [],
+			returnMessageAddMusic: ''
 		}
 	}
 
@@ -41,18 +46,6 @@ class TelaBuscarMusicas extends React.Component {
 		return hashParams;
 	}
 
-	// getNowPlaying() {
-	//     spotifyApi.getMyCurrentPlaybackState()
-	//         .then(response => {
-	//             this.setState({
-	//                 nowPlaying: {
-	//                     name: response.item.name,
-	//                     albumArt: response.item.album.images[0].url
-	//                 }
-	//             })
-	//         })
-	// }
-	
 
 	handleMusicSearch = (event) => {
 		this.setState({ musicSearch: event.target.value })
@@ -61,14 +54,104 @@ class TelaBuscarMusicas extends React.Component {
 	searchMusic = () => {
 		spotifyApi.searchTracks(this.state.musicSearch)
 			.then(data => {
-				this.setState({ musicFind: data.tracks.items })
+				this.setState({ 
+					musicFind: data.tracks.items,
+					musicSearch: '',
+				})
 			}, function (err) {
 				console.error(err);
 			});
 
 	}
 
+	componentDidMount() {
+		this.getAllPlaylists();
+	}
+
+	getAllPlaylists = async () => {
+		try {
+			const response = await axios.get(
+				`${baseUrl}/playlists/getAllPlaylists`,
+				{
+					headers: {
+						auth: myauth
+					}
+				}
+			)
+			this.setState({ allPlaylists: response.data.result })
+		} catch (error) {
+			console.log(error.response)
+			this.setState({ returnMessageAddMusic: '1' })
+		}
+	}
+
+	mudaPlaylist = (event) => {
+		this.setState({ 
+			IdPlaylist: event.target.value, 
+			returnMessageAddMusic: ''
+	 })
+	}
+
+	addMusicToPlaylistAppears = async (nomeMusica, nomeArtista, url) => {
+
+		let playlistData = {
+			playlistId: this.state.IdPlaylist,
+			music: {
+				name: nomeMusica,
+				artist: nomeArtista,
+				url: url
+			}
+		}
+
+		try {
+			await axios.put(
+				`${baseUrl}/playlists/addMusicToPlaylist`,
+				playlistData,
+				{
+					headers: {
+						auth: myauth
+					}
+				}
+			)
+			this.setState({
+				IdPlaylist: '',
+				returnMessageAddMusic: '2'
+			})
+			this.getAllPlaylists()
+
+		} catch (error) {
+			console.log(error)
+			this.setState({ returnMessageAddMusic: '1' })
+		}
+
+	}
+
+	
+
 	render() {
+
+		let message
+		if (this.state.returnMessageAddMusic) {
+			if (this.state.returnMessageAddMusic === '0') {
+				message = ''	
+			}
+			if (this.state.returnMessageAddMusic === '1') {
+				message = <h4>Não foi possível efetuar essa operação. Tente novamente mais tarde</h4>
+			}
+			if (this.state.returnMessageAddMusic === '2') {
+				message = <h4>Música adicionada com sucesso na playlist</h4>
+			}
+		}
+
+		let playlistsOption
+		if (this.state.allPlaylists.list) {
+			playlistsOption = this.state.allPlaylists.list.map(playlist => (
+				<option key={playlist.id} value={playlist.id}>{playlist.name}</option>
+			))
+		} else {
+			playlistsOption = <option>Carregando...</option>
+
+		}
 
 		let listMusic
 		if (this.state.musicFind) {
@@ -84,39 +167,34 @@ class TelaBuscarMusicas extends React.Component {
 						<strong>Link externo:</strong> <a href={dado.external_urls.spotify} target='_blank' rel="noopener noreferrer">Tocar no Spotify</a>
 					</p>
 
+					<S.Div2>
+
+					<S.Select onChange={this.mudaPlaylist}>
+						<option hidden>Selecione uma playlist</option>
+						{playlistsOption}
+					</S.Select>
+
+					<S.Botao2 onClick={() => this.addMusicToPlaylistAppears(dado.name, dado.artists[0].name, dado.external_urls.spotify)}>Adicionar na playlist</S.Botao2>
+					</S.Div2>
+
 				</S.Div>
 			))
 		}
 
+		
+
+		
+
+
 		return (
 			<S.Wrapper>
-				<S.H2>Buscar Música</S.H2>
-
-				<S.Div>
-					{!this.state.loggedIn &&
+				<S.DivLogin>
 						<a href='http://localhost:8888'>
 							<S.Botao>Login com Spotify</S.Botao>
 						</a>
-					}
-				</S.Div>
+				</S.DivLogin>
 
-				{/* TOCANDO AGORA */}
-				{/* <S.Div>
-                    {this.state.loggedIn &&
-                        <S.Botao onClick={() => this.getNowPlaying()}>
-                            Checar o que está tocando...
-                        </S.Botao>
-                    }
-                </S.Div>
-
-                <S.Div>
-                    Tocando agora: {this.state.nowPlaying.name}
-                </S.Div>
-
-                <S.Div>
-                    <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }} alt='' />
-                </S.Div> */}
-
+				<S.H2>Buscar Música</S.H2>
 
 				<S.Div>
 					<S.Input
@@ -128,13 +206,16 @@ class TelaBuscarMusicas extends React.Component {
 					<S.Botao onClick={() => this.searchMusic()}>Buscar</S.Botao>
 				</S.Div>
 
+				<S.Resposta>
+					{this.state.returnMessageAddMusic && message}
+				</S.Resposta>
+
 				<S.Div>
+					{/* {this.state.musicFind && 
+						this.state.appearsAddMusic ? addMusicToPlaylist : listMusic
+					} */}
 					{this.state.musicFind && listMusic}
 				</S.Div>
-
-				{/*<S.Div>
-                    Respostas
-                </S.Div> */}
 
 			</S.Wrapper>
 		)
