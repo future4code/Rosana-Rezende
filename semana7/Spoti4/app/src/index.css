@@ -1,0 +1,135 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Roboto', 'Courier New',
+    monospace;
+}
+
+
+/* MINHAS PERSONALIZAÇÕES */
+
+body {
+  background-color: #e1e9ec;
+  color: #252b29;
+  line-height: 1.4;
+}
+
+html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #252b29;
+  font-style: oblique;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+  footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  font-family: 'Roboto', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* LEMBRAR DE PERSONALIZAÇÕES INTERNAS
+
+HEADER
+const HeaderWrapper = styled.div`
+    background-color: #76c9ab;
+    box-shadow: -2px 2px 8px rgb(118, 201, 171, 0.5);
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+const H1 = styled.h1`
+    font-size: 2rem;
+    font-weight: 700;
+`
+
+
+FOOTER
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+const P = styled.p`
+    font-size: 1rem;
+`
+
+
+INTERNA
+const BoredAPIWrapper = styled.div`
+    background-color: #99d4c0;
+    box-shadow: -2px 2px 8px rgba(118, 201, 171, 0.5);
+		margin: 2rem auto;
+		width: 80%;
+    border-radius: 20px;
+    padding: 1rem;
+`
+
+
+@media screen and (max-device-width: 1200px) {}
+
+
+cursor: pointer;
+
+*/
