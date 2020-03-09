@@ -11,14 +11,13 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 <p align="center">
   <img  height='320' src='https://user-images.githubusercontent.com/45580434/76128847-469b8180-5fe4-11ea-8877-85ee691040a0.gif'>
-  <!-- <img  height='320' src='xxx'> -->
 </p>
 
 [Site do projeto - COM integração do Spotify](http://spoti4-v2-rosana.surge.sh/)
 
 <p align="center">
-  <img  height='320' src='https://user-images.githubusercontent.com/45580434/76128847-469b8180-5fe4-11ea-8877-85ee691040a0.gif'>
-  <!-- <img  height='320' src='xxx'> -->
+  <img  height='320' src='https://user-images.githubusercontent.com/45580434/76174620-26f08e80-6187-11ea-97a4-afa6b49ebe5c.gif'>
+  <img  height='320' src='https://user-images.githubusercontent.com/45580434/76174631-4b4c6b00-6187-11ea-849b-6008e9a6223a.gif'>
 </p>
 
 
