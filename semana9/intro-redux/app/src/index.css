@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.centraliza-texto{
+  text-align: center;
+}
+
+.vermelho{
+  color: rgb(146, 1, 1);
+}
+
+.enorme{
+  font-size: 5rem;
+}
+
+.paper{
+  padding: 1rem;
+}
+
+.rodape{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.botao{
+  margin: 0.5rem;
+}
