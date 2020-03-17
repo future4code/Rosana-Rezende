@@ -17,26 +17,26 @@ const tasksReducer = (state = initialState, action) => {
                 {
                     id: new Date().getTime(),
                     completed: false,
-                    text: action.text
+                    text: action.payload.text
                 }
             ]
         }
 
         case 'REMOVE_TASK': {
             return state.filter(task =>
-                task.id !== action.id
+                task.id !== action.payload.id
             )
         }
 
         case 'EDIT_TASK': {
             return state.map(task =>
-                task.id === action.id ? { ...task, text: action.text } : task
+                task.id === action.payload.id ? { ...task, text: action.payload.text } : task
             )
         }
 
         case 'MARK_TASK_AS_COMPLETE': {
             return state.filter(task =>
-                task.id === action.id ? { ...task, completed: !task.completed } : task
+                task.id === action.payload.id ? { ...task, completed: !task.completed } : task
             )
         }
 

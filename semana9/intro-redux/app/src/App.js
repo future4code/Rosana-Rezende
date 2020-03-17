@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 
 import styled from 'styled-components'
 
@@ -97,14 +97,15 @@ class App extends React.Component {
   render() {
 
     const {
-      addTask,
-      value
+      // addTask,
+      onAddTask,
+      tasks
     } = this.props
 
-    console.log(value)
+    console.log(tasks)
     console.log(this.state.inputText)
 
-  const listaDeTarefas = value.map(tarefa => (
+  const listaDeTarefas = tasks.map(tarefa => (
       <ListItem key={tarefa.id} button 
         // role={undefined} 
         // dense 
@@ -152,7 +153,8 @@ class App extends React.Component {
             // onKeyPress={this.adicionaTarefa}
             
           />
-          <Button onClick={() => addTask(this.state.inputText)}>Vai</Button>
+          {/* <Button onClick={() => addTask(this.state.inputText)}>Vai</Button> */}
+          <Button onClick={() => onAddTask(this.state.inputText)}>Vai</Button>
         </Grid>
 
         <List>
@@ -226,70 +228,17 @@ class App extends React.Component {
 }
 }
 
-// function App(props) {
-//   return(
-//     <Wrapper>
-//     <h1 className='centraliza-texto vermelho enorme'>4Task</h1>
-
-//     <Paper className='paper' elevation={3}>
-
-//       <Grid container>
-//         <TextField 
-//           fullWidth 
-//           label="O que tem para ser feito?" 
-//           // value={this.state.novaTarefa}
-//           // value={this.state.text}
-//           // onChange={this.escreveTarefa}
-//           // onKeyPress={this.adicionaTarefa}
-          
-//         />
-//         {/* <Button onClick={() => this.props.dispacth(addTask(this.state.text))}>Vai</Button> */}
-//       </Grid>
-
-//       <List>
-//         {/* {listaDeTarefas} */}
-//       </List>
-
-//       <Grid container className='rodape'>
-        
-//         <Grid item>
-//           <Button>Marcar todas como completas</Button>
-//         </Grid>
-
-//         <Grid item>
-
-//           <ToggleButtonGroup 
-//           exclusive 
-//           // value={this.state.tarefas} 
-//           // onChange={this.mudaTarefa} 
-//           aria-label="tarefas">
-//             <ToggleButton value="todas" aria-label="todas">
-//               Todas
-//           </ToggleButton>
-//             <ToggleButton value="pendentes" aria-label="pendentes" >
-//               Pendentes
-//           </ToggleButton>
-//             <ToggleButton value="completas" aria-label="completas">
-//               Completas
-//           </ToggleButton>
-//           </ToggleButtonGroup>
-
-//           </Grid>
-
-//       </Grid>
-
-//     </Paper>
-
-//   </Wrapper>
-//   )
-// }
-
-
 const mapStateToProps = (state) => ({
-  value: state.tasksReducer
+  tasks: state.tasksReducer
 })
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ addTask }, dispatch);
+// const mapDispatchToProps = dispatch =>
+//   bindActionCreators({ addTask }, dispatch);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddTask: text => dispatch(addTask(text))
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
