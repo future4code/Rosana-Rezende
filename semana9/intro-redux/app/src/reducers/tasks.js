@@ -15,7 +15,7 @@ const tasksReducer = (state = initialState, action) => {
             return [
                 ...state,
                 {
-                    id: new Date(), // isso não é puro?
+                    id: new Date(),
                     completed: false,
                     text: action.text
                 }
