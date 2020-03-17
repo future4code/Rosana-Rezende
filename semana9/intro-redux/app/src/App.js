@@ -32,7 +32,7 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      // tarefas: 'todas',
+      tarefas: 'todas',
       // novaTarefa: '',
       todasAsTarefas: [],
       text: this.props.text || ''

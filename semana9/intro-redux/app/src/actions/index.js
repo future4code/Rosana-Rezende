@@ -1,14 +1,22 @@
+// Pedido feito ao caixa (avisa pra todos que EU quero...)
+
 export const addTask = (text) => {
     return {
         type: "ADD_TASK",
-        text
+        // text
+        payload: {
+            text: text
+        }
     };
 };
 
 export const removeTask = (id) => {
     return {
         type: "REMOVE_TASK",
-        id
+        // id
+        payload: {
+            id: id
+        }
     };
 };
 
@@ -16,22 +24,23 @@ export const editTask = (id, text) => {
     return {
         type: "EDIT_TASK",
         id,
-        text
+        // text
+        payload: {
+            text: text,
+            id: id
+        }
     };
 };
 
 export const markTaskAsComplete = (id) => {
     return {
         type: "MARK_TASK_AS_COMPLETE",
-        id
+        // id
+        payload: {
+            id: id
+        }
     };
 };
-
-// export const deselectTaskAsComplete = () => {
-//     return {
-//         type: "DESELECT_TASK_AS_COMPLETE"
-//     };
-// };
 
 export const markAllTasksAsComplete = () => {
     return {
@@ -48,6 +57,9 @@ export const removeCompleteTasks = () => {
 export const selectTaskByFilter = (filter) => {
     return {
         type: "SELECT_TASK_BY_FILTER",
-        filter
+        // filter
+        payload: {
+            filter: filter
+        }
     };
 };
