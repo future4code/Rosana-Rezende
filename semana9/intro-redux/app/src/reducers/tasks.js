@@ -1,6 +1,12 @@
 // Pedido chegou ao CAIXA... ele vai atualizar o que pedi na store
 
-const initialState = []
+const initialState = [
+    {
+        id: new Date().getTime(),
+        completed: false,
+        text: 'Use Redux'
+    }
+]
 
 const tasksReducer = (state = initialState, action) => {
     switch (action.type) {

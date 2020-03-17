@@ -3,7 +3,6 @@
 export const addTask = (text) => {
     return {
         type: "ADD_TASK",
-        // text
         payload: {
             text: text
         }
@@ -13,7 +12,6 @@ export const addTask = (text) => {
 export const removeTask = (id) => {
     return {
         type: "REMOVE_TASK",
-        // id
         payload: {
             id: id
         }
@@ -23,8 +21,6 @@ export const removeTask = (id) => {
 export const editTask = (id, text) => {
     return {
         type: "EDIT_TASK",
-        id,
-        // text
         payload: {
             text: text,
             id: id
@@ -35,7 +31,6 @@ export const editTask = (id, text) => {
 export const markTaskAsComplete = (id) => {
     return {
         type: "MARK_TASK_AS_COMPLETE",
-        // id
         payload: {
             id: id
         }
@@ -57,7 +52,6 @@ export const removeCompleteTasks = () => {
 export const selectTaskByFilter = (filter) => {
     return {
         type: "SELECT_TASK_BY_FILTER",
-        // filter
         payload: {
             filter: filter
         }

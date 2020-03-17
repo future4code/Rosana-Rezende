@@ -23,9 +23,14 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-
-// import tasksReducer from './reducers/tasks'
-import { addTask } from './actions'
+import { 
+  addTask, 
+  removeTask, 
+  editTask, 
+  markTaskAsComplete,
+  markAllTasksAsComplete,
+  removeCompleteTasks
+} from './actions'
 
 
 const Wrapper = styled.div`
@@ -35,7 +40,7 @@ const Wrapper = styled.div`
 
 class App extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       tarefas: 'todas',
@@ -44,60 +49,17 @@ class App extends React.Component {
       inputText: ''
     }
   }
-  
 
   mudaTarefa = (event, novaMarcacao) => {
     this.setState({ tarefas: novaMarcacao })
   }
-
-  
-  // adicionaTarefa = (event) => {
-  //   // const text = event.target.value.trim()
-    
-  //   if (event.key === 'Enter') {
-  //     const copiaTodasAsTarefas = [...this.state.todasAsTarefas]
-  //     const essaNovaTarefa = {
-  //       id: new Date(),
-  //       name: event.target.value,
-  //       completa: false
-  //     }
-  //     copiaTodasAsTarefas.push(essaNovaTarefa)
-  //     this.setState({ 
-  //       todasAsTarefas: copiaTodasAsTarefas,
-  //       // novaTarefa: ''
-  //     })
-      
-  //     // this.props.onSave(text)
-  //     // if (this.props.newTodo) {
-  //       this.setState({ text: '' })
-  //     // }
-
-    
-  //   }
-  // }
-
-  
-
-  // marcarCompletaPendente = (id) => {
-  //   // this.setState({ todasAsTarefas[tarefa].completa: false })
-
-  //   // return state.map(todo =>
-  //   // todo.id === action.id ?
-  //   // { ...todo, completed: !todo.completed } :
-  //   // todo)
-  //   const tarefaCompleta = this.state.todasAsTarefas.map(tarefa => (
-  //     tarefa.id === id ? {...tarefa, completa: !tarefa.completa} : {tarefa}
-  //   ))
-  //   return tarefaCompleta
-    
-  // }
 
   inputChange = (event) => {
     this.setState({ inputText: event.target.value })
   }
 
   enterAddTask = (event) => {
-    if(event.key === 'Enter') {
+    if (event.key === 'Enter') {
       this.props.onAddTask(this.state.inputText)
       this.setState({ inputText: '' })
     }
@@ -106,133 +68,102 @@ class App extends React.Component {
   render() {
 
     const {
-      // addTask,
-      onAddTask,
-      tasks
+      tasks,
+      onDelete,
+      onEditTask,
+      onMarkTaskAsComplete,
+      onMarkAllTasksAsComplete,
+      onRemoveCompleteTasks
     } = this.props
 
     console.log(tasks)
-    console.log(this.state.inputText)
+    // console.log(this.state.inputText)
 
-  const listaDeTarefas = tasks.map(tarefa => (
-      <ListItem key={tarefa.id} button 
-        // role={undefined} 
-        // dense 
-      >
+    const listaDeTarefas = tasks.map(task => (
+      <ListItem key={task.id} 
+        button 
+        >
+        
         <ListItemIcon>
-          <Checkbox  edge="start"
-            // checked={tarefa.completa}
-            // onChange={() => this.marcarCompletaPendente(tarefa.id)}
+          <Checkbox edge="start"
+            // checked={task.completed}
+            onChange={() => onMarkTaskAsComplete(task.id)}
 
-            // defaultChecked={tarefa.completa} 
-          
-            // onClick={() => this.marcarCompletaPendente(tarefa)}
+          // checked={tarefa.completed}
+          // onChange={() => this.marcarCompletaPendente(tarefa.id)}
+
+          // defaultChecked={tarefa.completa} 
+
+          // onClick={() => this.marcarCompletaPendente(tarefa)}
           // checked={checked.indexOf(value) !== -1}
           // tabIndex={-1}
           // disableRipple
           // inputProps={{ 'aria-labelledby': labelId }}
           />
         </ListItemIcon>
-        <ListItemText primary={tarefa.text}></ListItemText>
+
+        <ListItemText>{task.text}</ListItemText>
+
+        <ListItemIcon>
+          <Button color='primary' onClick={() => onEditTask(task.id, task.text)}>EDITAR</Button>
+        </ListItemIcon>
 
         <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
+          <IconButton edge="end" aria-label="delete" onClick={() => onDelete(task.id)}>
+            <DeleteIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
 
       </ListItem>
     ))
 
-  
+    return (
+      <Wrapper>
+        <h1 className='centraliza-texto vermelho enorme'>4Task</h1>
 
-  return (
-    <Wrapper>
-      <h1 className='centraliza-texto vermelho enorme'>4Task</h1>
+        <Paper className='paper' elevation={3}>
 
-      <Paper className='paper' elevation={3}>
-
-        <Grid container className='topo'>
-          <TextField 
-            fullWidth 
-            label="O que tem para ser feito?" 
-            value={this.state.inputText}
-            onChange={this.inputChange}
-
-            onKeyDown={this.enterAddTask}            
-          />
-          {/* <Button onClick={() => onAddTask(this.state.inputText)}>Vai</Button> */}
-        </Grid>
-
-        <List>
-          {listaDeTarefas}
-        </List>
-
-        <Grid container className='rodape'>
-          
-          <Grid item>
-            <Button>Marcar todas como completas</Button>
+          <Grid container className='topo'>
+            <TextField
+              fullWidth
+              label="O que tem para ser feito?"
+              value={this.state.inputText}
+              onChange={this.inputChange}
+              onKeyDown={this.enterAddTask}
+            />
           </Grid>
 
-          <Grid item>
+          <List>
+            {listaDeTarefas}
+          </List>
 
-            <ToggleButtonGroup exclusive value={this.state.tarefas} onChange={this.mudaTarefa} aria-label="tarefas">
-              <ToggleButton value="todas" aria-label="todas">
-                Todas
-            </ToggleButton>
-              <ToggleButton value="pendentes" aria-label="pendentes" >
-                Pendentes
-            </ToggleButton>
-              <ToggleButton value="completas" aria-label="completas">
-                Completas
-            </ToggleButton>
-            </ToggleButtonGroup>
-
+          <Grid container className='rodape'>
+            <Grid item>
+              <Button onClick={() => onMarkAllTasksAsComplete()}>Marcar todas como completas</Button>
             </Grid>
-
-            {/* <Grid item>
-            <Button className='botao' variant="outlined" color="primary">Todas</Button>
-            <Button className='botao' variant="outlined" color="primary">Pendentes</Button>
-            <Button className='botao' variant="outlined" color="primary">Completas</Button>
-          </Grid> */}
-
-            {/* <Grid item>
-            <List>
-              <ListItem><Button 
-                className='botao' 
-                variant="outlined" 
-                color="primary"
-              >
-                Todas
-              </Button></ListItem>
-              <ListItem><Button 
-                className='botao' 
-                variant="outlined" 
-                color="primary"
-              >
-                Pendentes
-              </Button></ListItem>
-              <ListItem><Button 
-                className='botao' 
-                variant="outlined" 
-                color="primary"
-              >
-                Completas
-              </Button></ListItem>
-            </List>
-          </Grid> */}
-
-          <Grid item>
-            <Button>Remover todas as completas</Button>
+            <Grid item>
+              <ToggleButtonGroup exclusive value={this.state.tarefas} onChange={this.mudaTarefa} aria-label="tarefas">
+                <ToggleButton value="todas" aria-label="todas">
+                  Todas
+              </ToggleButton>
+                <ToggleButton value="pendentes" aria-label="pendentes" >
+                  Pendentes
+              </ToggleButton>
+                <ToggleButton value="completas" aria-label="completas">
+                  Completas
+              </ToggleButton>
+              </ToggleButtonGroup>
+            </Grid>
+            <Grid item>
+              <Button onClick={() => onRemoveCompleteTasks()}>Remover todas as completas</Button>
+            </Grid>
           </Grid>
 
-        </Grid>
+        </Paper>
 
-      </Paper>
-
-    </Wrapper>
-  );
-}
+      </Wrapper>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
@@ -242,9 +173,15 @@ const mapStateToProps = (state) => ({
 // const mapDispatchToProps = dispatch =>
 //   bindActionCreators({ addTask }, dispatch);
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
-    onAddTask: text => dispatch(addTask(text))
+    onAddTask: text => dispatch(addTask(text)),
+    onDelete: id => dispatch(removeTask(id)),
+    onEditTask: (id, text) => dispatch(editTask(id, text)),
+    onMarkTaskAsComplete: id => dispatch(markTaskAsComplete(id)),
+    
+    onMarkAllTasksAsComplete: dispatch(markAllTasksAsComplete()),//não sei se é assim
+    onRemoveCompleteTasks: dispatch(removeCompleteTasks())
   }
 }
 
