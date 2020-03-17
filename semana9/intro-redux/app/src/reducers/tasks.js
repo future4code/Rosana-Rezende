@@ -7,8 +7,8 @@ const initialState = [
         text: 'Test'
     }
 ]
-  
-  const tasksReducer = (state = initialState, action) => {
+
+const tasksReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case 'ADD_TASK': {
@@ -24,19 +24,19 @@ const initialState = [
 
         case 'REMOVE_TASK': {
             return state.filter(task =>
-                task.id !== action.id 
+                task.id !== action.id
             )
         }
 
         case 'EDIT_TASK': {
             return state.map(task =>
-                task.id === action.id ? {...task, text: action.text} : task
+                task.id === action.id ? { ...task, text: action.text } : task
             )
         }
 
         case 'MARK_TASK_AS_COMPLETE': {
             return state.filter(task =>
-                task.id === action.id ? {...task, completed: !task.completed} : task
+                task.id === action.id ? { ...task, completed: !task.completed } : task
             )
         }
 
@@ -52,16 +52,16 @@ const initialState = [
             return state.filter(task => task.completed === false)
         }
 
-        case 'SELECT_TASK_BY_FILTER': {
-            // const oldValue = state.value;
-            // const newState = { value: oldValue };
-            // return newState
-        }
-  
-      default:
-        return state;
+        // case 'SELECT_TASK_BY_FILTER': {
+        //     // const oldValue = state.value;
+        //     // const newState = { value: oldValue + 1};
+        //     // return newState
+        // }
+
+        default:
+            return state;
     }
-  };
-  
-  export default tasksReducer;
+};
+
+export default tasksReducer;
 

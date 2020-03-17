@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+
 
 import styled from 'styled-components'
 
@@ -22,6 +24,10 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
+// import tasksReducer from './reducers/tasks'
+// import { addTask } from './actions'
+
+
 const Wrapper = styled.div`
   max-width: 80vh;
   margin: auto;
@@ -37,6 +43,7 @@ class App extends React.Component {
       todasAsTarefas: [],
       text: this.props.text || ''
     }
+    // const [ store, dispatch ] = tasksReducer()
   }
 
   mudaTarefa = (event, novaMarcacao) => {
@@ -48,12 +55,14 @@ class App extends React.Component {
       // novaTarefa: event.target.value,
       text: event.target.value
     })
+    // const { dispatch } = this.props;                
+    // dispatch(tasksReducer(this.state.text));
+    // dispatch(addTask(this.state.text))    
   }
 
   adicionaTarefa = (event) => {
     // const text = event.target.value.trim()
     
-
     if (event.key === 'Enter') {
       const copiaTodasAsTarefas = [...this.state.todasAsTarefas]
       const essaNovaTarefa = {
@@ -66,28 +75,29 @@ class App extends React.Component {
         todasAsTarefas: copiaTodasAsTarefas,
         // novaTarefa: ''
       })
-
       
       // this.props.onSave(text)
       // if (this.props.newTodo) {
         this.setState({ text: '' })
       // }
+
+    
     }
   }
 
-  marcarCompletaPendente = (id) => {
-    // this.setState({ todasAsTarefas[tarefa].completa: false })
+  // marcarCompletaPendente = (id) => {
+  //   // this.setState({ todasAsTarefas[tarefa].completa: false })
 
-    // return state.map(todo =>
-    // todo.id === action.id ?
-    // { ...todo, completed: !todo.completed } :
-    // todo)
-    const tarefaCompleta = this.state.todasAsTarefas.map(tarefa => (
-      tarefa.id === id ? {...tarefa, completa: !tarefa.completa} : {tarefa}
-    ))
-    return tarefaCompleta
+  //   // return state.map(todo =>
+  //   // todo.id === action.id ?
+  //   // { ...todo, completed: !todo.completed } :
+  //   // todo)
+  //   const tarefaCompleta = this.state.todasAsTarefas.map(tarefa => (
+  //     tarefa.id === id ? {...tarefa, completa: !tarefa.completa} : {tarefa}
+  //   ))
+  //   return tarefaCompleta
     
-  }
+  // }
 
   render() {
 
@@ -102,8 +112,8 @@ class App extends React.Component {
       >
         <ListItemIcon>
           <Checkbox  edge="start"
-            checked={tarefa.completa}
-            onChange={() => this.marcarCompletaPendente(tarefa.id)}
+            // checked={tarefa.completa}
+            // onChange={() => this.marcarCompletaPendente(tarefa.id)}
 
 
             // defaultChecked={tarefa.completa} 
@@ -211,4 +221,4 @@ class App extends React.Component {
 }
 }
 
-export default App;
+export default connect()(App);
