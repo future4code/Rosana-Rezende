@@ -76,7 +76,8 @@ class App extends React.Component {
     this.setState({ editInput: event.target.value })
   }
 
-  // disappearsInput = () => {
+  // disappearsInput = (id) => {
+  //   this.props.onEditTask(id, this.state.editInput)
   //   this.setState({ inputHere: false })
   // }
 
@@ -116,12 +117,9 @@ class App extends React.Component {
           </>
         ) : (
             <ListItemText primary={task.text}
-              onClick={() => 
-                // (
-                this.openEditTask(task.id, task.text)
-              //     this.disappearsInput
-              // )
-              }>
+              onClick={() => this.openEditTask(task.id, task.text)}
+              // onClick={() => this.disappearsInput(task.id)}
+            >
             </ListItemText>
           )
         }

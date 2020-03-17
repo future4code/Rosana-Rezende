@@ -34,12 +34,14 @@ const tasksReducer = (state = initialState, action) => {
             )
         }
 
+        //find
         // case 'MARK_TASK_AS_COMPLETE': {
         //     return state.find(task =>
         //         task.id === action.payload.id ? { ...task, completed: !task.completed } : task
         //     )
         // }
 
+        //foreach
         // case 'MARK_ALL_TASKS_AS_COMPLETE': {
         //     const areAllMarked = state.every(task => task.completed)
         //     return state.map(task => ({
