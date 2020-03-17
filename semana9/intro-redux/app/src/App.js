@@ -40,11 +40,11 @@ class App extends React.Component {
     this.state = {
       tarefas: 'todas',
 
-      // jeito novo 
+      // ---------------------- JEITO NOVO
       inputText: '',
       editingId: '',
       editInput: '',
-      // inputHere: false
+      inputHere: false
     }
   }
 
@@ -52,7 +52,8 @@ class App extends React.Component {
     this.setState({ tarefas: novaMarcacao })
   }
 
-
+  
+  // ---------------------- JEITO NOVO
   inputChange = (event) => {
     this.setState({ inputText: event.target.value })
   }
@@ -76,10 +77,10 @@ class App extends React.Component {
     this.setState({ editInput: event.target.value })
   }
 
-  // disappearsInput = (id) => {
-  //   this.props.onEditTask(id, this.state.editInput)
-  //   this.setState({ inputHere: false })
-  // }
+  disappearsInput = (id, input) => {
+    this.props.onEditTask(id, input)
+    this.setState({ inputHere: false })
+  }
 
   render() {
 
@@ -101,24 +102,21 @@ class App extends React.Component {
           <Checkbox edge="start" onChange={() => onMarkTaskAsComplete(task.id)} />
         </ListItemIcon>
 
-        {this.state.editingId === task.id 
-        // && this.state.inputHere 
+        {this.state.editingId === task.id && this.state.inputHere 
         ? (
           <>
             <TextField id="standard-basic" label="Editar"
               value={this.state.editInput}
               onChange={this.inputEditChange}
-            // onKeyDown={() => onEditTask(task.id, this.state.editInput)}
             >
             </TextField>
             <ListItemIcon>
-              <Button color='primary' onClick={() => onEditTask(task.id, this.state.editInput)}>SALVAR</Button>
+              <Button color='primary' onClick={() => this.disappearsInput(task.id, this.state.editInput)}>SALVAR</Button>
             </ListItemIcon>
           </>
         ) : (
             <ListItemText primary={task.text}
               onClick={() => this.openEditTask(task.id, task.text)}
-              // onClick={() => this.disappearsInput(task.id)}
             >
             </ListItemText>
           )
