@@ -35,11 +35,12 @@ const tasksReducer = (state = initialState, action) => {
         }
 
         //find
-        // case 'MARK_TASK_AS_COMPLETE': {
-        //     return state.find(task =>
-        //         task.id === action.payload.id ? { ...task, completed: !task.completed } : task
-        //     )
-        // }
+        case 'MARK_TASK_AS_COMPLETE': {
+            let copiaState = [...state]
+            let thisTask = copiaState.find(task => task.id === action.payload.id)
+            thisTask.completed = !thisTask.completed
+            return copiaState
+        }
 
         //foreach
         // case 'MARK_ALL_TASKS_AS_COMPLETE': {

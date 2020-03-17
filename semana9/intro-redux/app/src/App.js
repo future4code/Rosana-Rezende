@@ -52,7 +52,7 @@ class App extends React.Component {
     this.setState({ tarefas: novaMarcacao })
   }
 
-  
+
   // ---------------------- JEITO NOVO
   inputChange = (event) => {
     this.setState({ inputText: event.target.value })
@@ -87,8 +87,8 @@ class App extends React.Component {
     const {
       tasks,
       onDelete,
-      onEditTask,
       onMarkTaskAsComplete,
+      
       onMarkAllTasksAsComplete,
       onRemoveCompleteTasks
     } = this.props
@@ -196,7 +196,7 @@ const mapDispatchToProps = dispatch => {
     onEditTask: (id, text) => dispatch(editTask(id, text)),
     onMarkTaskAsComplete: id => dispatch(markTaskAsComplete(id)),
 
-    // onMarkAllTasksAsComplete: dispatch(markAllTasksAsComplete()),//não sei se é assim
+    // onMarkAllTasksAsComplete: dispatch(markAllTasksAsComplete()),
     // onRemoveCompleteTasks: dispatch(removeCompleteTasks())
   }
 }
