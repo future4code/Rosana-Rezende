@@ -25,7 +25,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 
 // import tasksReducer from './reducers/tasks'
-// import { addTask } from './actions'
+import { addTask } from './actions'
 
 
 const Wrapper = styled.div`
@@ -39,12 +39,12 @@ class App extends React.Component {
     super(props)
     this.state = {
       tarefas: 'todas',
-      // novaTarefa: '',
       todasAsTarefas: [],
       text: this.props.text || ''
     }
-    // const [ store, dispatch ] = tasksReducer()
   }
+
+  
 
   mudaTarefa = (event, novaMarcacao) => {
     this.setState({ tarefas: novaMarcacao })
@@ -52,7 +52,6 @@ class App extends React.Component {
 
   escreveTarefa = (event) => {
     this.setState({
-      // novaTarefa: event.target.value,
       text: event.target.value
     })
     // const { dispatch } = this.props;                
@@ -115,7 +114,6 @@ class App extends React.Component {
             // checked={tarefa.completa}
             // onChange={() => this.marcarCompletaPendente(tarefa.id)}
 
-
             // defaultChecked={tarefa.completa} 
           
             // onClick={() => this.marcarCompletaPendente(tarefa)}
@@ -137,13 +135,15 @@ class App extends React.Component {
     ))
   }
 
+  console.log(this.props.value)
+
   return (
     <Wrapper>
       <h1 className='centraliza-texto vermelho enorme'>4Task</h1>
 
       <Paper className='paper' elevation={3}>
 
-        <Grid container>
+        <Grid container className='topo'>
           <TextField 
             fullWidth 
             label="O que tem para ser feito?" 
@@ -151,7 +151,9 @@ class App extends React.Component {
             value={this.state.text}
             onChange={this.escreveTarefa}
             onKeyPress={this.adicionaTarefa}
+            
           />
+          {/* <Button onClick={() => this.props.dispacth(addTask(this.state.text))}>Vai</Button> */}
         </Grid>
 
         <List>
@@ -212,6 +214,10 @@ class App extends React.Component {
             </List>
           </Grid> */}
 
+          <Grid item>
+            <Button>Remover todas as completas</Button>
+          </Grid>
+
         </Grid>
 
       </Paper>
@@ -221,4 +227,67 @@ class App extends React.Component {
 }
 }
 
-export default connect()(App);
+// function App(props) {
+//   return(
+//     <Wrapper>
+//     <h1 className='centraliza-texto vermelho enorme'>4Task</h1>
+
+//     <Paper className='paper' elevation={3}>
+
+//       <Grid container>
+//         <TextField 
+//           fullWidth 
+//           label="O que tem para ser feito?" 
+//           // value={this.state.novaTarefa}
+//           // value={this.state.text}
+//           // onChange={this.escreveTarefa}
+//           // onKeyPress={this.adicionaTarefa}
+          
+//         />
+//         {/* <Button onClick={() => this.props.dispacth(addTask(this.state.text))}>Vai</Button> */}
+//       </Grid>
+
+//       <List>
+//         {/* {listaDeTarefas} */}
+//       </List>
+
+//       <Grid container className='rodape'>
+        
+//         <Grid item>
+//           <Button>Marcar todas como completas</Button>
+//         </Grid>
+
+//         <Grid item>
+
+//           <ToggleButtonGroup 
+//           exclusive 
+//           // value={this.state.tarefas} 
+//           // onChange={this.mudaTarefa} 
+//           aria-label="tarefas">
+//             <ToggleButton value="todas" aria-label="todas">
+//               Todas
+//           </ToggleButton>
+//             <ToggleButton value="pendentes" aria-label="pendentes" >
+//               Pendentes
+//           </ToggleButton>
+//             <ToggleButton value="completas" aria-label="completas">
+//               Completas
+//           </ToggleButton>
+//           </ToggleButtonGroup>
+
+//           </Grid>
+
+//       </Grid>
+
+//     </Paper>
+
+//   </Wrapper>
+//   )
+// }
+
+
+const mapStateToProps = (state) => ({
+  value: state.tasksReducer
+})
+
+export default connect(mapStateToProps)(App);
