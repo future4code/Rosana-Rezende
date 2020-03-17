@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-
 import styled from 'styled-components'
 
 import Paper from '@material-ui/core/Paper';
@@ -100,11 +99,12 @@ class App extends React.Component {
 
   render() {
 
-  console.log(this.state.todasAsTarefas)
+    const { value } = this.props
+    console.log(value)
+    // console.log(this.props.value)
 
-  let listaDeTarefas
-  if(this.state.todasAsTarefas.length > 0) {
-    listaDeTarefas = this.state.todasAsTarefas.map(tarefa => (
+
+  const listaDeTarefas = value.map(tarefa => (
       <ListItem key={tarefa.id} button 
         // role={undefined} 
         // dense 
@@ -123,7 +123,7 @@ class App extends React.Component {
           // inputProps={{ 'aria-labelledby': labelId }}
           />
         </ListItemIcon>
-        <ListItemText primary={tarefa.name}></ListItemText>
+        <ListItemText primary={tarefa.text}></ListItemText>
 
         <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete">
@@ -133,9 +133,7 @@ class App extends React.Component {
 
       </ListItem>
     ))
-  }
-
-  console.log(this.props.value)
+  
 
   return (
     <Wrapper>
