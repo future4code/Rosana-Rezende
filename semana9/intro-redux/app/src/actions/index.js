@@ -1,26 +1,37 @@
-export const addTask = () => {
+export const addTask = (text) => {
     return {
-        type: "ADD_TASK"
+        type: "ADD_TASK",
+        text
     };
 };
 
-export const removeTask = () => {
+export const removeTask = (id) => {
     return {
-        type: "REMOVE_TASK"
+        type: "REMOVE_TASK",
+        id
     };
 };
 
-export const markTaskAsComplete = () => {
+export const editTask = (id, text) => {
     return {
-        type: "MARK_TASK_AS_COMPLETE"
+        type: "EDIT_TASK",
+        id,
+        text
     };
 };
 
-export const deselectTaskAsComplete = () => {
+export const markTaskAsComplete = (id) => {
     return {
-        type: "DESELECT_TASK_AS_COMPLETE"
+        type: "MARK_TASK_AS_COMPLETE",
+        id
     };
 };
+
+// export const deselectTaskAsComplete = () => {
+//     return {
+//         type: "DESELECT_TASK_AS_COMPLETE"
+//     };
+// };
 
 export const markAllTasksAsComplete = () => {
     return {
@@ -34,8 +45,9 @@ export const removeCompleteTasks = () => {
     };
 };
 
-export const selectTaskByType = () => {
+export const selectTaskByFilter = (filter) => {
     return {
-        type: "SELECT_TASK_BY_TYPE"
+        type: "SELECT_TASK_BY_FILTER",
+        filter
     };
 };

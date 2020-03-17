@@ -5,19 +5,22 @@ import styled from 'styled-components'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+// import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
+// import InputLabel from '@material-ui/core/InputLabel';
+// import Select from '@material-ui/core/Select';
+// import MenuItem from '@material-ui/core/MenuItem';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const Wrapper = styled.div`
   max-width: 80vh;
@@ -29,7 +32,10 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      tarefas: 'todas'
+      // tarefas: 'todas',
+      // novaTarefa: '',
+      todasAsTarefas: [],
+      text: this.props.text || ''
     }
   }
 
@@ -37,9 +43,89 @@ class App extends React.Component {
     this.setState({ tarefas: novaMarcacao })
   }
 
+  escreveTarefa = (event) => {
+    this.setState({
+      // novaTarefa: event.target.value,
+      text: event.target.value
+    })
+  }
+
+  adicionaTarefa = (event) => {
+    // const text = event.target.value.trim()
+    
+
+    if (event.key === 'Enter') {
+      const copiaTodasAsTarefas = [...this.state.todasAsTarefas]
+      const essaNovaTarefa = {
+        id: new Date(),
+        name: event.target.value,
+        completa: false
+      }
+      copiaTodasAsTarefas.push(essaNovaTarefa)
+      this.setState({ 
+        todasAsTarefas: copiaTodasAsTarefas,
+        // novaTarefa: ''
+      })
+
+      
+      // this.props.onSave(text)
+      // if (this.props.newTodo) {
+        this.setState({ text: '' })
+      // }
+    }
+  }
+
+  marcarCompletaPendente = (id) => {
+    // this.setState({ todasAsTarefas[tarefa].completa: false })
+
+    // return state.map(todo =>
+    // todo.id === action.id ?
+    // { ...todo, completed: !todo.completed } :
+    // todo)
+    const tarefaCompleta = this.state.todasAsTarefas.map(tarefa => (
+      tarefa.id === id ? {...tarefa, completa: !tarefa.completa} : {tarefa}
+    ))
+    return tarefaCompleta
+    
+  }
+
   render() {
 
-  const mock = ['item1', 'item2']
+  console.log(this.state.todasAsTarefas)
+
+  let listaDeTarefas
+  if(this.state.todasAsTarefas.length > 0) {
+    listaDeTarefas = this.state.todasAsTarefas.map(tarefa => (
+      <ListItem key={tarefa.id} button 
+        // role={undefined} 
+        // dense 
+      >
+        <ListItemIcon>
+          <Checkbox  edge="start"
+            checked={tarefa.completa}
+            onChange={() => this.marcarCompletaPendente(tarefa.id)}
+
+
+            // defaultChecked={tarefa.completa} 
+          
+            // onClick={() => this.marcarCompletaPendente(tarefa)}
+          // checked={checked.indexOf(value) !== -1}
+          // tabIndex={-1}
+          // disableRipple
+          // inputProps={{ 'aria-labelledby': labelId }}
+          />
+        </ListItemIcon>
+        <ListItemText primary={tarefa.name}></ListItemText>
+
+        <ListItemSecondaryAction>
+                    <IconButton edge="end" aria-label="delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+
+      </ListItem>
+    ))
+  }
 
   return (
     <Wrapper>
@@ -48,35 +134,18 @@ class App extends React.Component {
       <Paper className='paper' elevation={3}>
 
         <Grid container>
-          <TextField fullWidth label="O que tem para ser feito?" />
+          <TextField 
+            fullWidth 
+            label="O que tem para ser feito?" 
+            // value={this.state.novaTarefa}
+            value={this.state.text}
+            onChange={this.escreveTarefa}
+            onKeyPress={this.adicionaTarefa}
+          />
         </Grid>
 
         <List>
-          {mock.map((linha, index) => (
-            <ListItem
-              key={index}
-              // role={undefined} 
-              // dense 
-              button
-            >
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                // checked={checked.indexOf(value) !== -1}
-                // tabIndex={-1}
-                // disableRipple
-                // inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-
-              <ListItemText
-                primary={linha}
-              >
-                {/* {linha} */}
-              </ListItemText>
-
-            </ListItem>
-          ))}
+          {listaDeTarefas}
         </List>
 
         <Grid container className='rodape'>
