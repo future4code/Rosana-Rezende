@@ -12,26 +12,21 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-// import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import Select from '@material-ui/core/Select';
-// import MenuItem from '@material-ui/core/MenuItem';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { 
-  addTask, 
-  removeTask, 
-  editTask, 
+import {
+  addTask,
+  removeTask,
+  editTask,
   markTaskAsComplete,
   markAllTasksAsComplete,
   removeCompleteTasks
 } from './actions'
-
 
 const Wrapper = styled.div`
   max-width: 80vh;
@@ -46,13 +41,17 @@ class App extends React.Component {
       tarefas: 'todas',
 
       // jeito novo 
-      inputText: ''
+      inputText: '',
+      editingId: '',
+      editInput: '',
+      // inputHere: false
     }
   }
 
   mudaTarefa = (event, novaMarcacao) => {
     this.setState({ tarefas: novaMarcacao })
   }
+
 
   inputChange = (event) => {
     this.setState({ inputText: event.target.value })
@@ -64,6 +63,22 @@ class App extends React.Component {
       this.setState({ inputText: '' })
     }
   }
+
+  openEditTask = (id, text) => {
+    this.setState({
+      editingId: id,
+      editInput: text,
+      inputHere: true
+    })
+  }
+
+  inputEditChange = (event) => {
+    this.setState({ editInput: event.target.value })
+  }
+
+  // disappearsInput = () => {
+  //   this.setState({ inputHere: false })
+  // }
 
   render() {
 
@@ -77,36 +92,41 @@ class App extends React.Component {
     } = this.props
 
     console.log(tasks)
-    // console.log(this.state.inputText)
 
     const listaDeTarefas = tasks.map(task => (
-      <ListItem key={task.id} 
-        button 
-        >
-        
-        <ListItemIcon>
-          <Checkbox edge="start"
-            // checked={task.completed}
-            onChange={() => onMarkTaskAsComplete(task.id)}
-
-          // checked={tarefa.completed}
-          // onChange={() => this.marcarCompletaPendente(tarefa.id)}
-
-          // defaultChecked={tarefa.completa} 
-
-          // onClick={() => this.marcarCompletaPendente(tarefa)}
-          // checked={checked.indexOf(value) !== -1}
-          // tabIndex={-1}
-          // disableRipple
-          // inputProps={{ 'aria-labelledby': labelId }}
-          />
-        </ListItemIcon>
-
-        <ListItemText>{task.text}</ListItemText>
+      <ListItem key={task.id} button>
 
         <ListItemIcon>
-          <Button color='primary' onClick={() => onEditTask(task.id, task.text)}>EDITAR</Button>
+          <Checkbox edge="start" onChange={() => onMarkTaskAsComplete(task.id)} />
         </ListItemIcon>
+
+        {this.state.editingId === task.id 
+        // && this.state.inputHere 
+        ? (
+          <>
+            <TextField id="standard-basic" label="Editar"
+              value={this.state.editInput}
+              onChange={this.inputEditChange}
+            // onKeyDown={() => onEditTask(task.id, this.state.editInput)}
+            >
+            </TextField>
+            <ListItemIcon>
+              <Button color='primary' onClick={() => onEditTask(task.id, this.state.editInput)}>SALVAR</Button>
+            </ListItemIcon>
+          </>
+        ) : (
+            <ListItemText primary={task.text}
+              onClick={() => 
+                // (
+                this.openEditTask(task.id, task.text)
+              //     this.disappearsInput
+              // )
+              }>
+            </ListItemText>
+          )
+        }
+
+
 
         <ListItemSecondaryAction>
           <IconButton edge="end" aria-label="delete" onClick={() => onDelete(task.id)}>
@@ -179,9 +199,9 @@ const mapDispatchToProps = dispatch => {
     onDelete: id => dispatch(removeTask(id)),
     onEditTask: (id, text) => dispatch(editTask(id, text)),
     onMarkTaskAsComplete: id => dispatch(markTaskAsComplete(id)),
-    
-    onMarkAllTasksAsComplete: dispatch(markAllTasksAsComplete()),//não sei se é assim
-    onRemoveCompleteTasks: dispatch(removeCompleteTasks())
+
+    // onMarkAllTasksAsComplete: dispatch(markAllTasksAsComplete()),//não sei se é assim
+    // onRemoveCompleteTasks: dispatch(removeCompleteTasks())
   }
 }
 

@@ -4,7 +4,7 @@ const initialState = [
     {
         id: new Date().getTime(),
         completed: false,
-        text: 'Use Redux'
+        text: 'New Task'
     }
 ]
 
@@ -34,19 +34,19 @@ const tasksReducer = (state = initialState, action) => {
             )
         }
 
-        case 'MARK_TASK_AS_COMPLETE': {
-            return state.filter(task =>
-                task.id === action.payload.id ? { ...task, completed: !task.completed } : task
-            )
-        }
+        // case 'MARK_TASK_AS_COMPLETE': {
+        //     return state.find(task =>
+        //         task.id === action.payload.id ? { ...task, completed: !task.completed } : task
+        //     )
+        // }
 
-        case 'MARK_ALL_TASKS_AS_COMPLETE': {
-            const areAllMarked = state.every(task => task.completed)
-            return state.map(task => ({
-                ...task,
-                completed: !areAllMarked
-            }))
-        }
+        // case 'MARK_ALL_TASKS_AS_COMPLETE': {
+        //     const areAllMarked = state.every(task => task.completed)
+        //     return state.map(task => ({
+        //         ...task,
+        //         completed: !areAllMarked
+        //     }))
+        // }
 
         case 'REMOVE_COMPLETE_TASK': {
             return state.filter(task => task.completed === false)
