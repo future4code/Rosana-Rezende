@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 
 import styled from 'styled-components'
 
@@ -38,50 +39,42 @@ class App extends React.Component {
     super(props)
     this.state = {
       tarefas: 'todas',
-      todasAsTarefas: [],
-      text: this.props.text || ''
+
+      // jeito novo 
+      inputText: ''
     }
   }
-
   
 
   mudaTarefa = (event, novaMarcacao) => {
     this.setState({ tarefas: novaMarcacao })
   }
 
-  escreveTarefa = (event) => {
-    this.setState({
-      text: event.target.value
-    })
-    // const { dispatch } = this.props;                
-    // dispatch(tasksReducer(this.state.text));
-    // dispatch(addTask(this.state.text))    
-  }
-
-  adicionaTarefa = (event) => {
-    // const text = event.target.value.trim()
+  
+  // adicionaTarefa = (event) => {
+  //   // const text = event.target.value.trim()
     
-    if (event.key === 'Enter') {
-      const copiaTodasAsTarefas = [...this.state.todasAsTarefas]
-      const essaNovaTarefa = {
-        id: new Date(),
-        name: event.target.value,
-        completa: false
-      }
-      copiaTodasAsTarefas.push(essaNovaTarefa)
-      this.setState({ 
-        todasAsTarefas: copiaTodasAsTarefas,
-        // novaTarefa: ''
-      })
+  //   if (event.key === 'Enter') {
+  //     const copiaTodasAsTarefas = [...this.state.todasAsTarefas]
+  //     const essaNovaTarefa = {
+  //       id: new Date(),
+  //       name: event.target.value,
+  //       completa: false
+  //     }
+  //     copiaTodasAsTarefas.push(essaNovaTarefa)
+  //     this.setState({ 
+  //       todasAsTarefas: copiaTodasAsTarefas,
+  //       // novaTarefa: ''
+  //     })
       
-      // this.props.onSave(text)
-      // if (this.props.newTodo) {
-        this.setState({ text: '' })
-      // }
+  //     // this.props.onSave(text)
+  //     // if (this.props.newTodo) {
+  //       this.setState({ text: '' })
+  //     // }
 
     
-    }
-  }
+  //   }
+  // }
 
   // marcarCompletaPendente = (id) => {
   //   // this.setState({ todasAsTarefas[tarefa].completa: false })
@@ -97,12 +90,19 @@ class App extends React.Component {
     
   // }
 
+  inputChange = (event) => {
+    this.setState({ inputText: event.target.value })
+  }
+
   render() {
 
-    const { value } = this.props
-    console.log(value)
-    // console.log(this.props.value)
+    const {
+      addTask,
+      value
+    } = this.props
 
+    console.log(value)
+    console.log(this.state.inputText)
 
   const listaDeTarefas = value.map(tarefa => (
       <ListItem key={tarefa.id} button 
@@ -133,6 +133,7 @@ class App extends React.Component {
 
       </ListItem>
     ))
+
   
 
   return (
@@ -145,13 +146,13 @@ class App extends React.Component {
           <TextField 
             fullWidth 
             label="O que tem para ser feito?" 
-            // value={this.state.novaTarefa}
-            value={this.state.text}
-            onChange={this.escreveTarefa}
-            onKeyPress={this.adicionaTarefa}
+            value={this.state.inputText}
+            onChange={this.inputChange}
+
+            // onKeyPress={this.adicionaTarefa}
             
           />
-          {/* <Button onClick={() => this.props.dispacth(addTask(this.state.text))}>Vai</Button> */}
+          <Button onClick={() => addTask(this.state.inputText)}>Vai</Button>
         </Grid>
 
         <List>
@@ -288,4 +289,7 @@ const mapStateToProps = (state) => ({
   value: state.tasksReducer
 })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ addTask }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
