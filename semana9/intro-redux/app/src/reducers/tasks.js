@@ -1,12 +1,6 @@
 // Pedido chegou ao CAIXA... ele vai atualizar o que pedi na store
 
-const initialState = [
-    {
-        id: 0,
-        completed: false,
-        text: 'Test'
-    }
-]
+const initialState = []
 
 const tasksReducer = (state = initialState, action) => {
     switch (action.type) {

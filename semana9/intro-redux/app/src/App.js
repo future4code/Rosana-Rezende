@@ -76,6 +76,8 @@ class App extends React.Component {
   //   }
   // }
 
+  
+
   // marcarCompletaPendente = (id) => {
   //   // this.setState({ todasAsTarefas[tarefa].completa: false })
 
@@ -92,6 +94,13 @@ class App extends React.Component {
 
   inputChange = (event) => {
     this.setState({ inputText: event.target.value })
+  }
+
+  enterAddTask = (event) => {
+    if(event.key === 'Enter') {
+      this.props.onAddTask(this.state.inputText)
+      this.setState({ inputText: '' })
+    }
   }
 
   render() {
@@ -150,11 +159,9 @@ class App extends React.Component {
             value={this.state.inputText}
             onChange={this.inputChange}
 
-            // onKeyPress={this.adicionaTarefa}
-            
+            onKeyDown={this.enterAddTask}            
           />
-          {/* <Button onClick={() => addTask(this.state.inputText)}>Vai</Button> */}
-          <Button onClick={() => onAddTask(this.state.inputText)}>Vai</Button>
+          {/* <Button onClick={() => onAddTask(this.state.inputText)}>Vai</Button> */}
         </Grid>
 
         <List>
