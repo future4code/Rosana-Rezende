@@ -3,15 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { removeTask, editTask, markTaskAsComplete } from '../actions'
 
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import IconButton from '@material-ui/core/IconButton';
+import { TextField, ListItem, ListItemIcon, ListItemText, Checkbox, Button, ListItemSecondaryAction, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 class TaskItem extends React.Component {
@@ -49,7 +41,7 @@ class TaskItem extends React.Component {
 
                 <ListItemIcon>
                     <Checkbox edge="start"
-                        checked={task.completed}
+                        checked={task.done}
                         onChange={() => onMarkTaskAsComplete(task.id)} />
                 </ListItemIcon>
 
@@ -68,7 +60,7 @@ class TaskItem extends React.Component {
                     </>) : (
                         <ListItemText
                             onClick={() => this.openEditTask(task.id, task.text)}>
-                            {task.completed ? <strike>{task.text}</strike> : <span>{task.text}</span>}
+                            {task.done ? <strike>{task.text}</strike> : <span>{task.text}</span>}
                         </ListItemText>
                     )
                 }
@@ -84,7 +76,6 @@ class TaskItem extends React.Component {
         )
     }
 }
-
 
 const mapDispatchToProps = dispatch => {
     return {

@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { connect } from 'react-redux'
-import { addTask } from '../actions'
+import { createTask } from '../actions'
 
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -48,7 +48,7 @@ class TaskHeader extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddTask: text => dispatch(addTask(text))
+        onAddTask: text => dispatch(createTask(text))
     }
 }
 

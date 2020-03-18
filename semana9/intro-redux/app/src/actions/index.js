@@ -61,5 +61,40 @@ export const selectTaskByFilter = (filter) => {
     };
 };
 
+// Novas Ações Síncronas
+
+export const setTasks = tasks => {
+    return {
+        type: "SET_TASKS",
+        payload: {
+            tasks: tasks
+        }
+    };
+};
 
 // Ações assíncronas
+
+const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/reduxTodo/rosana/todos'
+
+export const fetchTasks = () => async (dispatch, getState) => {
+    const result = await axios.get(
+        `${baseUrl}`
+    );
+
+    dispatch(setTasks(result.data.todos));
+};
+
+export const createTask = text => async (dispatch, getState) => {
+    try {
+        await axios.post(
+            `${baseUrl}`,
+            {
+                text
+            }
+        );
+        dispatch(fetchTasks());
+    } catch (error) {
+        console.log("Errinho lindo, preciso tratar.");
+    }
+};
+

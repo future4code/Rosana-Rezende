@@ -1,11 +1,11 @@
 // Pedido chegou ao CAIXA... ele vai atualizar o que pedi na store
 
 const initialState = [
-    {
-        id: new Date().getTime(),
-        completed: false,
-        text: 'Nova tarefinha linda! Edite, complete e delete à vontade!'
-    }
+    // {
+    //     id: new Date().getTime(),
+    //     done: false,
+    //     text: 'Nova tarefinha linda! Edite, complete e delete à vontade!'
+    // }
 ]
 
 const tasksReducer = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const tasksReducer = (state = initialState, action) => {
                 ...state,
                 {
                     id: new Date().getTime(),
-                    completed: false,
+                    done: false,
                     text: action.payload.text
                 }
             ]
@@ -37,7 +37,7 @@ const tasksReducer = (state = initialState, action) => {
         case 'MARK_TASK_AS_COMPLETE': {
             // let copyState = [...state]
             // let thisTask = copyState.find(task => task.id === action.payload.id)
-            // thisTask.completed = !thisTask.completed
+            // thisTask.done = !thisTask.done
             // return copyState
 
             // outra maneira
@@ -45,7 +45,7 @@ const tasksReducer = (state = initialState, action) => {
                 if (task.id === action.payload.id) {
                     return {
                         ...task,
-                        completed: !task.completed
+                        done: !task.done
                     }
                 }
                 return task
@@ -58,7 +58,7 @@ const tasksReducer = (state = initialState, action) => {
             const newState = state.map(task => {
                     return {
                         ...task,
-                        completed: true
+                        done: true
                 }
             })
             return newState
@@ -66,7 +66,7 @@ const tasksReducer = (state = initialState, action) => {
 
         case 'REMOVE_COMPLETE_TASK': {
             const newState = state.filter(task => {
-                if(task.completed) {
+                if(task.done) {
                     return false
                 }
                 return true
@@ -74,12 +74,18 @@ const tasksReducer = (state = initialState, action) => {
             return newState
         }
 
-        // case 'SELECT_TASK_BY_FILTER': {
-        //     return {
-        //         ...state,
-        //         filter: action.payload.filter
-        //     }
-        // }
+
+
+        // Novas ações síncronas
+        case "SET_TASKS":
+            return action.payload.tasks;
+
+
+
+        // Novas ações assíncronas
+
+
+
 
         default:
             return state;
