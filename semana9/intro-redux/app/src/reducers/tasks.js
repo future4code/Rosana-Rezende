@@ -4,7 +4,7 @@ const initialState = [
     {
         id: new Date().getTime(),
         completed: false,
-        text: 'New Task'
+        text: 'Nova tarefinha linda! Edite, complete e delete à vontade!'
     }
 ]
 

@@ -69,8 +69,10 @@ class TaskList extends React.Component {
 										</Button>
 								</ListItemIcon>
 							</>) : (
-								<ListItemText primary={task.text}
+								<ListItemText 
 									onClick={() => this.openEditTask(task.id, task.text)}>
+										{task.completed ? <strike>{task.text}</strike> : <span>{task.text}</span>}
+										
 								</ListItemText>
 							)
 						}
