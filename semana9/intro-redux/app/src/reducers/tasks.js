@@ -64,17 +64,15 @@ const tasksReducer = (state = initialState, action) => {
             return newState
         }
 
-
-
-        // case 'REMOVE_COMPLETE_TASK': {
-        //     return state.filter(task => task.completed === false)
-        // }
-
-        // case 'SELECT_TASK_BY_FILTER': {
-        //     // const oldValue = state.value;
-        //     // const newState = { value: oldValue + 1};
-        //     // return newState
-        // }
+        case 'REMOVE_COMPLETE_TASK': {
+            const newState = state.filter(task => {
+                if(task.completed) {
+                    return false
+                }
+                return true
+            })
+            return newState
+        }
 
         default:
             return state;
