@@ -10,8 +10,7 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 [Site do projeto](http://4task.surge.sh/)
 
 <p align="center">
-  <img  height='320' src='xx'>
-  <img  height='320' src='xx'>
+  <img  width='600' src='https://user-images.githubusercontent.com/45580434/77000883-cf48e480-6937-11ea-947c-ead84a6b5ec9.gif'>
 </p>
 
 
@@ -41,11 +40,11 @@ Realizar integração com a API Redux Todo que permita o gerenciamento de uma li
 
 - [x] implementar as actions utilizando react-redux
 
-[Site criado](http://4task-v1-rosana.surge.sh/)
+  [Versão do projeto](http://4task-v1-rosana.surge.sh/)
 <br>
 
 3. **Integração com API**
 
 - [x] Persistir as operação feitas por meio da integração com API [Redux Todo](https://documenter.getpostman.com/view/7549981/SW11Xdtj?version=latest)
 
-[Site criado](http://4task.surge.sh/)
+  [Versão do projeto](http://4task.surge.sh/)
