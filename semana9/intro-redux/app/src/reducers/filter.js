@@ -12,11 +12,15 @@ const filterReducer = (state = initialState, action) => {
     switch (action.type) {
 
         // filter
-        // case 'SELECT_TASK_BY_FILTER': {
-        //     const oldValue = state.value;
-        //     const newState = { value: oldValue + 1};
-        //     return newState
-        // }
+        case 'SELECT_TASK_BY_FILTER': {
+            //     const oldValue = state.value;
+            //     const newState = { value: oldValue + 1};
+            //     return newState
+            return {
+                ...state,
+                filter: action.payload.filter
+            }
+        }
 
         default:
             return state;

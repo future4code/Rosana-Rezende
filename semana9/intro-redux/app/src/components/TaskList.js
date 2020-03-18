@@ -48,7 +48,19 @@ class TaskList extends React.Component {
 
 		return (
 			<List>
-				{tasks.map(task => (
+				{tasks
+					.filter((task) => {
+						const filter = this.props.filter
+						// if(filter === 'todas') return true
+						if(filter === 'pendentes') {
+							return task.completed === false
+						} 
+						if(filter === 'completas') {
+							return task.completed === true
+						} 
+						return true
+					})
+					.map(task => (
 					<ListItem key={task.id} button>
 
 						<ListItemIcon>
@@ -91,7 +103,8 @@ class TaskList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	tasks: state.tasksReducer
+	tasks: state.tasksReducer,
+	filter: state.filterReducer
 })
 
 const mapDispatchToProps = dispatch => {
