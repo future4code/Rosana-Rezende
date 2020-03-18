@@ -46,11 +46,11 @@ export const markAllTasksAsComplete = () => {
     };
 };
 
-export const removeCompleteTasks = () => {
-    return {
-        type: "REMOVE_COMPLETE_TASK"
-    };
-};
+// export const removeCompleteTasks = () => {
+//     return {
+//         type: "REMOVE_COMPLETE_TASK"
+//     };
+// };
 
 export const selectTaskByFilter = (filter) => {
     return {
@@ -123,13 +123,14 @@ export const deleteTask = id => async (dispatch, getState) => {
     }
 };
 
-// export const deleteAllTask = () => async (dispatch, getState) => {
-//     try {
-//         await axios.delete(
-//             `${baseUrl}/delete-done`
-//         );
-//         dispatch(fetchTasks());
-//     } catch (error) {
-//         console.log("Errinho lindo, preciso tratar.", error);
-//     }
-// };
+// substitui removeCompleteTasks
+export const deleteAllTask = () => async (dispatch, getState) => {
+    try {
+        await axios.delete(
+            `${baseUrl}/delete-done`
+        );
+        dispatch(fetchTasks());
+    } catch (error) {
+        console.log("Errinho lindo, preciso tratar.", error);
+    }
+};

@@ -62,15 +62,15 @@ const tasksReducer = (state = initialState, action) => {
             return newState
         }
 
-        case 'REMOVE_COMPLETE_TASK': {
-            const newState = state.filter(task => {
-                if(task.done) {
-                    return false
-                }
-                return true
-            })
-            return newState
-        }
+        // case 'REMOVE_COMPLETE_TASK': {
+        //     const newState = state.filter(task => {
+        //         if(task.done) {
+        //             return false
+        //         }
+        //         return true
+        //     })
+        //     return newState
+        // }
 
         // Novas ações síncronas
         case "SET_TASKS":
