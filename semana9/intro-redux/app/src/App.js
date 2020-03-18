@@ -11,12 +11,20 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
   max-width: 70vw;
   margin: auto;
+
+  @media screen and (max-device-width: 1200px) {
+		max-width: 90vw;
+	}
 `
 
 const Titulo = styled.h1`
   text-align: center;
   color: rgb(146, 1, 1);
   font-size: 5rem;
+
+  @media screen and (max-device-width: 1200px) {
+		font-size: 3rem;
+	}
 `
 
 const PaperEstilizado = styled(Paper)`
