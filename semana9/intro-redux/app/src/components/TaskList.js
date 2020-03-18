@@ -45,12 +45,13 @@ class TaskList extends React.Component {
 	render() {
 		const { tasks, onDelete, onMarkTaskAsComplete } = this.props
 		console.log(tasks)
+		const filter = this.props.filter
+		console.log(filter)
 
 		return (
 			<List>
 				{tasks
 					.filter((task) => {
-						const filter = this.props.filter
 						// if(filter === 'todas') return true
 						if(filter === 'pendentes') {
 							return task.completed === false
@@ -65,6 +66,7 @@ class TaskList extends React.Component {
 
 						<ListItemIcon>
 							<Checkbox edge="start"
+								checked={task.completed}
 								onChange={() => onMarkTaskAsComplete(task.id)} />
 						</ListItemIcon>
 

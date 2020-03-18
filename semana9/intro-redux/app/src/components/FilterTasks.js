@@ -68,7 +68,7 @@ class FilterTasks extends React.Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onSelectTaskByFilter: (filter) => dispatch(selectTaskByFilter(filter))
+		onSelectTaskByFilter: filter => dispatch(selectTaskByFilter(filter))
 	}
 }
 

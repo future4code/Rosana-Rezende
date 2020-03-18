@@ -74,6 +74,13 @@ const tasksReducer = (state = initialState, action) => {
             return newState
         }
 
+        // case 'SELECT_TASK_BY_FILTER': {
+        //     return {
+        //         ...state,
+        //         filter: action.payload.filter
+        //     }
+        // }
+
         default:
             return state;
     }
