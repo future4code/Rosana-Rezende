@@ -35,16 +35,37 @@ const tasksReducer = (state = initialState, action) => {
         }
 
         case 'MARK_TASK_AS_COMPLETE': {
-            let copiaState = [...state]
-            let thisTask = copiaState.find(task => task.id === action.payload.id)
-            thisTask.completed = !thisTask.completed
-            return copiaState
+            // let copyState = [...state]
+            // let thisTask = copyState.find(task => task.id === action.payload.id)
+            // thisTask.completed = !thisTask.completed
+            // return copyState
+
+            // outra maneira
+            const newState = state.map(task => {
+                if (task.id === action.payload.id) {
+                    return {
+                        ...task,
+                        completed: !task.completed
+                    }
+                }
+                return task
+            })
+            return newState
+
         }
 
         case 'MARK_ALL_TASKS_AS_COMPLETE': {
-            let copiaState = [...state]
-            let thisTask = copiaState.forEach(task => task.completed = true)
-            return thisTask
+            // let copyState = [...state]
+            // let thisTask = copyState.forEach(task => task.completed = true)
+            // return thisTask
+            const newState = state.map(task => {
+                    return {
+                        ...task,
+                        completed: true
+                }
+            })
+            return newState
+
         }
 
 
