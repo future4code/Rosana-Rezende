@@ -52,15 +52,16 @@ const tasksReducer = (state = initialState, action) => {
 
         // }
 
-        case 'MARK_ALL_TASKS_AS_COMPLETE': {
-            const newState = state.map(task => {
-                    return {
-                        ...task,
-                        done: true
-                }
-            })
-            return newState
-        }
+        // case 'MARK_ALL_TASKS_AS_COMPLETE': {
+        //     const newState = state.map(task => {
+        //             return {
+        //                 ...task,
+        //                 done: true
+        //         }
+        //     })
+        //     return newState
+
+        // }
 
         // case 'REMOVE_COMPLETE_TASK': {
         //     const newState = state.filter(task => {

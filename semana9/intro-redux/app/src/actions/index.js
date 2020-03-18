@@ -40,11 +40,11 @@ export const editTask = (id, text) => {
 //     };
 // };
 
-export const markAllTasksAsComplete = () => {
-    return {
-        type: "MARK_ALL_TASKS_AS_COMPLETE"
-    };
-};
+// export const markAllTasksAsComplete = () => {
+//     return {
+//         type: "MARK_ALL_TASKS_AS_COMPLETE"
+//     };
+// };
 
 // export const removeCompleteTasks = () => {
 //     return {
