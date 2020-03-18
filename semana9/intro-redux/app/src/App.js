@@ -13,15 +13,25 @@ const Wrapper = styled.div`
   margin: auto;
 `
 
+const Titulo = styled.h1`
+  text-align: center;
+  color: rgb(146, 1, 1);
+  font-size: 5rem;
+`
+
+const PaperEstilizado = styled(Paper)`
+  padding: 1rem;
+`
+
 function App() {
     return (
       <Wrapper>
-        <h1 className='centraliza-texto vermelho enorme'>4Task</h1>
-        <Paper className='paper' elevation={3}>
+        <Titulo>4Task</Titulo>
+        <PaperEstilizado elevation={3}>
           <TaskHeader/>
           <TaskList/>
           <TaskFooter/>
-        </Paper>
+        </PaperEstilizado>
       </Wrapper>
     );
 }

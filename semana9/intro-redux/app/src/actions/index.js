@@ -1,4 +1,7 @@
 // Pedido feito ao caixa (avisa pra todos que EU quero...)
+import axios from "axios";
+
+// Ações Síncronas
 
 export const addTask = (text) => {
     return {
@@ -57,3 +60,6 @@ export const selectTaskByFilter = (filter) => {
         }
     };
 };
+
+
+// Ações assíncronas
