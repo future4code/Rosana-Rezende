@@ -2,9 +2,9 @@ import React from 'react';
 
 import styled from 'styled-components'
 
-import CheckAllComplete from './CheckAllComplete';
-import RemoveAllComplete from './RemoveAllComplete';
-import FilterTasks from './FilterTasks';
+import CheckAllComplete from '../components/CheckAllComplete';
+import RemoveAllComplete from '../components/RemoveAllComplete';
+import FilterTasks from '../components/FilterTasks';
 
 import Grid from '@material-ui/core/Grid';
 

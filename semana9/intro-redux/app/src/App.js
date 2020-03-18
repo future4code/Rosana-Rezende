@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TaskHeader from './components/TaskHeader';
-import TaskList from './components/TaskList';
-import TaskFooter from './components/TaskFooter';
+import TaskHeader from './containers/TaskHeader';
+import TaskList from './containers/TaskList';
+import TaskFooter from './containers/TaskFooter';
 
 import Paper from '@material-ui/core/Paper';
 

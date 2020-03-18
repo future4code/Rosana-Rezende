@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import TaskItem from './TaskItem';
+import TaskItem from '../components/TaskItem';
 
 import List from '@material-ui/core/List';
 
