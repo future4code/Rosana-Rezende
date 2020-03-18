@@ -22,9 +22,9 @@ const tasksReducer = (state = initialState, action) => {
         //     ]
         // }
 
-        case 'REMOVE_TASK': {
-            return state.filter(task => task.id !== action.payload.id)
-        }
+        // case 'REMOVE_TASK': {
+        //     return state.filter(task => task.id !== action.payload.id)
+        // }
 
         case 'EDIT_TASK': {
             return state.map(task =>
@@ -34,33 +34,33 @@ const tasksReducer = (state = initialState, action) => {
             )
         }
 
-        case 'MARK_TASK_AS_COMPLETE': {
-            // let copyState = [...state]
-            // let thisTask = copyState.find(task => task.id === action.payload.id)
-            // thisTask.done = !thisTask.done
-            // return copyState
-            const newState = state.map(task => {
-                if (task.id === action.payload.id) {
-                    return {
-                        ...task,
-                        done: !task.done
-                    }
-                }
-                return task
-            })
-            return newState
-
-        }
-
-        // case 'MARK_ALL_TASKS_AS_COMPLETE': {
+        // case 'MARK_TASK_AS_COMPLETE': {
+        //     // let copyState = [...state]
+        //     // let thisTask = copyState.find(task => task.id === action.payload.id)
+        //     // thisTask.done = !thisTask.done
+        //     // return copyState
         //     const newState = state.map(task => {
+        //         if (task.id === action.payload.id) {
         //             return {
         //                 ...task,
-        //                 done: true
+        //                 done: !task.done
+        //             }
         //         }
+        //         return task
         //     })
         //     return newState
+
         // }
+
+        case 'MARK_ALL_TASKS_AS_COMPLETE': {
+            const newState = state.map(task => {
+                    return {
+                        ...task,
+                        done: true
+                }
+            })
+            return newState
+        }
 
         case 'REMOVE_COMPLETE_TASK': {
             const newState = state.filter(task => {

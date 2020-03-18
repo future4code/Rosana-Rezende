@@ -12,14 +12,14 @@ import axios from "axios";
 //     };
 // };
 
-export const removeTask = (id) => {
-    return {
-        type: "REMOVE_TASK",
-        payload: {
-            id: id
-        }
-    };
-};
+// export const removeTask = (id) => {
+//     return {
+//         type: "REMOVE_TASK",
+//         payload: {
+//             id: id
+//         }
+//     };
+// };
 
 export const editTask = (id, text) => {
     return {
@@ -110,3 +110,26 @@ export const doneTask = id => async (dispatch, getState) => {
         console.log("Errinho lindo, preciso tratar.", error);
     }
 };
+
+// subtitui removeTask
+export const deleteTask = id => async (dispatch, getState) => {
+    try {
+        await axios.delete(
+            `${baseUrl}/${id}`,
+        );
+        dispatch(fetchTasks());
+    } catch (error) {
+        console.log("Errinho lindo, preciso tratar.", error);
+    }
+};
+
+// export const deleteAllTask = () => async (dispatch, getState) => {
+//     try {
+//         await axios.delete(
+//             `${baseUrl}/delete-done`
+//         );
+//         dispatch(fetchTasks());
+//     } catch (error) {
+//         console.log("Errinho lindo, preciso tratar.", error);
+//     }
+// };

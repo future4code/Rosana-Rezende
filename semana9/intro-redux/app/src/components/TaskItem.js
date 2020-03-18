@@ -2,7 +2,8 @@ import React from 'react'
 
 import { connect } from 'react-redux'
 import { 
-    removeTask,
+    // removeTask,
+    deleteTask,
     editTask,
     // markTaskAsComplete,
     doneTask,
@@ -41,7 +42,8 @@ class TaskItem extends React.Component {
     render() {
         const { 
             task,
-            onDelete, 
+            // onDelete,
+            onDeleteTask,
             // onMarkTaskAsComplete, 
             onDoneTask 
         } = this.props
@@ -67,7 +69,7 @@ class TaskItem extends React.Component {
                             <Button color='primary'
                                 onClick={() => this.disappearsInput(task.id, this.state.editInput)}>
                                 SALVAR
-										</Button>
+							</Button>
                         </ListItemIcon>
                     </>) : (
                         <ListItemText
@@ -79,7 +81,9 @@ class TaskItem extends React.Component {
 
                 <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete"
-                        onClick={() => onDelete(task.id)}>
+                        // onClick={() => onDelete(task.id)}
+                        onClick={() => onDeleteTask(task.id)}
+                    >
                         <DeleteIcon />
                     </IconButton>
                 </ListItemSecondaryAction>
@@ -91,8 +95,12 @@ class TaskItem extends React.Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onDelete: id => dispatch(removeTask(id)),
+        // onDelete: id => dispatch(removeTask(id)),
+        onDeleteTask: id => dispatch(deleteTask(id)),
+
         onEditTask: (id, text) => dispatch(editTask(id, text)),
+
+
         // onMarkTaskAsComplete: id => dispatch(markTaskAsComplete(id)),
         onDoneTask: id => dispatch(doneTask(id)),
     }
