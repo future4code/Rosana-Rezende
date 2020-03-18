@@ -1,7 +1,12 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import { removeTask, editTask, markTaskAsComplete } from '../actions'
+import { 
+    removeTask,
+    editTask,
+    // markTaskAsComplete,
+    doneTask,
+} from '../actions'
 
 import { TextField, ListItem, ListItemIcon, ListItemText, Checkbox, Button, ListItemSecondaryAction, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -34,7 +39,12 @@ class TaskItem extends React.Component {
     }
 
     render() {
-        const { task, onDelete, onMarkTaskAsComplete } = this.props
+        const { 
+            task,
+            onDelete, 
+            // onMarkTaskAsComplete, 
+            onDoneTask 
+        } = this.props
 
         return (
             <ListItem key={task.id} button>
@@ -42,7 +52,9 @@ class TaskItem extends React.Component {
                 <ListItemIcon>
                     <Checkbox edge="start"
                         checked={task.done}
-                        onChange={() => onMarkTaskAsComplete(task.id)} />
+                        // onChange={() => onMarkTaskAsComplete(task.id)}
+                        onChange={() => onDoneTask(task.id)}  
+                    />
                 </ListItemIcon>
 
                 {this.state.editingId === task.id && this.state.inputHere
@@ -81,7 +93,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onDelete: id => dispatch(removeTask(id)),
         onEditTask: (id, text) => dispatch(editTask(id, text)),
-        onMarkTaskAsComplete: id => dispatch(markTaskAsComplete(id)),
+        // onMarkTaskAsComplete: id => dispatch(markTaskAsComplete(id)),
+        onDoneTask: id => dispatch(doneTask(id)),
     }
 }
 

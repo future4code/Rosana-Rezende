@@ -11,16 +11,16 @@ const initialState = [
 const tasksReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case 'ADD_TASK': {
-            return [
-                ...state,
-                {
-                    id: new Date().getTime(),
-                    done: false,
-                    text: action.payload.text
-                }
-            ]
-        }
+        // case 'ADD_TASK': {
+        //     return [
+        //         ...state,
+        //         {
+        //             id: new Date().getTime(),
+        //             done: false,
+        //             text: action.payload.text
+        //         }
+        //     ]
+        // }
 
         case 'REMOVE_TASK': {
             return state.filter(task => task.id !== action.payload.id)
@@ -39,8 +39,6 @@ const tasksReducer = (state = initialState, action) => {
             // let thisTask = copyState.find(task => task.id === action.payload.id)
             // thisTask.done = !thisTask.done
             // return copyState
-
-            // outra maneira
             const newState = state.map(task => {
                 if (task.id === action.payload.id) {
                     return {
@@ -54,15 +52,15 @@ const tasksReducer = (state = initialState, action) => {
 
         }
 
-        case 'MARK_ALL_TASKS_AS_COMPLETE': {
-            const newState = state.map(task => {
-                    return {
-                        ...task,
-                        done: true
-                }
-            })
-            return newState
-        }
+        // case 'MARK_ALL_TASKS_AS_COMPLETE': {
+        //     const newState = state.map(task => {
+        //             return {
+        //                 ...task,
+        //                 done: true
+        //         }
+        //     })
+        //     return newState
+        // }
 
         case 'REMOVE_COMPLETE_TASK': {
             const newState = state.filter(task => {
@@ -74,18 +72,11 @@ const tasksReducer = (state = initialState, action) => {
             return newState
         }
 
-
-
         // Novas ações síncronas
         case "SET_TASKS":
             return action.payload.tasks;
 
-
-
         // Novas ações assíncronas
-
-
-
 
         default:
             return state;

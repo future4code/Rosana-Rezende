@@ -31,14 +31,14 @@ export const editTask = (id, text) => {
     };
 };
 
-export const markTaskAsComplete = (id) => {
-    return {
-        type: "MARK_TASK_AS_COMPLETE",
-        payload: {
-            id: id
-        }
-    };
-};
+// export const markTaskAsComplete = (id) => {
+//     return {
+//         type: "MARK_TASK_AS_COMPLETE",
+//         payload: {
+//             id: id
+//         }
+//     };
+// };
 
 export const markAllTasksAsComplete = () => {
     return {
@@ -95,7 +95,18 @@ export const createTask = text => async (dispatch, getState) => {
         );
         dispatch(fetchTasks());
     } catch (error) {
-        console.log("Errinho lindo, preciso tratar.");
+        console.log("Errinho lindo, preciso tratar.", error);
     }
 };
 
+// substitui markTaskAsComplete
+export const doneTask = id => async (dispatch, getState) => {
+    try {
+        await axios.put(
+            `${baseUrl}/${id}/toggle`,
+        );
+        dispatch(fetchTasks());
+    } catch (error) {
+        console.log("Errinho lindo, preciso tratar.", error);
+    }
+};

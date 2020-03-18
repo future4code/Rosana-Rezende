@@ -32,7 +32,7 @@ class TaskList extends React.Component {
 						return true
 					})
 					.map(task => (
-						<TaskItem task={task} />
+						<TaskItem task={task} key={task.id}/>
 					))}
 			</List>
 		)
