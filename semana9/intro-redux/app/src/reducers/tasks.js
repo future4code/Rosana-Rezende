@@ -34,7 +34,6 @@ const tasksReducer = (state = initialState, action) => {
             )
         }
 
-        //find
         case 'MARK_TASK_AS_COMPLETE': {
             let copiaState = [...state]
             let thisTask = copiaState.find(task => task.id === action.payload.id)
@@ -42,18 +41,17 @@ const tasksReducer = (state = initialState, action) => {
             return copiaState
         }
 
-        //foreach
-        // case 'MARK_ALL_TASKS_AS_COMPLETE': {
-        //     const areAllMarked = state.every(task => task.completed)
-        //     return state.map(task => ({
-        //         ...task,
-        //         completed: !areAllMarked
-        //     }))
-        // }
-
-        case 'REMOVE_COMPLETE_TASK': {
-            return state.filter(task => task.completed === false)
+        case 'MARK_ALL_TASKS_AS_COMPLETE': {
+            let copiaState = [...state]
+            let thisTask = copiaState.forEach(task => task.completed = true)
+            return thisTask
         }
+
+
+
+        // case 'REMOVE_COMPLETE_TASK': {
+        //     return state.filter(task => task.completed === false)
+        // }
 
         // case 'SELECT_TASK_BY_FILTER': {
         //     // const oldValue = state.value;
