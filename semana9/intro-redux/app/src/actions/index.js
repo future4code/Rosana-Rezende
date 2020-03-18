@@ -3,14 +3,14 @@ import axios from "axios";
 
 // Ações Síncronas
 
-export const addTask = (text) => {
-    return {
-        type: "ADD_TASK",
-        payload: {
-            text: text
-        }
-    };
-};
+// export const addTask = (text) => {
+//     return {
+//         type: "ADD_TASK",
+//         payload: {
+//             text: text
+//         }
+//     };
+// };
 
 export const removeTask = (id) => {
     return {
@@ -84,6 +84,7 @@ export const fetchTasks = () => async (dispatch, getState) => {
     dispatch(setTasks(result.data.todos));
 };
 
+//substituiu addTask
 export const createTask = text => async (dispatch, getState) => {
     try {
         await axios.post(
