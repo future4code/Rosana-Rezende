@@ -5,13 +5,13 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
 
-// import { markAllTasksAsComplete } from '../actions'
+import { markAllTasksAsComplete } from '../actions'
 
 function CheckAllComplete(props) {
     return (
         <Grid item>
             <Button 
-                // onClick={() => props.onMarkAllTasksAsComplete()}
+                onClick={props.onMarkAllTasksAsComplete}
             >
                 Marcar todas como completas
             </Button>
@@ -21,7 +21,7 @@ function CheckAllComplete(props) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // onMarkAllTasksAsComplete: () => dispatch(markAllTasksAsComplete),
+        onMarkAllTasksAsComplete: () => dispatch(markAllTasksAsComplete()),
     }
 }
 

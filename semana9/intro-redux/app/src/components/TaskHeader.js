@@ -40,7 +40,6 @@ class TaskHeader extends React.Component {
     }
 }
 
-
 const mapDispatchToProps = dispatch => {
     return {
         onAddTask: text => dispatch(addTask(text))

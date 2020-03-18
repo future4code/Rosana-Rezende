@@ -23,14 +23,14 @@ const tasksReducer = (state = initialState, action) => {
         }
 
         case 'REMOVE_TASK': {
-            return state.filter(task =>
-                task.id !== action.payload.id
-            )
+            return state.filter(task => task.id !== action.payload.id)
         }
 
         case 'EDIT_TASK': {
             return state.map(task =>
-                task.id === action.payload.id ? { ...task, text: action.payload.text } : task
+                task.id === action.payload.id ? 
+                    { ...task, text: action.payload.text } 
+                    : task
             )
         }
 
@@ -55,9 +55,6 @@ const tasksReducer = (state = initialState, action) => {
         }
 
         case 'MARK_ALL_TASKS_AS_COMPLETE': {
-            // let copyState = [...state]
-            // let thisTask = copyState.forEach(task => task.completed = true)
-            // return thisTask
             const newState = state.map(task => {
                     return {
                         ...task,
@@ -65,7 +62,6 @@ const tasksReducer = (state = initialState, action) => {
                 }
             })
             return newState
-
         }
 
 
