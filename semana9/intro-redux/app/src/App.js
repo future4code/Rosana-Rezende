@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-  max-width: 80vh;
+  max-width: 70vw;
   margin: auto;
 `
 

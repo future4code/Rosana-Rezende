@@ -32,7 +32,7 @@ class FilterTasks extends React.Component {
           			</ToggleButton>
 					<ToggleButton value="pendentes" aria-label="pendentes" >
 						Pendentes
-          			</ToggleButton>
+          			</ToggleButton>					
 					<ToggleButton value="completas" aria-label="completas">
 						Completas
           			</ToggleButton>
