@@ -9,6 +9,8 @@ import {swipeLeft, swipeRight} from '../../components/UserSwipeCard/styled'
 import {updateCurrentPage} from '../../actions/route'
 import {Loader} from '../../components/Loader'
 
+import { fetchProfile } from '../../actions/profiles'
+
 export class SwipeScreen extends Component {
 	constructor(props) {
 		super(props)
@@ -21,6 +23,7 @@ export class SwipeScreen extends Component {
 		if (!this.props.profileToSwipe && this.props.getProfileToSwipe) {
 			this.props.getProfileToSwipe()
 		}
+		this.props.fetchProfile();
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
@@ -42,8 +45,10 @@ export class SwipeScreen extends Component {
 	}
 
 	render() {
-		const {profileToSwipe, goToMatchScreen} = this.props
+		
+		const {profileToSwipe, goToMatchScreen, profile} = this.props
 		const {currentAnimation} = this.state
+		console.log(profile)
 
 		return (
 			<SwipeScreenWrapper>
@@ -59,7 +64,10 @@ export class SwipeScreen extends Component {
 					{profileToSwipe ? <UserSwipeCard
 						userToSwipe={profileToSwipe}
 						animationDirection={currentAnimation}
-					/> : (<Loader/>)}
+					/> : (
+					<Loader/>
+					// <div>Oi</div>
+					)}
 					<ButtonsWrapper>
 						<OptionButton onClick={this.onChooseOption('dislike')} option="dislike">X</OptionButton>
 						<OptionButton onClick={this.onChooseOption('like')} option="like">♥️</OptionButton>
@@ -78,11 +86,13 @@ SwipeScreen.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
+	profile: state.profiles.profile
 })
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		goToMatchScreen: () => dispatch(updateCurrentPage('MatchScreen')),
+		fetchProfile: () => dispatch(fetchProfile())
 	}
 }
 

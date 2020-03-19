@@ -1,7 +1,15 @@
 const initialState = {}
 
 const profiles = (state = initialState, action) => {
-  return state
+  switch (action.type) {
+
+    case "SET_PROFILE":
+      return { profile: action.payload.profile }
+
+    default:
+      return state
+  }
+
 }
 
 export default profiles
