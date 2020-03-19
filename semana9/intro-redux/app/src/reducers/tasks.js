@@ -27,11 +27,13 @@ const tasksReducer = (state = initialState, action) => {
         // }
 
         case 'EDIT_TASK': {
-            return state.map(task =>
+            const result = state.map(task =>
                 task.id === action.payload.id ? 
                     { ...task, text: action.payload.text } 
                     : task
             )
+            console.log(result)
+            return result
         }
 
         // case 'MARK_TASK_AS_COMPLETE': {
