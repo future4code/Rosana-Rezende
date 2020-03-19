@@ -1,10 +1,7 @@
 import React from 'react';
 
 import { connect } from "react-redux";
-import { 
-	selectTaskByFilter, 
-	selectTaskBySearch 
-} from '../actions'
+import { selectTaskBySearch } from '../actions'
 
 import {AppBar, Toolbar, Typography, InputBase } from '@material-ui/core'
 
@@ -95,12 +92,7 @@ class TaskAppBar extends React.Component {
 				task.text.toLowerCase().includes((this.state.inputSearch).toLowerCase())
 			)
 			if(searchData.length > 0){
-				// console.log(searchData)
 				this.props.onSelectTaskBySearch(searchData)
-				// searchData.forEach(task => {
-				// 	// console.log(task.text)
-					
-				// })
 			}
 	}
 }
@@ -140,13 +132,11 @@ class TaskAppBar extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	tasks: state.tasksReducer,
-	// searchTask: state.searchReducer,
+	tasks: state.tasksReducer
 })
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onSelectTaskByFilter: filter => dispatch(selectTaskByFilter(filter)),
 		onSelectTaskBySearch: search => dispatch(selectTaskBySearch(search))
 	}
 }
