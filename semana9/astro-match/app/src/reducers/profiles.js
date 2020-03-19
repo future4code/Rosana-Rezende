@@ -11,7 +11,7 @@ const profiles = (state = initialState, action) => {
 
       case 'SET_MATCHES':
         return { 
-          ...state, 
+          // ...state, 
           matches: action.payload.matches
         }
 
