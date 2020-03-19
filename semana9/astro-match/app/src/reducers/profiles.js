@@ -1,7 +1,7 @@
 const initialState = {
   profile: null,
   matches: [],
-  listWithSelectedPerson: []
+  selectedPerson: null
 }
 
 const profiles = (state = initialState, action) => {
@@ -12,15 +12,18 @@ const profiles = (state = initialState, action) => {
 
     case 'SET_MATCHES':
       return {
-        // ...state, 
+        ...state, 
         matches: action.payload.matches
       }
 
     case 'SET_SELECTED_PROFILE':
       // console.log(state.matches)
-      const list = state.matches.map(person => person.id === action.payload.id && person)
+      const user = state.matches.filter(person => person.id === action.payload.id)
       // console.log(list)
-      return { listWithSelectedPerson: list}
+      return { 
+        ...state,
+        selectedPerson: user[0]
+      }
 
     default:
       return state

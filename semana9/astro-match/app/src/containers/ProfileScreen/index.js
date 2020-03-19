@@ -9,15 +9,9 @@ import { getMatches } from '../../actions/profiles'
 
 class ProfileScreen extends React.Component {
 
-  componentDidMount() {
-    if (this.props.getMatches) {
-      this.props.getMatches()
-    }
-  }
-
   render() {
-    const { goToSwipeScreen, listWithSelectedPerson } = this.props
-    // console.log(listWithSelectedPerson)
+    const { goToSwipeScreen, selectedPerson } = this.props
+    // console.log(selectedPerson)
     return (
       <>
         <AppBar
@@ -27,33 +21,24 @@ class ProfileScreen extends React.Component {
             onClick={goToSwipeScreen}
           />}
         />
-        {listWithSelectedPerson && listWithSelectedPerson.map(person => {
-          if (person !== false) {
-            // console.log(person)
-            return (
-              <DivWrapper key={person.id}>
-                <Nome>{person.name}</Nome>
-                <DivImage>
-                  <Avatar src={person.photo}></Avatar>
-                </DivImage>
-                <p>Bio: {person.bio}</p>
-                <p>Idade: {person.age}</p>
-              </DivWrapper>
-            )
-          }
-        })}
+        <DivWrapper key={selectedPerson.id}>
+          <Nome>{selectedPerson.name}</Nome>
+          <DivImage>
+            <Avatar src={selectedPerson.photo}></Avatar>
+          </DivImage>
+          <p>Bio: {selectedPerson.bio}</p>
+          <p>Idade: {selectedPerson.age}</p>
+        </DivWrapper>
       </>
     )
   }
 }
 
 // ProfileScreen.propTypes = {
-
 // }
 
-
 const mapStateToProps = state => ({
-  listWithSelectedPerson: state.profiles.listWithSelectedPerson
+  selectedPerson: state.profiles.selectedPerson
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -62,5 +47,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)
-
-

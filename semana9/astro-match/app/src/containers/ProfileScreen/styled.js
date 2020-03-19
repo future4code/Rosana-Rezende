@@ -7,18 +7,19 @@ export const MatchIcon = styled(Icon)`
 `
 
 export const DivWrapper = styled.div`
-  padding: 10px;
+  padding: 10px 20px;
 `
 
 export const DivImage = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
+  height: 250px;
 `
 
 export const Avatar = styled.img`
+  max-height: 100%;
   max-width: 100%;
-  max-height: 50vh;
 `
 
 export const Nome = styled.h2`
