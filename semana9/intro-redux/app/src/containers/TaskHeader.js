@@ -1,10 +1,16 @@
 import React from 'react'
 
+import styled from 'styled-components'
+
 import { connect } from 'react-redux'
-import { addTask } from '../actions'
+import { createTask } from '../actions'
 
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+
+const GridEstilizado = styled(Grid)`
+    margin-bottom: 1rem;
+`
 
 class TaskHeader extends React.Component {
     constructor(props) {
@@ -27,7 +33,7 @@ class TaskHeader extends React.Component {
 
     render() {
         return (
-            <Grid container className='topo'>
+            <GridEstilizado container>
                 <TextField
                     fullWidth
                     label="O que tem para ser feito?"
@@ -35,14 +41,14 @@ class TaskHeader extends React.Component {
                     onChange={this.inputChange}
                     onKeyDown={this.enterAddTask}
                 />
-            </Grid>
+            </GridEstilizado>
         )
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddTask: text => dispatch(addTask(text))
+        onAddTask: text => dispatch(createTask(text))
     }
 }
 
