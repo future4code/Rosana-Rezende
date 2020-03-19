@@ -12,12 +12,10 @@ class MatchScreen extends Component {
 		if (this.props.getMatches) {
 			this.props.getMatches()
 		}
-		// this.props.getMatches();
 	}
 
 	render() {
 		const {goToSwipeScreen, matches} = this.props
-		// console.log(this.props.profile)
 		return (
 			<div>
 				<AppBar
