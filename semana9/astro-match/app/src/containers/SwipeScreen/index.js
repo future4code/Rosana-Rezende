@@ -46,9 +46,8 @@ export class SwipeScreen extends Component {
 
 	render() {
 		
-		const {profileToSwipe, goToMatchScreen, profile} = this.props
+		const {profileToSwipe, goToMatchScreen} = this.props
 		const {currentAnimation} = this.state
-		console.log(profile)
 
 		return (
 			<SwipeScreenWrapper>
@@ -64,10 +63,7 @@ export class SwipeScreen extends Component {
 					{profileToSwipe ? <UserSwipeCard
 						userToSwipe={profileToSwipe}
 						animationDirection={currentAnimation}
-					/> : (
-					<Loader/>
-					// <div>Oi</div>
-					)}
+					/> : (<Loader/>)}
 					<ButtonsWrapper>
 						<OptionButton onClick={this.onChooseOption('dislike')} option="dislike">X</OptionButton>
 						<OptionButton onClick={this.onChooseOption('like')} option="like">♥️</OptionButton>
@@ -86,7 +82,7 @@ SwipeScreen.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-	profile: state.profiles.profile
+	profileToSwipe: state.profiles.profile
 })
 
 const mapDispatchToProps = (dispatch) => {
