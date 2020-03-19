@@ -9,7 +9,7 @@ import {swipeLeft, swipeRight} from '../../components/UserSwipeCard/styled'
 import {updateCurrentPage} from '../../actions/route'
 import {Loader} from '../../components/Loader'
 
-import { fetchProfile } from '../../actions/profiles'
+import { getProfile, choosePerson } from '../../actions/profiles'
 
 export class SwipeScreen extends Component {
 	constructor(props) {
@@ -23,7 +23,7 @@ export class SwipeScreen extends Component {
 		if (!this.props.profileToSwipe && this.props.getProfileToSwipe) {
 			this.props.getProfileToSwipe()
 		}
-		this.props.fetchProfile();
+		this.props.getProfile();
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
@@ -88,7 +88,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
 	return {
 		goToMatchScreen: () => dispatch(updateCurrentPage('MatchScreen')),
-		fetchProfile: () => dispatch(fetchProfile())
+		chooseProfile: (id, choice) => dispatch(choosePerson(id, choice)),
+		getProfile: () => dispatch(getProfile())
 	}
 }
 
