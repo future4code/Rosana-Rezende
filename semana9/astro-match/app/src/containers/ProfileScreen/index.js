@@ -1,14 +1,48 @@
 // import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
+import { AppBar } from '../../components/AppBar'
+import { mdiAccountSwitch } from '@mdi/js'
+import { updateCurrentPage } from '../../actions/route'
+import { MatchIcon, DivWrapper, DivImage, Avatar, Nome } from './styled'
+import { getMatches } from '../../actions/profiles'
 
 class ProfileScreen extends React.Component {
 
+  componentDidMount() {
+    if (this.props.getMatches) {
+      this.props.getMatches()
+    }
+  }
+
   render() {
-    // console.log(this.props.profile)
+    const { goToSwipeScreen, listWithSelectedPerson } = this.props
+    // console.log(listWithSelectedPerson)
     return (
-      <div>
-      </div>
+      <>
+        <AppBar
+          leftAction={<MatchIcon
+            path={mdiAccountSwitch}
+            size={1}
+            onClick={goToSwipeScreen}
+          />}
+        />
+        {listWithSelectedPerson && listWithSelectedPerson.map(person => {
+          if (person !== false) {
+            // console.log(person)
+            return (
+              <DivWrapper key={person.id}>
+                <Nome>{person.name}</Nome>
+                <DivImage>
+                  <Avatar src={person.photo}></Avatar>
+                </DivImage>
+                <p>Bio: {person.bio}</p>
+                <p>Idade: {person.age}</p>
+              </DivWrapper>
+            )
+          }
+        })}
+      </>
     )
   }
 }
@@ -17,8 +51,16 @@ class ProfileScreen extends React.Component {
 
 // }
 
-const mapStateToProps = (state) => ({
-  // profile: state.profiles.profile
+
+const mapStateToProps = state => ({
+  listWithSelectedPerson: state.profiles.listWithSelectedPerson
 })
 
-export default connect(mapStateToProps)(ProfileScreen)
+const mapDispatchToProps = dispatch => ({
+  goToSwipeScreen: () => dispatch(updateCurrentPage('SwipeScreen')),
+  getMatches: () => dispatch(getMatches())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)
+
+

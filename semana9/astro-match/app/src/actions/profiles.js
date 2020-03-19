@@ -42,7 +42,7 @@ export const getMatches = () => async (dispatch, getState) => {
 		const result = await axios.get(
 			`${baseUrl}/matches`
 		);
-		console.log(result.data.matches)
+		// console.log(result.data.matches)
 
 		dispatch(setMatches(result.data.matches));
 	} catch (error) {
@@ -67,6 +67,17 @@ export const choosePerson = (id, choice) => async (dispatch, getState) => {
 		console.log("Errinho lindo, preciso tratar.", error);
 	}
 };
+
+
+export const setSelectedProfile = id => {
+	return {
+		type: "SET_SELECTED_PROFILE",
+		payload: {
+			id: id
+		}
+	};
+};
+
 
 // dúvida... tem esse Id ou não? é como lá em cima?
 // export const clearOne = (id) => async (dispatch, getState) => {

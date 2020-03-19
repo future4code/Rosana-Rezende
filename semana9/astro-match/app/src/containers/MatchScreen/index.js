@@ -5,7 +5,7 @@ import {AppBar} from '../../components/AppBar'
 import {mdiAccountSwitch} from '@mdi/js'
 import {updateCurrentPage} from '../../actions/route'
 import {Avatar, List, ListItem, ListText, MatchIcon} from './styled'
-import { getMatches } from '../../actions/profiles'
+import { getMatches, setSelectedProfile } from '../../actions/profiles'
 
 class MatchScreen extends Component {
 	componentDidMount() {
@@ -14,9 +14,15 @@ class MatchScreen extends Component {
 		}
 	}
 
+	goToProfileScreenAndSendProfile = (profileSelectedId) => {
+		console.log(profileSelectedId)
+		this.props.setSelectedProfile(profileSelectedId)
+		this.props.goToProfileScreen()
+	}
+
 	render() {
-		const {goToSwipeScreen, matches} = this.props
-		console.log(matches)
+		const {goToSwipeScreen, matches } = this.props
+		// console.log(matches)
 		return (
 			<div>
 				<AppBar
@@ -29,7 +35,10 @@ class MatchScreen extends Component {
 				
 				<List>
 					{matches && matches.map((match) => (
-						<ListItem key={match.name}>
+						<ListItem 
+							key={match.name}
+							onClick={() => this.goToProfileScreenAndSendProfile(match.id)}
+						>
 							<Avatar src={match.photo}/>
 							<ListText>{match.name}</ListText>
 						</ListItem>
@@ -52,7 +61,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
 	goToSwipeScreen: () => dispatch(updateCurrentPage('SwipeScreen')),
-	getMatches: () => dispatch(getMatches())
+	goToProfileScreen: () => dispatch(updateCurrentPage('ProfileScreen')),
+	getMatches: () => dispatch(getMatches()),
+	setSelectedProfile: (id) => dispatch(setSelectedProfile(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatchScreen)
