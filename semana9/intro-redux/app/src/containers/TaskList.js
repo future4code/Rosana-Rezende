@@ -7,6 +7,7 @@ import TaskItem from '../components/TaskItem';
 
 import List from '@material-ui/core/List';
 
+
 class TaskList extends React.Component {
 	componentDidMount() {
 		this.props.onFetchTasks();
@@ -14,15 +15,22 @@ class TaskList extends React.Component {
 
 	render() {
 
-		const { tasks, filter } = this.props
+		const { tasks, filter, searchTask} = this.props
 		// console.log(tasks)
 		// console.log(filter)
+		// console.log(searchTask)
+
+		let lista
+		if (searchTask.length > 0) {
+			lista = searchTask
+		} else {
+			lista = tasks
+		}
 		
 		return (
 			<List>
-				{tasks
+				{lista
 					.filter((task) => {
-						// if(filter === 'todas') return true
 						if (filter === 'pendentes') {
 							return task.done === false
 						}
@@ -41,7 +49,8 @@ class TaskList extends React.Component {
 
 const mapStateToProps = (state) => ({
 	tasks: state.tasksReducer,
-	filter: state.filterReducer
+	filter: state.filterReducer,
+	searchTask: state.searchReducer,
 })
 
 const mapDispatchToProps = dispatch => {

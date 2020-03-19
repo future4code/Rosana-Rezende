@@ -61,6 +61,16 @@ export const selectTaskByFilter = (filter) => {
     };
 };
 
+
+export const selectTaskBySearch = (search) => {
+    return {
+        type: "SELECT_TASK_BY_SEARCH",
+        payload: {
+            search: search
+        }
+    };
+};
+
 // Novas Ações Síncronas
 
 export const setTasks = tasks => {
