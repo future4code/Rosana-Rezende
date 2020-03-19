@@ -87,7 +87,7 @@ class TaskAppBar extends React.Component {
 	
 	onPressEnter = (event) => {
 		if(event.key === 'Enter'){
-			this.setState({ inputSearch: '' })
+			// this.setState({ inputSearch: '' })
 			let searchData = this.props.tasks.filter(task => 
 				task.text.toLowerCase().includes((this.state.inputSearch).toLowerCase())
 			)
