@@ -42,8 +42,9 @@ export const getMatches = () => async (dispatch, getState) => {
 		const result = await axios.get(
 			`${baseUrl}/matches`
 		);
+		console.log(result.data.matches)
 
-		dispatch(setMatches(result.data.profile));
+		dispatch(setMatches(result.data.matches));
 	} catch (error) {
 		console.log("Errinho lindo, preciso tratar.", error);
 	}
@@ -51,13 +52,13 @@ export const getMatches = () => async (dispatch, getState) => {
 
 
 
-export const choosePerson = (id, choise) => async (dispatch, getState) => {
+export const choosePerson = (id, choice) => async (dispatch, getState) => {
 	try {
 		const result = await axios.post(
 			`${baseUrl}/choose-person`,
 			{
 				id,
-				choise
+				choice
             }
 		);
 

@@ -16,6 +16,7 @@ class MatchScreen extends Component {
 
 	render() {
 		const {goToSwipeScreen, matches} = this.props
+		console.log(matches)
 		return (
 			<div>
 				<AppBar
@@ -25,6 +26,7 @@ class MatchScreen extends Component {
 						onClick={goToSwipeScreen}
 					/>}
 				/>
+				
 				<List>
 					{matches && matches.map((match) => (
 						<ListItem key={match.name}>

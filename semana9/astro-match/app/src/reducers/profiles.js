@@ -12,7 +12,8 @@ const profiles = (state = initialState, action) => {
       case 'SET_MATCHES':
         return { 
           ...state, 
-          matches: action.payload.matches}
+          matches: action.payload.matches
+        }
 
     default:
       return state
