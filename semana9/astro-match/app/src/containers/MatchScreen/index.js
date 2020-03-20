@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import { AppBar } from '../../components/AppBar'
 import { mdiAccountSwitch } from '@mdi/js'
 import { updateCurrentPage } from '../../actions/route'
-import { Avatar, List, ListItem, ListText, MatchIcon, Delete } from './styled'
+import { Avatar, List, ListItem, ListText, MatchIcon,
+	//  Delete 
+} from './styled'
 
 import { getMatches, setSelectedProfile, setNewMatches } from '../../actions/profiles'
 
-import Button from '@material-ui/core/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
+// import Button from '@material-ui/core/Button';
+// import DeleteIcon from '@material-ui/icons/Delete';
 
 class MatchScreen extends Component {
 	componentDidMount() {
@@ -46,16 +48,16 @@ class MatchScreen extends Component {
 					{matches && matches.map((match) => (
 						<ListItem
 							key={match.name}
-						// onClick={() => this.goToProfileScreenAndSendProfile(match.id)}
+						onClick={() => this.goToProfileScreenAndSendProfile(match.id)}
 						>
-							<div onClick={() => this.goToProfileScreenAndSendProfile(match.id)}>
+							{/* <div onClick={() => this.goToProfileScreenAndSendProfile(match.id)}> */}
 								<Avatar src={match.photo} />
 								<ListText>{match.name}</ListText>
-							</div>
+							{/* </div>
 
 							<div>
         						<Delete onClick={() => this.newMatches(match.id)}/>
-							</div>
+							</div> */}
 
 						</ListItem>
 					))}

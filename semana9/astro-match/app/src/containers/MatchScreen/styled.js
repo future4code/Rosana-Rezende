@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 import Icon from '@mdi/react'
-import DeleteIcon from '@material-ui/icons/Delete';
+// import DeleteIcon from '@material-ui/icons/Delete';
 
 export const MatchIcon = styled(Icon)`
 	display: block;
 	fill: #4AA397;
 `
 
-export const Delete = styled(DeleteIcon)`
-	display: block;
-	color: red;
-`
+// export const Delete = styled(DeleteIcon)`
+// 	display: block;
+// 	color: red;
+// `
 
 export const List = styled.ul`
   padding: 0 10px;
@@ -25,7 +25,7 @@ export const ListItem = styled.div`
   width: 100%;
   transition: 0.2s;
   cursor: pointer;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   
   :hover {
     background: #eee;
@@ -35,7 +35,7 @@ export const ListItem = styled.div`
     border: unset;
   }
   
-  /* :active {
+  :active {
 			:before {
 				height: 100%;
 				width: 100%;
@@ -45,12 +45,12 @@ export const ListItem = styled.div`
     		background-color: rgba(0, 0, 0, 0.1);
     		content: "";
 			}
-   } */
+   }
 
-   >div{
+   /* >div{
      display: flex;
      align-items: center;
-   }
+   } */
 `
 
 export const Avatar = styled.div`

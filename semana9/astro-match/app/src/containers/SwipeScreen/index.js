@@ -49,7 +49,7 @@ export class SwipeScreen extends Component {
 	}
 
 	render() {
-		const {profileToSwipe, goToMatchScreen, matchesCount, matches} = this.props
+		const {profileToSwipe, goToMatchScreen, matchesCount} = this.props
 		const {currentAnimation} = this.state
 
 		return (
