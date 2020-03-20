@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types'
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {AppBar} from '../../components/AppBar'
-import {mdiAccountSwitch} from '@mdi/js'
-import {updateCurrentPage} from '../../actions/route'
-import {Avatar, List, ListItem, ListText, MatchIcon} from './styled'
-import { getMatches, setSelectedProfile } from '../../actions/profiles'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { AppBar } from '../../components/AppBar'
+import { mdiAccountSwitch } from '@mdi/js'
+import { updateCurrentPage } from '../../actions/route'
+import { Avatar, List, ListItem, ListText, MatchIcon, Delete } from './styled'
+
+import { getMatches, setSelectedProfile, setNewMatches } from '../../actions/profiles'
+
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class MatchScreen extends Component {
 	componentDidMount() {
@@ -20,8 +24,13 @@ class MatchScreen extends Component {
 		this.props.goToProfileScreen()
 	}
 
+	newMatches = (profileSelectedId) => {
+		// console.log(profileSelectedId)
+		this.props.setNewMatches(profileSelectedId)
+	}
+
 	render() {
-		const {goToSwipeScreen, matches } = this.props
+		const { goToSwipeScreen, matches } = this.props
 		// console.log(matches)
 		return (
 			<div>
@@ -32,15 +41,22 @@ class MatchScreen extends Component {
 						onClick={goToSwipeScreen}
 					/>}
 				/>
-				
+
 				<List>
 					{matches && matches.map((match) => (
-						<ListItem 
+						<ListItem
 							key={match.name}
-							onClick={() => this.goToProfileScreenAndSendProfile(match.id)}
+						// onClick={() => this.goToProfileScreenAndSendProfile(match.id)}
 						>
-							<Avatar src={match.photo}/>
-							<ListText>{match.name}</ListText>
+							<div onClick={() => this.goToProfileScreenAndSendProfile(match.id)}>
+								<Avatar src={match.photo} />
+								<ListText>{match.name}</ListText>
+							</div>
+
+							<div>
+        						<Delete onClick={() => this.newMatches(match.id)}/>
+							</div>
+
 						</ListItem>
 					))}
 				</List>
@@ -63,7 +79,8 @@ const mapDispatchToProps = dispatch => ({
 	goToSwipeScreen: () => dispatch(updateCurrentPage('SwipeScreen')),
 	goToProfileScreen: () => dispatch(updateCurrentPage('ProfileScreen')),
 	getMatches: () => dispatch(getMatches()),
-	setSelectedProfile: (id) => dispatch(setSelectedProfile(id))
+	setSelectedProfile: (id) => dispatch(setSelectedProfile(id)),
+	setNewMatches: (id) => dispatch(setNewMatches(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatchScreen)

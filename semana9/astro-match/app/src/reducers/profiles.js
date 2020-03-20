@@ -20,7 +20,7 @@ const profiles = (state = initialState, action) => {
 
     case 'COUNT_MATCHES':
       const numberOfMatches = action.payload.matches // pq dei get no length dele
-      console.log(numberOfMatches)
+      // console.log(numberOfMatches)
       return {
         ...state,
         matchesCount: numberOfMatches
@@ -33,6 +33,15 @@ const profiles = (state = initialState, action) => {
       return {
         ...state,
         selectedPerson: user[0]
+      }
+    
+      case 'SET_NEW_MATCHES':
+      // console.log(state.matches)
+      const listOtherUsers = state.matches.filter(person => person.id !== action.payload.id)
+      // console.log(listOtherUsers)
+      return {
+        ...state,
+        matches: listOtherUsers
       }
 
 

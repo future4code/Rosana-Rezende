@@ -100,6 +100,18 @@ export const setSelectedProfile = id => {
 	};
 };
 
+export const setNewMatches = id => {
+	return {
+		type: "SET_NEW_MATCHES",
+		payload: {
+			id: id
+		}
+	};
+};
+
+
+
+
 
 // dúvida... tem esse Id ou não? é como lá em cima?
 // export const clearOne = (id) => async (dispatch, getState) => {
@@ -108,10 +120,10 @@ export const setSelectedProfile = id => {
 // 			`${baseUrl}/clear`,
 // 			{
 // 				id
-//             }
+// 			}
 // 		);
-
-// 		dispatch(setProfile(result.data.profile));
+// 		console.log(result.data)
+// 		// dispatch(selectedProfileToDelete(result.data.matches));
 // 	} catch (error) {
 // 		console.log("Errinho lindo, preciso tratar.", error);
 // 	}
