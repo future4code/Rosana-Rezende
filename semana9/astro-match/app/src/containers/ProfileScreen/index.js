@@ -1,11 +1,15 @@
 // import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
+
 import { AppBar } from '../../components/AppBar'
-import { mdiAccountSwitch } from '@mdi/js'
+import UserSwipeCard from '../../components/UserSwipeCard'
+
 import { updateCurrentPage } from '../../actions/route'
-import { MatchIcon, DivWrapper, DivImage, Avatar, Nome } from './styled'
 import { getMatches } from '../../actions/profiles'
+
+import { mdiAccountSwitch } from '@mdi/js'
+import { MatchIcon, DivWrapper, Bio } from './styled'
 
 class ProfileScreen extends React.Component {
 
@@ -22,12 +26,8 @@ class ProfileScreen extends React.Component {
           />}
         />
         <DivWrapper key={selectedPerson.id}>
-          <Nome>{selectedPerson.name}</Nome>
-          <DivImage>
-            <Avatar src={selectedPerson.photo}></Avatar>
-          </DivImage>
-          <p>Bio: {selectedPerson.bio}</p>
-          <p>Idade: {selectedPerson.age}</p>
+          <UserSwipeCard userToSwipe={selectedPerson}/>
+          <Bio>{selectedPerson.bio}</Bio>
         </DivWrapper>
       </>
     )

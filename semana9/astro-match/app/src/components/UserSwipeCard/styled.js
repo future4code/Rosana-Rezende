@@ -50,9 +50,11 @@ export const BlurredBackground = styled.div`
 `
 
 export const ProfilePicture = styled.img`
-  width: 100%;
+  max-width: 100%;
+  max-height: 90%;
   display: block;
   z-index: 1;
+  margin: auto;
 `
 
 export const InfoWrapper = styled.div`
