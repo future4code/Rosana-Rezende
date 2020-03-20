@@ -61,6 +61,7 @@ export const choosePerson = (id, choice) => async (dispatch, getState) => {
             }
 		);
 		dispatch(getProfile(result.data.profile));
+		dispatch(setProfile(result.data.profile));
 			// não precisa chamar o upCountMatches, pq já tá chamando o getProfile que tem ele
 	} catch (error) {
 		console.log("Errinho lindo, preciso tratar.", error);
