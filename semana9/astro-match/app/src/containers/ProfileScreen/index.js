@@ -6,7 +6,6 @@ import { AppBar } from '../../components/AppBar'
 import UserSwipeCard from '../../components/UserSwipeCard'
 
 import { updateCurrentPage } from '../../actions/route'
-import { getMatches } from '../../actions/profiles'
 
 import { mdiAccountSwitch } from '@mdi/js'
 import { MatchIcon, DivWrapper, Bio } from './styled'
@@ -43,7 +42,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   goToSwipeScreen: () => dispatch(updateCurrentPage('SwipeScreen')),
-  getMatches: () => dispatch(getMatches())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)

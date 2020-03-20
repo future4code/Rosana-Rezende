@@ -47,9 +47,8 @@ export class SwipeScreen extends Component {
 	}
 
 	render() {
-		const {profileToSwipe, goToMatchScreen, matchesCount} = this.props
+		const {profileToSwipe, goToMatchScreen, matchesCount, matches} = this.props
 		const {currentAnimation} = this.state
-		// console.log(matchesCount)
 
 		return (
 			<SwipeScreenWrapper>
@@ -89,7 +88,7 @@ SwipeScreen.propTypes = {
 
 const mapStateToProps = (state) => ({
 	profileToSwipe: state.profiles.profile,
-	matchesCount: state.profiles.matchesCount
+	matchesCount: state.profiles.matchesCount,
 })
 
 const mapDispatchToProps = (dispatch) => {

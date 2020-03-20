@@ -1,8 +1,8 @@
 const initialState = {
   profile: null,
   matches: [],
+  matchesCount: 0,
   selectedPerson: null,
-  matchesCount: 0
 }
 
 const profiles = (state = initialState, action) => {
@@ -12,27 +12,29 @@ const profiles = (state = initialState, action) => {
       return { profile: action.payload.profile }
 
     case 'SET_MATCHES':
+      const matchesList = action.payload.matches // pq dei um get nele
       return {
-        ...state, 
-        matches: action.payload.matches
+        ...state,
+        matches: matchesList
+      }
+
+    case 'COUNT_MATCHES':
+      const numberOfMatches = action.payload.matches // pq dei get no length dele
+      console.log(numberOfMatches)
+      return {
+        ...state,
+        matchesCount: numberOfMatches
       }
 
     case 'SET_SELECTED_PROFILE':
       // console.log(state.matches)
       const user = state.matches.filter(person => person.id === action.payload.id)
-      // console.log(list)
-      return { 
+      // console.log(user)
+      return {
         ...state,
         selectedPerson: user[0]
       }
-    
-    case 'UP_COUNT_MATCHES':
-      const numberOfMatches = action.payload.count
-      // console.log(numberOfMatches)
-      return {
-        ...state,
-        matchesCount: numberOfMatches
-      }
+
 
     default:
       return state
