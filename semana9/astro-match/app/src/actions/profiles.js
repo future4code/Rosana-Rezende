@@ -11,7 +11,7 @@ export const setProfile = profile => {
 	return {
 		type: "SET_PROFILE",
 		payload: {
-			profile: profile
+			profile
 		}
 	};
 };
@@ -21,12 +21,23 @@ export const getProfile = () => async (dispatch, getState) => {
 		const result = await axios.get(
 			`${baseUrl}/person`
 		);
-		// dispatch(upCountMatches()) // chama quando carrega a página
+		dispatch(upCountMatches()) // chama quando carrega a página
+		dispatch(setProfile(undefined)); // gambiarra: sugestão do Edu
 		dispatch(setProfile(result.data.profile));
 	} catch (error) {
-		console.log("Errinho lindo, preciso tratar.", error);
+		console.log("Errinho lindo no getProfile, preciso tratar.", error);
 	}
 };
+
+
+export const makeMatch = (thisMatch) => {
+	return {
+		type: 'MAKE_MATCH',
+		payload: {
+			thisMatch
+		}
+	}
+}
 
 export const choosePerson = (id, choice) => async (dispatch, getState) => {
 	try {
@@ -37,10 +48,12 @@ export const choosePerson = (id, choice) => async (dispatch, getState) => {
 				choice
             }
 		);
-		dispatch(getProfile(result.data.profile));
-		// dispatch(setProfile(result.data.profile));
+		// console.log(result.data.isMatch)
+		dispatch(makeMatch(result.data.isMatch))
+
+		dispatch(getProfile());
 	} catch (error) {
-		console.log("Errinho lindo, preciso tratar.", error);
+		console.log("Errinho lindo no choosePerson, preciso tratar.", error);
 	}
 };
 
@@ -71,11 +84,11 @@ export const getMatches = () => async (dispatch, getState) => {
 
 // basicamente, igual ao setMatches
 	// a diferença é que, abaixo, dou um get no length dele
-export const countMatches = (matches) => {
+export const countMatches = (num) => {
 	return {
 		type: 'COUNT_MATCHES',
 		payload: {
-			matches: matches
+			num: num
 		}
 	};
 };
@@ -101,11 +114,13 @@ export const setSelectedProfile = id => {
 	};
 };
 
-export const setNewMatches = id => {
-	return {
-		type: "SET_NEW_MATCHES",
-		payload: {
-			id: id
-		}
-	};
-};
+
+// deletando match
+// export const setNewMatches = id => {
+// 	return {
+// 		type: "SET_NEW_MATCHES",
+// 		payload: {
+// 			id: id
+// 		}
+// 	};
+// };

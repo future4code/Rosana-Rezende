@@ -10,6 +10,11 @@ export const FavoriteBorderStyle = styled(FavoriteBorderIcon)`
   color: #4AA397;
 `
 
+export const Message = styled.div`
+  text-align: center;
+  font-size: 1.5rem;
+`
+
 export const OptionButton = styled.button`
    border-radius: 50%;
    width: 80px;

@@ -3,13 +3,17 @@ const initialState = {
   matches: [],
   matchesCount: 0,
   selectedPerson: null,
+  makeMatch: false
 }
 
 const profiles = (state = initialState, action) => {
   switch (action.type) {
 
     case "SET_PROFILE":
-      return { profile: action.payload.profile }
+      return { 
+        ...state,
+        profile: action.payload.profile 
+      }
 
     case 'SET_MATCHES':
       const matchesList = action.payload.matches // pq dei um get nele
@@ -19,7 +23,7 @@ const profiles = (state = initialState, action) => {
       }
 
     case 'COUNT_MATCHES':
-      const numberOfMatches = action.payload.matches // pq dei get no length dele
+      const numberOfMatches = action.payload.num // pq dei get no length dele
       // console.log(numberOfMatches)
       return {
         ...state,
@@ -35,14 +39,23 @@ const profiles = (state = initialState, action) => {
         selectedPerson: user[0]
       }
     
-      case 'SET_NEW_MATCHES':
-      // console.log(state.matches)
-      const listOtherUsers = state.matches.filter(person => person.id !== action.payload.id)
-      // console.log(listOtherUsers)
+    case 'MAKE_MATCH':
+      let result  = action.payload.thisMatch
       return {
         ...state,
-        matches: listOtherUsers
+        makeMatch: result
       }
+
+    
+      // deletando match
+      // case 'SET_NEW_MATCHES':
+      // // console.log(state.matches)
+      // const listOtherUsers = state.matches.filter(person => person.id !== action.payload.id)
+      // // console.log(listOtherUsers)
+      // return {
+      //   ...state,
+      //   matches: listOtherUsers
+      // }
 
 
     default:

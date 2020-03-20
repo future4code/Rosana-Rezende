@@ -8,7 +8,9 @@ import { Avatar, List, ListItem, ListText, MatchIcon,
 	//  Delete 
 } from './styled'
 
-import { getMatches, setSelectedProfile, setNewMatches } from '../../actions/profiles'
+import { getMatches, setSelectedProfile, 
+	// setNewMatches 
+} from '../../actions/profiles'
 
 // import Button from '@material-ui/core/Button';
 // import DeleteIcon from '@material-ui/icons/Delete';
@@ -82,7 +84,7 @@ const mapDispatchToProps = dispatch => ({
 	goToProfileScreen: () => dispatch(updateCurrentPage('ProfileScreen')),
 	getMatches: () => dispatch(getMatches()),
 	setSelectedProfile: (id) => dispatch(setSelectedProfile(id)),
-	setNewMatches: (id) => dispatch(setNewMatches(id))
+	// setNewMatches: (id) => dispatch(setNewMatches(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatchScreen)
