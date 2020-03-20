@@ -21,12 +21,29 @@ export const getProfile = () => async (dispatch, getState) => {
 		const result = await axios.get(
 			`${baseUrl}/person`
 		);
-		dispatch(upCountMatches()) // chama quando carrega a página
+		// dispatch(upCountMatches()) // chama quando carrega a página
 		dispatch(setProfile(result.data.profile));
 	} catch (error) {
 		console.log("Errinho lindo, preciso tratar.", error);
 	}
 };
+
+export const choosePerson = (id, choice) => async (dispatch, getState) => {
+	try {
+		const result = await axios.post(
+			`${baseUrl}/choose-person`,
+			{
+				id,
+				choice
+            }
+		);
+		dispatch(getProfile(result.data.profile));
+		// dispatch(setProfile(result.data.profile));
+	} catch (error) {
+		console.log("Errinho lindo, preciso tratar.", error);
+	}
+};
+
 
 
 export const setMatches = matches => {
@@ -50,23 +67,6 @@ export const getMatches = () => async (dispatch, getState) => {
 	}
 };
 
-
-export const choosePerson = (id, choice) => async (dispatch, getState) => {
-	try {
-		const result = await axios.post(
-			`${baseUrl}/choose-person`,
-			{
-				id,
-				choice
-            }
-		);
-		dispatch(getProfile(result.data.profile));
-		dispatch(setProfile(result.data.profile));
-			// não precisa chamar o upCountMatches, pq já tá chamando o getProfile que tem ele
-	} catch (error) {
-		console.log("Errinho lindo, preciso tratar.", error);
-	}
-};
 
 
 // basicamente, igual ao setMatches
@@ -109,23 +109,3 @@ export const setNewMatches = id => {
 		}
 	};
 };
-
-
-
-
-
-// dúvida... tem esse Id ou não? é como lá em cima?
-// export const clearOne = (id) => async (dispatch, getState) => {
-// 	try {
-// 		const result = await axios.post(
-// 			`${baseUrl}/clear`,
-// 			{
-// 				id
-// 			}
-// 		);
-// 		console.log(result.data)
-// 		// dispatch(selectedProfileToDelete(result.data.matches));
-// 	} catch (error) {
-// 		console.log("Errinho lindo, preciso tratar.", error);
-// 	}
-// };

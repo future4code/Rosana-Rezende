@@ -7,7 +7,7 @@ import {AppBar} from '../../components/AppBar'
 import {Loader} from '../../components/Loader'
 
 import {updateCurrentPage} from '../../actions/route'
-import { getProfile, choosePerson, countMatches } from '../../actions/profiles'
+import { getProfile, choosePerson, upCountMatches } from '../../actions/profiles'
 
 import {ButtonsWrapper, ContentWrapper, SwipeScreenWrapper, OptionButton, FavoriteStyle, FavoriteBorderStyle} from './styled'
 import {swipeLeft, swipeRight} from '../../components/UserSwipeCard/styled'
@@ -27,12 +27,14 @@ export class SwipeScreen extends Component {
 	componentDidMount() {
 		if (!this.props.profileToSwipe) {
 			this.props.getProfile();
+			this.props.upCountMatches()
 		}
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
 		if (prevProps.profileToSwipe !== this.props.profileToSwipe) {
 			this.setState({currentAnimation: null})
+			this.props.upCountMatches()
 		}
 	}
 
@@ -51,6 +53,8 @@ export class SwipeScreen extends Component {
 	render() {
 		const {profileToSwipe, goToMatchScreen, matchesCount} = this.props
 		const {currentAnimation} = this.state
+
+		console.log(matchesCount)
 
 		return (
 			<SwipeScreenWrapper>
@@ -75,6 +79,7 @@ export class SwipeScreen extends Component {
 						<OptionButton onClick={this.onChooseOption('dislike')} option="dislike">X</OptionButton>
 						<OptionButton onClick={this.onChooseOption('like')} option="like">♥️</OptionButton>
 					</ButtonsWrapper>
+					{/* <button>oi</button> */}
 				</ContentWrapper>
 			</SwipeScreenWrapper>
 		)
@@ -98,7 +103,7 @@ const mapDispatchToProps = (dispatch) => {
 		goToMatchScreen: () => dispatch(updateCurrentPage('MatchScreen')),
 		chooseProfile: (id, choice) => dispatch(choosePerson(id, choice)),
 		getProfile: () => dispatch(getProfile()),
-		countMatches: () => dispatch(countMatches())
+		upCountMatches: () => dispatch(upCountMatches())
 	}
 }
 
