@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Icon from '@mdi/react'
 
 export const OptionButton = styled.button`
    border-radius: 50%;
@@ -50,12 +49,6 @@ export const SwipeScreenWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-`
-
-
-export const MatchIcon = styled(Icon)`
-	display: block;
-	fill: #753192;
 `
 
 export const ButtonsWrapper = styled.div`

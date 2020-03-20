@@ -1,7 +1,8 @@
 const initialState = {
   profile: null,
   matches: [],
-  selectedPerson: null
+  selectedPerson: null,
+  matchesCount: 0
 }
 
 const profiles = (state = initialState, action) => {
@@ -23,6 +24,14 @@ const profiles = (state = initialState, action) => {
       return { 
         ...state,
         selectedPerson: user[0]
+      }
+    
+    case 'UP_COUNT_MATCHES':
+      const numberOfMatches = action.payload.count
+      // console.log(numberOfMatches)
+      return {
+        ...state,
+        matchesCount: numberOfMatches
       }
 
     default:

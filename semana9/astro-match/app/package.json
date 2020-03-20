@@ -5,6 +5,8 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
     "@mdi/font": "^4.5.95",
     "@mdi/js": "^4.5.95",
     "@mdi/react": "^1.2.1",
