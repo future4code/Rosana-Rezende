@@ -8,6 +8,8 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 ## Projeto: sagan-4used
 Semana exclusiva de **PROJETO EM GRUPO**
 
+[Repositório do projeto](https://github.com/future4code/sagan-4used)
+
 [Site do projeto](http://sagan-4used.surge.sh/)
 
 ![4used](https://user-images.githubusercontent.com/45580434/76660062-d0a09880-6556-11ea-908e-7781b400d2a6.gif)
@@ -50,16 +52,16 @@ A plataforma servirá para 2 tipos de clientes:
 
 - [X] Deve haver um carrinho que o usuário possa adicionar produtos e ver o subtotal
 
-- Na listagem de produtos o usuário deve ser capaz:
+- [X] Na listagem de produtos o usuário deve ser capaz:
     - De filtrar por:
-        - [X] Valor mínimo e máximo
-        - [X] Categoria (uma por vez)
-        - [X] Título ou descrição
+        - Valor mínimo e máximo
+        - Categoria (uma por vez)
+        - Título ou descrição
 
     - De ordenar por:
-        - [X] Nome
-        - [X] Preço
-        - [X] Categoria
+        - Nome
+        - Preço
+        - Categoria
 
 - [X] Todo produto deve conter, no mínimo, os seguintes campos:
     - Nome
