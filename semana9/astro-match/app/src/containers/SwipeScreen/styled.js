@@ -1,4 +1,14 @@
 import styled from 'styled-components'
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
+export const FavoriteStyle = styled(FavoriteIcon)`
+  color: #4AA397;
+`
+
+export const FavoriteBorderStyle = styled(FavoriteBorderIcon)`
+  color: #4AA397;
+`
 
 export const OptionButton = styled.button`
    border-radius: 50%;

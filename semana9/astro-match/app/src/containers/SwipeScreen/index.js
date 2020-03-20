@@ -9,13 +9,11 @@ import {Loader} from '../../components/Loader'
 import {updateCurrentPage} from '../../actions/route'
 import { getProfile, choosePerson, countMatches } from '../../actions/profiles'
 
-import {ButtonsWrapper, ContentWrapper, SwipeScreenWrapper, OptionButton} from './styled'
+import {ButtonsWrapper, ContentWrapper, SwipeScreenWrapper, OptionButton, FavoriteStyle, FavoriteBorderStyle} from './styled'
 import {swipeLeft, swipeRight} from '../../components/UserSwipeCard/styled'
 
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 
 export class SwipeScreen extends Component {
@@ -61,7 +59,7 @@ export class SwipeScreen extends Component {
 						<Badge 
 							badgeContent={matchesCount} 
 							color="secondary">
-							{matchesCount > 0 ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+							{matchesCount > 0 ? <FavoriteStyle /> : <FavoriteBorderStyle />}
 						</Badge>
 					</IconButton>
 				}
