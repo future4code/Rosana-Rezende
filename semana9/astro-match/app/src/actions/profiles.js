@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/astroMatch/rosana'
 
+
 export const clearSwipes = () => async (dispatch) => {
 	await axios.put(`${baseUrl}/clear`)
 	dispatch(upCountMatches()) // atualiza quando limpo
@@ -113,6 +114,13 @@ export const setSelectedProfile = id => {
 		}
 	};
 };
+
+
+export function hideMessage() {
+    return {
+        type: 'HIDE_MESSAGE',
+    }
+}
 
 
 // deletando match

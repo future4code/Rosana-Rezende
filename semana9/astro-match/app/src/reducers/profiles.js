@@ -45,6 +45,12 @@ const profiles = (state = initialState, action) => {
         ...state,
         makeMatch: result
       }
+    
+    case 'HIDE_MESSAGE':
+      return {
+        ...state,
+        makeMatch: false
+      }
 
     
       // deletando match

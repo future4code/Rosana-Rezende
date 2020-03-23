@@ -7,7 +7,7 @@ import { AppBar } from '../../components/AppBar'
 import { Loader } from '../../components/Loader'
 
 import { updateCurrentPage } from '../../actions/route'
-import { getProfile, choosePerson, upCountMatches } from '../../actions/profiles'
+import { getProfile, choosePerson, upCountMatches, hideMessage } from '../../actions/profiles'
 
 import { ButtonsWrapper, ContentWrapper, SwipeScreenWrapper, 
 	OptionButton, FavoriteStyle, FavoriteBorderStyle, Message
@@ -16,6 +16,7 @@ import { swipeLeft, swipeRight } from '../../components/UserSwipeCard/styled'
 
 import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
+import { Close } from '@material-ui/icons'
 
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 
@@ -55,7 +56,7 @@ export class SwipeScreen extends Component {
 	}
 
 	render() {
-		const { profileToSwipe, goToMatchScreen, matchesCount, makeMatch } = this.props
+		const { profileToSwipe, goToMatchScreen, matchesCount, makeMatch, hideMessage } = this.props
 		const { currentAnimation } = this.state
 		// console.log(makeMatch)
 
@@ -85,6 +86,7 @@ export class SwipeScreen extends Component {
 						</ButtonsWrapper>
 					</ContentWrapper>
 				</SwipeScreenWrapper>
+
 				{makeMatch && (
 				<SnackbarContent aria-describedby="client-snackbar"
 					message={
@@ -92,11 +94,11 @@ export class SwipeScreen extends Component {
 							<p>Deu Match na última tentativa... Vai lá espiar, ou continue ♥️</p>
 							</Message>
 					}
-					// action={[
-					// 	<IconButton key="close" aria-label="Close" color="inherit">
-					// 	  <CloseIcon />
-					// 	</IconButton>,
-					//   ]}
+					action={[
+						<IconButton key="close" aria-label="Close" color="inherit">
+						  <Close onClick={hideMessage} />
+						</IconButton>,
+					  ]}
 				></SnackbarContent>
 				)}
 			</>
@@ -122,7 +124,8 @@ const mapDispatchToProps = (dispatch) => {
 		goToMatchScreen: () => dispatch(updateCurrentPage('MatchScreen')),
 		chooseProfile: (id, choice) => dispatch(choosePerson(id, choice)),
 		getProfile: () => dispatch(getProfile()),
-		upCountMatches: () => dispatch(upCountMatches())
+		upCountMatches: () => dispatch(upCountMatches()),
+		hideMessage: () => dispatch(hideMessage())
 	}
 }
 
