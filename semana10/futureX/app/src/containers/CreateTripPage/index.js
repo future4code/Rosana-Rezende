@@ -36,6 +36,7 @@ class CreateTripPage extends Component {
   }
 }
 
+
 const mapDispatchToProps = dispatch => {
   return {
     goToList: () => dispatch(push(routes.list)),
