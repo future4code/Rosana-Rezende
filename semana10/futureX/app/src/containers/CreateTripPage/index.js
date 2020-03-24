@@ -8,7 +8,7 @@ import { routes } from '../Router'
 import { createTrip } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, TextField, MenuItem } from '@material-ui/core'
 
 const CreateTripWrapper = styled.form`
   width: 100%;
@@ -27,141 +27,163 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  button: {
+    width: 150,
+    margin: 40,
+  },
 };
 
 class CreateTripPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: undefined,
-      planet: undefined,
-      date: undefined,
-      description: undefined,
-      durationInDays: undefined
+      // name: undefined,
+      // planet: undefined,
+      // date: undefined,
+      // description: undefined,
+      // durationInDays: undefined
+      form: {}
     };
   }
 
   handleFieldChange = event => {
     this.setState({
-      [event.target.name]: event.target.value
+      form: {
+        ...this.state.form,
+        [event.target.name]: event.target.value
+      }
     });
   };
 
-  onCreateTrip = (e) => {
-    e.preventDefault()
-    const newName = this.state.name
-    const newPlanet = this.state.planet
-    const newDate = this.state.date
-    const newDescription = this.state.description
-    const newDurationInDays =  this.state.durationInDays
-    if(newName && newPlanet && newDate && newDescription && newDurationInDays) {
-      const trip = {
-        name: newName,
-        planet: newPlanet,
-        date: newDate,
-        description: newDescription,
-        durationInDays: newDurationInDays
-      }
-      console.log(trip)
-      // this.props.createTrip(trip)
-      this.setState({
-        name: '',
-        planet: '',
-        date: '',
-        description: '',
-        durationInDays: ''
-      })
-    } else {
-      alert('Preencha todos os campos para cadastrar uma viagem')
-    }
-  }
-
+  handleSubmission = event => {
+    event.preventDefault();
+    console.log(this.state.form);
+    // this.props.createTrip(this.state.form)
+    // this.setState({ form: '' }) // NÃO CONSEGUI LIMPAR OS CAMPOS
+  };
 
   render() {
 
-    const { name, planet, date, description, durationInDays } = this.state
+    // const { name, planet, date, description, durationInDays } = this.state
     const { classes, goToList } = this.props
+
+    const formFields = [
+      {
+        type: 'text',
+        label: 'Nome da viagem',
+        name: 'name',
+        title: '',
+        required: true,
+        pattern: '',
+      },
+      {
+        type: 'date',
+        label: 'Data',
+        name: 'date',
+        title: 'Preencha uma data após 01/01/2021',
+        required: true,
+        pattern: '',
+        min: '2021-01-01',
+      },
+      {
+        type: 'text',
+        label: 'Descrição',
+        name: 'description',
+        title: '',
+        required: true,
+        pattern: '',
+        multiline: true,
+        rows: '4'
+      },
+      {
+        type: 'number',
+        label: 'Duração',
+        name: 'durationInDays',
+        title: '',
+        required: true,
+        pattern: '',
+      },
+    ]
+
+    const planets = ['Mercúrio', 'Vênus', 'Terra', 'Marte', 'Júpiter', 'Saturno', 'Urano', 'Netuno']
 
     return (
       <>
-<AppBar position="static">
-            <Toolbar>
-              <Typography variant="h6" color="inherit" className={classes.grow}>
-                FutureX
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              FutureX
               </Typography>
-              <Button color="inherit" onClick={goToList}>Lista de Viagens</Button>
-            </Toolbar>
-          </AppBar>
-      <CreateTripWrapper>
+            <Button color="inherit" onClick={goToList}>Lista de Viagens</Button>
+          </Toolbar>
+        </AppBar>
 
-        <h4>Preencha os campos para criar uma viagem espacial.</h4>
-        <br/><br/>
+        <CreateTripWrapper onSubmit={this.handleSubmission}>
 
-        Nome da viagem: 
-        <input 
-          required
-          type='text' 
-          value={name}
-          name='name'
-          onChange={this.handleFieldChange}
-        />
-        <br/>
+          <Typography variant="h6" color="inherit">
+            Preencha os campos para criar uma viagem espacial.
+          </Typography>
 
-        Planeta:
-        <select
-          required
-          value={planet}
-          name='planet'
-          onChange={this.handleFieldChange}
-        >
-          <option value='' hidden>Selecione...</option>
-          <option value={'Mercúrio'}>Mercúrio</option>
-          <option value={'Vênus'}>Vênus</option>
-          <option value={'Terra'}>Terra</option>
-          <option value={'Marte'}>Marte</option>
-          <option value={'Júpiter'}>Júpiter</option>
-          <option value={'Saturno'}>Saturno</option>
-          <option value={'Urano'}>Urano</option>
-          <option value={'Netuno'}>Netuno</option>
-        </select>
-        <br/>
 
-        Data:
-        <input 
-          required
-          type='date' 
-          value={date}
-          name='date'
-          onChange={this.handleFieldChange}
-        />
-        <br/>
+          <TextField
+            required
+            id='planet'
+            name='planet'
+            label='Planeta'
+            value={this.state.form['planet']}
+            type='text'
+            onChange={this.handleFieldChange}
+            select  
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu,
+              },
+            }}
+            helperText={'Selecione um planeta'}  
+            margin='normal'
+            variant='outlined'
+            fullWidth
+            required
 
-        Descrição:
-        <textarea
-          required
-          value={description}
-          name='description'
-          onChange={this.handleFieldChange}
-        />
-        <br/>
+            pattern=''
+            title=''
+          >
+            {/* <MenuItem value='' hidden></MenuItem> */}
+            {planets.map(planet => (
+              <MenuItem key={planet} value={planet}>{planet}</MenuItem>
+            ))}
+          </TextField>
 
-        Duração (dias):
-        <input 
-          required
-          type='number' 
-          value={durationInDays}
-          name='durationInDays'
-          onChange={this.handleFieldChange}
-        />
-        <br/>
+          {formFields.map(field => (
+            <TextField
+              id={field.name}
+              name={field.name}
+              type={field.type}
+              label={field.label}
+              required={field.required}
+              pattern={field.pattern}
+              title={field.title}
+              min={field.min}
+              multiline={field.multiline}
+              rows={field.rows}
+              margin='normal'
+              variant='outlined'
+              fullWidth
+              value={this.state.form[field.name]}
+              onChange={this.handleFieldChange}
+            />
+          ))}       
 
-        <button
-          onClick={this.onCreateTrip}
+        <Button
+          variant='contained' 
+          color='primary' 
+          className={classes.button}
+          type='submit'
         >
           Cadastrar
-        </button>
+        </Button>
 
-      </CreateTripWrapper>
+        </CreateTripWrapper>
       </>
     );
   }

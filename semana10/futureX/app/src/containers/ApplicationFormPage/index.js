@@ -31,16 +31,9 @@ const styles = {
     width: 150,
     margin: 40,
   },
-
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-
-  menu: {
-    width: 200,
-  },
-
+  // menu: {
+  //   width: 200,
+  // },
 };
 
 class ApplicationFormPage extends Component {
