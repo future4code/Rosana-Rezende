@@ -37,11 +37,6 @@ class CreateTripPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // name: undefined,
-      // planet: undefined,
-      // date: undefined,
-      // description: undefined,
-      // durationInDays: undefined
       form: {}
     };
   }
@@ -64,7 +59,6 @@ class CreateTripPage extends Component {
 
   render() {
 
-    // const { name, planet, date, description, durationInDays } = this.state
     const { classes, goToList } = this.props
 
     const formFields = [
@@ -130,8 +124,8 @@ class CreateTripPage extends Component {
             id='planet'
             name='planet'
             label='Planeta'
-            value={this.state.form['planet']}
             type='text'
+            value={this.state.form['planet']  || ''}
             onChange={this.handleFieldChange}
             select  
             SelectProps={{
@@ -143,13 +137,14 @@ class CreateTripPage extends Component {
             margin='normal'
             variant='outlined'
             fullWidth
-            pattern=''
-            title=''
+            inputProps={{ 
+              pattern: '',
+              title: ''
+            }}
             InputLabelProps={{
               shrink: true,
             }}
           >
-            {/* <MenuItem value='' hidden></MenuItem> */}
             {planets.map(planet => (
               <MenuItem key={planet} value={planet}>{planet}</MenuItem>
             ))}
@@ -158,19 +153,24 @@ class CreateTripPage extends Component {
           {formFields.map(field => (
             <TextField
               id={field.name}
+              key={field.name}
               name={field.name}
               type={field.type}
               label={field.label}
               required={field.required}
-              pattern={field.pattern}
-              title={field.title}
+              inputProps={{ 
+                pattern: field.pattern,
+                title: field.title
+              }}
+              // pattern={field.pattern}
+              // title={field.title}
               min={field.min}
               multiline={field.multiline}
               rows={field.rows}
               margin='normal'
               variant='outlined'
               fullWidth
-              value={this.state.form[field.name]}
+              value={this.state.form[field.name]  || ''}
               onChange={this.handleFieldChange}
               InputLabelProps={{
                 shrink: true,

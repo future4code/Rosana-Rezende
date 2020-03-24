@@ -42,9 +42,10 @@ const addTrip = (trip) => ({
 export const createTrip = trip => async (dispatch) => {
 
 	try {
-		const response = await axios.post(`${baseUrl}/trips`, {trip: trip})
-		console.log(response.data)
-        dispatch(addTrip())
+		// const response = await axios.post(`${baseUrl}/trips`, {trip: trip})
+		// console.log(response.data)
+		// dispatch(addTrip())
+		console.log('Deu certo', trip)
     } catch(error) {
         console.log('Errinho lindo no createTrip, preciso tratar', error)
     }
@@ -52,12 +53,13 @@ export const createTrip = trip => async (dispatch) => {
 }
 
 
-
-export const applyToTrip = (id, application) => async (dispatch) => {
-
+export const applyToTrip = (form) => async (dispatch) => {
 	try {
-		const response = await axios.post(`${baseUrl}/trips/${id}/apply`, {application: application})
-
+		const apllication = {...form}
+		const id = form.tripSelectedId
+		delete apllication.tripSelectedId
+		// console.log('Deu certo', 'apllication: ', apllication, 'id: ', id)
+		await axios.post(`${baseUrl}/trips/${id}/apply`, apllication)
 	} catch(error) {
         console.log('Errinho lindo no applyToTrip, preciso tratar', error)
     }
