@@ -8,7 +8,7 @@ import { routes } from '../Router'
 import { createTrip } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, TextField, MenuItem } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core'
 
 const CreateTripWrapper = styled.form`
   width: 100%;
@@ -52,14 +52,25 @@ class CreateTripPage extends Component {
 
   handleSubmission = event => {
     event.preventDefault();
-    console.log(this.state.form);
-    // this.props.createTrip(this.state.form)
-    // this.setState({ form: '' }) // NÃO CONSEGUI LIMPAR OS CAMPOS
+    // console.log(this.state.form);
+    this.props.createTrip(this.state.form)
+    this.setState({
+      form: {
+        [event.target.name]: ''
+      }
+    })
   };
 
   render() {
 
     const { classes, goToList } = this.props
+    
+    let today = new Date();
+    let month = JSON.stringify(today.getMonth()+1)
+    if(month < 10) {
+      month = '0'+month
+    }
+    let dateNow = today.getFullYear()+'-'+month+'-'+today.getDate()
 
     const formFields = [
       {
@@ -67,35 +78,34 @@ class CreateTripPage extends Component {
         label: 'Nome da viagem',
         name: 'name',
         required: true,
-        pattern: '[a-zA-Z]{5,}',
+        pattern: '[a-zA-Z ]{5,}',
         title: 'Nome da viagem, no mínimo 5 letras',
       },
       {
         type: 'date',
         label: 'Data',
         name: 'date',
-        title: 'Preencha uma data após 01/01/2021',
         required: true,
-        pattern: '',
-        min: '2021-01-01',
+        min: dateNow,
+        // pattern: '',
+        // title: 'Preencha uma data após 01/01/2021',
       },
       {
         type: 'text',
         label: 'Descrição',
         name: 'description',
-        title: '',
         required: true,
-        pattern: '',
         multiline: true,
-        rows: '4'
+        rows: '4',
+        pattern: '[a-zA-Z ]{30,}',
+        title: 'Descrição, no mínimo 30 letras',
       },
       {
         type: 'number',
         label: 'Duração',
         name: 'durationInDays',
-        title: '',
         required: true,
-        pattern: '',
+        min: '50'
       },
     ]
 
@@ -118,35 +128,29 @@ class CreateTripPage extends Component {
             Preencha os campos para criar uma viagem espacial.
           </Typography>
 
-
           <TextField
-            required
             id='planet'
             name='planet'
             label='Planeta'
             type='text'
             value={this.state.form['planet']  || ''}
             onChange={this.handleFieldChange}
-            select  
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu,
-              },
-            }}
-            helperText={'Selecione um planeta'}  
             margin='normal'
             variant='outlined'
             fullWidth
-            inputProps={{ 
-              pattern: '',
-              title: ''
-            }}
             InputLabelProps={{
               shrink: true,
             }}
+            select  
+            helperText={'Selecione um planeta'}  
+            SelectProps={{
+              native: true,
+              required: true
+            }}
           >
+            <option value='' hidden></option>
             {planets.map(planet => (
-              <MenuItem key={planet} value={planet}>{planet}</MenuItem>
+              <option key={planet} value={planet}>{planet}</option>
             ))}
           </TextField>
 
@@ -160,11 +164,9 @@ class CreateTripPage extends Component {
               required={field.required}
               inputProps={{ 
                 pattern: field.pattern,
-                title: field.title
+                title: field.title,
+                min: field.min
               }}
-              // pattern={field.pattern}
-              // title={field.title}
-              min={field.min}
               multiline={field.multiline}
               rows={field.rows}
               margin='normal'

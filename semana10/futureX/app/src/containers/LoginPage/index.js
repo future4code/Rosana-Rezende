@@ -22,10 +22,6 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
   button: {
     width: 150,
     margin: 40,
@@ -36,20 +32,38 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      form: {}
     };
   }
 
   handleFieldChange = event => {
     this.setState({
-      [event.target.name]: event.target.value
+      form: {
+        ...this.state.form,
+        [event.target.name]: event.target.value
+      }
     });
   };
 
+  handleSubmission = event => {
+    event.preventDefault();
+    // this.props.minhaAcao(this.state.form)
+    // console.log(this.state.form)
+    this.setState({
+      form: {
+        [event.target.name]: ''
+      }
+    })
+    this.props.goToList()
+  };
+
   render() {
-    const { email, password } = this.state;
-    const { classes, goToList } = this.props
+    const { classes } = this.props
+
+    const formField = [
+      { name: 'email', type: 'email', label: 'Email' },
+      { name: 'password', type: 'password', label: 'Senha' }
+    ]
 
     return (
       <>
@@ -58,29 +72,39 @@ class LoginPage extends Component {
               <Typography variant="h6" color="inherit" className={classes.grow}>
                 FutureX
               </Typography>
-              {/* <Button color="inherit">Login</Button> */}
             </Toolbar>
           </AppBar>
-      <LoginWrapper>
-        <TextField
-          onChange={this.handleFieldChange}
-          name="email"
-          type="email"
-          label="E-mail"
-          value={email}
-        />
-        <TextField
-          onChange={this.handleFieldChange}
-          name="password"
-          type="password"
-          label="Password"
-          value={password}
-        />
+
+      <LoginWrapper onSubmit={this.handleSubmission}>
+
+          <Typography variant="h6" color="inherit"> 
+            Preencha os campos para fazer login:
+          </Typography>
+
+          {formField.map(field => (
+            <TextField
+              key={field.name}
+              id={field.name}
+              name={field.name}
+              type={field.type}
+              label={field.label}
+              required
+              margin='normal'
+              variant='outlined'
+              value={this.state.form[field.name] || ''}
+              onChange={this.handleFieldChange}
+            />
+          ))}
+          
         <Button 
+          type='submit'
           variant='contained' 
           color='primary' 
           className={classes.button}
-          onClick={goToList}>Login</Button>
+        >
+            Login
+        </Button>
+
       </LoginWrapper>
       </>
     );

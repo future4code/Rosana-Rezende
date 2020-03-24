@@ -8,22 +8,23 @@ import { routes } from '../Router'
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 
-const TripDetailsWrapper = styled.form`
-  width: 100%;
+const TripDetailsWrapper = styled.div`
+  width: 90vw;
+  margin: auto
   min-height: 90vh;
   gap: 10px;
   place-content: center;
-  justify-items: center;
   display: grid;
-`;
+`
+
+const DivTitle = styled.div`
+  text-align: center;
+  margin-bottom: 2rem;
+`
 
 const styles = {
   grow: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
   },
 };
 
@@ -34,37 +35,48 @@ class TripDetailsPage extends Component {
     };
   }
   render() {
-    
+
     const { classes, goToList, trip } = this.props
+    // console.log(trip)
 
     return (
       <>
-      <AppBar position="static">
-                  <Toolbar>
-                    <Typography variant="h6" color="inherit" className={classes.grow}>
-                      FutureX
-                    </Typography>
-                    <Button color="inherit" onClick={goToList}>Lista de Viagens</Button>
-                  </Toolbar>
-                </AppBar>
-      <TripDetailsWrapper>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              FutureX
+            </Typography>
+            <Button color="inherit" onClick={goToList}>
+              Lista de Viagens
+            </Button>
+          </Toolbar>
+        </AppBar>
 
-        Nome: {trip.name}
-        <br/>
+        <TripDetailsWrapper>
 
-        Planeta: {trip.planet}
-        <br/>
+          <DivTitle>
+            <Typography component="p" variant="h5" color="inherit">
+              Detalhes da viagem '<strong>{trip.name}</strong>'
+          </Typography>
+          </DivTitle>
 
-        Data: {trip.date}
-        <br/>
+          <Typography component="p" variant="h6" color="inherit">
+            <strong>Planeta: </strong>{trip.planet}
+          </Typography>
 
-        Duração: {trip.durationInDays}
-        <br/>
+          <Typography component="p" variant="h6" color="inherit">
+            <strong>Data:</strong> {trip.date}
+          </Typography>
 
-        Descrição: {trip.description}
-        <br/>
+          <Typography component="p" variant="h6" color="inherit">
+            <strong>Duração:</strong> {trip.durationInDays} dias
+        </Typography>
 
-      </TripDetailsWrapper>
+          <Typography component="p" variant="h6" color="inherit">
+            <strong>Descrição:</strong> {trip.description}
+          </Typography>
+
+        </TripDetailsWrapper>
       </>
     );
   }

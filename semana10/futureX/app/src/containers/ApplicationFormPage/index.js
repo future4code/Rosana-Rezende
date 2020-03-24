@@ -8,10 +8,7 @@ import { routes } from '../Router'
 import { getTrips, applyToTrip } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import {
-  AppBar, Toolbar, Typography, Button, TextField, MenuItem,
-  // Select, OutlinedInput, FormControl, InputLabel
-} from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core'
 
 const ApplicationFormWrapper = styled.form`
   width: 100%;
@@ -59,20 +56,12 @@ class ApplicationFormPage extends Component {
 
   handleSubmission = event => {
     event.preventDefault();
-    if (this.state.form['country']) {
-      if (this.state.form['tripSelectedId']) {
-        this.props.applyToTrip(this.state.form)
-        this.setState({
-          form: {
-            [event.target.name]: ''
-          }
-        })
-      } else {
-        alert('Preencha o campo de Viagem para continuar')
+    this.props.applyToTrip(this.state.form)
+    this.setState({
+      form: {
+        [event.target.name]: ''
       }
-    } else {
-      alert('Preencha o campo de País para continuar')
-    }
+    })
   };
 
   render() {
@@ -191,64 +180,31 @@ class ApplicationFormPage extends Component {
               name={select.name}
               type={select.type}
               label={select.label}
-              required={select.required}
-              inputProps={{
-                pattern: select.pattern,
-                title: select.title
-              }}
+              value={this.state.form[select.name]}
+              onChange={this.handleFieldChange}
               margin='normal'
               variant='outlined'
               fullWidth
-              value={this.state.form[select.name] || undefined}
-              onChange={this.handleFieldChange}
               select
               helperText={select.helperText}
               InputLabelProps={{
                 shrink: true,
               }}
+              SelectProps={{
+                native: true,
+                required: true
+              }}
             >
-              <MenuItem value=''>Selecione...</MenuItem>
+              <option value='' hidden></option>
               {select.options === trips ?
                 select.options.map(option =>
-                  <MenuItem key={option.id} value={option.id}>{option.name} - {option.planet}</MenuItem >)
+                  <option key={option.id} value={option.id}>{option.name} - {option.planet}</option >)
                 :
                 select.options.map(option =>
-                  <MenuItem key={option} value={option}>{option}</MenuItem >)
+                  <option key={option} value={option}>{option}</option >)
               }
             </TextField>
           ))}
-
-
-          {/* <FormControl 
-            variant="outlined" 
-            margin='normal'
-            fullWidth 
-          >
-            <InputLabel htmlFor="country" shrink>
-              País
-            </InputLabel>
-            <Select
-              native
-              required
-              value={this.state.form['country'] || ''}
-              onChange={this.handleFieldChange}
-              input={
-                <OutlinedInput
-                  key={'country'}
-                  id={'country'}
-                  name={'country'}
-                  type={'text'}
-                  label={'País'}
-                  helperText='Selecione um país'
-                />
-              }
-            >
-              <option>Selecione...</option>
-              {coutrys.map(option =>
-                <option key={option} value={option}>{option}</option >)
-              }
-            </Select>
-          </FormControl> */}
 
           <Button
             variant='contained'

@@ -8,7 +8,7 @@ import { routes } from '../Router'
 import { getTrips, setSeletctedTrip } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, Card, CardContent, CardActions } from '@material-ui/core'
 
 const ListTripsWrapper = styled.form`
   width: 100%;
@@ -22,25 +22,27 @@ const ListTripsWrapper = styled.form`
 const Trips = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `
 
-const Trip = styled.div`
-  margin: 1rem;
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 1rem;
-  text-align: center;
+const CardTrip = styled(Card)`
   width: 15vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1rem;
+  text-align: center;
+  align-items: center;
 `
 
 const styles = {
   grow: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
+  button: {
+    margin: 10,
+  }
+
 };
 
 class ListTripsPage extends Component {
@@ -63,7 +65,7 @@ class ListTripsPage extends Component {
 
   render() {
 
-    const { classes, goToCreate, trips } = this.props
+    const { classes, goToCreate, goToHome, trips } = this.props
     // console.log(trips)
 
     return (
@@ -73,23 +75,42 @@ class ListTripsPage extends Component {
               <Typography variant="h6" color="inherit" className={classes.grow}>
                 FutureX
               </Typography>
-              <Button color="inherit" onClick={goToCreate}>Criar Viagem</Button>
+              <Button color="inherit" onClick={goToCreate} className={classes.button}>Criar Viagem</Button>
+              <Button color="inherit" 
+                onClick={goToHome}
+              >
+                Logout
+              </Button>
             </Toolbar>
           </AppBar>
       <ListTripsWrapper>
 
-        <h2>Lista de viagens espaciais</h2>
+        <Typography variant="h4" color="inherit" className={classes.grow}>
+        Lista de viagens espaciais
+        </Typography>
 
         <Trips>
 
-        { trips.map(trip => (
-          <Trip key={trip.id}>
-            <p>{trip.name}</p>
-            <button onClick={() => this.clickDatail(trip.id)}>Detalhes</button>
-          </Trip>
+        {trips.map(trip => (
+          <CardTrip key={trip.id}>
+              <CardContent>
+                <Typography>
+                  {trip.name}
+                </Typography>
+              </CardContent>
+            <CardActions>
+              <Button size="small" color="primary"
+                onClick={() => this.clickDatail(trip.id)}
+              >
+                Detalhes
+              </Button>
+
+            </CardActions>
+          </CardTrip>
         ))}
 
         </Trips>
+
 
 
 
@@ -107,6 +128,7 @@ const mapDispatchToProps = dispatch => {
   return {
     goToCreate: () => dispatch(push(routes.create)),
     goToDetails: () => dispatch(push(routes.details)),
+    goToHome: () => dispatch(push(routes.home)),
     getTrips: () => dispatch(getTrips()),
     setSeletctedTrip: (id) => dispatch(setSeletctedTrip(id))
   }
