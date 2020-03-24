@@ -127,9 +127,7 @@ class ApplicationFormPage extends Component {
         <Typography variant="h6" color="inherit">
         Preencha os dados abaixo para se candidata a uma viagem:
         </Typography>
-
-        {/* <div> */}
-
+        
         <TextField
           // id="outlined-name"
           label="Nome"
@@ -204,7 +202,6 @@ class ApplicationFormPage extends Component {
           fullWidth
           select
           SelectProps={{
-            // native: true,
             MenuProps: {
               className: classes.menu,
             },
@@ -234,8 +231,6 @@ class ApplicationFormPage extends Component {
           })}
         </select> */}
 
-        {/* </div> */}
-
         <Button
           variant='contained' 
           color='primary' 
@@ -244,8 +239,6 @@ class ApplicationFormPage extends Component {
         >
           Aplicar
         </Button>
-
-
 
       </ApplicationFormWrapper>
       </>
