@@ -47,14 +47,16 @@ class HomePage extends Component {
             </Toolbar>
           </AppBar>
         <HomeWrapper>
-          <h1>HomePage</h1>
           <p>Bem vindx ao <strong>FutureX</strong>, sua plataforma de gerenciamento de viagens espaciais</p>
-          <button onClick={goToLogin}>
-            Login
-        </button>
-          <button onClick={goToApllication}>
-            Formulário de aplicação
-        </button>
+          <img src={'https://user-images.githubusercontent.com/45580434/77418220-5ddcbc00-6da5-11ea-9516-76b0d18b3813.png'}/>
+          <div>
+            <button onClick={goToLogin}>
+              Login
+          </button>
+            <button onClick={goToApllication}>
+              Formulário de aplicação
+          </button>
+          </div>
         </HomeWrapper>
       </>
     );

@@ -11,7 +11,7 @@ import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 
 const LoginWrapper = styled.form`
   width: 100%;
-  height: 100vh;
+  min-height: 90vh;
   gap: 10px;
   place-content: center;
   justify-items: center;
