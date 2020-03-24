@@ -26,6 +26,10 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  button: {
+    width: 150,
+    margin: 40,
+  }
 };
 
 class LoginPage extends Component {
@@ -72,7 +76,11 @@ class LoginPage extends Component {
           label="Password"
           value={password}
         />
-        <Button onClick={goToList}>Login</Button>
+        <Button 
+          variant='contained' 
+          color='primary' 
+          className={classes.button}
+          onClick={goToList}>Login</Button>
       </LoginWrapper>
       </>
     );

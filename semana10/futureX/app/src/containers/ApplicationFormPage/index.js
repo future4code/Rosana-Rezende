@@ -8,7 +8,7 @@ import { routes } from '../Router'
 import { getTrips, applyToTrip } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, TextField, MenuItem   } from '@material-ui/core'
 
 const ApplicationFormWrapper = styled.form`
   width: 100%;
@@ -27,6 +27,20 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
+  button: {
+    width: 150,
+    margin: 40,
+  },
+
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+
+  menu: {
+    width: 200,
+  },
+
 };
 
 class ApplicationFormPage extends Component {
@@ -107,56 +121,106 @@ class ApplicationFormPage extends Component {
               <Button color="inherit" onClick={goToLogin}>Login</Button>
             </Toolbar>
           </AppBar>
+      
       <ApplicationFormWrapper>
-
+        
+        <Typography variant="h6" color="inherit">
         Preencha os dados abaixo para se candidata a uma viagem:
-        <br/><br/>
+        </Typography>
 
-        Nome:
-        <input
+        {/* <div> */}
+
+        <TextField
+          // id="outlined-name"
+          label="Nome"
+          margin="normal"
+          variant="outlined"
           type='text'
           name='name'
           value={name}
           onChange={this.handleFieldChange}
+          fullWidth
         />
-        <br/>
 
-        Idade:
-        <input
+        <TextField
+          // id="outlined-name"
+          label="Idade"
+          margin="normal"
+          variant="outlined"
           type='number'
           name='age'
           value={age}
           onChange={this.handleFieldChange}
+          fullWidth
         />
-        <br/>
 
-        Texto de aplicação:
-        <textarea
+        <TextField
+          // id="outlined-multiline-static"
+          label="Texto de aplicação"
+          multiline
+          rows="4"
+          margin="normal"
+          variant="outlined"
           type='text'
           name='text'
           value={text}
           onChange={this.handleFieldChange}
+          fullWidth
         />
-        <br/>
 
-        Profissão:
-        <input
+        <TextField
+          // id="outlined-name"
+          label="Profissão"
+          margin="normal"
+          variant="outlined"
           type='text'
           name='profession'
           value={profession}
           onChange={this.handleFieldChange}
+          fullWidth
         />
 
-        País:
-        <input
+        <TextField
+          // id="outlined-name"
+          label="País"
+          margin="normal"
+          variant="outlined"
           type='text'
           name='country'
           value={country}
           onChange={this.handleFieldChange}
+          fullWidth
         />
-        <br/>
 
-        Viagem:
+        <TextField
+          // id="outlined-name"
+          label="Viagem"
+          margin="normal"
+          variant="outlined"
+          // type='text'
+          name='tripSelectedId'
+          value={tripSelectedId}
+          onChange={this.handleFieldChange}
+          fullWidth
+          select
+          SelectProps={{
+            // native: true,
+            MenuProps: {
+              className: classes.menu,
+            },
+          }}
+          helperText="Selecione uma viagem"
+        > 
+          <option value='' hidden></option>
+          {trips.map(trip => {
+            return (
+              <MenuItem key={trip.id} value={trip.id}>{trip.name}</MenuItem >
+            )
+          })}
+        </TextField>
+
+
+        {/* Viagem:
         <select
           name='tripSelectedId'
           value={tripSelectedId}
@@ -168,13 +232,18 @@ class ApplicationFormPage extends Component {
               <option value={trip.id}>{trip.name}</option>
             )
           })}
-        </select>
+        </select> */}
 
-        <button
+        {/* </div> */}
+
+        <Button
+          variant='contained' 
+          color='primary' 
+          className={classes.button}
           onClick={this.toAplly}
         >
           Aplicar
-        </button>
+        </Button>
 
 
 
