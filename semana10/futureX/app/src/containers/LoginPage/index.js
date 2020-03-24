@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 
 import { routes } from '../Router'
+
+import { withStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
 
 const LoginWrapper = styled.form`
   width: 100%;
@@ -15,6 +17,16 @@ const LoginWrapper = styled.form`
   justify-items: center;
   display: grid;
 `;
+
+const styles = {
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 class LoginPage extends Component {
   constructor(props) {
@@ -33,9 +45,18 @@ class LoginPage extends Component {
 
   render() {
     const { email, password } = this.state;
-    const { goToList } = this.props
+    const { classes, goToList } = this.props
 
     return (
+      <>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" color="inherit" className={classes.grow}>
+                FutureX
+              </Typography>
+              {/* <Button color="inherit">Login</Button> */}
+            </Toolbar>
+          </AppBar>
       <LoginWrapper>
         <TextField
           onChange={this.handleFieldChange}
@@ -53,6 +74,7 @@ class LoginPage extends Component {
         />
         <Button onClick={goToList}>Login</Button>
       </LoginWrapper>
+      </>
     );
   }
 }
@@ -63,4 +85,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default connect(null, mapDispatchToProps)(withStyles(styles)(LoginPage));

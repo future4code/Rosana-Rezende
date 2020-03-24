@@ -19,6 +19,14 @@ const trips = (state = initialState, action) => {
                 ...state,
                 selectedTrip: trip[0]
             }
+        
+        // NÃO DEU CERTO
+        case 'ADD_TRIP':
+            const listTrip = [...state.trip, action.payload.trip]
+            return {
+                ...state,
+                trips: listTrip
+            }
 
         default:
             return state

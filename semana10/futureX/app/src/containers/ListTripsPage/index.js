@@ -7,6 +7,9 @@ import { routes } from '../Router'
 
 import { getTrips, setSeletctedTrip } from '../../actions'
 
+import { withStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+
 const ListTripsWrapper = styled.form`
   width: 100%;
   height: 100vh;
@@ -15,6 +18,30 @@ const ListTripsWrapper = styled.form`
   justify-items: center;
   display: grid;
 `;
+
+const Trips = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const Trip = styled.div`
+  margin: 1rem;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 1rem;
+  text-align: center;
+  width: 15vw;
+`
+
+const styles = {
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 class ListTripsPage extends Component {
   constructor(props) {
@@ -36,25 +63,38 @@ class ListTripsPage extends Component {
 
   render() {
 
-    const { goToCreate, trips } = this.props
+    const { classes, goToCreate, trips } = this.props
     // console.log(trips)
 
     return (
+      <>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" color="inherit" className={classes.grow}>
+                FutureX
+              </Typography>
+              <Button color="inherit" onClick={goToCreate}>Criar Viagem</Button>
+            </Toolbar>
+          </AppBar>
       <ListTripsWrapper>
-        <h1>ListTripsPage</h1>
 
-        <button onClick={goToCreate}>Criar viagem</button>
+        <h2>Lista de viagens espaciais</h2>
 
+        <Trips>
 
         { trips.map(trip => (
-          <div key={trip.id}>
+          <Trip key={trip.id}>
             <p>{trip.name}</p>
             <button onClick={() => this.clickDatail(trip.id)}>Detalhes</button>
-          </div>
+          </Trip>
         ))}
+
+        </Trips>
+
 
 
       </ListTripsWrapper>
+      </>
     );
   }
 }
@@ -72,4 +112,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListTripsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ListTripsPage));

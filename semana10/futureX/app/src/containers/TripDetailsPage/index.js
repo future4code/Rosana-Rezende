@@ -5,6 +5,9 @@ import styled from "styled-components";
 
 import { routes } from '../Router'
 
+import { withStyles } from '@material-ui/core/styles';
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+
 const TripDetailsWrapper = styled.form`
   width: 100%;
   height: 100vh;
@@ -14,6 +17,16 @@ const TripDetailsWrapper = styled.form`
   display: grid;
 `;
 
+const styles = {
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
+
 class TripDetailsPage extends Component {
   constructor(props) {
     super(props);
@@ -22,13 +35,19 @@ class TripDetailsPage extends Component {
   }
   render() {
     
-    const { goToList, trip } = this.props
+    const { classes, goToList, trip } = this.props
 
     return (
+      <>
+      <AppBar position="static">
+                  <Toolbar>
+                    <Typography variant="h6" color="inherit" className={classes.grow}>
+                      FutureX
+                    </Typography>
+                    <Button color="inherit" onClick={goToList}>Lista de Viagens</Button>
+                  </Toolbar>
+                </AppBar>
       <TripDetailsWrapper>
-        <h1>TripDetailsPage</h1>
-        
-        <button onClick={goToList}>Lista de Viagens</button>
 
         Nome: {trip.name}
         <br/>
@@ -46,6 +65,7 @@ class TripDetailsPage extends Component {
         <br/>
 
       </TripDetailsWrapper>
+      </>
     );
   }
 }
@@ -60,4 +80,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TripDetailsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TripDetailsPage));
