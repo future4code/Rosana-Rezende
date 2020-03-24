@@ -72,9 +72,9 @@ class CreateTripPage extends Component {
         type: 'text',
         label: 'Nome da viagem',
         name: 'name',
-        title: '',
         required: true,
-        pattern: '',
+        pattern: '[a-zA-Z]{5,}',
+        title: 'Nome da viagem, no mínimo 5 letras',
       },
       {
         type: 'date',
@@ -143,10 +143,11 @@ class CreateTripPage extends Component {
             margin='normal'
             variant='outlined'
             fullWidth
-            required
-
             pattern=''
             title=''
+            InputLabelProps={{
+              shrink: true,
+            }}
           >
             {/* <MenuItem value='' hidden></MenuItem> */}
             {planets.map(planet => (
@@ -171,6 +172,9 @@ class CreateTripPage extends Component {
               fullWidth
               value={this.state.form[field.name]}
               onChange={this.handleFieldChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           ))}       
 

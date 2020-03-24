@@ -168,6 +168,9 @@ class ApplicationFormPage extends Component {
             fullWidth
             value={this.state.form[field.name]}
             onChange={this.handleFieldChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         ))}
 
@@ -192,7 +195,10 @@ class ApplicationFormPage extends Component {
                 className: classes.menu,
               },
             }}
-            helperText={select.helperText}          
+            helperText={select.helperText}
+            InputLabelProps={{
+              shrink: true,
+            }}          
           >
             {/* <MenuItem value='' hidden></MenuItem> */}
             {select.options === trips ? 
