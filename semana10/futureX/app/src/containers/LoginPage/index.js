@@ -57,8 +57,8 @@ class LoginPage extends Component {
     const { classes } = this.props
 
     const loginDataField = [
-      { name: 'email', type: 'email', label: 'Email' },
-      { name: 'password', type: 'password', label: 'Senha' }
+      { name: 'email', type: 'email', label: 'Email', placeholder: 'teste@email.com' },
+      { name: 'password', type: 'password', label: 'Senha', placeholder: '1234' }
     ]
 
     return (
@@ -84,6 +84,7 @@ class LoginPage extends Component {
               name={field.name}
               type={field.type}
               label={field.label}
+              placeholder={field.placeholder}
               required
               margin='normal'
               variant='outlined'
