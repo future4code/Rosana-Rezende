@@ -7,7 +7,7 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Projeto: FutureX
 
-[Site do projeto](xxx)
+[Site do projeto](http://futurex-rosana.surge.sh/)
 
 <p align="center">
   <img  height='500' src='xx'>
@@ -20,8 +20,10 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ### Escopo do projeto
 Criar uma plataforma de gerenciamento de viagens espaciais.
-<br><br>
+<br>
 
+[Documentação da API FutureX](https://documenter.getpostman.com/view/7549981/SW14Vd4b?version=latest)
+<br><br>
 
 #### Requisitos
 
