@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 import styled from "styled-components";
 
 import { routes } from '../Router'
+import { decideCandidate } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent, CardActions } from '@material-ui/core'
@@ -11,16 +12,20 @@ import { Input } from '@material-ui/icons';
 
 const TripDetailsWrapper = styled.div`
   width: 90vw;
-  margin: auto
-  min-height: 90vh;
+  margin: auto;
+  min-height: 80vh;
   gap: 10px;
   place-content: center;
   display: grid;
+  padding: 2rem;
 `
 
-const DivTitle = styled.div`
+const DivCenter = styled.div`
   text-align: center;
-  margin-bottom: 0.5rem;
+`
+
+const CardActionsStyled = styled(CardActions)`
+  text-align: center;
 `
 
 const DivCandidates = styled.div`
@@ -35,6 +40,7 @@ const CardCandidate = styled(Card)`
   flex-direction: column;
   justify-content: space-between;
   margin: 1rem;
+  padding: 1rem 0.5rem;
   /* text-align: center; */
   /* align-items: center; */
 `
@@ -56,12 +62,13 @@ class TripDetailsPage extends Component {
   }
 
   componentDidMount() {
-    const { goToLogin } = this.props
+    const { goToLogin, trip, goToList } = this.props
     const token = localStorage.getItem('token')
     if (token === null) {
       goToLogin() //redireciona pra login
     }
   }
+
 
   logout = () => {
     const { goToHome } = this.props
@@ -71,7 +78,7 @@ class TripDetailsPage extends Component {
 
   render() {
 
-    const { classes, goToList, goToHome, trip } = this.props
+    const { classes, goToList, goToHome, trip, decideCandidate } = this.props
     console.log(trip)
 
     return (
@@ -80,18 +87,15 @@ class TripDetailsPage extends Component {
           <Toolbar>
             <Typography
               variant="h6" color="inherit" className={classes.logo}
-              onClick={goToHome}
-            >
+              onClick={goToHome}>
               FutureX
             </Typography>
             <div className={classes.grow} />
             <Button color="inherit" onClick={goToList}>
               Lista de Viagens
             </Button>
-            <IconButton
-              color="inherit"
-              onClick={this.logout}
-            >
+            <IconButton color="inherit"
+              onClick={this.logout}>
               <Input />
             </IconButton>
           </Toolbar>
@@ -99,11 +103,11 @@ class TripDetailsPage extends Component {
 
         <TripDetailsWrapper>
 
-          <DivTitle>
+          <DivCenter>
             <Typography component="p" variant="h5" color="inherit">
-              Detalhes da viagem '<strong>{trip.name}</strong>'
+              Detalhes da viagem <strong>{trip.name}</strong>
           </Typography>
-          </DivTitle>
+          </DivCenter>
 
           <Typography component="p" variant="h6" color="inherit">
             <strong>Planeta: </strong>{trip.planet}
@@ -121,6 +125,39 @@ class TripDetailsPage extends Component {
             <strong>Descrição:</strong> {trip.description}
           </Typography>
 
+          {trip.approved && trip.approved.length > 0 ? 
+           (<>
+            <Typography component="p" variant="h6" color="inherit">
+              <strong>Aprovados:</strong>
+            </Typography>
+            <DivCandidates>
+            {trip.approved.map(candidate => (
+                <CardCandidate key={candidate.id}>
+                  <DivCenter>
+                      <Typography variant="h5">{candidate.name}</Typography>
+                    </DivCenter>
+                  <CardContent>
+                    <Typography><strong>Idade: </strong>{candidate.age} anos</Typography>
+                    <Typography><strong>Profissão: </strong>{candidate.profession}</Typography>
+                    <Typography><strong>País: </strong>{candidate.country}</Typography>
+                    <Typography><strong>Texto de aplicação: </strong>{candidate.applicationText}</Typography>
+                  </CardContent>
+                  {/* <DivCenter>
+                    <Button color="primary"
+                      onClick={() => decideCandidate(trip.id, candidate.id)}>
+                      Desaprovar
+                    </Button>
+                  </DivCenter> */}
+                </CardCandidate>
+            ))}
+            </DivCandidates>
+          </>)
+          : 
+          (<Typography component="p" variant="h6" color="inherit">
+            <strong>Aprovados: </strong> não há aprovados para essa viagem!
+          </Typography>)
+          }
+
           {trip.candidates && trip.candidates.length > 0 
           ?
             (<>
@@ -129,16 +166,22 @@ class TripDetailsPage extends Component {
               </Typography>
               <DivCandidates>
               {trip.candidates.map(candidate => (
-                  <CardCandidate>
-                    <CardContent>
-                      <DivTitle>
+                  <CardCandidate key={candidate.id}>
+                    <DivCenter>
                         <Typography variant="h5">{candidate.name}</Typography>
-                      </DivTitle>
+                      </DivCenter>
+                    <CardContent>
                       <Typography><strong>Idade: </strong>{candidate.age} anos</Typography>
                       <Typography><strong>Profissão: </strong>{candidate.profession}</Typography>
                       <Typography><strong>País: </strong>{candidate.country}</Typography>
                       <Typography><strong>Texto de aplicação: </strong>{candidate.applicationText}</Typography>
                     </CardContent>
+                    <DivCenter>
+                      <Button color="primary"
+                        onClick={() => decideCandidate(trip.id, candidate.id)}>
+                        Aprovar
+                      </Button>
+                    </DivCenter>
                   </CardCandidate>
               ))}
               </DivCandidates>
@@ -148,6 +191,8 @@ class TripDetailsPage extends Component {
               <strong>Candidatos: </strong>Não há candidatos para essa viagem!
             </Typography>)
           }
+
+          
 
         </TripDetailsWrapper>
       </>
@@ -163,7 +208,8 @@ const mapDispatchToProps = dispatch => {
   return {
     goToList: () => dispatch(push(routes.list)),
     goToLogin: () => dispatch(push(routes.login)),
-    goToHome: () => dispatch(push(routes.home))
+    goToHome: () => dispatch(push(routes.home)),
+    decideCandidate: (tripId, candidateId) => dispatch(decideCandidate(tripId, candidateId))
   }
 }
 

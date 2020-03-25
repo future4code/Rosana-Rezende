@@ -38,11 +38,8 @@ const CardTrip = styled(Card)`
 const DivTitle = styled.div`
   text-align: center;
   margin-bottom: 0.5rem;
-  height: 70%;
+  min-height: 8vw;
 `
-
-
-
 
 const styles = {
   grow: {
@@ -69,7 +66,7 @@ class ListTripsPage extends Component {
     getTrips()
   }
 
-  clickDatail = (tripId) => {
+  clickDetail = (tripId) => {
     const { goToDetails, getTripDetail } = this.props
     goToDetails()
     // console.log(tripId)
@@ -140,8 +137,8 @@ class ListTripsPage extends Component {
                   </div>
                 </CardContent>
                 <CardActions>
-                  <Button size="small" color="primary"
-                    onClick={() => this.clickDatail(trip.id)}
+                  <Button color="primary"
+                    onClick={() => this.clickDetail(trip.id)}
                   >
                     Detalhes
                   </Button>

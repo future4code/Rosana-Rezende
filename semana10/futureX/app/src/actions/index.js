@@ -102,3 +102,20 @@ export const createTrip = trip => async (dispatch) => {
 	}
 }
 
+export const decideCandidate = (tripId, candidateId) => async (dispatch) => {
+	try {
+		const token = localStorage.getItem('token')
+		// console.log(tripId)
+		// console.log(candidateId)
+		await axios.put(
+			`${baseUrl}/trips/${tripId}/candidates/${candidateId}/decide`,
+			{ "approve": true },
+			{ headers: { auth: token } }
+			)
+		alert('Candidato aprovado com sucesso!')
+		// dispatch(getTripDetail())
+	} catch (error) {
+		console.error(error.message)
+		alert('Não foi possível realizar a escolha! Tente novamente mais tarde.')
+	}
+}
