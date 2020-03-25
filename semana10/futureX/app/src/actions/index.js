@@ -2,7 +2,6 @@ import axios from 'axios'
 import { push } from "connected-react-router";
 import { routes } from '../containers/Router'
 
-
 const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/futureX/rosana'
 
 const setTrips = (trips) => ({
@@ -77,7 +76,7 @@ export const login = (loginData) => async (dispatch) => {
 
 		// console.log(response.data) // retorna sucess, token e user
 		const token = response.data.token
-		window.localStorage.setItem('token', token)
+		localStorage.setItem('token', token)
 
 		// entro na página de listas
 		dispatch(push(routes.list))

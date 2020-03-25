@@ -53,14 +53,19 @@ class ListTripsPage extends Component {
   }
 
   componentDidMount() {
-    this.props.getTrips()
+    const { goToLogin, getTrips } = this.props
+    const token = localStorage.getItem('token')
+    if (token === null) {
+      goToLogin() //redireciona pra login
+    }
+    getTrips()
   }
 
   clickDatail = (tripId) => {
-    this.props.goToDetails()
-    // enviar os detalhes da trip
+    const { goToDetails, setSeletctedTrip } = this.props
+    goToDetails()
     // console.log(tripId)
-    this.props.setSeletctedTrip(tripId)
+    setSeletctedTrip(tripId) // enviar o Id da trip
   }
 
   render() {
@@ -70,51 +75,46 @@ class ListTripsPage extends Component {
 
     return (
       <>
-          <AppBar position="static">
-            <Toolbar>
-              <Typography variant="h6" color="inherit" className={classes.grow}>
-                FutureX
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              FutureX
               </Typography>
-              <Button color="inherit" onClick={goToCreate} className={classes.button}>Criar Viagem</Button>
-              <Button color="inherit" 
-                onClick={goToHome}
-              >
-                Logout
+            <Button color="inherit" onClick={goToCreate} className={classes.button}>Criar Viagem</Button>
+            <Button color="inherit"
+              onClick={goToHome}
+            >
+              Logout
               </Button>
-            </Toolbar>
-          </AppBar>
-      <ListTripsWrapper>
+          </Toolbar>
+        </AppBar>
 
-        <Typography variant="h4" color="inherit" className={classes.grow}>
-        Lista de viagens espaciais
-        </Typography>
+        <ListTripsWrapper>
 
-        <Trips>
+          <Typography variant="h4" color="inherit" className={classes.grow}>
+            Lista de viagens espaciais
+          </Typography>
 
-        {trips.map(trip => (
-          <CardTrip key={trip.id}>
-              <CardContent>
-                <Typography>
-                  {trip.name}
-                </Typography>
-              </CardContent>
-            <CardActions>
-              <Button size="small" color="primary"
-                onClick={() => this.clickDatail(trip.id)}
-              >
-                Detalhes
-              </Button>
+          <Trips>
+            {trips.map(trip => (
+              <CardTrip key={trip.id}>
+                <CardContent>
+                  <Typography>
+                    {trip.name}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small" color="primary"
+                    onClick={() => this.clickDatail(trip.id)}
+                  >
+                    Detalhes
+                  </Button>
+                </CardActions>
+              </CardTrip>
+            ))}
+          </Trips>
 
-            </CardActions>
-          </CardTrip>
-        ))}
-
-        </Trips>
-
-
-
-
-      </ListTripsWrapper>
+        </ListTripsWrapper>
       </>
     );
   }
@@ -129,6 +129,7 @@ const mapDispatchToProps = dispatch => {
     goToCreate: () => dispatch(push(routes.create)),
     goToDetails: () => dispatch(push(routes.details)),
     goToHome: () => dispatch(push(routes.home)),
+    goToLogin: () => dispatch(push(routes.login)),
     getTrips: () => dispatch(getTrips()),
     setSeletctedTrip: (id) => dispatch(setSeletctedTrip(id))
   }
