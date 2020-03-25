@@ -45,7 +45,9 @@ class TripDetailsPage extends Component {
 
   render() {
 
-    const { classes, goToList, trip } = this.props
+    const { classes, goToList, 
+      // trip 
+    } = this.props
     // console.log(trip)
 
     return (
@@ -65,24 +67,24 @@ class TripDetailsPage extends Component {
 
           <DivTitle>
             <Typography component="p" variant="h5" color="inherit">
-              Detalhes da viagem '<strong>{trip.name}</strong>'
+              {/* Detalhes da viagem '<strong>{trip.name}</strong>' */}
           </Typography>
           </DivTitle>
 
           <Typography component="p" variant="h6" color="inherit">
-            <strong>Planeta: </strong>{trip.planet}
+            {/* <strong>Planeta: </strong>{trip.planet} */}
           </Typography>
 
           <Typography component="p" variant="h6" color="inherit">
-            <strong>Data:</strong> {trip.date}
+            {/* <strong>Data:</strong> {trip.date} */}
           </Typography>
 
           <Typography component="p" variant="h6" color="inherit">
-            <strong>Duração:</strong> {trip.durationInDays} dias
+            {/* <strong>Duração:</strong> {trip.durationInDays} dias */}
         </Typography>
 
           <Typography component="p" variant="h6" color="inherit">
-            <strong>Descrição:</strong> {trip.description}
+            {/* <strong>Descrição:</strong> {trip.description} */}
           </Typography>
 
         </TripDetailsWrapper>

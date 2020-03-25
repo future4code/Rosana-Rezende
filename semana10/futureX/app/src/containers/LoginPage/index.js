@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { push } from "connected-react-router";
 
 import { login } from '../../actions'
+import { routes } from '../Router'
 
 import styled from "styled-components";
 import { withStyles } from '@material-ui/core/styles';
@@ -54,7 +56,7 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { classes } = this.props
+    const { classes, goToHome } = this.props
 
     const loginDataField = [
       { name: 'email', type: 'email', label: 'Email', placeholder: 'teste@email.com' },
@@ -68,6 +70,11 @@ class LoginPage extends Component {
               <Typography variant="h6" color="inherit" className={classes.grow}>
                 FutureX
               </Typography>
+              <Button color="inherit"
+              onClick={goToHome}
+            >
+              Home
+            </Button>
             </Toolbar>
           </AppBar>
 
@@ -109,7 +116,8 @@ class LoginPage extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  login: (loginData) => dispatch(login(loginData))
+  login: (loginData) => dispatch(login(loginData)),
+  goToHome: () => dispatch(push(routes.home)),
 
 })
 

@@ -10,12 +10,14 @@ import TripDetailsPage from '../TripDetailsPage'
 import ApplicationFormPage from '../ApplicationFormPage'
 
 export const routes = {
+  // páginas públicas
   home: '/',
+  application: '/application-form',
   login: '/login',
+  // páginas privadas
   create: '/trips/create',
   list: '/trips/list',
   details: '/trips/details',
-  application: '/application-form',
 };
 
 function Router(props) {

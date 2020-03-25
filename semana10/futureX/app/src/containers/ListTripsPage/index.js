@@ -84,8 +84,8 @@ class ListTripsPage extends Component {
             <Button color="inherit"
               onClick={goToHome}
             >
-              Logout
-              </Button>
+              Home
+            </Button>
           </Toolbar>
         </AppBar>
 

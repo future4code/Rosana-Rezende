@@ -136,8 +136,8 @@ class ApplicationFormPage extends Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               FutureX
               </Typography>
-            <Button color="inherit" onClick={goToHome}>Voltar</Button>
             <Button color="inherit" onClick={goToLogin}>Login</Button>
+            <Button color="inherit" onClick={goToHome}>Home</Button>
           </Toolbar>
         </AppBar>
 
