@@ -73,7 +73,7 @@ class ApplicationFormPage extends Component {
 
     const formFields = [
       {
-        type: 'text',
+        type: 'text', 
         label: 'Nome',
         name: 'name',
         required: true,

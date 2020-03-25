@@ -1,6 +1,7 @@
 const initialState = {
     trips: [],
-    selectedTrip: null
+    // selectedTrip: null,
+    tripDetail: {}
 }
 
 const trips = (state = initialState, action) => {
@@ -11,13 +12,11 @@ const trips = (state = initialState, action) => {
                 ...state,
                 trips: action.payload.trips
             }
-
-        case 'SET_SELECTED_TRIP':
-            const trip = state.trips.filter(trip => trip.id === action.payload.id)
-            // console.log(trip)
+        
+        case 'SET_TRIP_DETAIL':
             return {
                 ...state,
-                selectedTrip: trip[0]
+                tripDetail: action.payload.trip
             }
 
         default:

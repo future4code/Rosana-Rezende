@@ -21,16 +21,6 @@ export const getTrips = () => async (dispatch) => {
 
 }
 
-
-export const setSeletctedTrip = id => {
-	return {
-		type: "SET_SELECTED_TRIP",
-		payload: {
-			id: id
-		}
-	};
-};
-
 // const myAuth = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkNmbjZPd0YyOVU5TDJSYzV0UWo1IiwiZW1haWwiOiJhc3Ryb2RldkBnbWFpbC5jb20uYnIiLCJpYXQiOjE1NzMxNDc5NDV9.cTNMopD35hMpOo34LhvFmmZJmUCrFUQdFECJnG7EvL4'
 
 export const createTrip = trip => async (dispatch) => {
@@ -85,5 +75,30 @@ export const login = (loginData) => async (dispatch) => {
 		console.error(error.message)
 		alert('Email e/ou senha inválidos')		
 	}
-
 }
+
+const setTripDetail = (trip) => ({
+	type: 'SET_TRIP_DETAIL',
+	payload: {
+		trip
+	}
+})
+
+export const getTripDetail = id => async (dispatch) => {
+	// console.log(id)
+	try {
+		const token = localStorage.getItem('token')
+		const response = await axios.get(`${baseUrl}/trip/${id}?=`, {
+			headers: {
+				auth: token
+			}
+		})
+		dispatch(setTripDetail(response.data.trip))
+	} catch (error) {
+		console.error(error.message)
+		alert('Não foi possível acessar os detalhes da mensagem')
+	}
+
+
+};
+

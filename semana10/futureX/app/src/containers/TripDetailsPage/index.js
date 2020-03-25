@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { routes } from '../Router'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent, CardActions } from '@material-ui/core'
 import { Input } from '@material-ui/icons';
 
 const TripDetailsWrapper = styled.div`
@@ -20,7 +20,23 @@ const TripDetailsWrapper = styled.div`
 
 const DivTitle = styled.div`
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
+`
+
+const DivCandidates = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
+const CardCandidate = styled(Card)`
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1rem;
+  /* text-align: center; */
+  /* align-items: center; */
 `
 
 const styles = {
@@ -29,7 +45,7 @@ const styles = {
   },
   logo: {
     cursor: 'pointer',
-  },  
+  },
 };
 
 class TripDetailsPage extends Component {
@@ -48,29 +64,27 @@ class TripDetailsPage extends Component {
   }
 
   logout = () => {
-    const { goToHome} = this.props
+    const { goToHome } = this.props
     localStorage.removeItem('token') //senão fica sempre logado
     goToHome()
   }
 
   render() {
 
-    const { classes, goToList, goToHome
-      // trip 
-    } = this.props
-    // console.log(trip)
+    const { classes, goToList, goToHome, trip } = this.props
+    console.log(trip)
 
     return (
       <>
         <AppBar position="static">
           <Toolbar>
-            <Typography 
+            <Typography
               variant="h6" color="inherit" className={classes.logo}
               onClick={goToHome}
             >
               FutureX
             </Typography>
-            <div className={classes.grow}/>
+            <div className={classes.grow} />
             <Button color="inherit" onClick={goToList}>
               Lista de Viagens
             </Button>
@@ -78,7 +92,7 @@ class TripDetailsPage extends Component {
               color="inherit"
               onClick={this.logout}
             >
-              <Input/>
+              <Input />
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -87,25 +101,52 @@ class TripDetailsPage extends Component {
 
           <DivTitle>
             <Typography component="p" variant="h5" color="inherit">
-              {/* Detalhes da viagem '<strong>{trip.name}</strong>' */}
+              Detalhes da viagem '<strong>{trip.name}</strong>'
           </Typography>
           </DivTitle>
 
           <Typography component="p" variant="h6" color="inherit">
-            {/* <strong>Planeta: </strong>{trip.planet} */}
+            <strong>Planeta: </strong>{trip.planet}
           </Typography>
 
           <Typography component="p" variant="h6" color="inherit">
-            {/* <strong>Data:</strong> {trip.date} */}
+            <strong>Data:</strong> {trip.date}
           </Typography>
 
           <Typography component="p" variant="h6" color="inherit">
-            {/* <strong>Duração:</strong> {trip.durationInDays} dias */}
+            <strong>Duração:</strong> {trip.durationInDays} dias
         </Typography>
 
           <Typography component="p" variant="h6" color="inherit">
-            {/* <strong>Descrição:</strong> {trip.description} */}
+            <strong>Descrição:</strong> {trip.description}
           </Typography>
+
+          {trip.candidates ?
+            (<>
+              <Typography component="p" variant="h6" color="inherit">
+                <strong>Candidatos:</strong>
+              </Typography>
+              <DivCandidates>
+              {trip.candidates.map(candidate => (
+                  <CardCandidate>
+                    <CardContent>
+                      <DivTitle>
+                        <Typography variant="h5">{candidate.name}</Typography>
+                      </DivTitle>
+                      <Typography><strong>Idade: </strong>{candidate.age} anos</Typography>
+                      <Typography><strong>Profissão: </strong>{candidate.profession}</Typography>
+                      <Typography><strong>País: </strong>{candidate.country}</Typography>
+                      <Typography><strong>Texto de aplicação: </strong>{candidate.applicationText}</Typography>
+                    </CardContent>
+                  </CardCandidate>
+              ))}
+              </DivCandidates>
+            </>)
+            :
+            (<Typography component="p" variant="h6" color="inherit">
+              <strong>Candidatos: </strong>Não há candidatos para essa viagem!
+            </Typography>)
+          }
 
         </TripDetailsWrapper>
       </>
@@ -114,7 +155,7 @@ class TripDetailsPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  trip: state.trips.selectedTrip
+  trip: state.trips.tripDetail
 })
 
 const mapDispatchToProps = dispatch => {

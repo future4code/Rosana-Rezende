@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import { routes } from '../Router'
 
-import { getTrips, setSeletctedTrip } from '../../actions'
+import { getTrips, getTripDetail } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent, CardActions } from '@material-ui/core'
@@ -32,9 +32,17 @@ const CardTrip = styled(Card)`
   flex-direction: column;
   justify-content: space-between;
   margin: 1rem;
-  text-align: center;
   align-items: center;
 `
+
+const DivTitle = styled.div`
+  text-align: center;
+  margin-bottom: 0.5rem;
+  height: 70%;
+`
+
+
+
 
 const styles = {
   grow: {
@@ -62,10 +70,10 @@ class ListTripsPage extends Component {
   }
 
   clickDatail = (tripId) => {
-    const { goToDetails, setSeletctedTrip } = this.props
+    const { goToDetails, getTripDetail } = this.props
     goToDetails()
     // console.log(tripId)
-    setSeletctedTrip(tripId) // enviar o Id da trip
+    getTripDetail(tripId) // enviar o Id da trip
   }
 
   logout = () => {
@@ -114,9 +122,22 @@ class ListTripsPage extends Component {
             {trips.map(trip => (
               <CardTrip key={trip.id}>
                 <CardContent>
+                  <DivTitle>
+                    <Typography variant="subtitle1">
+                      {trip.name}
+                    </Typography>
+                  </DivTitle>
+                  <div>
                   <Typography>
-                    {trip.name}
+                    <strong>Planeta: </strong>{trip.planet}
                   </Typography>
+                  <Typography>
+                   <strong>Data: </strong>{trip.date}
+                  </Typography>
+                  <Typography>
+                   <strong>Duração: </strong>{trip.durationInDays} dias
+                  </Typography>
+                  </div>
                 </CardContent>
                 <CardActions>
                   <Button size="small" color="primary"
@@ -146,7 +167,7 @@ const mapDispatchToProps = dispatch => {
     goToHome: () => dispatch(push(routes.home)),
     goToLogin: () => dispatch(push(routes.login)),
     getTrips: () => dispatch(getTrips()),
-    setSeletctedTrip: (id) => dispatch(setSeletctedTrip(id))
+    getTripDetail: (id) => dispatch(getTripDetail(id))
   }
 }
 
