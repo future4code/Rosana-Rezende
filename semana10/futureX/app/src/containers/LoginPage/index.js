@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
-import TextField from "@material-ui/core/TextField";
+
+import { login } from '../../actions'
+
 import styled from "styled-components";
-
-import { routes } from '../Router'
-
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core'
 
 const LoginWrapper = styled.form`
   width: 100%;
@@ -32,14 +30,14 @@ class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {}
+      loginData: {}
     };
   }
 
   handleFieldChange = event => {
     this.setState({
-      form: {
-        ...this.state.form,
+      loginData: {
+        ...this.state.loginData,
         [event.target.name]: event.target.value
       }
     });
@@ -47,20 +45,18 @@ class LoginPage extends Component {
 
   handleSubmission = event => {
     event.preventDefault();
-    // this.props.minhaAcao(this.state.form)
-    // console.log(this.state.form)
+    this.props.login(this.state.loginData)
     this.setState({
-      form: {
+      loginData: {
         [event.target.name]: ''
       }
     })
-    this.props.goToList()
   };
 
   render() {
     const { classes } = this.props
 
-    const formField = [
+    const loginDataField = [
       { name: 'email', type: 'email', label: 'Email' },
       { name: 'password', type: 'password', label: 'Senha' }
     ]
@@ -81,7 +77,7 @@ class LoginPage extends Component {
             Preencha os campos para fazer login:
           </Typography>
 
-          {formField.map(field => (
+          {loginDataField.map(field => (
             <TextField
               key={field.name}
               id={field.name}
@@ -91,7 +87,7 @@ class LoginPage extends Component {
               required
               margin='normal'
               variant='outlined'
-              value={this.state.form[field.name] || ''}
+              value={this.state.loginData[field.name] || ''}
               onChange={this.handleFieldChange}
             />
           ))}
@@ -111,10 +107,9 @@ class LoginPage extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    goToList: () => dispatch(push(routes.list)),
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  login: (loginData) => dispatch(login(loginData))
+
+})
 
 export default connect(null, mapDispatchToProps)(withStyles(styles)(LoginPage));

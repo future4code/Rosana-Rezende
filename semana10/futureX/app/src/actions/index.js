@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { push } from "connected-react-router";
+import { routes } from '../containers/Router'
+
 
 const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/futureX/rosana'
 
@@ -63,4 +66,25 @@ export const applyToTrip = (form) => async (dispatch) => {
 	} catch (error) {
 		console.log('Errinho lindo no applyToTrip, preciso tratar', error)
 	}
+}
+
+
+
+export const login = (loginData) => async (dispatch) => {
+	try {
+		// console.log(loginData)
+		const response = await axios.post(`${baseUrl}/login`, loginData) // verica se usuário ou senhas estão corretos
+
+		// console.log(response.data) // retorna sucess, token e user
+		const token = response.data.token
+		window.localStorage.setItem('token', token)
+
+		// entro na página de listas
+		dispatch(push(routes.list))
+
+	} catch (error) {
+		console.error(error.message)
+		alert('Email e/ou senha inválidos')		
+	}
+
 }
