@@ -52,6 +52,7 @@ export const applyToTrip = (form) => async (dispatch) => {
 		delete apllication.tripSelectedId
 		// console.log('Deu certo', 'apllication: ', apllication, 'id: ', id)
 		await axios.post(`${baseUrl}/trips/${id}/apply`, apllication)
+		alert('Aplicação feita com sucesso!')
 	} catch (error) {
 		console.log('Errinho lindo no applyToTrip, preciso tratar', error)
 	}

@@ -117,7 +117,7 @@ class ApplicationFormPage extends Component {
         title: '',
         required: true,
         pattern: '',
-        helperText: 'Selecione um país',
+        helperText: 'Selecione um país...',
         options: coutrys
       },
       {
@@ -127,7 +127,7 @@ class ApplicationFormPage extends Component {
         title: '',
         required: true,
         pattern: '',
-        helperText: 'Selecione uma viagem',
+        helperText: 'Selecione uma viagem...',
         options: trips
       },
     ]
@@ -186,13 +186,13 @@ class ApplicationFormPage extends Component {
               name={select.name}
               type={select.type}
               label={select.label}
-              value={this.state.form[select.name]}
+              value={this.state.form[select.name] || ''}
               onChange={this.handleFieldChange}
               margin='normal'
               variant='outlined'
               fullWidth
               select
-              helperText={select.helperText}
+              // helperText={select.helperText}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -201,7 +201,7 @@ class ApplicationFormPage extends Component {
                 required: true
               }}
             >
-              <option value='' hidden></option>
+              <option value=''>{select.helperText}</option>
               {select.options === trips ?
                 select.options.map(option =>
                   <option key={option.id} value={option.id}>{option.name} - {option.planet}</option >)
