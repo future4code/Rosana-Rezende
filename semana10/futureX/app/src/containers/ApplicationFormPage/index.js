@@ -23,6 +23,9 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  logo: {
+    cursor: 'pointer',
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -133,11 +136,14 @@ class ApplicationFormPage extends Component {
       <>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
+            <Typography 
+              variant="h6" color="inherit" className={classes.logo}
+              onClick={goToHome}
+            >
               FutureX
-              </Typography>
+            </Typography>
+            <div className={classes.grow}/>
             <Button color="inherit" onClick={goToLogin}>Login</Button>
-            <Button color="inherit" onClick={goToHome}>Home</Button>
           </Toolbar>
         </AppBar>
 

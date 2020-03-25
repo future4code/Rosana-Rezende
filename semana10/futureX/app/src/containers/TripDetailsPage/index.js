@@ -26,6 +26,9 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  logo: {
+    cursor: 'pointer',
+  },  
 };
 
 class TripDetailsPage extends Component {
@@ -45,7 +48,7 @@ class TripDetailsPage extends Component {
 
   render() {
 
-    const { classes, goToList, 
+    const { classes, goToList, goToHome
       // trip 
     } = this.props
     // console.log(trip)
@@ -54,9 +57,13 @@ class TripDetailsPage extends Component {
       <>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
+            <Typography 
+              variant="h6" color="inherit" className={classes.logo}
+              onClick={goToHome}
+            >
               FutureX
             </Typography>
+            <div className={classes.grow}/>
             <Button color="inherit" onClick={goToList}>
               Lista de Viagens
             </Button>
@@ -101,6 +108,7 @@ const mapDispatchToProps = dispatch => {
   return {
     goToList: () => dispatch(push(routes.list)),
     goToLogin: () => dispatch(push(routes.login)),
+    goToHome: () => dispatch(push(routes.home))
   }
 }
 

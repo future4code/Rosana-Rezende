@@ -23,6 +23,9 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  logo: {
+    cursor: 'pointer',
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -71,7 +74,7 @@ class CreateTripPage extends Component {
 
   render() {
 
-    const { classes, goToList } = this.props
+    const { classes, goToList, goToHome } = this.props
     
     let today = new Date();
     let month = JSON.stringify(today.getMonth()+1)
@@ -123,9 +126,13 @@ class CreateTripPage extends Component {
       <>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
+            <Typography 
+              variant="h6" color="inherit" className={classes.logo}
+              onClick={goToHome}
+            >
               FutureX
-              </Typography>
+            </Typography>
+            <div className={classes.grow}/>
             <Button color="inherit" onClick={goToList}>Lista de Viagens</Button>
           </Toolbar>
         </AppBar>
@@ -208,6 +215,7 @@ const mapDispatchToProps = dispatch => {
   return {
     goToList: () => dispatch(push(routes.list)),
     goToLogin: () => dispatch(push(routes.login)),
+    goToHome: () => dispatch(push(routes.home)),
     createTrip: (trip) => dispatch(createTrip(trip))
   }
 }

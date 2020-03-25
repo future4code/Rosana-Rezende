@@ -39,10 +39,9 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
-  button: {
-    margin: 10,
-  }
-
+  logo: {
+    cursor: 'pointer',
+  },
 };
 
 class ListTripsPage extends Component {
@@ -77,14 +76,17 @@ class ListTripsPage extends Component {
       <>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              FutureX
-              </Typography>
-            <Button color="inherit" onClick={goToCreate} className={classes.button}>Criar Viagem</Button>
-            <Button color="inherit"
+          <Typography 
+              variant="h6" color="inherit" className={classes.logo}
               onClick={goToHome}
             >
-              Home
+              FutureX
+            </Typography>
+            <div className={classes.grow}/>
+            <Button color="inherit" 
+              onClick={goToCreate} 
+            >
+              Criar Viagem
             </Button>
           </Toolbar>
         </AppBar>

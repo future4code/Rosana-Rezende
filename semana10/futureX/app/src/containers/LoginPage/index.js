@@ -22,6 +22,9 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  logo: {
+    cursor: 'pointer',
+  },
   button: {
     width: 150,
     margin: 40,
@@ -67,14 +70,13 @@ class LoginPage extends Component {
       <>
           <AppBar position="static">
             <Toolbar>
-              <Typography variant="h6" color="inherit" className={classes.grow}>
+              <Typography 
+                variant="h6" color="inherit" className={classes.logo}
+                onClick={goToHome}
+              >
                 FutureX
               </Typography>
-              <Button color="inherit"
-              onClick={goToHome}
-            >
-              Home
-            </Button>
+              <div className={classes.grow}/>
             </Toolbar>
           </AppBar>
 
