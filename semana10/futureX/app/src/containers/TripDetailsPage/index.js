@@ -121,7 +121,8 @@ class TripDetailsPage extends Component {
             <strong>Descrição:</strong> {trip.description}
           </Typography>
 
-          {trip.candidates ?
+          {trip.candidates && trip.candidates.length > 0 
+          ?
             (<>
               <Typography component="p" variant="h6" color="inherit">
                 <strong>Candidatos:</strong>

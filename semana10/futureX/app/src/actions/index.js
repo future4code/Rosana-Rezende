@@ -16,49 +16,11 @@ export const getTrips = () => async (dispatch) => {
 		const response = await axios.get(`${baseUrl}/trips`)
 		dispatch(setTrips(response.data.trips))
 	} catch (error) {
-		console.log('Errinho lindo no getTrips, preciso tratar', error)
+		console.error(error.message)
+		alert('Não foi possível acessar a lista de viagens')
 	}
 
 }
-
-// const myAuth = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkNmbjZPd0YyOVU5TDJSYzV0UWo1IiwiZW1haWwiOiJhc3Ryb2RldkBnbWFpbC5jb20uYnIiLCJpYXQiOjE1NzMxNDc5NDV9.cTNMopD35hMpOo34LhvFmmZJmUCrFUQdFECJnG7EvL4'
-
-export const createTrip = trip => async (dispatch) => {
-	try {
-		const tripFormated = {
-			name: trip.name,
-			planet: trip.planet,
-			date: trip.date,
-			description: trip.description,
-			durationInDays: trip.durationInDays
-		}
-		console.log('Deu certo', tripFormated)
-		// await axios.post(
-		// 	`${baseUrl}/trips`,
-		// 	tripFormated,
-		// 	{
-		// 		headers: { auth: myAuth }
-		// 	})
-	} catch (error) {
-		console.log('Errinho lindo no createTrip, preciso tratar', error)
-	}
-}
-
-
-export const applyToTrip = (form) => async (dispatch) => {
-	try {
-		const apllication = { ...form }
-		const id = form.tripSelectedId
-		delete apllication.tripSelectedId
-		// console.log('Deu certo', 'apllication: ', apllication, 'id: ', id)
-		await axios.post(`${baseUrl}/trips/${id}/apply`, apllication)
-		alert('Aplicação feita com sucesso!')
-	} catch (error) {
-		console.log('Errinho lindo no applyToTrip, preciso tratar', error)
-	}
-}
-
-
 
 export const login = (loginData) => async (dispatch) => {
 	try {
@@ -97,9 +59,46 @@ export const getTripDetail = id => async (dispatch) => {
 		dispatch(setTripDetail(response.data.trip))
 	} catch (error) {
 		console.error(error.message)
-		alert('Não foi possível acessar os detalhes da mensagem')
+		alert('Não foi possível acessar os detalhes da viagem selecionada')
 	}
-
-
 };
+
+export const applyToTrip = (form) => async (dispatch) => {
+	try {
+		const apllication = { ...form }
+		const id = form.tripSelectedId
+		delete apllication.tripSelectedId
+		// console.log('Deu certo', 'apllication: ', apllication, 'id: ', id)
+		await axios.post(`${baseUrl}/trips/${id}/apply`, apllication)
+		alert('Aplicação feita com sucesso!')
+	} catch (error) {
+		console.error(error.message)
+		alert('Não foi possível realizar a aplicação! Tente novamente mais tarde.')
+	}
+}
+
+export const createTrip = trip => async (dispatch) => {
+	try {
+		const tripFormated = {
+			name: trip.name,
+			planet: trip.planet,
+			date: trip.date,
+			description: trip.description,
+			durationInDays: trip.durationInDays
+		}
+		const token = localStorage.getItem('token')
+		// console.log('Deu certo', tripFormated)
+		// console.log(token)
+		await axios.post(
+			`${baseUrl}/trips`,
+			tripFormated,
+			{
+				headers: { auth: token }
+			})
+		alert('Viagem espacial cadastrada com sucesso!')
+	} catch (error) {
+		console.error(error.message)
+		alert('Não foi possível cadastrar a viagem! Tente novamente mais tarde.')
+	}
+}
 

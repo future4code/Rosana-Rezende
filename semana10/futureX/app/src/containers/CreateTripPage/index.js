@@ -172,13 +172,13 @@ class CreateTripPage extends Component {
               shrink: true,
             }}
             select  
-            helperText={'Selecione um planeta'}  
+            // helperText={'Selecione um planeta'}  
             SelectProps={{
               native: true,
               required: true
             }}
           >
-            <option value='' hidden></option>
+            <option value=''>Selecione um planeta...</option>
             {planets.map(planet => (
               <option key={planet} value={planet}>{planet}</option>
             ))}
