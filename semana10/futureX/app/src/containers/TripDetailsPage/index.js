@@ -6,7 +6,8 @@ import styled from "styled-components";
 import { routes } from '../Router'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
+import { Input } from '@material-ui/icons';
 
 const TripDetailsWrapper = styled.div`
   width: 90vw;
@@ -46,6 +47,12 @@ class TripDetailsPage extends Component {
     }
   }
 
+  logout = () => {
+    const { goToHome} = this.props
+    localStorage.removeItem('token') //senão fica sempre logado
+    goToHome()
+  }
+
   render() {
 
     const { classes, goToList, goToHome
@@ -67,6 +74,12 @@ class TripDetailsPage extends Component {
             <Button color="inherit" onClick={goToList}>
               Lista de Viagens
             </Button>
+            <IconButton
+              color="inherit"
+              onClick={this.logout}
+            >
+              <Input/>
+            </IconButton>
           </Toolbar>
         </AppBar>
 

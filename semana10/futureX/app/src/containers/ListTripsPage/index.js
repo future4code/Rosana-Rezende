@@ -8,7 +8,8 @@ import { routes } from '../Router'
 import { getTrips, setSeletctedTrip } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, Card, CardContent, CardActions } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent, CardActions } from '@material-ui/core'
+import { Input } from '@material-ui/icons';
 
 const ListTripsWrapper = styled.form`
   width: 100%;
@@ -67,6 +68,12 @@ class ListTripsPage extends Component {
     setSeletctedTrip(tripId) // enviar o Id da trip
   }
 
+  logout = () => {
+    const { goToHome} = this.props
+    localStorage.removeItem('token') //senão fica sempre logado
+    goToHome()
+  }
+
   render() {
 
     const { classes, goToCreate, goToHome, trips } = this.props
@@ -88,6 +95,12 @@ class ListTripsPage extends Component {
             >
               Criar Viagem
             </Button>
+            <IconButton
+              color="inherit"
+              onClick={this.logout}
+            >
+              <Input/>
+            </IconButton>
           </Toolbar>
         </AppBar>
 

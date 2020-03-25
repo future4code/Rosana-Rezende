@@ -8,7 +8,8 @@ import { routes } from '../Router'
 import { createTrip } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, TextField, IconButton } from '@material-ui/core'
+import { Input } from '@material-ui/icons';
 
 const CreateTripWrapper = styled.form`
   width: 100%;
@@ -72,6 +73,12 @@ class CreateTripPage extends Component {
     })
   };
 
+  logout = () => {
+    const { goToHome} = this.props
+    localStorage.removeItem('token') //senão fica sempre logado
+    goToHome()
+  }
+
   render() {
 
     const { classes, goToList, goToHome } = this.props
@@ -133,7 +140,15 @@ class CreateTripPage extends Component {
               FutureX
             </Typography>
             <div className={classes.grow}/>
-            <Button color="inherit" onClick={goToList}>Lista de Viagens</Button>
+            <Button color="inherit" onClick={goToList}>
+              Lista de Viagens
+            </Button>
+            <IconButton
+              color="inherit"
+              onClick={this.logout}
+            >
+              <Input/>
+            </IconButton>
           </Toolbar>
         </AppBar>
 
