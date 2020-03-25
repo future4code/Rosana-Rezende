@@ -41,6 +41,14 @@ class CreateTripPage extends Component {
     };
   }
 
+  componentDidMount() {
+    const { goToLogin } = this.props
+    const token = localStorage.getItem('token')
+    if (token === null) {
+      goToLogin() //redireciona pra login
+    }
+  }
+
   handleFieldChange = event => {
     this.setState({
       form: {
@@ -199,6 +207,7 @@ class CreateTripPage extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     goToList: () => dispatch(push(routes.list)),
+    goToLogin: () => dispatch(push(routes.login)),
     createTrip: (trip) => dispatch(createTrip(trip))
   }
 }
