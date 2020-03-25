@@ -34,6 +34,15 @@ class TripDetailsPage extends Component {
     this.state = {
     };
   }
+
+  componentDidMount() {
+    const { goToLogin } = this.props
+    const token = localStorage.getItem('token')
+    if (token === null) {
+      goToLogin() //redireciona pra login
+    }
+  }
+
   render() {
 
     const { classes, goToList, trip } = this.props
@@ -89,6 +98,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
   return {
     goToList: () => dispatch(push(routes.list)),
+    goToLogin: () => dispatch(push(routes.login)),
   }
 }
 
