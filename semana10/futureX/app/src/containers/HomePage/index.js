@@ -38,16 +38,6 @@ const Image = styled.img`
 	}
 `
 
-const DivButtons = styled.div`
-  display: flex;
-  width: 50vw;
-  justify-content: space-around;
-
-  @media screen and (max-device-width: 1200px) {
-		width: 90vw;
-	}
-`
-
 const styles = {
   grow: {
     flexGrow: 1,
@@ -74,12 +64,12 @@ class HomePage extends Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               FutureX
               </Typography>
-            {/* <Button color="inherit">Login</Button> */}
+            <Button color="inherit" onClick={goToLogin}>Login</Button>
           </Toolbar>
         </AppBar>
 
         <HomeWrapper>
-          
+
           <DivTitle>
             <Typography variant="h5" color="inherit">
               Bem vindx ao <strong>FutureX</strong>
@@ -89,26 +79,20 @@ class HomePage extends Component {
             </Typography>
           </DivTitle>
 
-          <Image src={'https://user-images.githubusercontent.com/45580434/77418220-5ddcbc00-6da5-11ea-9516-76b0d18b3813.png'}/>
+          <Image src={'https://user-images.githubusercontent.com/45580434/77418220-5ddcbc00-6da5-11ea-9516-76b0d18b3813.png'} />
 
-          <DivButtons>
-            <Button
-              variant='contained' color='primary'
-              onClick={goToLogin}
-              className={classes.button}
-            >
-              Login
-            </Button>
-            <Button
-              variant='contained'
-              color='primary'
-              className={classes.button}
-              onClick={goToApllication}
-            >
-              Formulário de aplicação
-            </Button>
-          </DivButtons>
+          <Typography variant="h6" color="inherit">
+            Quer embarcar conosco?
+            </Typography>
 
+          <Button
+            variant='contained'
+            color='primary'
+            className={classes.button}
+            onClick={goToApllication}
+          >
+            Formulário de aplicação
+          </Button>
         </HomeWrapper>
       </>
     );

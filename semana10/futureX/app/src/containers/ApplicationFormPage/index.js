@@ -77,7 +77,7 @@ class ApplicationFormPage extends Component {
 
   render() {
 
-    const { classes, goToHome, goToLogin, trips } = this.props
+    const { classes, goToHome, trips } = this.props
 
     const formSelects = [
       {
@@ -113,7 +113,6 @@ class ApplicationFormPage extends Component {
               FutureX
             </Typography>
             <div className={classes.grow}/>
-            <Button color="inherit" onClick={goToLogin}>Login</Button>
           </Toolbar>
         </AppBar>
 
@@ -163,7 +162,6 @@ class ApplicationFormPage extends Component {
               variant='outlined'
               fullWidth
               select
-              // helperText={select.helperText}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -206,7 +204,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    goToLogin: () => dispatch(push(routes.login)),
     goToHome: () => dispatch(push(routes.home)),
     getTrips: () => dispatch(getTrips()),
     applyToTrip: (form) => dispatch(applyToTrip(form))
