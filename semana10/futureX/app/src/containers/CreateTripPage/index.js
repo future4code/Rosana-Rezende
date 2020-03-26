@@ -66,13 +66,16 @@ class CreateTripPage extends Component {
 
   handleSubmission = event => {
     event.preventDefault();
-    // console.log(this.state.form);
-    this.props.createTrip(this.state.form)
-    this.setState({
-      form: {
-        [event.target.name]: ''
-      }
-    })
+    if(this.state.form['description'].length < 30){
+      alert('O campo de descrição deve ter no mínimo 30 caracteres')
+    } else {
+      this.props.createTrip(this.state.form)
+      this.setState({
+        form: {
+          [event.target.name]: ''
+        }
+      })
+    }    
   };
 
   logout = () => {

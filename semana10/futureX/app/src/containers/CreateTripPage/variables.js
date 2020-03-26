@@ -28,8 +28,6 @@ export const formFields = [
       required: true,
       multiline: true,
       rows: '4',
-      pattern: '[a-zA-Z ]{30,}',
-      title: 'Descrição, no mínimo 30 letras',
     },
     {
       type: 'number',
