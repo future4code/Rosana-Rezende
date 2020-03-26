@@ -75,10 +75,15 @@ export const applyToTrip = (form) => async (dispatch) => {
 
 export const createTrip = trip => async (dispatch) => {
 	try {
+		let oldDate = trip.date.split('-')
+		let day = Number(oldDate[2])
+		let month = Number(oldDate[1])
+		let year = Number(oldDate[0])
+		let newDate = `${day}/${month}/${year}`
 		const tripFormated = {
 			name: trip.name,
 			planet: trip.planet,
-			date: trip.date,
+			date: newDate,
 			description: trip.description,
 			durationInDays: trip.durationInDays
 		}

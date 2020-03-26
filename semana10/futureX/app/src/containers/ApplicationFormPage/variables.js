@@ -4,7 +4,7 @@ export const formFields = [
       label: 'Nome',
       name: 'name',
       required: true,
-      pattern: '[a-zA-Z ]{3,}',
+      pattern: "[a-zA-Zà-úÀ-ú ]{3,}", // no mínimo 3 letras
       title: 'O campo de nome deve ter no mínimo 3 caracteres',
     },
     {
@@ -27,7 +27,7 @@ export const formFields = [
       label: 'Profissão',
       name: 'profession',
       required: true,
-      pattern: '[a-zA-Z ]{10,}',
+      pattern: '.{10,}', // no mínimo 10 caracteres
       title: 'O campo de profissão deve ter no mínimo 10 caracteres',
     },
   ]
