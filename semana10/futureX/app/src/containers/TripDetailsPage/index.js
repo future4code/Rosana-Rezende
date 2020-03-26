@@ -97,7 +97,7 @@ class TripDetailsPage extends Component {
   render() {
 
     const { classes, goToList, goToHome, trip, decideCandidate } = this.props
-    console.log(trip)
+    // console.log(trip)
 
     return (
       <>

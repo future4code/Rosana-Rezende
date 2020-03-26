@@ -26,14 +26,10 @@ export const login = (loginData) => async (dispatch) => {
 	try {
 		// console.log(loginData)
 		const response = await axios.post(`${baseUrl}/login`, loginData) // verica se usuário ou senhas estão corretos
-
 		// console.log(response.data) // retorna sucess, token e user
 		const token = response.data.token
-		localStorage.setItem('token', token)
-
-		// entro na página de listas
-		dispatch(push(routes.list))
-
+		localStorage.setItem('token', token)	
+		dispatch(push(routes.list)) // entro na página de listas
 	} catch (error) {
 		console.error(error.message)
 		alert('Email e/ou senha inválidos')		
@@ -87,8 +83,7 @@ export const createTrip = trip => async (dispatch) => {
 			durationInDays: trip.durationInDays
 		}
 		const token = localStorage.getItem('token')
-		// console.log('Deu certo', tripFormated)
-		// console.log(token)
+		// console.log('Deu certo', tripFormated, token)
 		await axios.post(
 			`${baseUrl}/trips`,
 			tripFormated,
@@ -105,8 +100,7 @@ export const createTrip = trip => async (dispatch) => {
 export const decideCandidate = (tripId, candidateId) => async (dispatch) => {
 	try {
 		const token = localStorage.getItem('token')
-		// console.log(tripId)
-		// console.log(candidateId)
+		// console.log(tripId, candidateId)
 		await axios.put(
 			`${baseUrl}/trips/${tripId}/candidates/${candidateId}/decide`,
 			{ "approve": true },

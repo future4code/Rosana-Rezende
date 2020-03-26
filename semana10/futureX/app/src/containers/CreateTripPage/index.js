@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import styled from "styled-components";
-
-import { routes } from '../Router'
-
-import { createTrip } from '../../actions'
-
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, TextField, IconButton } from '@material-ui/core'
 import { Input } from '@material-ui/icons';
+
+import { routes } from '../Router'
+import { createTrip } from '../../actions'
+import { formFields, planets } from './variables'
 
 const DivContainer = styled.div`
   display: grid;
@@ -83,55 +82,7 @@ class CreateTripPage extends Component {
   }
 
   render() {
-
-    const { classes, goToList, goToHome } = this.props
-
-    let today = new Date();
-    let month = JSON.stringify(today.getMonth() + 1)
-    if (month < 10) {
-      month = '0' + month
-    }
-    let dateNow = today.getFullYear() + '-' + month + '-' + today.getDate()
-
-    const formFields = [
-      {
-        type: 'text',
-        label: 'Nome da viagem',
-        name: 'name',
-        required: true,
-        pattern: '[a-zA-Z ]{5,}',
-        title: 'Nome da viagem, no mínimo 5 letras',
-      },
-      {
-        type: 'date',
-        label: 'Data',
-        name: 'date',
-        required: true,
-        min: dateNow,
-        // pattern: '',
-        // title: 'Preencha uma data após 01/01/2021',
-      },
-      {
-        type: 'text',
-        label: 'Descrição',
-        name: 'description',
-        required: true,
-        multiline: true,
-        rows: '4',
-        pattern: '[a-zA-Z ]{30,}',
-        title: 'Descrição, no mínimo 30 letras',
-      },
-      {
-        type: 'number',
-        label: 'Duração',
-        name: 'durationInDays',
-        required: true,
-        min: '50'
-      },
-    ]
-
-    const planets = ['Mercúrio', 'Vênus', 'Terra', 'Marte', 'Júpiter', 'Saturno', 'Urano', 'Netuno']
-
+    const { classes, goToList, goToHome } = this.props   
     return (
       <>
         <AppBar position="static">
@@ -177,7 +128,6 @@ class CreateTripPage extends Component {
                 shrink: true,
               }}
               select
-              // helperText={'Selecione um planeta'}  
               SelectProps={{
                 native: true,
                 required: true
@@ -216,8 +166,7 @@ class CreateTripPage extends Component {
             ))}
 
             <Button variant='contained' color='primary'
-              className={classes.button}
-              type='submit'
+              className={classes.button} type='submit'
             >
               Cadastrar
             </Button>

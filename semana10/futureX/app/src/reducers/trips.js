@@ -11,7 +11,7 @@ const trips = (state = initialState, action) => {
                 ...state,
                 trips: action.payload.trips
             }
-        
+
         case 'SET_TRIP_DETAIL':
             return {
                 ...state,
