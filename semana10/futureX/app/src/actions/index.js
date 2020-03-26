@@ -113,7 +113,7 @@ export const decideCandidate = (tripId, candidateId) => async (dispatch) => {
 			{ headers: { auth: token } }
 			)
 		alert('Candidato aprovado com sucesso!')
-		// dispatch(getTripDetail())
+		dispatch(getTripDetail(tripId))
 	} catch (error) {
 		console.error(error.message)
 		alert('Não foi possível realizar a escolha! Tente novamente mais tarde.')
