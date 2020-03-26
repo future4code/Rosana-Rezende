@@ -40,7 +40,7 @@ export const login = (loginData) => async (dispatch) => {
 	}
 }
 
-const setTripDetail = (trip) => ({
+export const setTripDetail = (trip) => ({
 	type: 'SET_TRIP_DETAIL',
 	payload: {
 		trip

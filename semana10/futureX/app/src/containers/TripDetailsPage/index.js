@@ -4,7 +4,7 @@ import { push } from "connected-react-router";
 import styled from "styled-components";
 
 import { routes } from '../Router'
-import { decideCandidate } from '../../actions'
+import { decideCandidate, setTripDetail } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent } from '@material-ui/core'
@@ -80,6 +80,11 @@ class TripDetailsPage extends Component {
     if (token === null) {
       goToLogin() //redireciona pra login
     }
+  }
+
+  componentWillUnmount() {
+    const { setTripDetail } = this.props
+    setTripDetail({})
   }
 
 
@@ -222,7 +227,8 @@ const mapDispatchToProps = dispatch => {
     goToList: () => dispatch(push(routes.list)),
     goToLogin: () => dispatch(push(routes.login)),
     goToHome: () => dispatch(push(routes.home)),
-    decideCandidate: (tripId, candidateId) => dispatch(decideCandidate(tripId, candidateId))
+    decideCandidate: (tripId, candidateId) => dispatch(decideCandidate(tripId, candidateId)),
+    setTripDetail: (id) => dispatch(setTripDetail(id))
   }
 }
 
