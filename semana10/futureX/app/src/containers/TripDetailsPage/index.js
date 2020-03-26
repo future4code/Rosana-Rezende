@@ -84,7 +84,7 @@ class TripDetailsPage extends Component {
 
   componentWillUnmount() {
     const { setTripDetail } = this.props
-    setTripDetail({})
+    setTripDetail()
   }
 
 
@@ -119,8 +119,8 @@ class TripDetailsPage extends Component {
           </Toolbar>
         </AppBar>
 
+        {trip ? 
         <TripDetailsWrapper>
-
           <DivTitle>
             <Typography component="p" variant="h5" color="inherit">
               Detalhes da viagem <strong>{trip.name}</strong>
@@ -209,10 +209,17 @@ class TripDetailsPage extends Component {
               <strong>Candidatos: </strong>Não há candidatos para essa viagem!
             </Typography>)
           }
-
-          
-
         </TripDetailsWrapper>
+
+        : 
+        
+        <TripDetailsWrapper>
+          <Typography component="p" variant="h6" color="inherit">
+            Carregando...
+          </Typography>
+        </TripDetailsWrapper>
+
+        }
       </>
     );
   }
