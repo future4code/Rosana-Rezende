@@ -10,14 +10,19 @@ import { getTrips, applyToTrip } from '../../actions'
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core'
 
+const DivContainer = styled.div`
+  width: 80vw;
+  margin: 2rem auto;
+`;
+
 const ApplicationFormWrapper = styled.form`
-  width: 100%;
-  min-height: 90vh;
-  gap: 10px;
   place-content: center;
   justify-items: center;
-  display: grid;
-`;
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  margin: 1rem auto;
+`
 
 const styles = {
   grow: {
@@ -26,13 +31,10 @@ const styles = {
   logo: {
     cursor: 'pointer',
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
   button: {
     width: 150,
-    margin: 40,
+    margin: 'auto',
+    marginTop: 30,
   },
 };
 
@@ -147,12 +149,13 @@ class ApplicationFormPage extends Component {
           </Toolbar>
         </AppBar>
 
-        <ApplicationFormWrapper onSubmit={this.handleSubmission}>
+        <DivContainer>
 
           <Typography variant="h6" color="inherit">
             Preencha os dados abaixo para se candidatar a uma viagem:
           </Typography>
 
+          <ApplicationFormWrapper onSubmit={this.handleSubmission}>
           {formFields.map(field => (
             <TextField
               key={field.name}
@@ -220,8 +223,9 @@ class ApplicationFormPage extends Component {
           >
             Aplicar
           </Button>
+          </ApplicationFormWrapper>
 
-        </ApplicationFormWrapper>
+        </DivContainer>
       </>
     );
   }

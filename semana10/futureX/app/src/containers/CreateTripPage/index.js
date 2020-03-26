@@ -11,13 +11,19 @@ import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, TextField, IconButton } from '@material-ui/core'
 import { Input } from '@material-ui/icons';
 
-const CreateTripWrapper = styled.form`
-  width: 100%;
-  min-height: 90vh;
-  gap: 10px;
-  place-content: center;
-  justify-items: center;
+const DivContainer = styled.div`
   display: grid;
+  min-height: 80vh;
+  place-content: center;
+  width: 80vw;
+  margin: 2rem auto;
+`;
+
+const CreateTripWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  margin: 1rem auto;
 `;
 
 const styles = {
@@ -27,13 +33,10 @@ const styles = {
   logo: {
     cursor: 'pointer',
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
   button: {
     width: 150,
-    margin: 40,
+    margin: 'auto',
+    marginTop: 20,
   },
 };
 
@@ -74,7 +77,7 @@ class CreateTripPage extends Component {
   };
 
   logout = () => {
-    const { goToHome} = this.props
+    const { goToHome } = this.props
     localStorage.removeItem('token') //senão fica sempre logado
     goToHome()
   }
@@ -82,13 +85,13 @@ class CreateTripPage extends Component {
   render() {
 
     const { classes, goToList, goToHome } = this.props
-    
+
     let today = new Date();
-    let month = JSON.stringify(today.getMonth()+1)
-    if(month < 10) {
-      month = '0'+month
+    let month = JSON.stringify(today.getMonth() + 1)
+    if (month < 10) {
+      month = '0' + month
     }
-    let dateNow = today.getFullYear()+'-'+month+'-'+today.getDate()
+    let dateNow = today.getFullYear() + '-' + month + '-' + today.getDate()
 
     const formFields = [
       {
@@ -133,13 +136,13 @@ class CreateTripPage extends Component {
       <>
         <AppBar position="static">
           <Toolbar>
-            <Typography 
+            <Typography
               variant="h6" color="inherit" className={classes.logo}
               onClick={goToHome}
             >
               FutureX
             </Typography>
-            <div className={classes.grow}/>
+            <div className={classes.grow} />
             <Button color="inherit" onClick={goToList}>
               Lista de Viagens
             </Button>
@@ -147,79 +150,80 @@ class CreateTripPage extends Component {
               color="inherit"
               onClick={this.logout}
             >
-              <Input/>
+              <Input />
             </IconButton>
           </Toolbar>
         </AppBar>
 
-        <CreateTripWrapper onSubmit={this.handleSubmission}>
+        <DivContainer>
 
           <Typography variant="h6" color="inherit">
             Preencha os campos para criar uma viagem espacial.
           </Typography>
+          
+          <CreateTripWrapper onSubmit={this.handleSubmission}>
 
-          <TextField
-            id='planet'
-            name='planet'
-            label='Planeta'
-            type='text'
-            value={this.state.form['planet']  || ''}
-            onChange={this.handleFieldChange}
-            margin='normal'
-            variant='outlined'
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-            }}
-            select  
-            // helperText={'Selecione um planeta'}  
-            SelectProps={{
-              native: true,
-              required: true
-            }}
-          >
-            <option value=''>Selecione um planeta...</option>
-            {planets.map(planet => (
-              <option key={planet} value={planet}>{planet}</option>
-            ))}
-          </TextField>
-
-          {formFields.map(field => (
             <TextField
-              id={field.name}
-              key={field.name}
-              name={field.name}
-              type={field.type}
-              label={field.label}
-              required={field.required}
-              inputProps={{ 
-                pattern: field.pattern,
-                title: field.title,
-                min: field.min
-              }}
-              multiline={field.multiline}
-              rows={field.rows}
+              id='planet'
+              name='planet'
+              label='Planeta'
+              type='text'
+              value={this.state.form['planet'] || ''}
+              onChange={this.handleFieldChange}
               margin='normal'
               variant='outlined'
               fullWidth
-              value={this.state.form[field.name]  || ''}
-              onChange={this.handleFieldChange}
               InputLabelProps={{
                 shrink: true,
               }}
-            />
-          ))}       
+              select
+              // helperText={'Selecione um planeta'}  
+              SelectProps={{
+                native: true,
+                required: true
+              }}
+            >
+              <option value=''>Selecione um planeta...</option>
+              {planets.map(planet => (
+                <option key={planet} value={planet}>{planet}</option>
+              ))}
+            </TextField>
 
-        <Button
-          variant='contained' 
-          color='primary' 
-          className={classes.button}
-          type='submit'
-        >
-          Cadastrar
-        </Button>
+            {formFields.map(field => (
+              <TextField
+                id={field.name}
+                key={field.name}
+                name={field.name}
+                type={field.type}
+                label={field.label}
+                required={field.required}
+                inputProps={{
+                  pattern: field.pattern,
+                  title: field.title,
+                  min: field.min
+                }}
+                multiline={field.multiline}
+                rows={field.rows}
+                margin='normal'
+                variant='outlined'
+                fullWidth
+                value={this.state.form[field.name] || ''}
+                onChange={this.handleFieldChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            ))}
 
-        </CreateTripWrapper>
+            <Button variant='contained' color='primary'
+              className={classes.button}
+              type='submit'
+            >
+              Cadastrar
+            </Button>
+
+          </CreateTripWrapper>
+        </DivContainer>
       </>
     );
   }

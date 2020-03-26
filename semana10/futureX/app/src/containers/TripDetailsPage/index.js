@@ -7,24 +7,28 @@ import { routes } from '../Router'
 import { decideCandidate } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent, CardActions } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent } from '@material-ui/core'
 import { Input } from '@material-ui/icons';
 
 const TripDetailsWrapper = styled.div`
-  width: 90vw;
-  margin: auto;
-  min-height: 80vh;
-  gap: 10px;
-  place-content: center;
   display: grid;
-  padding: 2rem;
+  min-height: 80vh;
+  place-content: center;
+  width: 80vw;
+  margin: 2rem auto;
+
+  @media screen and (max-device-width: 1200px) {
+		width: 90vw;
+    margin: 1rem auto;
+	}
+`
+
+const DivTitle = styled.div`
+  text-align: center;
+  margin-bottom: 2rem;
 `
 
 const DivCenter = styled.div`
-  text-align: center;
-`
-
-const CardActionsStyled = styled(CardActions)`
   text-align: center;
 `
 
@@ -39,10 +43,19 @@ const CardCandidate = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 1rem;
+  margin: 0.5rem;
   padding: 1rem 0.5rem;
-  /* text-align: center; */
-  /* align-items: center; */
+  align-items: center;
+
+  @media screen and (max-device-width: 1200px) {
+		width: 35vw;
+	}
+  @media screen and (max-device-width: 800px) {
+		width: 40vw;
+	}
+  @media screen and (max-device-width: 400px) {
+		width: 70vw;
+	}
 `
 
 const styles = {
@@ -62,7 +75,7 @@ class TripDetailsPage extends Component {
   }
 
   componentDidMount() {
-    const { goToLogin, trip, goToList } = this.props
+    const { goToLogin } = this.props
     const token = localStorage.getItem('token')
     if (token === null) {
       goToLogin() //redireciona pra login
@@ -103,11 +116,11 @@ class TripDetailsPage extends Component {
 
         <TripDetailsWrapper>
 
-          <DivCenter>
+          <DivTitle>
             <Typography component="p" variant="h5" color="inherit">
               Detalhes da viagem <strong>{trip.name}</strong>
-          </Typography>
-          </DivCenter>
+            </Typography>
+          </DivTitle>
 
           <Typography component="p" variant="h6" color="inherit">
             <strong>Planeta: </strong>{trip.planet}
@@ -154,7 +167,7 @@ class TripDetailsPage extends Component {
           </>)
           : 
           (<Typography component="p" variant="h6" color="inherit">
-            <strong>Aprovados: </strong> não há aprovados para essa viagem!
+            <strong>Aprovados: </strong> Não há aprovados para essa viagem!
           </Typography>)
           }
 

@@ -11,13 +11,17 @@ import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent, CardActions } from '@material-ui/core'
 import { Input } from '@material-ui/icons';
 
-const ListTripsWrapper = styled.form`
-  width: 100%;
-  min-height: 90vh;
-  gap: 10px;
-  place-content: center;
-  justify-items: center;
+const ListTripsWrapper = styled.div`
   display: grid;
+  min-height: 80vh;
+  place-content: center;
+  width: 80vw;
+  margin: 2rem auto;
+
+  @media screen and (max-device-width: 1200px) {
+		width: 90vw;
+    margin: 1rem auto;
+	}
 `;
 
 const Trips = styled.div`
@@ -31,14 +35,26 @@ const CardTrip = styled(Card)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 1rem;
+  margin: 0.5rem;
   align-items: center;
+
+  @media screen and (max-device-width: 1200px) {
+		width: 20vw;
+	}
+  @media screen and (max-device-width: 800px) {
+		width: 25vw;
+	}
+  @media screen and (max-device-width: 600px) {
+		width: 30vw;
+	}
+  @media screen and (max-device-width: 400px) {
+		width: 40vw;
+	}
 `
 
 const DivTitle = styled.div`
   text-align: center;
-  margin-bottom: 0.5rem;
-  min-height: 8vw;
+  margin-bottom: 2rem;
 `
 
 const styles = {
@@ -111,20 +127,23 @@ class ListTripsPage extends Component {
 
         <ListTripsWrapper>
 
-          <Typography variant="h4" color="inherit" className={classes.grow}>
-            Lista de viagens espaciais
-          </Typography>
+          <DivTitle>
+            <Typography variant="h4" color="inherit" className={classes.grow}>
+              Lista de viagens espaciais
+            </Typography>
+          </DivTitle>
 
           <Trips>
             {trips.map(trip => (
               <CardTrip key={trip.id}>
-                <CardContent>
+                <CardActions>
                   <DivTitle>
                     <Typography variant="subtitle1">
                       {trip.name}
                     </Typography>
                   </DivTitle>
-                  <div>
+                </CardActions>
+                <CardContent>
                   <Typography>
                     <strong>Planeta: </strong>{trip.planet}
                   </Typography>
@@ -134,12 +153,10 @@ class ListTripsPage extends Component {
                   <Typography>
                    <strong>Duração: </strong>{trip.durationInDays} dias
                   </Typography>
-                  </div>
                 </CardContent>
                 <CardActions>
                   <Button color="primary"
-                    onClick={() => this.clickDetail(trip.id)}
-                  >
+                    onClick={() => this.clickDetail(trip.id)}>
                     Detalhes
                   </Button>
                 </CardActions>
