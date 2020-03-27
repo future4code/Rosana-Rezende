@@ -13,5 +13,10 @@ export const TripDetailsWrapper = styled.div`
     }
 `
 
+export const DivTitle = styled.div`
+    text-align: center;
+    margin-bottom: 2rem;
+`
+
 export const styles = {
 };

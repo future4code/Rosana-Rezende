@@ -3,14 +3,15 @@ import { push } from "connected-react-router";
 import { connect } from "react-redux";
 
 import { routes } from '../Router'
-import { decideCandidate, setTripDetail } from '../../actions'
+import { setTripDetail } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { Typography, Button, CardContent } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 
 import Appbar from "../../components/Appbar";
 
-import { CardCandidate, DivCandidates, DivCenter, DivTitle, TripDetailsWrapper, styles} from './styles'
+import { TripDetailsWrapper, styles } from './styles'
+import TripDetails from "../../components/TripDetails";
 
 class TripDetailsPage extends Component {
   constructor(props) {
@@ -33,114 +34,20 @@ class TripDetailsPage extends Component {
   }
 
   render() {
-
-    const { trip, decideCandidate } = this.props
-    // console.log(trip)
+    const { trip } = this.props
 
     return (
       <>
-        <Appbar page={'details'}/>
-        
-        {trip ? 
-        <TripDetailsWrapper>
-          <DivTitle>
-            <Typography component="p" variant="h5" color="inherit">
-              Detalhes da viagem <strong>{trip.name}</strong>
-            </Typography>
-          </DivTitle>
+        <Appbar page={'details'} />
 
-          <Typography component="p" variant="h6" color="inherit">
-            <strong>Planeta: </strong>{trip.planet}
-          </Typography>
-
-          <Typography component="p" variant="h6" color="inherit">
-            <strong>Data:</strong> {trip.date}
-          </Typography>
-
-          <Typography component="p" variant="h6" color="inherit">
-            <strong>Duração:</strong> {trip.durationInDays} dias
-        </Typography>
-
-          <Typography component="p" variant="h6" color="inherit">
-            <strong>Descrição:</strong> {trip.description}
-          </Typography>
-
-          {trip.approved && trip.approved.length > 0 ? 
-           (<>
+        {trip ?
+          <TripDetails />
+          :
+          <TripDetailsWrapper>
             <Typography component="p" variant="h6" color="inherit">
-              <strong>Aprovados:</strong>
+              Carregando...
             </Typography>
-            <DivCandidates>
-            {trip.approved.map(candidate => (
-                <CardCandidate key={candidate.id}>
-                  <DivCenter>
-                      <Typography variant="h5">{candidate.name}</Typography>
-                    </DivCenter>
-                  <CardContent>
-                    <Typography><strong>Idade: </strong>{candidate.age} anos</Typography>
-                    <Typography><strong>Profissão: </strong>{candidate.profession}</Typography>
-                    <Typography><strong>País: </strong>{candidate.country}</Typography>
-                    <Typography><strong>Texto de aplicação: </strong>{candidate.applicationText}</Typography>
-                  </CardContent>
-                  {/* <DivCenter>
-                    <Button color="primary"
-                      onClick={() => decideCandidate(trip.id, candidate.id)}>
-                      Desaprovar
-                    </Button>
-                  </DivCenter> */}
-                </CardCandidate>
-            ))}
-            </DivCandidates>
-          </>)
-          : 
-          (<Typography component="p" variant="h6" color="inherit">
-            <strong>Aprovados: </strong> Não há aprovados para essa viagem!
-          </Typography>)
-          }
-
-          {trip.candidates && trip.candidates.length > 0 
-          ?
-            (<>
-              <Typography component="p" variant="h6" color="inherit">
-                <strong>Candidatos:</strong>
-              </Typography>
-              <DivCandidates>
-              {trip.candidates.map(candidate => (
-                  <CardCandidate key={candidate.id}>
-                    <DivCenter>
-                        <Typography variant="h5">{candidate.name}</Typography>
-                      </DivCenter>
-                    <CardContent>
-                      <Typography><strong>Idade: </strong>{candidate.age} anos</Typography>
-                      <Typography><strong>Profissão: </strong>{candidate.profession}</Typography>
-                      <Typography><strong>País: </strong>{candidate.country}</Typography>
-                      <Typography><strong>Texto de aplicação: </strong>{candidate.applicationText}</Typography>
-                    </CardContent>
-                    <DivCenter>
-                      <Button color="primary"
-                        onClick={() => decideCandidate(trip.id, candidate.id)}>
-                        Aprovar
-                      </Button>
-                    </DivCenter>
-                  </CardCandidate>
-              ))}
-              </DivCandidates>
-            </>)
-            :
-            (<Typography component="p" variant="h6" color="inherit">
-              <strong>Candidatos: </strong>Não há candidatos para essa viagem!
-            </Typography>)
-          }
-        </TripDetailsWrapper>
-
-        : 
-        
-        <TripDetailsWrapper>
-          <Typography component="p" variant="h6" color="inherit">
-            Carregando...
-          </Typography>
-        </TripDetailsWrapper>
-
+          </TripDetailsWrapper>
         }
       </>
     );
@@ -153,7 +60,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    decideCandidate: (tripId, candidateId) => dispatch(decideCandidate(tripId, candidateId)),
     setTripDetail: (id) => dispatch(setTripDetail(id)),
     goToLogin: () => dispatch(push(routes.login)),
   }
