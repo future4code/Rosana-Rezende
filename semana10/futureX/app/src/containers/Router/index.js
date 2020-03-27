@@ -32,6 +32,8 @@ function Router(props) {
         <ProtectedRoute exact path={routes.create} component={CreateTripPage} />
         <ProtectedRoute exact path={routes.list} component={ListTripsPage} />
         <ProtectedRoute exact path={routes.details} component={TripDetailsPage} />
+
+        <Route path="*" component={() => "Página não encontrada"} />
       </Switch>
     </ConnectedRouter>
   );
