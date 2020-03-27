@@ -22,6 +22,7 @@ class Appbar extends React.Component {
 	logout = () => {
 		const { goToHome } = this.props
 		localStorage.removeItem('token') //senão fica sempre logado
+		localStorage.removeItem('user')
 		goToHome()
 	}
 
