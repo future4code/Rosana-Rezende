@@ -3,33 +3,12 @@ import { connect } from "react-redux";
 
 import { login } from '../../actions'
 
-import styled from "styled-components";
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, Button, TextField } from '@material-ui/core'
 
 import Appbar from "../../components/Appbar";
 
-const LoginWrapper = styled.form`
-  width: 100%;
-  min-height: 90vh;
-  gap: 10px;
-  place-content: center;
-  justify-items: center;
-  display: grid;
-`;
-
-const styles = {
-  grow: {
-    flexGrow: 1,
-  },
-  logo: {
-    cursor: 'pointer',
-  },
-  button: {
-    width: 150,
-    margin: 40,
-  }
-};
+import { LoginWrapper, styles } from './styles'
 
 class LoginPage extends Component {
   constructor(props) {

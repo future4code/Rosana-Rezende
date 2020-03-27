@@ -1,70 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-import styled from "styled-components";
-
 import { routes } from '../Router'
-
 import { getTrips, getTripDetail } from '../../actions'
-
 import { withStyles } from '@material-ui/core/styles';
-import { Typography, Button, Card, CardContent, CardActions } from '@material-ui/core'
+import { Typography, Button, CardContent, CardActions } from '@material-ui/core'
+import { CardTrip, DivTitle, ListTripsWrapper, Trips, styles } from './styles'
 import Appbar from "../../components/Appbar";
-
-const ListTripsWrapper = styled.div`
-  display: grid;
-  min-height: 80vh;
-  place-content: center;
-  width: 80vw;
-  margin: 2rem auto;
-
-  @media screen and (max-device-width: 1200px) {
-		width: 90vw;
-    margin: 1rem auto;
-	}
-`;
-
-const Trips = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`
-
-const CardTrip = styled(Card)`
-  width: 15vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 0.5rem;
-  align-items: center;
-
-  @media screen and (max-device-width: 1200px) {
-		width: 20vw;
-	}
-  @media screen and (max-device-width: 800px) {
-		width: 25vw;
-	}
-  @media screen and (max-device-width: 600px) {
-		width: 30vw;
-	}
-  @media screen and (max-device-width: 400px) {
-		width: 40vw;
-	}
-`
-
-const DivTitle = styled.div`
-  text-align: center;
-  margin-bottom: 2rem;
-`
-
-const styles = {
-  grow: {
-    flexGrow: 1,
-  },
-  logo: {
-    cursor: 'pointer',
-  },
-};
 
 class ListTripsPage extends Component {
   constructor(props) {

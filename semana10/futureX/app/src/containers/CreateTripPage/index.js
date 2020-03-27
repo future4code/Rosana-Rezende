@@ -1,43 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-import styled from "styled-components";
+
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, Button, TextField } from '@material-ui/core'
 
 import { routes } from '../Router'
 import { createTrip } from '../../actions'
+
 import { formFields, planets } from './variables'
+import { CreateTripWrapper, DivContainer, styles } from './styles'
+
 import Appbar from "../../components/Appbar";
-
-const DivContainer = styled.div`
-  display: grid;
-  min-height: 80vh;
-  place-content: center;
-  width: 80vw;
-  margin: 2rem auto;
-`;
-
-const CreateTripWrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 70vw;
-  margin: 1rem auto;
-`;
-
-const styles = {
-  grow: {
-    flexGrow: 1,
-  },
-  logo: {
-    cursor: 'pointer',
-  },
-  button: {
-    width: 150,
-    margin: 'auto',
-    marginTop: 20,
-  },
-};
 
 class CreateTripPage extends Component {
   constructor(props) {

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-import styled from "styled-components";
 
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, Button } from '@material-ui/core'
@@ -9,44 +8,7 @@ import { Typography, Button } from '@material-ui/core'
 import { routes } from '../Router'
 import Appbar from "../../components/Appbar";
 
-const HomeWrapper = styled.div`
-  width: 80vw;
-  margin: auto;
-  min-height: 90vh;
-  gap: 10px;
-  place-content: center;
-  justify-items: center;
-  display: grid;
-`;
-
-const DivTitle = styled.div`
-  text-align: center;
-  width: 50vw;
-
-  @media screen and (max-device-width: 1200px) {
-		width: 70vw;
-	}
-`
-
-const Image = styled.img`
-  margin: 2rem;
-  width: 30vw;
-  box-shadow: -3px 3px 2px #ccc;
-  border-radius: 50%;
-
-  @media screen and (max-device-width: 1200px) {
-		width: 50vw;
-	}
-`
-
-const styles = {
-  grow: {
-    flexGrow: 1,
-  },
-  button: {
-    width: 150,
-  }
-};
+import { DivTitle, HomeWrapper, Image, styles } from './styles'
 
 class HomePage extends Component {
   constructor(props) {
@@ -58,7 +20,7 @@ class HomePage extends Component {
   render() {
     const { classes, goToApllication, user } = this.props
     const token = localStorage.getItem('token')
-    // console.log(user) // tem id e email
+    //console.log(user) // tem id e email
 
     return (
       <>
@@ -69,7 +31,7 @@ class HomePage extends Component {
           <DivTitle>
             {token && user ? 
             (<Typography variant="h5" color="inherit" style={ {margin: '10px' }}>
-              Bem vindx ao <strong>FutureX</strong> {token && user ? user.email : ""}
+              Bem vindx ao <strong>FutureX</strong> {user ? user.email : ""}
             </Typography>) 
             : 
             (<Typography variant="h5" color="inherit">

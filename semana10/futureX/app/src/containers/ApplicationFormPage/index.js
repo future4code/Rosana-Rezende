@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
 
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, Button, TextField } from '@material-ui/core'
@@ -9,33 +8,7 @@ import { getTrips, applyToTrip } from '../../actions'
 import { formFields, coutrys } from './variables'
 import Appbar from "../../components/Appbar";
 
-const DivContainer = styled.div`
-  width: 80vw;
-  margin: 2rem auto;
-`;
-
-const ApplicationFormWrapper = styled.form`
-  place-content: center;
-  justify-items: center;
-  display: flex;
-  flex-direction: column;
-  width: 70vw;
-  margin: 1rem auto;
-`
-
-const styles = {
-  grow: {
-    flexGrow: 1,
-  },
-  logo: {
-    cursor: 'pointer',
-  },
-  button: {
-    width: 150,
-    margin: 'auto',
-    marginTop: 30,
-  },
-};
+import { ApplicationFormWrapper, DivContainer, styles} from './styles'
 
 class ApplicationFormPage extends Component {
   constructor(props) {
