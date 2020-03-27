@@ -20,11 +20,7 @@ class ListTripsPage extends Component {
   }
 
   componentDidMount() {
-    const { goToLogin, getTrips } = this.props
-    const token = localStorage.getItem('token')
-    if (token === null) {
-      goToLogin() //redireciona pra login
-    }
+    const { getTrips } = this.props
     getTrips()
   }
 

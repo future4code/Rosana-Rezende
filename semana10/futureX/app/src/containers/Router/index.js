@@ -1,6 +1,7 @@
 import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { Switch, Route } from "react-router-dom";
+import { ProtectedRoute } from "../../components/ProtectedRoute";
 
 import HomePage from '../HomePage'
 import LoginPage from "../LoginPage";
@@ -25,11 +26,12 @@ function Router(props) {
     <ConnectedRouter history={props.history}>
       <Switch>
         <Route exact path={routes.home} component={HomePage} />
-        <Route exact path={routes.login} component={LoginPage} />
-        <Route exact path={routes.create} component={CreateTripPage} />
-        <Route exact path={routes.list} component={ListTripsPage} />
-        <Route exact path={routes.details} component={TripDetailsPage} />
         <Route exact path={routes.application} component={ApplicationFormPage} />
+        <Route exact path={routes.login} component={LoginPage} />
+
+        <ProtectedRoute exact path={routes.create} component={CreateTripPage} />
+        <ProtectedRoute exact path={routes.list} component={ListTripsPage} />
+        <ProtectedRoute exact path={routes.details} component={TripDetailsPage} />
       </Switch>
     </ConnectedRouter>
   );

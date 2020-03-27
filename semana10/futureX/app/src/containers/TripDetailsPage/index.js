@@ -20,14 +20,6 @@ class TripDetailsPage extends Component {
     };
   }
 
-  componentDidMount() {
-    const { goToLogin } = this.props
-    const token = localStorage.getItem('token')
-    if (token === null) {
-      goToLogin() //redireciona pra login
-    }
-  }
-
   componentWillUnmount() {
     const { setTripDetail } = this.props
     setTripDetail()
