@@ -4,10 +4,10 @@ import { push } from "connected-react-router";
 import styled from "styled-components";
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
-import { Input } from '@material-ui/icons';
+import { Typography, Button } from '@material-ui/core'
 
 import { routes } from '../Router'
+import Appbar from "../../components/Appbar";
 
 const HomeWrapper = styled.div`
   width: 80vw;
@@ -55,42 +55,27 @@ class HomePage extends Component {
     };
   }
 
-  logout = () => {
-    const { goToHome} = this.props
-    localStorage.removeItem('token') //senão fica sempre logado
-    goToHome()
-  }
-
   render() {
-    const { classes, goToLogin, goToApllication, goToList } = this.props
+    const { classes, goToApllication, user } = this.props
     const token = localStorage.getItem('token')
+    // console.log(user) // tem id e email
 
     return (
       <>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              FutureX
-            </Typography>
-            {token === null ? 
-            <Button color="inherit" onClick={goToLogin}>Login</Button>
-            :
-            <>
-              <Button color="inherit" onClick={goToList}>Viagens Espaciais</Button>
-              <IconButton color="inherit" onClick={this.logout}>
-                <Input/>
-              </IconButton>
-            </>
-            }
-          </Toolbar>
-        </AppBar>
-
+        <Appbar page={'home'} token={token} />
+        
         <HomeWrapper>
 
           <DivTitle>
-            <Typography variant="h5" color="inherit">
+            {token && user ? 
+            (<Typography variant="h5" color="inherit" style={ {margin: '10px' }}>
+              Bem vindx ao <strong>FutureX</strong> {token && user ? user.email : ""}
+            </Typography>) 
+            : 
+            (<Typography variant="h5" color="inherit">
               Bem vindx ao <strong>FutureX</strong>
-            </Typography>
+            </Typography>)
+            }
             <Typography variant="h5" color="inherit">
               Encontre as melhores viagens espaciais!
             </Typography>
@@ -116,13 +101,15 @@ class HomePage extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.user.user
+});
+
 const mapDispatchToProps = dispatch => {
   return {
-    goToLogin: () => dispatch(push(routes.login)),
-    goToList: () => dispatch(push(routes.list)),
     goToHome: () => dispatch(push(routes.home)),
     goToApllication: () => dispatch(push(routes.application))
   }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(HomePage));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(HomePage));

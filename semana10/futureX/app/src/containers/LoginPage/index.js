@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
 
 import { login } from '../../actions'
-import { routes } from '../Router'
 
 import styled from "styled-components";
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core'
+import { Typography, Button, TextField } from '@material-ui/core'
+
+import Appbar from "../../components/Appbar";
 
 const LoginWrapper = styled.form`
   width: 100%;
@@ -59,7 +59,7 @@ class LoginPage extends Component {
   };
 
   render() {
-    const { classes, goToHome } = this.props
+    const { classes } = this.props
 
     const loginDataField = [
       { name: 'email', type: 'email', label: 'Email', placeholder: 'teste@email.com' },
@@ -68,21 +68,11 @@ class LoginPage extends Component {
 
     return (
       <>
-          <AppBar position="static">
-            <Toolbar>
-              <Typography 
-                variant="h6" color="inherit" className={classes.logo}
-                onClick={goToHome}
-              >
-                FutureX
-              </Typography>
-              <div className={classes.grow}/>
-            </Toolbar>
-          </AppBar>
+        <Appbar page={'login'} />
 
-      <LoginWrapper onSubmit={this.handleSubmission}>
+        <LoginWrapper onSubmit={this.handleSubmission}>
 
-          <Typography variant="h6" color="inherit"> 
+          <Typography variant="h6" color="inherit">
             Preencha os campos para fazer login:
           </Typography>
 
@@ -101,17 +91,17 @@ class LoginPage extends Component {
               onChange={this.handleFieldChange}
             />
           ))}
-          
-        <Button 
-          type='submit'
-          variant='contained' 
-          color='primary' 
-          className={classes.button}
-        >
+
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            className={classes.button}
+          >
             Login
         </Button>
 
-      </LoginWrapper>
+        </LoginWrapper>
       </>
     );
   }
@@ -119,7 +109,6 @@ class LoginPage extends Component {
 
 const mapDispatchToProps = dispatch => ({
   login: (loginData) => dispatch(login(loginData)),
-  goToHome: () => dispatch(push(routes.home)),
 
 })
 

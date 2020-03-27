@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
 import { routes } from '../Router'
 import { decideCandidate, setTripDetail } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent } from '@material-ui/core'
-import { Input } from '@material-ui/icons';
+import { Typography, Button, Card, CardContent } from '@material-ui/core'
+
+import Appbar from "../../components/Appbar";
 
 const TripDetailsWrapper = styled.div`
   display: grid;
@@ -59,12 +60,6 @@ const CardCandidate = styled(Card)`
 `
 
 const styles = {
-  grow: {
-    flexGrow: 1,
-  },
-  logo: {
-    cursor: 'pointer',
-  },
 };
 
 class TripDetailsPage extends Component {
@@ -87,38 +82,15 @@ class TripDetailsPage extends Component {
     setTripDetail()
   }
 
-
-  logout = () => {
-    const { goToHome } = this.props
-    localStorage.removeItem('token') //senão fica sempre logado
-    goToHome()
-  }
-
   render() {
 
-    const { classes, goToList, goToHome, trip, decideCandidate } = this.props
+    const { trip, decideCandidate } = this.props
     // console.log(trip)
 
     return (
       <>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography
-              variant="h6" color="inherit" className={classes.logo}
-              onClick={goToHome}>
-              FutureX
-            </Typography>
-            <div className={classes.grow} />
-            <Button color="inherit" onClick={goToList}>
-              Lista de Viagens
-            </Button>
-            <IconButton color="inherit"
-              onClick={this.logout}>
-              <Input />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-
+        <Appbar page={'details'}/>
+        
         {trip ? 
         <TripDetailsWrapper>
           <DivTitle>
@@ -226,16 +198,14 @@ class TripDetailsPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  trip: state.trips.tripDetail
+  trip: state.trips.tripDetail,
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    goToList: () => dispatch(push(routes.list)),
-    goToLogin: () => dispatch(push(routes.login)),
-    goToHome: () => dispatch(push(routes.home)),
     decideCandidate: (tripId, candidateId) => dispatch(decideCandidate(tripId, candidateId)),
-    setTripDetail: (id) => dispatch(setTripDetail(id))
+    setTripDetail: (id) => dispatch(setTripDetail(id)),
+    goToLogin: () => dispatch(push(routes.login)),
   }
 }
 

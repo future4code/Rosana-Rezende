@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
 import styled from "styled-components";
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, TextField } from '@material-ui/core'
+import { Typography, Button, TextField } from '@material-ui/core'
 
-import { routes } from '../Router'
 import { getTrips, applyToTrip } from '../../actions'
 import { formFields, coutrys } from './variables'
+import Appbar from "../../components/Appbar";
 
 const DivContainer = styled.div`
   width: 80vw;
@@ -77,7 +76,7 @@ class ApplicationFormPage extends Component {
 
   render() {
 
-    const { classes, goToHome, trips } = this.props
+    const { classes, trips } = this.props
 
     const formSelects = [
       {
@@ -104,18 +103,8 @@ class ApplicationFormPage extends Component {
 
     return (
       <>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography 
-              variant="h6" color="inherit" className={classes.logo}
-              onClick={goToHome}
-            >
-              FutureX
-            </Typography>
-            <div className={classes.grow}/>
-          </Toolbar>
-        </AppBar>
-
+        <Appbar page={'application'}/>
+        
         <DivContainer>
 
           <Typography variant="h6" color="inherit">
@@ -204,7 +193,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    goToHome: () => dispatch(push(routes.home)),
     getTrips: () => dispatch(getTrips()),
     applyToTrip: (form) => dispatch(applyToTrip(form))
   }

@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import styled from "styled-components";
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, TextField, IconButton } from '@material-ui/core'
-import { Input } from '@material-ui/icons';
+import { Typography, Button, TextField } from '@material-ui/core'
 
 import { routes } from '../Router'
 import { createTrip } from '../../actions'
 import { formFields, planets } from './variables'
+import Appbar from "../../components/Appbar";
 
 const DivContainer = styled.div`
   display: grid;
@@ -78,37 +78,14 @@ class CreateTripPage extends Component {
     }    
   };
 
-  logout = () => {
-    const { goToHome } = this.props
-    localStorage.removeItem('token') //senão fica sempre logado
-    goToHome()
-  }
 
   render() {
-    const { classes, goToList, goToHome } = this.props   
+    const { classes } = this.props  
+    
     return (
       <>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography
-              variant="h6" color="inherit" className={classes.logo}
-              onClick={goToHome}
-            >
-              FutureX
-            </Typography>
-            <div className={classes.grow} />
-            <Button color="inherit" onClick={goToList}>
-              Lista de Viagens
-            </Button>
-            <IconButton
-              color="inherit"
-              onClick={this.logout}
-            >
-              <Input />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-
+        <Appbar page={'create'}/>
+        
         <DivContainer>
 
           <Typography variant="h6" color="inherit">
@@ -181,12 +158,9 @@ class CreateTripPage extends Component {
   }
 }
 
-
 const mapDispatchToProps = dispatch => {
   return {
-    goToList: () => dispatch(push(routes.list)),
     goToLogin: () => dispatch(push(routes.login)),
-    goToHome: () => dispatch(push(routes.home)),
     createTrip: (trip) => dispatch(createTrip(trip))
   }
 }

@@ -8,8 +8,8 @@ import { routes } from '../Router'
 import { getTrips, getTripDetail } from '../../actions'
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button, IconButton, Card, CardContent, CardActions } from '@material-ui/core'
-import { Input } from '@material-ui/icons';
+import { Typography, Button, Card, CardContent, CardActions } from '@material-ui/core'
+import Appbar from "../../components/Appbar";
 
 const ListTripsWrapper = styled.div`
   display: grid;
@@ -89,41 +89,15 @@ class ListTripsPage extends Component {
     getTripDetail(tripId) // enviar o Id da trip
   }
 
-  logout = () => {
-    const { goToHome} = this.props
-    localStorage.removeItem('token') //senão fica sempre logado
-    goToHome()
-  }
 
   render() {
 
-    const { classes, goToCreate, goToHome, trips } = this.props
+    const { classes, trips } = this.props
     // console.log(trips)
 
     return (
       <>
-        <AppBar position="static">
-          <Toolbar>
-          <Typography 
-              variant="h6" color="inherit" className={classes.logo}
-              onClick={goToHome}
-            >
-              FutureX
-            </Typography>
-            <div className={classes.grow}/>
-            <Button color="inherit" 
-              onClick={goToCreate} 
-            >
-              Criar Viagem
-            </Button>
-            <IconButton
-              color="inherit"
-              onClick={this.logout}
-            >
-              <Input/>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
+        <Appbar page={'list'}/>
 
         <ListTripsWrapper>
 
@@ -148,10 +122,10 @@ class ListTripsPage extends Component {
                     <strong>Planeta: </strong>{trip.planet}
                   </Typography>
                   <Typography>
-                   <strong>Data: </strong>{trip.date}
+                    <strong>Data: </strong>{trip.date}
                   </Typography>
                   <Typography>
-                   <strong>Duração: </strong>{trip.durationInDays} dias
+                    <strong>Duração: </strong>{trip.durationInDays} dias
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -171,14 +145,12 @@ class ListTripsPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  trips: state.trips.trips
+  trips: state.trips.trips,
 })
 
 const mapDispatchToProps = dispatch => {
   return {
-    goToCreate: () => dispatch(push(routes.create)),
     goToDetails: () => dispatch(push(routes.details)),
-    goToHome: () => dispatch(push(routes.home)),
     goToLogin: () => dispatch(push(routes.login)),
     getTrips: () => dispatch(getTrips()),
     getTripDetail: (id) => dispatch(getTripDetail(id))
