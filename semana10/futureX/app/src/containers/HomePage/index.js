@@ -55,7 +55,9 @@ class HomePage extends Component {
   }
 
   render() {
-    const { classes, goToLogin, goToApllication } = this.props
+    const { classes, goToLogin, goToApllication, goToList } = this.props
+
+    const token = localStorage.getItem('token')
 
     return (
       <>
@@ -63,8 +65,12 @@ class HomePage extends Component {
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               FutureX
-              </Typography>
+            </Typography>
+            {token === null ? 
             <Button color="inherit" onClick={goToLogin}>Login</Button>
+            :
+            <Button color="inherit" onClick={goToList}>Viagens Espaciais</Button>
+            }
           </Toolbar>
         </AppBar>
 
@@ -102,6 +108,7 @@ class HomePage extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     goToLogin: () => dispatch(push(routes.login)),
+    goToList: () => dispatch(push(routes.list)),
     goToApllication: () => dispatch(push(routes.application))
   }
 }
