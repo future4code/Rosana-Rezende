@@ -4,7 +4,8 @@ import { push } from "connected-react-router";
 import styled from "styled-components";
 
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
+import { Input } from '@material-ui/icons';
 
 import { routes } from '../Router'
 
@@ -54,9 +55,14 @@ class HomePage extends Component {
     };
   }
 
+  logout = () => {
+    const { goToHome} = this.props
+    localStorage.removeItem('token') //senão fica sempre logado
+    goToHome()
+  }
+
   render() {
     const { classes, goToLogin, goToApllication, goToList } = this.props
-
     const token = localStorage.getItem('token')
 
     return (
@@ -69,7 +75,12 @@ class HomePage extends Component {
             {token === null ? 
             <Button color="inherit" onClick={goToLogin}>Login</Button>
             :
-            <Button color="inherit" onClick={goToList}>Viagens Espaciais</Button>
+            <>
+              <Button color="inherit" onClick={goToList}>Viagens Espaciais</Button>
+              <IconButton color="inherit" onClick={this.logout}>
+                <Input/>
+              </IconButton>
+            </>
             }
           </Toolbar>
         </AppBar>
@@ -109,6 +120,7 @@ const mapDispatchToProps = dispatch => {
   return {
     goToLogin: () => dispatch(push(routes.login)),
     goToList: () => dispatch(push(routes.list)),
+    goToHome: () => dispatch(push(routes.home)),
     goToApllication: () => dispatch(push(routes.application))
   }
 }
