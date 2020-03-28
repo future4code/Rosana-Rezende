@@ -19,27 +19,19 @@ export const getTrips = () => async (dispatch) => {
 		console.error(error.message)
 		alert('Não foi possível acessar a lista de viagens')
 	}
-
 }
 
-const setUser = (userData) => ({
-	type: 'SET_USER',
-	payload: {
-		userData
-	}
-})
-
 export const login = (loginData) => async (dispatch) => {
+	// console.log(loginData)
 	try {
-		// console.log(loginData)
 		const response = await axios.post(`${baseUrl}/login`, loginData) // verica se usuário ou senhas estão corretos
 		// console.log(response.data) // retorna sucess, token e user
 		const token = response.data.token
 		const user = response.data.user
+		// console.log(user)
 		localStorage.setItem('token', token)
 		localStorage.setItem('user', JSON.stringify(user))
-		dispatch(push(routes.list)) // entro na página de listas
-		dispatch(setUser(user))
+		dispatch(push(routes.list))
 	} catch (error) {
 		console.error(error.message)
 		alert('Email e/ou senha inválidos')

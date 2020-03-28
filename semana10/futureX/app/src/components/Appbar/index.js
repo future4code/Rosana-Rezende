@@ -28,11 +28,14 @@ class Appbar extends React.Component {
 
 	render() {
 
-		const { classes, user, page, token, goToLogin, goToList, goToHome, goToCreate } = this.props
+		const { classes, page, token, goToLogin, goToList, goToHome, goToCreate } = this.props
+
+		const userData = localStorage.getItem('user')
+		const newUserData = JSON.parse(userData)
 
 		const userEmail = <>
-			<Typography variant="body1" color="inherit">
-				<em>{user && user.email}</em>
+			<Typography variant="subtitle1" color="inherit">
+				{newUserData && newUserData.email}
 			</Typography>
 			<div className={classes.grow} />
 		</>
@@ -95,10 +98,6 @@ class Appbar extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	user: state.user.user
-});
-
 const mapDispatchToProps = dispatch => {
 	return {
 		goToLogin: () => dispatch(push(routes.login)),
@@ -108,4 +107,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Appbar));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Appbar));

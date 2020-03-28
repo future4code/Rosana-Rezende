@@ -18,9 +18,12 @@ class HomePage extends Component {
   }
 
   render() {
-    const { classes, goToApllication, user } = this.props
+    const { classes, goToApllication } = this.props
     const token = localStorage.getItem('token')
-    //console.log(user) // tem id e email
+    const userData = localStorage.getItem('user')
+    const newUserData = JSON.parse(userData)
+    // console.log(userData)
+    // console.log(newUserData)
 
     return (
       <>
@@ -29,15 +32,16 @@ class HomePage extends Component {
         <HomeWrapper>
 
           <DivTitle>
-            {token && user ? 
+            {userData ? 
             (<Typography variant="h5" color="inherit" style={ {margin: '10px' }}>
-              Bem vindx ao <strong>FutureX</strong> {user ? user.email : ""}
+              Bem vindx ao <strong>FutureX</strong> <em>{newUserData.email}</em>
             </Typography>) 
             : 
             (<Typography variant="h5" color="inherit">
               Bem vindx ao <strong>FutureX</strong>
             </Typography>)
             }
+
             <Typography variant="h5" color="inherit">
               Encontre as melhores viagens espaciais!
             </Typography>
@@ -63,10 +67,6 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.user.user
-});
-
 const mapDispatchToProps = dispatch => {
   return {
     goToHome: () => dispatch(push(routes.home)),
@@ -74,4 +74,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(HomePage));
+export default connect(null, mapDispatchToProps)(withStyles(styles)(HomePage));

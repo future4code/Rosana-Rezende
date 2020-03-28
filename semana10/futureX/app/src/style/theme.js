@@ -4,5 +4,8 @@ import orange from "@material-ui/core/colors/orange";
 export default createMuiTheme({
   palette: {
     primary: orange
-  }
+  },
+  typography: {
+    useNextVariants: true,
+  },
 });
