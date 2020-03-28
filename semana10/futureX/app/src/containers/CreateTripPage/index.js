@@ -20,6 +20,14 @@ class CreateTripPage extends Component {
       form: {}
     };
   }
+  componentDidMount(){
+    const { goToLogin } = this.props
+    const userData = localStorage.getItem('user')
+    const newUserData = JSON.parse(userData)
+    if(newUserData.email.includes('admin') === false){
+      goToLogin()
+    }
+  }
 
   handleFieldChange = event => {
     this.setState({

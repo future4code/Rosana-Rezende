@@ -62,7 +62,8 @@ class Appbar extends React.Component {
 			case 'list':
 				content = <>
 					{userEmail}
-					<Button color="inherit" onClick={goToCreate}>Criar Viagem</Button>
+					{newUserData.email.includes('admin') && 
+					<Button color="inherit" onClick={goToCreate}>Criar Viagem</Button>}
 					{logoutButton}
 				</>
 				break;
