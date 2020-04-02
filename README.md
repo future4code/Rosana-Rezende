@@ -20,10 +20,6 @@ Tecnologias, linguagens e projetos desenvolvidos por Rosana Rezende durante o Bo
   <a href="https://github.com/future4code/Rosana-Rezende/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/future4code/Rosana-Rezende">
   </a>
-
-  <a href="https://github.com/future4code/Rosana-Rezende/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/future4code/Rosana-Rezende">
-  </a>
 </p>
 <br>
 
@@ -40,6 +36,7 @@ Tecnologias, linguagens e projetos desenvolvidos por Rosana Rezende durante o Bo
 * Vanilla Javascript
 * Node.js
 * React
+* Redux
 <br>
 
 ### PROJETOS
