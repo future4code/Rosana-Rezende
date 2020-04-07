@@ -13,6 +13,12 @@ describe("Checa Palíndromo", () => {
     expect(resultado).toBe(true)
   });
 
+  it("Palíndromo - Retorna true quando frase = O alívio foi vilão", () => {
+    const frase = "O alívio foi vilão"
+    const resultado = checaPalindromo(frase);
+    expect(resultado).toBe(true)
+  });
+
   it("Não é palíndromo - Retorna false quando frase = nada", () => {
     const frase = "nada"
     const resultado = checaPalindromo(frase);
