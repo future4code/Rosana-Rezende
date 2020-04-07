@@ -25,7 +25,7 @@ describe('Posts Action-Creators', () => {
         expect(mockedAction.type).toEqual("SET_FILTERED_POSTS")
         expect(mockedAction.payload.posts).toBeDefined()
         expect(mockedAction.payload.posts).toEqual(mockPosts)
-
+        
     })
 
     it('Set Input Search', () => {
