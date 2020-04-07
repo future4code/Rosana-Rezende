@@ -135,7 +135,7 @@ export const voteInDetail = (id, direction) => async (dispatch, getState) => {
     }
 }
 
-const setPostId = (id) => ({
+export const setPostId = (id) => ({
     type: 'SET_POST_ID',
     payload: {
         id
