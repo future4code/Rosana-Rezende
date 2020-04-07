@@ -4,24 +4,23 @@ import ButtonScrollToTop from './index'
 import { ButtonTop } from './styles'
 import renderer from "react-test-renderer";
 
+
 describe("Button Scroll To Top", () => {
     
-    it('Scroll Function', () => {
+    it('Scroll Function', () => {  
+        window.scroll = jest.fn()
 
-        const mockScrollFunction = jest.fn()
-
-        const component = shallow(
-            <ButtonScrollToTop onClikToScroll={mockScrollFunction} />
-        )
+        const component = shallow(<ButtonScrollToTop />)
 
         const scrollButton = component.find(ButtonTop)
         
         // o botão existe?
         expect(scrollButton).toHaveLength(1)
 
-        // scrollButton.simulate("click");
+        scrollButton.simulate("click");
 
-        // expect(mockScrollFunction).toHaveBeenCalledWith(1);
+        // ele está indo até o topo da página?
+        expect(window.scroll).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
 
     })
 })
