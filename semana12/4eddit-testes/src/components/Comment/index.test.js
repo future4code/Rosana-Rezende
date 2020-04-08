@@ -23,19 +23,26 @@ const mockComment = {
 describe("Comment", () => {
 
     it('Click Comment Up', () => {
+        const mockClickCommentUp = jest.fn()
 
         const component = shallow(
         <Provider store={store}>
-            <Comment comment={mockComment}/>
+            <Comment comment={mockComment} onClickCommentUp={mockClickCommentUp} />
         </Provider>
         )
 
         const voteComment = component.find(IconButton)
         console.log(voteComment)
 
-        // o botão existe? espero que sejam 2 ou 4?
-        // expect(voteComment).toHaveLength(2)
-        // expect(voteComment).toHaveBeenCalledTimes(2)
+        // o botão existe? espero que sejam 4?
+        // expect(voteComment).toHaveLength(4)
+        // expect(voteComment).toHaveBeenCalledTimes(4)
+
+        // voteComment.at(1).simulate('click')
+
+        // expect(mockClickCommentUp).toHaveBeenCalledTimes(1)
+
+
 
     })
 })
