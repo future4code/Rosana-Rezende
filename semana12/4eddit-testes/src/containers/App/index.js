@@ -18,7 +18,7 @@ const middlewares = [
     : f => f
 ];
 
-const store = createStore(generateReducers(history), compose(...middlewares));
+export const store = createStore(generateReducers(history), compose(...middlewares));
 
 export const App = () => (
   <Provider store={store}>
