@@ -3,7 +3,9 @@ import {
     setFilteredPosts,
     setInputSearch,
     setPostId,
-    setPostDetail
+    setPostDetail, 
+
+    signup,
 } from "./index"
 
 describe('Posts Action-Creators', () => {
@@ -55,6 +57,20 @@ describe('Posts Action-Creators', () => {
         expect(mockedAction.type).toEqual("SET_POST_DETAIL")
         expect(mockedAction.payload.post).toBeDefined()
         expect(mockedAction.payload.post).toEqual(mockPost)
+
+    })
+
+    // Integração com API
+
+    it('Sigup', () => {
+        // não sei exatamente o que ele espera, mas acho que é assim
+        const mockRegisterData = {
+            email: "teste@email.com",
+            password: "qwerty",
+            username: "User Test"
+        }
+        const mockedAction = signup(mockRegisterData)
+        // console.log(mockedAction)
 
     })
 
