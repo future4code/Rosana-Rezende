@@ -70,7 +70,7 @@ describe('Posts Action-Creators', () => {
             username: "User Test"
         }
         const mockedAction = signup(mockRegisterData)
-        // console.log(mockedAction)
+        console.log(mockedAction)
 
     })
 
