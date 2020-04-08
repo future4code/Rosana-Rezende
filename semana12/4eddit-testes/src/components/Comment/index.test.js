@@ -27,7 +27,10 @@ describe("Comment", () => {
 
         const component = shallow(
         <Provider store={store}>
-            <Comment comment={mockComment} onClickCommentUp={mockClickCommentUp} />
+            <Comment 
+                comment={mockComment} 
+                onClickCommentUp={mockClickCommentUp} 
+            />
         </Provider>
         )
 
@@ -41,6 +44,7 @@ describe("Comment", () => {
         // voteComment.at(1).simulate('click')
 
         // expect(mockClickCommentUp).toHaveBeenCalledTimes(1)
+        // expect(mockClickCommentUp).toHaveBeenCalledWith(mockComment.id);
 
 
 

@@ -8,6 +8,13 @@ import {
     signup,
 } from "./index"
 
+// import configureMockStore from 'redux-mock-store'
+// import thunk from 'redux-thunk'
+// import fetchMock from 'fetch-mock'
+
+// const middlewares = [thunk]
+// const mockStore = configureMockStore(middlewares)
+
 describe('Posts Action-Creators', () => {
 
     it('Set Posts', () => {
@@ -58,9 +65,15 @@ describe('Posts Action-Creators', () => {
         expect(mockedAction.payload.post).toBeDefined()
         expect(mockedAction.payload.post).toEqual(mockPost)
 
-    })
+    })    
 
-    // Integração com API
+})
+
+describe('Async actions', () => {
+
+    // afterEach(() => {
+    //     fetchMock.restore()
+    // })
 
     it('Sigup', () => {
         // não sei exatamente o que ele espera, mas acho que é assim
@@ -71,7 +84,13 @@ describe('Posts Action-Creators', () => {
         }
         const mockedAction = signup(mockRegisterData)
         console.log(mockedAction)
+        // const store = mockStore({})
+
+        // return store.dispatch(signup()).then(() => {
+        //     expect(store.getActions()).toEqual(mockedAction)
+        // })
 
     })
+
 
 })
