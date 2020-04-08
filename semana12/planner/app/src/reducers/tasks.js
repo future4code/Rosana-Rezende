@@ -1,18 +1,5 @@
 const initialState = {
-    allTasks: [
-        // {
-        //     text: "testando segunda",
-        //     day: "Segunda"
-        //   },
-        //   {
-        //     text: "testando segunda mais uma vez",
-        //     day: "Segunda"
-        //   },
-        //   {
-        //     text: "testando terça",
-        //     day: "Terça"
-        //   },
-    ]
+    allTasks: []
 }
 
 const tasks = (state = initialState, action) => {
