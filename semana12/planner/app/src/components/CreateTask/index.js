@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import { list } from '../../utils/constants'
 import { createTask } from '../../actions'
 
-import { CreateTaskWrapper, CreateTaskForm, TaskInput, SelectDay } from './styles'
-import { Button } from '@material-ui/core'
+import { CreateTaskWrapper, CreateTaskForm, TaskInput, SelectDay, ButtonStyled } from './styles'
 
-const CreateTask = (props) => {
+export const CreateTask = (props) => {
 
   const [task, setTask] = useState('')
   const [weekDay, setWeekDay] = useState('')
@@ -29,6 +28,7 @@ const CreateTask = (props) => {
       <CreateTaskForm onSubmit={onCreateTask}>
 
         <TaskInput
+          id="task"
           variant='outlined'
           margin="normal"
           label="Escrever tarefa..."
@@ -42,6 +42,7 @@ const CreateTask = (props) => {
         />
 
         <SelectDay
+          id="weekDay"
           select
           variant='outlined'
           label="Selecionar dia"
@@ -59,9 +60,9 @@ const CreateTask = (props) => {
           ))}
         </SelectDay>
 
-        <Button type="submit" variant="contained" color="primary">
+        <ButtonStyled type="submit" variant="contained" color="primary">
           Criar tarefa
-        </Button>
+        </ButtonStyled>
 
       </CreateTaskForm>
 
