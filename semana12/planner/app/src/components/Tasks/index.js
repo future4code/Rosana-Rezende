@@ -28,7 +28,7 @@ const Tasks = (props) => {
 
           <CardContent>
             {props.tasks.filter(task => task.day === weekDay).map(task => (
-              <Typography key={task.text}>
+              <Typography key={task.id} variant='body1' component="p">
                 {task.text}
               </Typography>
             ))}

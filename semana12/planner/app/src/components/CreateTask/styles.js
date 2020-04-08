@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Paper } from '@material-ui/core'
+import { Paper, TextField } from '@material-ui/core'
 
 export const CreateTaskWrapper = styled(Paper)`
     margin: 1rem;
@@ -13,5 +13,12 @@ export const CreateTaskWrapper = styled(Paper)`
 export const CreateTaskForm = styled.form`
     display: flex;
     justify-content: space-around;
-    align-items: center
+    align-items: center;
+`
+
+export const TaskInput = styled(TextField)`
+`
+
+export const SelectDay = styled(TextField)`
+    width: 200px;
 `

@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { list } from '../../utils/constants'
 import { createTask } from '../../actions'
 
-import { CreateTaskWrapper, CreateTaskForm } from './styles'
-import { TextField, Button } from '@material-ui/core'
+import { CreateTaskWrapper, CreateTaskForm, TaskInput, SelectDay } from './styles'
+import { Button } from '@material-ui/core'
 
 const CreateTask = (props) => {
 
@@ -28,7 +28,7 @@ const CreateTask = (props) => {
 
       <CreateTaskForm onSubmit={onCreateTask}>
 
-        <TextField
+        <TaskInput
           variant='outlined'
           margin="normal"
           label="Escrever tarefa..."
@@ -41,7 +41,7 @@ const CreateTask = (props) => {
           }}
         />
 
-        <TextField
+        <SelectDay
           select
           variant='outlined'
           label="Selecionar dia"
@@ -57,7 +57,7 @@ const CreateTask = (props) => {
           {list.map(day => (
             <option key={day} value={day}>{day}</option>
           ))}
-        </TextField>
+        </SelectDay>
 
         <Button type="submit" variant="contained" color="primary">
           Criar tarefa
