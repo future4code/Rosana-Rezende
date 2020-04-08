@@ -7,7 +7,7 @@ import {
     setPostDetail
 } from "../actions/index"
 
-const mockStore = {
+const mockInitialState = {
 
     // allPosts: [
     //     {
@@ -66,7 +66,7 @@ describe("Posts Reducer", () => {
     it("Set Posts", () => {
         const mockPosts = [{}]
         const mockedAction = setPosts(mockPosts)
-        const newStore = postsReducer(mockStore, mockedAction)
+        const newStore = postsReducer(mockInitialState, mockedAction)
 
         expect(newStore.allPosts).toHaveLength(1)
     })
@@ -74,7 +74,7 @@ describe("Posts Reducer", () => {
     it('Set Filtered Posts', () => {
         const mockPosts = [{}]
         const mockedAction = setFilteredPosts(mockPosts)
-        const newStore = postsReducer(mockStore, mockedAction)
+        const newStore = postsReducer(mockInitialState, mockedAction)
 
         expect(newStore.filteredPosts).toHaveLength(1)
         
@@ -83,7 +83,7 @@ describe("Posts Reducer", () => {
     it('Set Input Search', () => {
         const mockInputData = "test"
         const mockedAction = setInputSearch(mockInputData)
-        const newStore = postsReducer(mockStore, mockedAction)
+        const newStore = postsReducer(mockInitialState, mockedAction)
         
         expect(newStore.inputSearch).toBe("test")
     })
@@ -91,7 +91,7 @@ describe("Posts Reducer", () => {
     it('Set Post Id', () => {
         const mockId = "1234"
         const mockedAction = setPostId(mockId)
-        const newStore = postsReducer(mockStore, mockedAction)
+        const newStore = postsReducer(mockInitialState, mockedAction)
         
         expect(newStore.postId).toBe("1234")
     })
@@ -99,7 +99,7 @@ describe("Posts Reducer", () => {
     it('Set Post Detail', () => {
         const mockPost = [{}]
         const mockedAction = setPostDetail(mockPost)
-        const newStore = postsReducer(mockStore, mockedAction)
+        const newStore = postsReducer(mockInitialState, mockedAction)
         
         expect(newStore.postDetail).toHaveLength(1)
     })
