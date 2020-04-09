@@ -52,8 +52,26 @@ describe('Tasks - Async actions', () => {
 
     })
 
-    it('Create Tasks - should create a task', () => {
+    it('Create Tasks - should create a task', async () => {
 
+        // Mock do axios
+        axios.post = jest.fn()  
+
+        // Mock do dispatch
+        const dispatch = jest.fn()
+
+        const mockCreateTaskData = {
+            day: "Terça",
+            text: "Tarefa de teste 2"
+        }
+
+        // Executa a ação assíncrona
+        await createTask(mockCreateTaskData)(dispatch)
+
+        // Verifica se o dispatch foi chamado com a ação correta
+        // expect(dispatch).toHaveBeenCalledWith(
+
+        // )
 
 
     })
