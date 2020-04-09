@@ -13,40 +13,40 @@ describe('Tasks - Action Creators', () => {
 })
 
 describe('Tasks - Async actions', () => {
+    
+    // Mock do dispatch
+        // pra que ele funcione aqui, sem quebrar outros testes
+    let mockDispatch
+    beforeEach(() => {
+        mockDispatch = jest.fn()
+    });
 
     it('Get Tasks - should return a list of tasks', async () => {
 
-        // Mock do axios
-        axios.get = jest.fn(() => {
-            return {
-                data: [
-                    {
-                        id: "abc",
-                        day: "Segunda",
-                        text: "Tarefa de teste"
-                    }
-                ]
+        // Mock de dados
+            // fiz igualzinho o formato, mas funcionaria com qq coisa
+        const mockDataTaskCreated = [
+            {
+                id: "abc",
+                day: "Segunda",
+                text: "Tarefa de teste"
             }
-        })
+        ]
+
+        // Mock do axios
+        axios.get = jest.fn(() => ({ data: mockDataTaskCreated }))
 
         // const response = axios.get() // aqui ela é síncrona = responde instantaneamente
         // console.log(response.data)
 
-        // Mock do dispatch
-        const dispatch = jest.fn()
-
         // Executa a ação assíncrona
-        await getTasks()(dispatch)
+        await getTasks()(mockDispatch)
 
         // Verifica se o dispatch foi chamado com a ação correta
-        expect(dispatch).toHaveBeenCalledWith({
+        expect(mockDispatch).toHaveBeenCalledWith({
             type: "SET_TASKS",
             payload: {
-                tasks: [{
-                    id: "abc",
-                    day: "Segunda",
-                    text: "Tarefa de teste"
-                }]
+                tasks: mockDataTaskCreated
             }
         })
 
@@ -54,25 +54,27 @@ describe('Tasks - Async actions', () => {
 
     it('Create Tasks - should create a task', async () => {
 
-        // Mock do axios
-        axios.post = jest.fn()  
-
-        // Mock do dispatch
-        const dispatch = jest.fn()
-
-        const mockCreateTaskData = {
+        // Mock de dados
+        const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/generic/planner-sagan-rosana'
+            // mais um vez, fiz igualzinho, mas funcionaria com qq coisa
+        const mockDataTaskToCreate = {
             day: "Terça",
             text: "Tarefa de teste 2"
         }
 
+        // Mock do axios
+        axios.post = jest.fn()
+
         // Executa a ação assíncrona
-        await createTask(mockCreateTaskData)(dispatch)
+        await createTask(mockDataTaskToCreate)(mockDispatch)
 
-        // Verifica se o dispatch foi chamado com a ação correta
-        // expect(dispatch).toHaveBeenCalledWith(
-
-        // )
-
-
+        // Verifica se o dispatch foi chamado
+        expect(mockDispatch).toHaveBeenCalled()
+        // só uma vez?
+        expect(mockDispatch).toHaveBeenCalledTimes(1)
+        // o axios.post pegou a url e os dados?
+        expect(axios.post).toHaveBeenCalledWith(baseUrl, mockDataTaskToCreate)
+    
     })
+
 })

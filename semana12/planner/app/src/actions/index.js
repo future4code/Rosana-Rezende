@@ -12,7 +12,7 @@ export const setTasks = (tasks) => ({
 export const getTasks = () => async (dispatch) => {
 
     try{
-        const response = await axios.get(`${baseUrl}`)
+        const response = await axios.get(baseUrl)
         // console.log(response.data)
         dispatch(setTasks(response.data))
 
@@ -26,7 +26,7 @@ export const createTask = (createTaskData) => async (dispatch) => {
     // console.log(createTaskData)
 
     try{
-        await axios.post(`${baseUrl}`, createTaskData)
+        await axios.post(baseUrl, createTaskData)
         dispatch(getTasks())
 
     } catch(error) {
