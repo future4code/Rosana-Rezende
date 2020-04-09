@@ -49,7 +49,6 @@ export const CreateTask = (props) => {
           required
           SelectProps={{
             native: true,
-            required: true
           }}
           value={weekDay}
           onChange={(e) => setWeekDay(e.target.value)}
