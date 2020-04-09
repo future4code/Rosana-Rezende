@@ -10,9 +10,10 @@ import { CardContent, Typography } from '@material-ui/core'
 
 export const Tasks = (props) => {
 
+  const { getTasks } = props
   useEffect(() => {
-    props.getTasks()
-  }, [])
+    getTasks()
+  }, [getTasks])
 
   return (
     <TasksWrapper>
