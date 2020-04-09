@@ -20,7 +20,7 @@ export const App = () => (
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <Planner />
+      <Planner id="planner"/>
     </MuiThemeProvider>
   </Provider>
 );
