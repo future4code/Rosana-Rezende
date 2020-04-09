@@ -7,16 +7,18 @@ import { CreateTaskForm } from './styles'
 import configureStore from 'redux-mock-store'
 
 const mockStore = configureStore([])
-const initialState = {};
+const mockInitialState = {};
 
 describe('Create Task - when the form is submitted', () => {
     let store
     let component
-    const mockCreateTask = jest.fn()     
+    let mockCreateTask   
 
     beforeEach(() => {
-        store = mockStore(initialState);
+        mockCreateTask = jest.fn()   
+        store = mockStore(mockInitialState);
         component = shallow(<CreateTask store={store} createTask={mockCreateTask} />)
+        jest.resetAllMocks()
     });
 
     it('should call de mock create task function', () => {
@@ -29,7 +31,7 @@ describe('Create Task - when the form is submitted', () => {
         formCreateTask.simulate('submit', {preventDefault() {}})
 
         // ele é chamado uma vez
-        expect(mockCreateTask.mock.calls.length).toBe(1)
+        expect(mockCreateTask).toBeCalledTimes(1)
 
     })
 
@@ -61,9 +63,7 @@ describe('Create Task - when the form is submitted', () => {
 
         // o resultado é o que eu espero?
             // console.log(mockCreateTask.mock.calls)
-            // [1] pq já chamamos o mockCreateTask antes, agora é com argumentos
-            // [0] pq é o primeiro índice do array
-        expect(mockCreateTask.mock.calls[1][0]).toEqual({
+        expect(mockCreateTask).toHaveBeenCalledWith({
             text: 'Tarefa teste',
             day: 'Segunda'
         })
