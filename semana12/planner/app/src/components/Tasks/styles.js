@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Card, CardContent, Typography } from '@material-ui/core'
+import { Card, CardContent } from '@material-ui/core'
 
 export const TasksWrapper = styled.div`
     margin: 0 1rem;
