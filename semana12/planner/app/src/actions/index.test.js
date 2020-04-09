@@ -1,5 +1,6 @@
-import { createTask, getTasks, setTasks } from './index'
 import axios from 'axios'
+import { createTask, getTasks, setTasks } from './index'
+import { baseUrl } from '../utils/constants'
 
 describe('Tasks - Action Creators', () => {
     it('Set Tasks', () => {
@@ -55,7 +56,6 @@ describe('Tasks - Async actions', () => {
     it('Create Tasks - should create a task', async () => {
 
         // Mock de dados
-        const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/generic/planner-sagan-rosana'
             // mais um vez, fiz igualzinho, mas funcionaria com qq coisa
         const mockDataTaskToCreate = {
             day: "Terça",
