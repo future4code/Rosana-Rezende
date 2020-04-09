@@ -8,7 +8,7 @@ import { TasksWrapper, CardStyled, WeekDay } from './styles'
 import { CardContent, Typography } from '@material-ui/core'
 
 
-const Tasks = (props) => {
+export const Tasks = (props) => {
 
   useEffect(() => {
     props.getTasks()

@@ -1,5 +1,4 @@
 // https://hackernoon.com/unit-testing-redux-connected-components-692fa3c4441c
-
 import React from "react";
 import { shallow } from "enzyme";
 import { CreateTask } from './index'
