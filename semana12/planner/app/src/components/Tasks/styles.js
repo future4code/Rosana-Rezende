@@ -10,7 +10,7 @@ export const TasksWrapper = styled.div`
 
 export const CardStyled = styled(Card)`
     width: 12vw;
-    height: 82vh;
+    height: 72vh;
     @media screen and (max-width: 1200px) {
         width: 92vw;
         height: 30vh;

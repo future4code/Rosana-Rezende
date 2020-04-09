@@ -14,9 +14,16 @@ export const CreateTaskForm = styled.form`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    @media screen and (max-width: 1200px){
+        flex-wrap: wrap;
+    }
 `
 
 export const TaskInput = styled(TextField)`
+    width: 400px;
+    @media screen and (max-width: 1200px){
+        width: 95%;
+    }
 `
 
 export const SelectDay = styled(TextField)`
