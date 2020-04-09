@@ -6,19 +6,19 @@ import Appbar from "../../components/Appbar";
 import CreateTask from "../../components/CreateTask";
 import Tasks from "../../components/Tasks";
 
-const Planner = () => {
+export const Planner = () => {
 
   return (
     <>
-      <Appbar/>
+      <Appbar id="appbar"/>
 
       <PlannerWrapper>
 
-      <CreateTask/>
+        <CreateTask id="createtask"/>
 
-      <Tasks/>
+        <Tasks id="tasks"/>
 
-    </PlannerWrapper>
+      </PlannerWrapper>
     </>
   );
 }
