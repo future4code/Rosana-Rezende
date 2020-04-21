@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-let resultadoFinal = 1;
 function calculaFatorial(n) {
+    let resultadoFinal = 1;
     if (n >= 1) {
         for (let contador = n; contador > 1; contador--) {
             resultadoFinal *= contador;

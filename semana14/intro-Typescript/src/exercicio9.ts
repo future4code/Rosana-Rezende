@@ -1,6 +1,6 @@
-let resultadoFinal: number = 1
 
 export function calculaFatorial(n: number): number {
+    let resultadoFinal: number = 1
     if(n >= 1){
         for(let contador = n; contador > 1; contador--){
             resultadoFinal *= contador
@@ -11,5 +11,6 @@ export function calculaFatorial(n: number): number {
     return resultadoFinal
 }
 
-// calculaFatorial(6)
-// console.log(resultadoFinal)
+// console.log(calculaFatorial(5))
+
+// console.log(calculaFatorial(6))
