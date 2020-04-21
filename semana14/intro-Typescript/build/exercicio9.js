@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let resultadoFinal = 1;
 function calculaFatorial(n) {
     if (n >= 1) {
@@ -10,6 +12,5 @@ function calculaFatorial(n) {
     }
     return resultadoFinal;
 }
-calculaFatorial(6);
-console.log(resultadoFinal);
+exports.calculaFatorial = calculaFatorial;
 //# sourceMappingURL=exercicio9.js.map
