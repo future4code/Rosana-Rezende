@@ -5,18 +5,21 @@ const num2 = Number(process.argv[4])
 let resultado
 if(operacao === 'add'){
     resultado = num1 + num2
+    console.log("\x1b[33m", 'Resposta: ', resultado)
 } 
 else if(operacao === 'sub'){
     resultado = num1 - num2
+    console.log("\x1b[34m", 'Resposta: ', resultado)
 } 
 else if(operacao === 'mult'){
     resultado = num1 * num2
+    console.log("\x1b[35m", 'Resposta: ', resultado)
 } 
 else if(operacao === 'div') {
     resultado = num1 / num2
+    console.log("\x1b[36m", 'Resposta: ', resultado)
 }
 else {
-    resultado = 'Erro! Realize uma operação matemática válida.'
+    resultado = 
+    console.log("\x1b[31m", 'Erro! Realize uma operação matemática válida.')
 }
-
-console.log('Resposta: ', resultado)

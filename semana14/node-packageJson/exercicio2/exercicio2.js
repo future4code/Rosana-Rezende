@@ -6,7 +6,7 @@ ${novaTarefa}`
 
 try{
     fs.appendFileSync(listaDeTarefas, novaTarefaFormatada, 'utf8')
-    console.log('Tarefa inserida com sucesso')
+    console.log("\x1b[32m", 'Tarefa inserida com sucesso')
 } catch (err) {
     console.error(err)
 }
