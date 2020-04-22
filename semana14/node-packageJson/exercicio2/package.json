@@ -1,0 +1,20 @@
+{
+  "name": "sagan-aula44-exercicio2",
+  "version": "1.0.0",
+  "description": "Turma Sagan - Aula 44: Node e package.json - Exercício 2",
+  "main": "exercicio2.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node exercicio2.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/future4code/Rosana-Rezende/tree/master/semana14"
+  },
+  "keywords": [
+    "node",
+    "package.json"
+  ],
+  "author": "Rosana Rezende",
+  "license": "MIT"
+}
