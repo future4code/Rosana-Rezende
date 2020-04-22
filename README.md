@@ -1,14 +1,16 @@
-# Future4 | Full-Stack Web Development Bootcamp
+# Labenu | Full-Stack Web Development Bootcamp
 Desenvolvimento de aplicações completas, incluindo frontend Web com React e backend com Node.js.
 
-<p align="center">
-  <img  width='500' src='https://user-images.githubusercontent.com/45580434/74607837-f69f5e00-50ba-11ea-97e0-62fab855bcb6.png'>
-</p>
+![Screenshot_1](https://user-images.githubusercontent.com/45580434/79641791-06e1c100-8170-11ea-8ecf-b6c889805d55.png)
 <br>
   
-## [Rosana-Rezende](https://www.linkedin.com/in/rosanarezende/) 
-Tecnologias, linguagens e projetos desenvolvidos por Rosana Rezende durante o Bootcamp.
+## Rosana-Rezende
+Advogada | Desenvolvedora web front-end | MBA em gestão: inteligência de negócios digitais - FGV
 <br><br>
+
+**Canais de comunicação**:
+- [Linkedin](https://www.linkedin.com/in/rosanarezende/)
+- [Github](https://github.com/rosanarezende)
 
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/future4code/Rosana-Rezende">
@@ -23,6 +25,10 @@ Tecnologias, linguagens e projetos desenvolvidos por Rosana Rezende durante o Bo
 </p>
 <br>
 
+## Front-end
+Tecnologias, linguagens e projetos desenvolvidos durante o Bootcamp.
+<br><br>
+
 ### LINGUAGENS
 
 * HTML
@@ -30,20 +36,35 @@ Tecnologias, linguagens e projetos desenvolvidos por Rosana Rezende durante o Bo
 * JavaScript
 <br>
 
-### TECNOLOGIAS
+### TECNOLOGIAS/FERRAMENTAS
 
+* Terminal
 * Git
+* ChromeDevTools
 * Vanilla Javascript
 * Node.js
 * React
 * Redux
-<br>
+* Redux-Thunk: Integração do redux com requisições assíncronas.
+* Autenticação
+* Estilização Avançada com CSS
+* Uso de bibliotecas de UI (MaterialUI)
+* Aplicações com múltiplas rotas utilizando React Router
+* Formulários com Validação
+* Teste unitário de lógica e de componentes
+* Responsividade e adaptação de aplicação web para front.
+<br><br>
 
-### PROJETOS
+### PROJETO FINAL - iFuture
 
-* [Portfólio](https://github.com/future4code/Rosana-Rezende/tree/master/semana1/portfolio)
-* [F4Bank - Landing Page](https://github.com/future4code/sagan-f4bank)
-* [Black Jack](https://github.com/future4code/Rosana-Rezende/tree/master/semana3/projeto--Blackjack)
-* [Whats4](https://github.com/future4code/sagan-whats4-grupo4)
+[Repositório do projeto](https://github.com/future4code/sagan-4food-B)
+
+[Site do projeto](http://ifuture-sagan.surge.sh/)
+
+**Versão mobile**
+
+<p align="center">
+  <img  height='600' src='https://user-images.githubusercontent.com/45580434/79641732-bd917180-816f-11ea-810b-59ee03a3367b.gif'>
+</p>
 
 <br>
