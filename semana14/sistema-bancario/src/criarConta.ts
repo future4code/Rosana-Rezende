@@ -4,31 +4,64 @@ const nome: string = process.argv[2]
 const CPF: string = process.argv[3]
 const dataDeNacimento: string = process.argv[4]
 
-const dateFormated: string[] = dataDeNacimento.split('/')
-const day: string = dateFormated[0]
-const month: string = dateFormated[1]
-const year: string = dateFormated[2]
-const newDate: string = `${year}/${month}/${day}`
-const birthday: any = new Date(newDate)
-const today: any = new Date()
-const time: any = today - birthday
-const age: any = Math.floor(time / (1000 * 60 * 60 * 24 * 365.25));
+const banco: string = 'banco.json'
+let contas = fs.readFileSync(banco).toString()
+let contasJson = JSON.parse(contas)
 
-const fileName = 'conta.json'
-let conta: object
+type conta = {
+    usuario: {
+        nome: string,
+        CPF: string,
+        dataDeNascimento: string
+    },
+    saldo: number, 
+    extrato: any[] // vai ser de números?
+}
 
-if(age > 18){
-    conta = {
-        usuario: {
-            nome: nome,
-            CPF: CPF,
-            dataDeNascimento: dataDeNacimento
-        },
-        saldo: 0,
-        extrato: []
+let novaConta: conta = {
+    usuario: {
+        nome: nome,
+        CPF: CPF,
+        dataDeNascimento: dataDeNacimento
+    },
+    saldo: 0,
+    extrato: []
+}
+
+function criarConta(): void {
+    try {
+        contasJson.push(novaConta)
+        fs.writeFileSync(banco, JSON.stringify(contasJson, null, 4))
+        console.log("\x1b[32m", 'Conta criada com sucesso')
+    } catch (err) {
+        console.error(err)
     }
-    // fs.writeFileSync(fileName, conta)
-    console.log("\x1b[32m", 'Conta criada com sucesso')
+}
+
+function validarExisteCPF(): boolean {
+    let validador: object[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
+    if(validador.length >= 1){
+        return false
+    } else {
+        return true
+    }
+}
+// e pra validar o formato do CPF???
+
+
+const dataFormatada: string[] = dataDeNacimento.split('/')
+const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
+const aniversario: any = new Date(novaData) // não funciona number (quebra ele) nem Date (quebra o cálculo de time)
+const hoje: any = new Date() 
+const diferenca: number = hoje - aniversario
+const idade: number = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
+
+if (idade >= 18) {
+    if(validarExisteCPF()){
+        criarConta()
+    } else {
+        console.log("\x1b[31m", 'CPF já cadastrado')
+    }
 } else {
-    console.log("\x1b[31m", 'Não é possível cria conta')
+    console.log("\x1b[31m", 'Menores de 18 anos não tem permissão para cria conta')
 }
