@@ -1,23 +1,44 @@
 import { readdir, readFile } from 'fs'
 
-const handleFileRead = (err: Error, data: Buffer) => {
-    try{
-        const fileContent: string = data.toString()
-        return fileContent
-    } catch(e){
-        console.error('Deu erro: ', err)
-    }
-}
-
 readdir('./textos', (err: Error, files: string[]) => {
-    if(err){
+    if (err) {
         console.log(err)
         return
     } else {
-        files.map(file => {
-            console.log(file)
-            // const content = readFile(file, handleFileRead)
-            // console.log(content)
+        let promises: Promise<string>[] = []
+        files.forEach(file => {
+            const myPromiseText = new Promise<string>((resolve, reject) => {
+
+                readFile(`./textos/${file}`, (err: Error, data: Buffer) => {
+                    try {
+                        const fileContent: string = data.toString()
+                        resolve(fileContent)
+                    } catch (e) {
+                        reject(err)
+                    }
+                })
+
+            })
+
+            // myPromiseText
+            //     .then(result => {
+            //         console.log(result)
+            //     })
+            //     .catch(err => {
+            //         console.error(err)
+            //     })
+
+            promises.push(myPromiseText)
+
         })
+
+        Promise.all(promises)
+            .then(result => {
+                const resultado = result.join()
+                console.log(resultado)
+            })
+            .catch(err => {
+                console.log(err)
+            })        
     }
 })
