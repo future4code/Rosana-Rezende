@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs = require("fs");
+const fs_1 = require("fs");
 const nome = process.argv[2];
 const CPF = process.argv[3];
 const dataDeNacimento = process.argv[4];
 const banco = 'banco.json';
-let contas = fs.readFileSync(banco).toString();
+let contas = fs_1.readFileSync(banco).toString();
 let contasJson = JSON.parse(contas);
 let novaConta = {
     usuario: {
@@ -19,14 +19,14 @@ let novaConta = {
 function criarConta() {
     try {
         contasJson.push(novaConta);
-        fs.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
+        fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
         console.log("\x1b[32m", 'Conta criada com sucesso');
     }
     catch (err) {
         console.error(err);
     }
 }
-function validarCPF() {
+function validarExisteCPF() {
     let validador = contasJson.filter((conta) => conta.usuario.CPF === CPF);
     if (validador.length >= 1) {
         return false;
@@ -42,7 +42,7 @@ const hoje = new Date();
 const diferenca = hoje - aniversario;
 const idade = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
 if (idade >= 18) {
-    if (validarCPF()) {
+    if (validarExisteCPF()) {
         criarConta();
     }
     else {

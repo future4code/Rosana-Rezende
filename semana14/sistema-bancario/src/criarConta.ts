@@ -1,11 +1,24 @@
-import * as fs from 'fs'
+import { readFileSync, readFile, writeFileSync } from 'fs'
 
 const nome: string = process.argv[2]
 const CPF: string = process.argv[3]
 const dataDeNacimento: string = process.argv[4]
 
 const banco: string = 'banco.json'
-let contas = fs.readFileSync(banco).toString()
+
+/// tranforma em assíncrona
+// const handleFileRead = (err: Error, data: Buffer) => {
+//     try{
+//         const bancoConteudo: string = data.toString()
+//         return bancoConteudo
+//     } catch(error) {
+//         console.error('Erro: ', err, error)
+//     }
+// }
+
+
+// let contas = readFile(banco, handleFileRead)
+let contas = readFileSync(banco).toString()
 let contasJson = JSON.parse(contas)
 
 type conta = {
@@ -31,7 +44,7 @@ let novaConta: conta = {
 function criarConta(): void {
     try {
         contasJson.push(novaConta)
-        fs.writeFileSync(banco, JSON.stringify(contasJson, null, 4))
+        writeFileSync(banco, JSON.stringify(contasJson, null, 4))
         console.log("\x1b[32m", 'Conta criada com sucesso')
     } catch (err) {
         console.error(err)
