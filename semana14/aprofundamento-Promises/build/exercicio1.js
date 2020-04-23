@@ -30,8 +30,8 @@ fs_1.readdir('./textos', (err, files) => {
                 ' do ': '\x1b[36m do \x1b[0m'
             };
             const resultFormated = result.join();
-            const resultWithSedRed = resultFormated.replace(/sed| id | do /g, i => replaces[i]);
-            console.log(resultWithSedRed);
+            const resultWithColors = resultFormated.replace(/sed| id | do /g, i => replaces[i]);
+            console.log(resultWithColors);
         })
             .catch(err => {
             console.log(err);
