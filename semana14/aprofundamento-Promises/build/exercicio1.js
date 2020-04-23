@@ -20,18 +20,18 @@ fs_1.readdir('./textos', (err, files) => {
                     }
                 });
             });
-            myPromiseText
-                .then(result => {
-            })
-                .catch(err => {
-                console.error(err);
-            });
             promises.push(myPromiseText);
         });
         Promise.all(promises)
             .then(result => {
-            const resultado = result.join();
-            console.log(resultado);
+            const replaces = {
+                sed: '\x1b[31msed\x1b[0m',
+                ' id ': '\x1b[31m id \x1b[0m',
+                ' do ': '\x1b[36m do \x1b[0m'
+            };
+            const resultFormated = result.join();
+            const resultWithSedRed = resultFormated.replace(/sed| id | do /g, i => replaces[i]);
+            console.log(resultWithSedRed);
         })
             .catch(err => {
             console.log(err);
