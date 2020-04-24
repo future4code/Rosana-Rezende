@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
+const moment = require("moment");
+moment.locale('pt-br');
 const operacao = process.argv[4];
 const nome = process.argv[5];
 const CPF = process.argv[6];
@@ -46,12 +48,10 @@ if (operacao === 'criarConta') {
                 console.error(err);
             }
         }
-        const dataFormatada = dataDeNacimento.split('/');
-        const novaData = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`;
-        const aniversario = new Date(novaData).getTime();
-        const hoje = new Date().getTime();
-        const diferenca = hoje - aniversario;
-        const idade = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
+        let dataDeNacimentoFormatada = moment(dataDeNacimento, "DD/MM/YYYY");
+        const hoje = moment();
+        const idade = hoje.diff(dataDeNacimentoFormatada, "years");
+        console.log(idade);
         if (idade >= 18) {
             if (validarExisteCPF()) {
                 console.log("\x1b[31m", 'CPF já cadastrado');
@@ -99,10 +99,8 @@ else if (operacao === 'adicionarSaldo') {
     }
 }
 else if (operacao === 'pagarConta') {
-    const dataFormatada = dataDePagamento.split('/');
-    const novaData = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`;
-    const dataDePagamentoFormatada = new Date(novaData).getTime();
-    const hoje = new Date().getTime();
+    let dataDePagamentoFormatada = moment(dataDePagamento, "DD/MM/YYYY").unix();
+    const hoje = moment().unix();
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento');
     }

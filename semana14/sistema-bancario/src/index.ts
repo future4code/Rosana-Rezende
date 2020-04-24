@@ -29,6 +29,8 @@ import {
     readFileSync, writeFileSync,
     // readFile, readdir
 } from 'fs'
+import * as moment from 'moment'
+moment.locale('pt-br')
 
 const operacao: string = process.argv[4]
 const nome: string = process.argv[5]
@@ -99,12 +101,18 @@ if (operacao === 'criarConta') {
             }
         }
 
-        const dataFormatada: string[] = dataDeNacimento.split('/')
-        const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
-        const aniversario: number = new Date(novaData).getTime() // com getTime aceita number
-        const hoje: number = new Date().getTime()
-        const diferenca: number = hoje - aniversario
-        const idade: number = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
+        // const dataFormatada: string[] = dataDeNacimento.split('/')
+        // const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
+        // const aniversario: number = new Date(novaData).getTime() // com getTime aceita number
+        const dataDeNacimentoFormatada: moment.Moment = moment(dataDeNacimento, "DD/MM/YYYY")
+
+        // const hoje: number = new Date().getTime()
+        const hoje: moment.Moment = moment()
+            
+        // const diferenca: number = hoje - aniversario
+        // const idade: number = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
+        const idade = hoje.diff(dataDeNacimentoFormatada, "years")      
+        console.log(idade)
         if (idade >= 18) {
             if (validarExisteCPF()) {
                 console.log("\x1b[31m", 'CPF já cadastrado')
@@ -158,11 +166,14 @@ else if(operacao === 'adicionarSaldo'){
 }
 
 else if(operacao === 'pagarConta'){
-    const dataFormatada: string[] = dataDePagamento.split('/')
-    const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
-    const dataDePagamentoFormatada: number = new Date(novaData).getTime() // com getTime aceita number
-    const hoje: number = new Date().getTime()
+    // const dataFormatada: string[] = dataDePagamento.split('/')
+    // const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
+    // const dataDePagamentoFormatada: number = new Date(novaData).getTime() // com getTime aceita number
+    const dataDePagamentoFormatada: number = moment(dataDePagamento, "DD/MM/YYYY").unix()
     
+    // const hoje: number = new Date().getTime()
+    const hoje: number = moment().unix()
+
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
         console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento')
     } 
