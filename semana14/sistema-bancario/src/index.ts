@@ -177,7 +177,7 @@ else if(operacao === 'pagarConta'){
                 dataDePagamento = hoje.format("DD/MM/YYYY")
             }
             const novoPagamento: infoExtrato = {
-                valor: valor,
+                valor: Number(valor),
                 descricao: descricao,
                 data: dataDePagamento
             }

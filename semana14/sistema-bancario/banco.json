@@ -5,8 +5,14 @@
             "CPF": "02397770504",
             "dataDeNascimento": "27/05/1987"
         },
-        "saldo": 0,
-        "extrato": []
+        "saldo": 55,
+        "extrato": [
+            {
+                "valor": 15,
+                "descricao": "academia",
+                "data": "12/05/2020"
+            }
+        ]
     },
     {
         "usuario": {
@@ -14,7 +20,7 @@
             "CPF": "11820701751",
             "dataDeNascimento": "11/03/1987"
         },
-        "saldo": 10,
+        "saldo": 60,
         "extrato": [
             {
                 "valor": "10",

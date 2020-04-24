@@ -122,7 +122,7 @@ else if (operacao === 'pagarConta') {
                 dataDePagamento = hoje.format("DD/MM/YYYY");
             }
             const novoPagamento = {
-                valor: valor,
+                valor: Number(valor),
                 descricao: descricao,
                 data: dataDePagamento
             };
@@ -130,7 +130,7 @@ else if (operacao === 'pagarConta') {
             contaObjeto.saldo -= Number(valor);
             contaObjeto.extrato.push(novoPagamento);
             fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
-            console.log("\x1b[32m", 'Pagamento realizado com sucesso: ', novoPagamento);
+            console.log("\x1b[32m", 'Pagamento realizado com sucesso:', '\x1b[0m', novoPagamento);
         }
     }
 }
