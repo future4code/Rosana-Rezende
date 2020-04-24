@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "tsc && node build/criarConta.js"
+    "start": "tsc && node build/index.js --target es6"
   },
   "repository": {
     "type": "git",
