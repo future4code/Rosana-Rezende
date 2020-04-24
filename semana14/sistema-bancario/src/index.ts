@@ -147,8 +147,6 @@ else if(operacao === 'adicionarSaldo'){
             writeFileSync(banco, JSON.stringify(contasJson, null, 4))
             const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
             console.log('Seu novo saldo é de', saldoFormatado)
-    
-            // muda algo no extrato???
         }
         else {
             console.log('\x1b[31m', 'Informe um CPF válido')
@@ -157,26 +155,41 @@ else if(operacao === 'adicionarSaldo'){
 }
 
 else if(operacao === 'pagarConta'){
-    const dataDePagamentoFormatada: number = moment(dataDePagamento, "DD/MM/YYYY").unix()
-    const hoje: number = moment().unix()
-
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
         console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento')
     } 
-    else if(dataDePagamentoFormatada < hoje){
-        // continua...
-    }
-    else {
-        if(dataDePagamento === undefined){
-            dataDePagamento = new Date()
+    else {       
+        const dataDePagamentoFormatada: moment.Moment = moment(dataDePagamento, "DD/MM/YYYY")
+        const hoje: moment.Moment = moment()
+        const diferenca = hoje.diff(dataDePagamentoFormatada, "days")
+
+        const contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
+        const saldoNaConta: number = contaPesquisada[0].saldo
+        
+        if(diferenca > 0){
+            console.log('\x1b[31m', 'Não é possível realizar pagamentos com datas anteriores ao dia vigente')
         }
+        else if(valor > saldoNaConta){
+            console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação')
+        }
+        else {
+            if(dataDePagamento === undefined){
+                dataDePagamento = hoje.format("DD/MM/YYYY")
+            }
+            const novoPagamento: infoExtrato = {
+                valor: valor,
+                descricao: descricao,
+                data: dataDePagamento
+            }
+            const contaObjeto: conta = contaPesquisada[0]
+            contaObjeto.saldo -= Number(valor)
+            contaObjeto.extrato.push(novoPagamento)
+            writeFileSync(banco, JSON.stringify(contasJson, null, 4))
+            console.log("\x1b[32m", 'Pagamento realizado com sucesso:', '\x1b[0m', novoPagamento)
 
-        // continua...
-
-
-        // muda algo no extrato????
-
-    }
+            // esses pagamentos no futuro eu deveria agendar? como?
+        }
+    }   
 
 }
 

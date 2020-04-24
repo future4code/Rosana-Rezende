@@ -14,7 +14,18 @@
             "CPF": "11820701751",
             "dataDeNascimento": "11/03/1987"
         },
-        "saldo": 25,
-        "extrato": []
+        "saldo": 10,
+        "extrato": [
+            {
+                "valor": "10",
+                "descricao": "energia",
+                "data": "24/04/2020"
+            },
+            {
+                "valor": "5",
+                "descricao": "balões de festa",
+                "data": "10/07/2020"
+            }
+        ]
     }
 ]

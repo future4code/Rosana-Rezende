@@ -102,16 +102,35 @@ else if (operacao === 'adicionarSaldo') {
     }
 }
 else if (operacao === 'pagarConta') {
-    const dataDePagamentoFormatada = moment(dataDePagamento, "DD/MM/YYYY").unix();
-    const hoje = moment().unix();
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento');
     }
-    else if (dataDePagamentoFormatada < hoje) {
-    }
     else {
-        if (dataDePagamento === undefined) {
-            dataDePagamento = new Date();
+        const dataDePagamentoFormatada = moment(dataDePagamento, "DD/MM/YYYY");
+        const hoje = moment();
+        const diferenca = hoje.diff(dataDePagamentoFormatada, "days");
+        const contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
+        const saldoNaConta = contaPesquisada[0].saldo;
+        if (diferenca > 0) {
+            console.log('\x1b[31m', 'Não é possível realizar pagamentos com datas anteriores ao dia vigente');
+        }
+        else if (valor > saldoNaConta) {
+            console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação');
+        }
+        else {
+            if (dataDePagamento === undefined) {
+                dataDePagamento = hoje.format("DD/MM/YYYY");
+            }
+            const novoPagamento = {
+                valor: valor,
+                descricao: descricao,
+                data: dataDePagamento
+            };
+            const contaObjeto = contaPesquisada[0];
+            contaObjeto.saldo -= Number(valor);
+            contaObjeto.extrato.push(novoPagamento);
+            fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
+            console.log("\x1b[32m", 'Pagamento realizado com sucesso: ', novoPagamento);
         }
     }
 }
