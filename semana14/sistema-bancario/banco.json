@@ -5,7 +5,7 @@
             "CPF": "02397770504",
             "dataDeNascimento": "27/05/1987"
         },
-        "saldo": 55,
+        "saldo": 75,
         "extrato": [
             {
                 "valor": 15,
@@ -20,7 +20,7 @@
             "CPF": "11820701751",
             "dataDeNascimento": "11/03/1987"
         },
-        "saldo": 60,
+        "saldo": 40,
         "extrato": [
             {
                 "valor": "10",

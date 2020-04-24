@@ -139,6 +139,32 @@ else if (operacao === 'transferenciaInterna') {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a transferir, nome do Destinatário e CPF do destinário');
     }
     else {
+        if (!validarExisteCPF()) {
+            console.log('\x1b[31m', 'Informe um CPF de remetente válido');
+        }
+        else {
+            const pesquisaContaDestinatario = contasJson.filter((conta) => conta.usuario.CPF === CPFDoDestinatario);
+            if (pesquisaContaDestinatario.length < 1) {
+                console.log('\x1b[31m', 'Informe um CPF de destinatário válido');
+            }
+            else {
+                const contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
+                const saldoNaConta = contaPesquisada[0].saldo;
+                if (valor > saldoNaConta) {
+                    console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação');
+                }
+                else {
+                    const contaRemetente = contaPesquisada[0];
+                    contaRemetente.saldo -= Number(valor);
+                    const contaDestinatario = pesquisaContaDestinatario[0];
+                    contaDestinatario.saldo += Number(valor);
+                    fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
+                    const valorTranferido = Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                    const nomeDoDestinatario = contaDestinatario.usuario.nome;
+                    console.log(`\x1b[32mTransferência de ${valorTranferido} para ${nomeDoDestinatario} realizada do sucesso!\x1b[0m`);
+                }
+            }
+        }
     }
 }
 else {

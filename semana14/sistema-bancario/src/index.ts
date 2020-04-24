@@ -73,15 +73,15 @@ function validarExisteCPF(): boolean {
     }
 }
 
-if(operacao === 'buscarTodasContas'){
+if (operacao === 'buscarTodasContas') {
     console.log(contas)
 }
 
 else if (operacao === 'criarConta') {
     if (nome === undefined || CPF === undefined || dataDeNacimento === undefined) {
-        console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF e data de nascimento')
+        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF e data de nascimento')
     }
-    else {   
+    else {
 
         let novaConta: conta = {
             usuario: {
@@ -91,7 +91,7 @@ else if (operacao === 'criarConta') {
             },
             saldo: 0,
             extrato: []
-        }        
+        }
 
         function criarConta(): void {
             try {
@@ -105,8 +105,8 @@ else if (operacao === 'criarConta') {
 
         const dataDeNacimentoFormatada: moment.Moment = moment(dataDeNacimento, "DD/MM/YYYY")
         const hoje: moment.Moment = moment()
-        const idade = hoje.diff(dataDeNacimentoFormatada, "years")      
-        
+        const idade = hoje.diff(dataDeNacimentoFormatada, "years")
+
         if (idade >= 18) {
             if (validarExisteCPF()) {
                 console.log("\x1b[31m", 'CPF já cadastrado')
@@ -117,35 +117,35 @@ else if (operacao === 'criarConta') {
             console.log("\x1b[31m", 'Menores de 18 anos não tem permissão para cria conta')
         }
     }
-} 
+}
 
-else if (operacao === 'pegarSaldo'){
+else if (operacao === 'pegarSaldo') {
     if (nome === undefined || CPF === undefined) {
-        console.log('\x1b[31m','Passe os parâmetros necessários: nome e CPF')
+        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome e CPF')
     }
     else {
-        if(validarExisteCPF()){
+        if (validarExisteCPF()) {
             let contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
             let contaObjeto: conta = contaPesquisada[0]
-            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) 
+            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
             console.log('Seu saldo é de', saldoFormatado)
-        } 
+        }
         else {
             console.log('\x1b[31m', 'Informe um CPF válido')
         }
     }
 }
 
-else if(operacao === 'adicionarSaldo'){
+else if (operacao === 'adicionarSaldo') {
     if (nome === undefined || CPF === undefined || valor === undefined) {
-        console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF e valor que deseja adicionar ao saldo')
+        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF e valor que deseja adicionar ao saldo')
     } else {
-        if(validarExisteCPF){
+        if (validarExisteCPF) {
             let contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
             let contaObjeto: conta = contaPesquisada[0]
             contaObjeto.saldo += Number(valor)
             writeFileSync(banco, JSON.stringify(contasJson, null, 4))
-            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
             console.log('Seu novo saldo é de', saldoFormatado)
         }
         else {
@@ -154,26 +154,26 @@ else if(operacao === 'adicionarSaldo'){
     }
 }
 
-else if(operacao === 'pagarConta'){
+else if (operacao === 'pagarConta') {
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
-        console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento')
-    } 
-    else {       
+        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento')
+    }
+    else {
         const dataDePagamentoFormatada: moment.Moment = moment(dataDePagamento, "DD/MM/YYYY")
         const hoje: moment.Moment = moment()
         const diferenca = hoje.diff(dataDePagamentoFormatada, "days")
 
         const contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
         const saldoNaConta: number = contaPesquisada[0].saldo
-        
-        if(diferenca > 0){
+
+        if (diferenca > 0) {
             console.log('\x1b[31m', 'Não é possível realizar pagamentos com datas anteriores ao dia vigente')
         }
-        else if(valor > saldoNaConta){
+        else if (valor > saldoNaConta) {
             console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação')
         }
         else {
-            if(dataDePagamento === undefined){
+            if (dataDePagamento === undefined) {
                 dataDePagamento = hoje.format("DD/MM/YYYY")
             }
             const novoPagamento: infoExtrato = {
@@ -189,16 +189,45 @@ else if(operacao === 'pagarConta'){
 
             // esses pagamentos no futuro eu deveria agendar? como?
         }
-    }   
+    }
 
 }
 
-else if(operacao === 'transferenciaInterna'){
+else if (operacao === 'transferenciaInterna') {
     if (nome === undefined || CPF === undefined || valor === undefined || nomeDoDestinatario === undefined || CPFDoDestinatario === undefined) {
-        console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF, valor a transferir, nome do Destinatário e CPF do destinário')
+        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a transferir, nome do Destinatário e CPF do destinário')
     }
     else {
-        // continua...
+        if (!validarExisteCPF()) {
+            console.log('\x1b[31m', 'Informe um CPF de remetente válido')
+        }
+        else {
+            const pesquisaContaDestinatario: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPFDoDestinatario)
+            if (pesquisaContaDestinatario.length < 1) {
+                console.log('\x1b[31m', 'Informe um CPF de destinatário válido')
+            }
+
+            else {
+                const contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
+                const saldoNaConta: number = contaPesquisada[0].saldo
+                if (valor > saldoNaConta) {
+                    console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação')
+                }
+                
+                else {
+                    const contaRemetente: conta = contaPesquisada[0]
+                    contaRemetente.saldo -= Number(valor)
+
+                    const contaDestinatario: conta = pesquisaContaDestinatario[0]
+                    contaDestinatario.saldo += Number(valor)
+                    writeFileSync(banco, JSON.stringify(contasJson, null, 4))
+
+                    const valorTranferido = Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                    const nomeDoDestinatario = contaDestinatario.usuario.nome
+                    console.log(`\x1b[32mTransferência de ${valorTranferido} para ${nomeDoDestinatario} realizada do sucesso!\x1b[0m`)
+                }
+            }
+        }
     }
 }
 
