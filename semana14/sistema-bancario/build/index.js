@@ -74,9 +74,14 @@ else if (operacao === 'pegarSaldo') {
     else {
         if (validarExisteCPF()) {
             let contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
-            let contaObjeto = contaPesquisada[0];
-            const saldoFormatado = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            console.log('Seu saldo é de', saldoFormatado);
+            if (contaPesquisada[0].usuario.nome === nome) {
+                let contaObjeto = contaPesquisada[0];
+                const saldoFormatado = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                console.log('Saldo:', saldoFormatado);
+            }
+            else {
+                console.log('Informe nome de usuário correspondente ao CPF');
+            }
         }
         else {
             console.log('\x1b[31m', 'Informe um CPF válido');
@@ -103,7 +108,7 @@ else if (operacao === 'adicionarSaldo') {
 }
 else if (operacao === 'pagarConta') {
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
-        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento');
+        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar e descrição');
     }
     else {
         const dataDePagamentoFormatada = moment(dataDePagamento, "DD/MM/YYYY");
