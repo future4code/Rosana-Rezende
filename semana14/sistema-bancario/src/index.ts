@@ -51,7 +51,7 @@ let contasJson = JSON.parse(contas)
 type infoExtrato = {
     valor: number,
     descricao: string,
-    data: moment.Moment
+    data: any
 }
 
 type conta = {
@@ -150,6 +150,15 @@ else if (operacao === 'adicionarSaldo') {
             if (contaPesquisada[0].usuario.nome === nome) {
                 let contaObjeto: conta = contaPesquisada[0]
                 contaObjeto.saldo += Number(valor)
+
+                const hoje: moment.Moment = moment()
+                const novoSaldo: infoExtrato = {
+                    valor: Number(valor),
+                    descricao: "Depósito de dinheiro",
+                    data: hoje.format("DD/MM/YYYY")
+                }
+                contaObjeto.extrato.push(novoSaldo)
+
                 writeFileSync(banco, JSON.stringify(contasJson, null, 4))
                 const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                 console.log('Saldo atualizado:', saldoFormatado)

@@ -20,7 +20,7 @@
             "CPF": "11820701751",
             "dataDeNascimento": "11/03/1987"
         },
-        "saldo": 105,
+        "saldo": 130,
         "extrato": [
             {
                 "valor": "10",
@@ -31,6 +31,16 @@
                 "valor": "5",
                 "descricao": "balões de festa",
                 "data": "10/07/2020"
+            },
+            {
+                "valor": 15,
+                "descricao": "Depósito de dinheiro",
+                "data": "2020-04-24T22:52:49.013Z"
+            },
+            {
+                "valor": 10,
+                "descricao": "Depósito de dinheiro",
+                "data": "24/04/2020"
             }
         ]
     }

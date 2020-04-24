@@ -98,6 +98,13 @@ else if (operacao === 'adicionarSaldo') {
             if (contaPesquisada[0].usuario.nome === nome) {
                 let contaObjeto = contaPesquisada[0];
                 contaObjeto.saldo += Number(valor);
+                const hoje = moment();
+                const novoSaldo = {
+                    valor: Number(valor),
+                    descricao: "Depósito de dinheiro",
+                    data: hoje.format("DD/MM/YYYY")
+                };
+                contaObjeto.extrato.push(novoSaldo);
                 fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
                 const saldoFormatado = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                 console.log('Saldo atualizado:', saldoFormatado);
