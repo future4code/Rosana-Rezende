@@ -126,11 +126,12 @@ else if (operacao === 'pegarSaldo') {
     else {
         if (validarExisteCPF()) {
             let contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
-            if(contaPesquisada[0].usuario.nome === nome){
+            if (contaPesquisada[0].usuario.nome === nome) {
                 let contaObjeto: conta = contaPesquisada[0]
                 const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                 console.log('Saldo:', saldoFormatado)
-            } else {
+            } 
+            else {
                 console.log('Informe nome de usuário correspondente ao CPF')
             }
         }
@@ -144,13 +145,18 @@ else if (operacao === 'adicionarSaldo') {
     if (nome === undefined || CPF === undefined || valor === undefined) {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF e valor que deseja adicionar ao saldo')
     } else {
-        if (validarExisteCPF) {
+        if (validarExisteCPF()) {
             let contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
-            let contaObjeto: conta = contaPesquisada[0]
-            contaObjeto.saldo += Number(valor)
-            writeFileSync(banco, JSON.stringify(contasJson, null, 4))
-            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-            console.log('Seu novo saldo é de', saldoFormatado)
+            if (contaPesquisada[0].usuario.nome === nome) {
+                let contaObjeto: conta = contaPesquisada[0]
+                contaObjeto.saldo += Number(valor)
+                writeFileSync(banco, JSON.stringify(contasJson, null, 4))
+                const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                console.log('Saldo atualizado:', saldoFormatado)
+            } 
+            else {
+                console.log('Informe nome de usuário correspondente ao CPF')
+            }
         }
         else {
             console.log('\x1b[31m', 'Informe um CPF válido')
