@@ -39,20 +39,22 @@ const banco: string = 'banco.json'
 let contas = readFileSync(banco).toString()
 let contasJson = JSON.parse(contas)
 
+type conta = {
+    usuario: {
+        nome: string,
+        CPF: string,
+        dataDeNascimento: string
+    },
+    saldo: number,
+    extrato: any[] // vai possuir o valor, a data e uma descrição
+}
+
 if (operation === 'criarConta') {
     if (nome === undefined || CPF === undefined || dataDeNacimento === undefined) {
         console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF e data de nascimento')
     }
     else {
-        type conta = {
-            usuario: {
-                nome: string,
-                CPF: string,
-                dataDeNascimento: string
-            },
-            saldo: number,
-            extrato: any[] // vai possuir o valor, a data e uma descrição
-        }
+        
 
         let novaConta: conta = {
             usuario: {
@@ -102,7 +104,16 @@ if (operation === 'criarConta') {
 } 
 
 else if (operation === 'pegarSaldo'){
-    
+    if (nome === undefined || CPF === undefined) {
+        console.log('\x1b[31m','Passe os parâmetros necessários: nome e CPF')
+    }
+    else {
+        let contaPesquisada: object[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
+        let contaObjeto: object = contaPesquisada[0]
+        console.log(contaObjeto) // não consegui acessar contaObjeto.saldo
+
+        console.log('Seu saldo é de R$ ')
+    }
 }
 
 else {

@@ -61,6 +61,15 @@ if (operation === 'criarConta') {
     }
 }
 else if (operation === 'pegarSaldo') {
+    if (nome === undefined || CPF === undefined) {
+        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome e CPF');
+    }
+    else {
+        let contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
+        let contaObjeto = contaPesquisada[0];
+        console.log(contaObjeto);
+        console.log('Seu saldo é de R$ ');
+    }
 }
 else {
     console.log('\x1b[31m', 'Faça uma operação válida');
