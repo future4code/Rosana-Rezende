@@ -36,7 +36,7 @@ const operacao: string = process.argv[4]
 const nome: string = process.argv[5]
 const CPF: string = process.argv[6]
 const dataDeNacimento: string = process.argv[7]
-const valor: string = process.argv[7] // pode ocupar a mesma posição?
+const valor: any = process.argv[7] // pode ocupar a mesma posição?
 
 const descricao: string = process.argv[8]
 let dataDePagamento: any = process.argv[9]
@@ -127,7 +127,7 @@ else if (operacao === 'pegarSaldo'){
         if(validarExisteCPF()){
             let contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
             let contaObjeto: conta = contaPesquisada[0]
-            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) // não consegui acessar contaObjeto.saldo
+            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) 
             console.log('Seu saldo é de', saldoFormatado)
         } 
         else {
@@ -141,13 +141,12 @@ else if(operacao === 'adicionarSaldo'){
         console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF e valor que deseja adicionar ao saldo')
     } else {
         if(validarExisteCPF){
-            // não é pra ler... é pra escrever
-
-
-            // let contaPesquisada: object[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
-            // let contaObjeto: object = contaPesquisada[0]
-            // console.log(contaObjeto)
-            // preciso adicionar o valor ao saldo do objeto
+            let contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
+            let contaObjeto: conta = contaPesquisada[0]
+            contaObjeto.saldo += Number(valor)
+            writeFileSync(banco, JSON.stringify(contasJson, null, 4))
+            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+            console.log('Seu novo saldo é de', saldoFormatado)
     
             // muda algo no extrato???
         }

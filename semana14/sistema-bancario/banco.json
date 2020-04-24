@@ -1,20 +1,20 @@
 [
     {
         "usuario": {
-            "nome": "Rosana Rezende",
-            "CPF": "11820701751",
-            "dataDeNascimento": "11/03/1987"
+            "nome": "Cleiton Dias",
+            "CPF": "02397770504",
+            "dataDeNascimento": "27/05/1987"
         },
         "saldo": 0,
         "extrato": []
     },
     {
         "usuario": {
-            "nome": "Cleiton Dias",
-            "CPF": "02397770504",
-            "dataDeNascimento": "27/05/1987"
+            "nome": "Rosana Rezende",
+            "CPF": "11820701751",
+            "dataDeNascimento": "11/03/1987"
         },
-        "saldo": 0,
+        "saldo": 25,
         "extrato": []
     }
 ]

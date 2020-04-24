@@ -89,6 +89,12 @@ else if (operacao === 'adicionarSaldo') {
     }
     else {
         if (validarExisteCPF) {
+            let contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
+            let contaObjeto = contaPesquisada[0];
+            contaObjeto.saldo += Number(valor);
+            fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
+            const saldoFormatado = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            console.log('Seu novo saldo é de', saldoFormatado);
         }
         else {
             console.log('\x1b[31m', 'Informe um CPF válido');
