@@ -101,8 +101,8 @@ if (operacao === 'criarConta') {
 
         const dataFormatada: string[] = dataDeNacimento.split('/')
         const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
-        const aniversario: any = new Date(novaData) // não funciona number (quebra ele) nem Date (quebra o cálculo de time)
-        const hoje: any = new Date()
+        const aniversario: number = new Date(novaData).getTime() // com getTime aceita number
+        const hoje: number = new Date().getTime()
         const diferenca: number = hoje - aniversario
         const idade: number = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
         if (idade >= 18) {
@@ -158,10 +158,15 @@ else if(operacao === 'adicionarSaldo'){
 }
 
 else if(operacao === 'pagarConta'){
+    const dataFormatada: string[] = dataDePagamento.split('/')
+    const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
+    const dataDePagamentoFormatada: number = new Date(novaData).getTime() // com getTime aceita number
+    const hoje: number = new Date().getTime()
+    
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
         console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento')
     } 
-    else if(dataDePagamento === 'valor no passado... fazer a lógica'){
+    else if(dataDePagamentoFormatada < hoje){
         // continua...
     }
     else {

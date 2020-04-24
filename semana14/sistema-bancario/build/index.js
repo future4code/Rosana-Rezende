@@ -48,8 +48,8 @@ if (operacao === 'criarConta') {
         }
         const dataFormatada = dataDeNacimento.split('/');
         const novaData = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`;
-        const aniversario = new Date(novaData);
-        const hoje = new Date();
+        const aniversario = new Date(novaData).getTime();
+        const hoje = new Date().getTime();
         const diferenca = hoje - aniversario;
         const idade = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
         if (idade >= 18) {
@@ -88,16 +88,25 @@ else if (operacao === 'adicionarSaldo') {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF e valor que deseja adicionar ao saldo');
     }
     else {
-        let contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
-        let contaObjeto = contaPesquisada[0];
-        console.log(contaObjeto);
+        if (validarExisteCPF) {
+            let contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
+            let contaObjeto = contaPesquisada[0];
+            console.log(contaObjeto);
+        }
+        else {
+            console.log('\x1b[31m', 'Informe um CPF válido');
+        }
     }
 }
 else if (operacao === 'pagarConta') {
+    const dataFormatada = dataDePagamento.split('/');
+    const novaData = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`;
+    const dataDePagamentoFormatada = new Date(novaData).getTime();
+    const hoje = new Date().getTime();
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento');
     }
-    else if (dataDePagamento === 'valor no passado... fazer a lógica') {
+    else if (dataDePagamentoFormatada < hoje) {
     }
     else {
         if (dataDePagamento === undefined) {

@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/future4code/Rosana-Rezende#readme",
   "dependencies": {
-    "@types/node": "^13.13.2"
+    "@types/node": "^13.13.2",
+    "moment": "^2.24.0"
   }
 }
