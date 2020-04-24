@@ -24,7 +24,10 @@ function validarExisteCPF() {
         return false;
     }
 }
-if (operacao === 'criarConta') {
+if (operacao === 'buscarTodasContas') {
+    console.log(contas);
+}
+else if (operacao === 'criarConta') {
     if (nome === undefined || CPF === undefined || dataDeNacimento === undefined) {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF e data de nascimento');
     }
@@ -48,10 +51,9 @@ if (operacao === 'criarConta') {
                 console.error(err);
             }
         }
-        let dataDeNacimentoFormatada = moment(dataDeNacimento, "DD/MM/YYYY");
+        const dataDeNacimentoFormatada = moment(dataDeNacimento, "DD/MM/YYYY");
         const hoje = moment();
         const idade = hoje.diff(dataDeNacimentoFormatada, "years");
-        console.log(idade);
         if (idade >= 18) {
             if (validarExisteCPF()) {
                 console.log("\x1b[31m", 'CPF já cadastrado');
@@ -65,8 +67,6 @@ if (operacao === 'criarConta') {
         }
     }
 }
-else if (operacao === 'buscarTodasContas') {
-}
 else if (operacao === 'pegarSaldo') {
     if (nome === undefined || CPF === undefined) {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome e CPF');
@@ -75,8 +75,8 @@ else if (operacao === 'pegarSaldo') {
         if (validarExisteCPF()) {
             let contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
             let contaObjeto = contaPesquisada[0];
-            console.log(contaObjeto);
-            console.log('Seu saldo é de R$ ');
+            const saldoFormatado = contaObjeto.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            console.log('Seu saldo é de', saldoFormatado);
         }
         else {
             console.log('\x1b[31m', 'Informe um CPF válido');
@@ -89,9 +89,6 @@ else if (operacao === 'adicionarSaldo') {
     }
     else {
         if (validarExisteCPF) {
-            let contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
-            let contaObjeto = contaPesquisada[0];
-            console.log(contaObjeto);
         }
         else {
             console.log('\x1b[31m', 'Informe um CPF válido');
@@ -99,7 +96,7 @@ else if (operacao === 'adicionarSaldo') {
     }
 }
 else if (operacao === 'pagarConta') {
-    let dataDePagamentoFormatada = moment(dataDePagamento, "DD/MM/YYYY").unix();
+    const dataDePagamentoFormatada = moment(dataDePagamento, "DD/MM/YYYY").unix();
     const hoje = moment().unix();
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar, descrição e data de pagamento');

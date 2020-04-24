@@ -51,7 +51,7 @@ let contasJson = JSON.parse(contas)
 type infoExtrato = {
     valor: number,
     descricao: string,
-    data: any
+    data: moment.Moment
 }
 
 type conta = {
@@ -73,7 +73,11 @@ function validarExisteCPF(): boolean {
     }
 }
 
-if (operacao === 'criarConta') {
+if(operacao === 'buscarTodasContas'){
+    console.log(contas)
+}
+
+else if (operacao === 'criarConta') {
     if (nome === undefined || CPF === undefined || dataDeNacimento === undefined) {
         console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF e data de nascimento')
     }
@@ -87,9 +91,7 @@ if (operacao === 'criarConta') {
             },
             saldo: 0,
             extrato: []
-        }
-
-        
+        }        
 
         function criarConta(): void {
             try {
@@ -101,18 +103,10 @@ if (operacao === 'criarConta') {
             }
         }
 
-        // const dataFormatada: string[] = dataDeNacimento.split('/')
-        // const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
-        // const aniversario: number = new Date(novaData).getTime() // com getTime aceita number
         const dataDeNacimentoFormatada: moment.Moment = moment(dataDeNacimento, "DD/MM/YYYY")
-
-        // const hoje: number = new Date().getTime()
         const hoje: moment.Moment = moment()
-            
-        // const diferenca: number = hoje - aniversario
-        // const idade: number = Math.floor(diferenca / (1000 * 60 * 60 * 24 * 365.25));
         const idade = hoje.diff(dataDeNacimentoFormatada, "years")      
-        console.log(idade)
+        
         if (idade >= 18) {
             if (validarExisteCPF()) {
                 console.log("\x1b[31m", 'CPF já cadastrado')
@@ -125,21 +119,16 @@ if (operacao === 'criarConta') {
     }
 } 
 
-else if(operacao === 'buscarTodasContas'){
-
-}
-
 else if (operacao === 'pegarSaldo'){
     if (nome === undefined || CPF === undefined) {
         console.log('\x1b[31m','Passe os parâmetros necessários: nome e CPF')
     }
     else {
         if(validarExisteCPF()){
-            let contaPesquisada: object[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
-            let contaObjeto: object = contaPesquisada[0]
-            console.log(contaObjeto) // não consegui acessar contaObjeto.saldo
-    
-            console.log('Seu saldo é de R$ ')
+            let contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
+            let contaObjeto: conta = contaPesquisada[0]
+            const saldoFormatado: string = contaObjeto.saldo.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}) // não consegui acessar contaObjeto.saldo
+            console.log('Seu saldo é de', saldoFormatado)
         } 
         else {
             console.log('\x1b[31m', 'Informe um CPF válido')
@@ -152,9 +141,12 @@ else if(operacao === 'adicionarSaldo'){
         console.log('\x1b[31m','Passe os parâmetros necessários: nome, CPF e valor que deseja adicionar ao saldo')
     } else {
         if(validarExisteCPF){
-            let contaPesquisada: object[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
-            let contaObjeto: object = contaPesquisada[0]
-            console.log(contaObjeto)
+            // não é pra ler... é pra escrever
+
+
+            // let contaPesquisada: object[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
+            // let contaObjeto: object = contaPesquisada[0]
+            // console.log(contaObjeto)
             // preciso adicionar o valor ao saldo do objeto
     
             // muda algo no extrato???
@@ -166,12 +158,7 @@ else if(operacao === 'adicionarSaldo'){
 }
 
 else if(operacao === 'pagarConta'){
-    // const dataFormatada: string[] = dataDePagamento.split('/')
-    // const novaData: string = `${dataFormatada[2]}/${dataFormatada[1]}/${dataFormatada[0]}`
-    // const dataDePagamentoFormatada: number = new Date(novaData).getTime() // com getTime aceita number
     const dataDePagamentoFormatada: number = moment(dataDePagamento, "DD/MM/YYYY").unix()
-    
-    // const hoje: number = new Date().getTime()
     const hoje: number = moment().unix()
 
     if (nome === undefined || CPF === undefined || valor === undefined || descricao === undefined) {
