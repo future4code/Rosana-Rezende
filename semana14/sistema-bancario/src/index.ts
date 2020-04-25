@@ -212,7 +212,8 @@ else if (operacao === 'pagarConta') {
                     console.log("\x1b[32m", 'Pagamento realizado com sucesso:', '\x1b[0m', novoPagamento)
 
                 }
-            } else {
+            } 
+            else {
                 console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF')
             }
 
@@ -246,17 +247,16 @@ else if (operacao === 'atualizarSaldo') {
                 
                 // mas ainda deixo essas informações no extrato? toda vez que rodar essa função vai subtrair elas do saldo
 
-            } else {
+            } 
+            else {
                 console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF')
             }
 
-        } else {
+        } 
+        else {
             console.log('\x1b[31m', 'Informe um CPF válido')
         }
-
     }
-
-
 }
 
 else if (operacao === 'transferenciaInterna') {
