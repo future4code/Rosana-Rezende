@@ -1,34 +1,8 @@
-// / tranforma em assíncrona - não consegui
-// let myPromiseText
-// readdir('./', (err: Error, files: any) => {
-//     if(err){
-//         return
-//     } else {
-//         myPromiseText = new Promise<string>((resolve, reject) => {
-
-//             readFile(banco, (err: Error, data: Buffer) => {
-//                 try{
-//                     const bancoConteudo: string = data.toString()
-//                     resolve(bancoConteudo)
-//                 } catch(error) {
-//                     reject(err)
-//                 }
-//             })
-
-//         })
-//         myPromiseText.then(result => {
-//              console.log(result)
-//             return result
-//         })
-//     }
-// })
-
-// console.log(myPromiseText)
-
 import {
     readFileSync, writeFileSync,
     // readFile, readdir
 } from 'fs'
+
 import * as moment from 'moment'
 moment.locale('pt-br')
 
@@ -36,17 +10,14 @@ const operacao: string = process.argv[4]
 const nome: string = process.argv[5]
 const CPF: string = process.argv[6]
 const dataDeNacimento: string = process.argv[7]
-const valor: any = process.argv[7] // pode ocupar a mesma posição?
+
+const valor: any = process.argv[7]
 
 const descricao: string = process.argv[8]
 let dataDePagamento: any = process.argv[9]
 
 const nomeDoDestinatario: string = process.argv[8]
 const CPFDoDestinatario: string = process.argv[9]
-
-const banco: string = 'banco.json'
-let contas = readFileSync(banco).toString()
-let contasJson = JSON.parse(contas)
 
 type infoExtrato = {
     valor: number,
@@ -61,9 +32,28 @@ type conta = {
         dataDeNascimento: string
     },
     saldo: number,
-    extrato: infoExtrato[] // vai possuir o valor, a data e uma descrição
+    extrato: infoExtrato[]
 }
 
+const banco = require('path').resolve(__dirname, '../banco.json')
+
+let contas = readFileSync(banco).toString()
+
+// // Pq esse código não funciona? ele volta undefined... só não entendo pq
+// const contas2 = readFile(banco, (err: Error, data: Buffer) => {
+//     try {
+//         let bancoConteudo: string = data.toString()
+//         console.log(bancoConteudo) // aqui volta direitinho
+//         return bancoConteudo
+//     } catch (error) {
+//         console.error(err)
+//     }
+// })
+// console.log(contas2)
+
+let contasJson: conta[] = JSON.parse(contas)
+
+// usada em várias funcionalidades
 function validarExisteCPF(): boolean {
     let validador: object[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
     if (validador.length >= 1) {
@@ -72,6 +62,7 @@ function validarExisteCPF(): boolean {
         return false
     }
 }
+
 
 if (operacao === 'buscarTodasContas') {
     console.log(contas)
@@ -212,7 +203,7 @@ else if (operacao === 'pagarConta') {
                     console.log("\x1b[32m", 'Pagamento realizado com sucesso:', '\x1b[0m', novoPagamento)
 
                 }
-            } 
+            }
             else {
                 console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF')
             }
@@ -230,29 +221,29 @@ else if (operacao === 'atualizarSaldo') {
     } else {
         if (validarExisteCPF()) {
             const contaPesquisada: conta[] = contasJson.filter((conta: conta) => conta.usuario.CPF === CPF)
-            if (contaPesquisada[0].usuario.nome === nome) {             
+            if (contaPesquisada[0].usuario.nome === nome) {
                 const extratoFiltado = contaPesquisada[0].extrato.filter((despesa: infoExtrato) => {
                     const hoje: moment.Moment = moment()
                     const dataDaDespesa: moment.Moment = moment(despesa.data, "DD/MM/YYYY")
                     const diferenca = hoje.diff(dataDaDespesa, "days")
                     return diferenca > 0
                 })
-                const totalDespesasPassadas = extratoFiltado.reduce( (valorInicial: number, despesa: infoExtrato) => {
+                const totalDespesasPassadas = extratoFiltado.reduce((valorInicial: number, despesa: infoExtrato) => {
                     return valorInicial + despesa.valor
                 }, 0)
                 contaPesquisada[0].saldo -= totalDespesasPassadas
                 writeFileSync(banco, JSON.stringify(contasJson, null, 4))
                 const saldoFormatado: string = contaPesquisada[0].saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                 console.log('Saldo atualizado:', saldoFormatado)
-                
+
                 // mas ainda deixo essas informações no extrato? toda vez que rodar essa função vai subtrair elas do saldo
 
-            } 
+            }
             else {
                 console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF')
             }
 
-        } 
+        }
         else {
             console.log('\x1b[31m', 'Informe um CPF válido')
         }
@@ -282,7 +273,7 @@ else if (operacao === 'transferenciaInterna') {
 
                 else {
                     const hoje: moment.Moment = moment()
-                    
+
                     const contaRemetente: conta = contaPesquisada[0]
                     const novoTransferenciaRemetente: infoExtrato = {
                         valor: Number(valor),
@@ -300,8 +291,8 @@ else if (operacao === 'transferenciaInterna') {
                     }
                     // contaDestinatario.saldo += Number(valor)
                     contaDestinatario.extrato.push(novoTransferenciaDestinatario)
-                                        
-                    writeFileSync(banco, JSON.stringify(contasJson, null, 4))                  
+
+                    writeFileSync(banco, JSON.stringify(contasJson, null, 4))
                     const valorTranferido = Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                     const nomeDoDestinatario = contaDestinatario.usuario.nome
                     console.log(`\x1b[32mTransferência de ${valorTranferido} para ${nomeDoDestinatario} realizada do sucesso!\x1b[0m`)

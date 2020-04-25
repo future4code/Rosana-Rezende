@@ -63,5 +63,14 @@
                 "data": "24/04/2020"
             }
         ]
+    },
+    {
+        "usuario": {
+            "nome": "Gato de Botas",
+            "CPF": "12345678910",
+            "dataDeNascimento": "01/01/2001"
+        },
+        "saldo": 0,
+        "extrato": []
     }
 ]
