@@ -21,6 +21,11 @@
                 "valor": 25,
                 "descricao": "lanche",
                 "data": "12/05/2020"
+            },
+            {
+                "valor": 10,
+                "descricao": "Dinheiro recebido por transferência",
+                "data": "24/04/2020"
             }
         ]
     },
@@ -50,6 +55,11 @@
             {
                 "valor": 10,
                 "descricao": "Depósito de dinheiro",
+                "data": "24/04/2020"
+            },
+            {
+                "valor": 10,
+                "descricao": "Dinheiro enviado por transferência",
                 "data": "24/04/2020"
             }
         ]

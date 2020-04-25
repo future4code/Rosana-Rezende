@@ -211,10 +211,21 @@ else if (operacao === 'transferenciaInterna') {
                     console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação');
                 }
                 else {
+                    const hoje = moment();
                     const contaRemetente = contaPesquisada[0];
-                    contaRemetente.saldo -= Number(valor);
+                    const novoTransferenciaRemetente = {
+                        valor: Number(valor),
+                        descricao: 'Dinheiro enviado por transferência',
+                        data: hoje.format("DD/MM/YYYY")
+                    };
+                    contaRemetente.extrato.push(novoTransferenciaRemetente);
                     const contaDestinatario = pesquisaContaDestinatario[0];
-                    contaDestinatario.saldo += Number(valor);
+                    const novoTransferenciaDestinatario = {
+                        valor: Number(valor),
+                        descricao: 'Dinheiro recebido por transferência',
+                        data: hoje.format("DD/MM/YYYY")
+                    };
+                    contaDestinatario.extrato.push(novoTransferenciaDestinatario);
                     fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
                     const valorTranferido = Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
                     const nomeDoDestinatario = contaDestinatario.usuario.nome;

@@ -281,13 +281,27 @@ else if (operacao === 'transferenciaInterna') {
                 }
 
                 else {
+                    const hoje: moment.Moment = moment()
+                    
                     const contaRemetente: conta = contaPesquisada[0]
-                    contaRemetente.saldo -= Number(valor)
+                    const novoTransferenciaRemetente: infoExtrato = {
+                        valor: Number(valor),
+                        descricao: 'Dinheiro enviado por transferência',
+                        data: hoje.format("DD/MM/YYYY")
+                    }
+                    // contaRemetente.saldo -= Number(valor)
+                    contaRemetente.extrato.push(novoTransferenciaRemetente)
 
                     const contaDestinatario: conta = pesquisaContaDestinatario[0]
-                    contaDestinatario.saldo += Number(valor)
-                    writeFileSync(banco, JSON.stringify(contasJson, null, 4))
-
+                    const novoTransferenciaDestinatario: infoExtrato = {
+                        valor: Number(valor),
+                        descricao: 'Dinheiro recebido por transferência',
+                        data: hoje.format("DD/MM/YYYY")
+                    }
+                    // contaDestinatario.saldo += Number(valor)
+                    contaDestinatario.extrato.push(novoTransferenciaDestinatario)
+                                        
+                    writeFileSync(banco, JSON.stringify(contasJson, null, 4))                  
                     const valorTranferido = Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                     const nomeDoDestinatario = contaDestinatario.usuario.nome
                     console.log(`\x1b[32mTransferência de ${valorTranferido} para ${nomeDoDestinatario} realizada do sucesso!\x1b[0m`)
