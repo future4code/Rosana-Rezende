@@ -15,17 +15,6 @@ const CPFDoDestinatario = process.argv[9];
 const banco = require('path').resolve(__dirname, '../banco.json');
 let contas = fs_1.readFileSync(banco).toString();
 let contasJson = JSON.parse(contas);
-const contas2 = fs_1.readFile(banco, (err, data) => {
-    try {
-        let bancoConteudo = data.toString();
-        console.log(bancoConteudo);
-        return bancoConteudo;
-    }
-    catch (error) {
-        console.error(err);
-    }
-});
-console.log(contas2);
 function validarExisteCPF() {
     let validador = contasJson.filter((conta) => conta.usuario.CPF === CPF);
     if (validador.length >= 1) {

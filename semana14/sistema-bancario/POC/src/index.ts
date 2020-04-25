@@ -237,6 +237,7 @@ else if (operacao === 'atualizarSaldo') {
                 console.log('Saldo atualizado:', saldoFormatado)
 
                 // mas ainda deixo essas informações no extrato? toda vez que rodar essa função vai subtrair elas do saldo
+                    // uma solução seria, se essa função rodasse todos os dias no mesmo horário, colocar que ela tem que rodar apenas para o que é no dia de hoje, desconsiderando os dias anteriores, que já foram computados
 
             }
             else {
