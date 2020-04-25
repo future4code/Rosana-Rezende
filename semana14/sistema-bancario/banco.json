@@ -5,11 +5,21 @@
             "CPF": "02397770504",
             "dataDeNascimento": "27/05/1987"
         },
-        "saldo": 75,
+        "saldo": 35,
         "extrato": [
             {
                 "valor": 15,
                 "descricao": "academia",
+                "data": "23/04/2020"
+            },
+            {
+                "valor": 5,
+                "descricao": "troco",
+                "data": "20/04/2020"
+            },
+            {
+                "valor": 25,
+                "descricao": "lanche",
                 "data": "12/05/2020"
             }
         ]
@@ -23,19 +33,19 @@
         "saldo": 130,
         "extrato": [
             {
-                "valor": "10",
+                "valor": 10,
                 "descricao": "energia",
-                "data": "24/04/2020"
+                "data": "24/04/2019"
             },
             {
-                "valor": "5",
+                "valor": 5,
                 "descricao": "balões de festa",
                 "data": "10/07/2020"
             },
             {
                 "valor": 15,
                 "descricao": "Depósito de dinheiro",
-                "data": "2020-04-24T22:52:49.013Z"
+                "data": "23/04/2020"
             },
             {
                 "valor": 10,

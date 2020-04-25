@@ -110,7 +110,7 @@ else if (operacao === 'adicionarSaldo') {
                 console.log('Saldo atualizado:', saldoFormatado);
             }
             else {
-                console.log('Informe nome de usuário correspondente ao CPF');
+                console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF');
             }
         }
         else {
@@ -123,31 +123,71 @@ else if (operacao === 'pagarConta') {
         console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar e descrição');
     }
     else {
-        const dataDePagamentoFormatada = moment(dataDePagamento, "DD/MM/YYYY");
-        const hoje = moment();
-        const diferenca = hoje.diff(dataDePagamentoFormatada, "days");
-        const contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
-        const saldoNaConta = contaPesquisada[0].saldo;
-        if (diferenca > 0) {
-            console.log('\x1b[31m', 'Não é possível realizar pagamentos com datas anteriores ao dia vigente');
-        }
-        else if (valor > saldoNaConta) {
-            console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação');
+        if (validarExisteCPF()) {
+            const contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
+            if (contaPesquisada[0].usuario.nome === nome) {
+                const dataDePagamentoFormatada = moment(dataDePagamento, "DD/MM/YYYY");
+                const hoje = moment();
+                const diferenca = hoje.diff(dataDePagamentoFormatada, "days");
+                const saldoNaConta = contaPesquisada[0].saldo;
+                if (diferenca > 0) {
+                    console.log('\x1b[31m', 'Não é possível realizar pagamentos com datas anteriores ao dia vigente');
+                }
+                else if (valor > saldoNaConta) {
+                    console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação');
+                }
+                else {
+                    if (dataDePagamento === undefined) {
+                        dataDePagamento = hoje.format("DD/MM/YYYY");
+                    }
+                    const novoPagamento = {
+                        valor: Number(valor),
+                        descricao: descricao,
+                        data: dataDePagamento
+                    };
+                    const contaObjeto = contaPesquisada[0];
+                    contaObjeto.extrato.push(novoPagamento);
+                    fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
+                    console.log("\x1b[32m", 'Pagamento realizado com sucesso:', '\x1b[0m', novoPagamento);
+                }
+            }
+            else {
+                console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF');
+            }
         }
         else {
-            if (dataDePagamento === undefined) {
-                dataDePagamento = hoje.format("DD/MM/YYYY");
+            console.log('\x1b[31m', 'Informe um CPF válido');
+        }
+    }
+}
+else if (operacao === 'atualizarSaldo') {
+    if (nome === undefined || CPF === undefined) {
+        console.log('\x1b[31m', 'Passe os parâmetros necessários: nome e CPF');
+    }
+    else {
+        if (validarExisteCPF()) {
+            const contaPesquisada = contasJson.filter((conta) => conta.usuario.CPF === CPF);
+            if (contaPesquisada[0].usuario.nome === nome) {
+                const extratoFiltado = contaPesquisada[0].extrato.filter((despesa) => {
+                    const hoje = moment();
+                    const dataDaDespesa = moment(despesa.data, "DD/MM/YYYY");
+                    const diferenca = hoje.diff(dataDaDespesa, "days");
+                    return diferenca > 0;
+                });
+                const totalDespesasPassadas = extratoFiltado.reduce((valorInicial, despesa) => {
+                    return valorInicial + despesa.valor;
+                }, 0);
+                contaPesquisada[0].saldo -= totalDespesasPassadas;
+                fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
+                const saldoFormatado = contaPesquisada[0].saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                console.log('Saldo atualizado:', saldoFormatado);
             }
-            const novoPagamento = {
-                valor: Number(valor),
-                descricao: descricao,
-                data: dataDePagamento
-            };
-            const contaObjeto = contaPesquisada[0];
-            contaObjeto.saldo -= Number(valor);
-            contaObjeto.extrato.push(novoPagamento);
-            fs_1.writeFileSync(banco, JSON.stringify(contasJson, null, 4));
-            console.log("\x1b[32m", 'Pagamento realizado com sucesso:', '\x1b[0m', novoPagamento);
+            else {
+                console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF');
+            }
+        }
+        else {
+            console.log('\x1b[31m', 'Informe um CPF válido');
         }
     }
 }
