@@ -1,0 +1,20 @@
+{
+  "name": "oop",
+  "version": "1.0.0",
+  "module": "system",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node build/test.js --target es6",
+    "ex1": "tsc && node build/exercicio1.js --target es6",
+    "ex2": "tsc && node build/exercicio2.js --target es6",
+    "postManager": "tsc && node build/exercicio2-1.js --target es6"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.12.14",
+    "axios": "^0.19.2"
+  }
+}
