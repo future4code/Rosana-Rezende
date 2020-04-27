@@ -1,6 +1,5 @@
 import * as fs from 'fs'
 
-
 export class JSONFileManager {
 
   fileName: string;
@@ -8,6 +7,7 @@ export class JSONFileManager {
   constructor(fileName: string) {
     this.fileName = fileName
   }
+
   writeObjectToFile(objectToSave: Object) {
     fs.writeFileSync(this.fileName, JSON.stringify(objectToSave, null, 2))
   }
