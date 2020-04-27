@@ -1,34 +1,7 @@
 import { UserAccount } from "./UserAccount";
-import { JSONFileManager } from "./JSONFileManager";
-
-const bankFile = require('path').resolve(__dirname, '../bank.json')
-const fileManager: JSONFileManager = new JSONFileManager(bankFile)
-const accountsJson = fileManager.getObjectFromFIle() as UserAccount[]
-
-const name: string = process.argv[5]
-const cpf: string = process.argv[6]
-const dateOfBith: string = process.argv[7]
-
-// const valor: any = process.argv[7]
-
-// const descricao: string = process.argv[8]
-// let dataDePagamento: any = process.argv[9]
-
-// const nomeDoDestinatario: string = process.argv[8]
-// const CPFDoDestinatario: string = process.argv[9]
+import { accountsJson, fileManager, checksIfCpfExists, name, cpf, dateOfBith} from './index'
 
 export class Bank {
-
-	checksIfCpfExists(): boolean {
-		const result = accountsJson.filter((account: UserAccount) =>
-			account.cpf === cpf
-		)
-		if (result.length > 0) {
-			return true
-		} else {
-			return false
-		}
-	}
 
 	createAccount(): void {
 
@@ -41,7 +14,7 @@ export class Bank {
 				console.log("\x1b[31m", 'Menores de 18 anos não tem permissão para cria conta')
 			}
 			else {
-				if (this.checksIfCpfExists()) {
+				if (checksIfCpfExists()) {
 					console.log("\x1b[31m", 'CPF já cadastrado')
 				}
 				else {
