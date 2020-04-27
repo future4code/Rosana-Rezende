@@ -1,5 +1,5 @@
 import { UserAccount } from "./UserAccount";
-import { accountsJson, fileManager, checksIfCpfExists, name, cpf, dateOfBith} from './index'
+import { accountsJson, fileManager, checksIfCpfExists, name, cpf, cpfSearch, dateOfBith} from './index'
 
 export class Bank {
 
@@ -36,9 +36,14 @@ export class Bank {
 	}
 
 
-	// getAccountByCpf(): UserAccount {
-
-	// }
+	getAccountByCpf(): UserAccount {
+		if(cpfSearch === undefined){
+			console.log('\x1b[31m', 'Passe o parâmetro necessário: CPF')
+		} else {
+			const accountSearched = accountsJson.filter((account: UserAccount) => account.cpf === cpfSearch)
+			return accountSearched[0]
+		}
+	}
 
 
 	// saveAccounts(): void {

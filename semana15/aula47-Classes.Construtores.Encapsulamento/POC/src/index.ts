@@ -8,13 +8,14 @@ export const accountsJson = fileManager.getObjectFromFIle() as UserAccount[]
 
 const operation: string = process.argv[4]
 export const name: string = process.argv[5]
+export const cpfSearch: string = process.argv[5]
 export const cpf: string = process.argv[6]
 export const dateOfBith: string = process.argv[7]
 export const value: string = process.argv[7]
 // export const paymentDate: any = process.argv[8]
 // export const description: string = process.argv[9]
 
-const bankHere = new Bank()
+const bank = new Bank()
 const userAccount = new UserAccount(name, cpf, dateOfBith)
 
 export function checksIfCpfExists(): boolean {
@@ -29,11 +30,11 @@ export function checksIfCpfExists(): boolean {
 }
 
 if (operation === 'getAllAccounts') {
-    console.log(bankHere.getAllAccounts())
+    console.log(bank.getAllAccounts())
 }
 
 else if(operation === 'createAccount') {
-    bankHere.createAccount()
+    bank.createAccount()
 }
 
 else if(operation === 'getBalance') {
@@ -45,8 +46,8 @@ else if(operation === 'addBalance') {
     userAccount.addBalance()
 }
 
-else if(operation === 'xxx') {
-
+else if(operation === 'getAccountByCpf') {
+    console.log(bank.getAccountByCpf())
 }
 
 else if(operation === 'xxx') {

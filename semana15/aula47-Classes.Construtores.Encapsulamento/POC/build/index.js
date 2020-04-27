@@ -8,11 +8,11 @@ exports.fileManager = new JSONFileManager_1.JSONFileManager(bankFile);
 exports.accountsJson = exports.fileManager.getObjectFromFIle();
 const operation = process.argv[4];
 exports.name = process.argv[5];
+exports.cpfSearch = process.argv[5];
 exports.cpf = process.argv[6];
 exports.dateOfBith = process.argv[7];
 exports.value = process.argv[7];
-exports.paymentDate = process.argv[8];
-const bankHere = new Bank_1.Bank();
+const bank = new Bank_1.Bank();
 const userAccount = new UserAccount_1.UserAccount(exports.name, exports.cpf, exports.dateOfBith);
 function checksIfCpfExists() {
     const result = exports.accountsJson.filter((account) => account.cpf === exports.cpf);
@@ -25,10 +25,10 @@ function checksIfCpfExists() {
 }
 exports.checksIfCpfExists = checksIfCpfExists;
 if (operation === 'getAllAccounts') {
-    console.log(bankHere.getAllAccounts());
+    console.log(bank.getAllAccounts());
 }
 else if (operation === 'createAccount') {
-    bankHere.createAccount();
+    bank.createAccount();
 }
 else if (operation === 'getBalance') {
     const formatedBalance = userAccount.getBalance().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -37,7 +37,8 @@ else if (operation === 'getBalance') {
 else if (operation === 'addBalance') {
     userAccount.addBalance();
 }
-else if (operation === 'xxx') {
+else if (operation === 'getAccountByCpf') {
+    console.log(bank.getAccountByCpf());
 }
 else if (operation === 'xxx') {
 }

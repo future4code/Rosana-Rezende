@@ -32,6 +32,15 @@ class Bank {
     getAllAccounts() {
         return index_1.fileManager.getObjectFromFIle();
     }
+    getAccountByCpf() {
+        if (index_1.cpfSearch === undefined) {
+            console.log('\x1b[31m', 'Passe o parâmetro necessário: CPF');
+        }
+        else {
+            const accountSearched = index_1.accountsJson.filter((account) => account.cpf === index_1.cpfSearch);
+            return accountSearched[0];
+        }
+    }
 }
 exports.Bank = Bank;
 //# sourceMappingURL=Bank.js.map
