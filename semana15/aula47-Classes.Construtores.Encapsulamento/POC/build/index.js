@@ -10,6 +10,8 @@ const operation = process.argv[4];
 exports.name = process.argv[5];
 exports.cpf = process.argv[6];
 exports.dateOfBith = process.argv[7];
+exports.value = process.argv[7];
+exports.paymentDate = process.argv[8];
 const bankHere = new Bank_1.Bank();
 const userAccount = new UserAccount_1.UserAccount(exports.name, exports.cpf, exports.dateOfBith);
 function checksIfCpfExists() {
@@ -33,6 +35,7 @@ else if (operation === 'getBalance') {
     console.log('Saldo:', formatedBalance);
 }
 else if (operation === 'addBalance') {
+    userAccount.addBalance();
 }
 else if (operation === 'xxx') {
 }
