@@ -32,13 +32,13 @@ const newConsumer = new Consumer("oieoie", "oie@email.com", "Oie", "eioeio", "01
 
 // ------------------------------ EXERCÍCIO 3 ------------------------------
 
-console.log(`
-Id: ${newConsumer.getId()}
-Nome: ${newConsumer.getName()}
-Email: ${newConsumer.getEmail()}
-Valor total da compra: ${newConsumer.purchaseTotal}
-Cartão de crédito: ${newConsumer.getCreditCard()}
-`)
+// console.log(`
+// Id: ${newConsumer.getId()}
+// Nome: ${newConsumer.getName()}
+// Email: ${newConsumer.getEmail()}
+// Valor total da compra: ${newConsumer.purchaseTotal}
+// Cartão de crédito: ${newConsumer.getCreditCard()}
+// `)
 
 // a. Seria possível imprimir a senha (password) atrelada a essa instância? Por quê?
 // Não é possível, pois ele não consegue acessar propriedades privadas da classe pai
@@ -46,6 +46,9 @@ Cartão de crédito: ${newConsumer.getCreditCard()}
 
 
 // ------------------------------ EXERCÍCIO 4 ------------------------------
+
+newConsumer.introduceYourself()
+
 
 
 // ------------------------------ EXERCÍCIO 5 ------------------------------

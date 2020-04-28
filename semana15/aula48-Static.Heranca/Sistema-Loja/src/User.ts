@@ -24,4 +24,8 @@ export class User {
         return this.name
     }
 
+    introduceYourself(): void {
+        console.log('Olá, bom dia!')
+    }
+
 }
