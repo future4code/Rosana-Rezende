@@ -4,6 +4,7 @@ import { Dish } from './Dishies/Dish'
 
 // import { Employee } from './Employees/Employee'
 import { Cashier } from './Employees/Cashier'
+import { Chef } from './Employees/Chef'
 
 const mySaltyDish: SaltyDish = new SaltyDish(30, 10, ["Dois hamburgueres", "alface", "queijo"], 10, ["mostarda", "ketchup", "molho especial"]);
 // const mySaltyDishProfit: number =  mySaltyDish.getProfit();
@@ -30,7 +31,9 @@ dishies.push(brigadeiro)
 dishies.push(feijoada)
 
 const caixaFulano = new Cashier("Fulano", 1500)
+// caixaFulano.sayJob()
+// console.log("O valor da conta é:", caixaFulano.calculateBill(dishies))
 
-caixaFulano.sayJob()
-
-console.log("O valor da conta é:", caixaFulano.calculateBill(dishies))
+const chefBeltrano = new Chef("Beltrano", 2000)
+chefBeltrano.removeDishFromMenu(dishies, brigadeiro)
+console.log(chefBeltrano.removeDishFromMenu(dishies, brigadeiro))
