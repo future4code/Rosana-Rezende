@@ -1,25 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const UserAccount_1 = require("./UserAccount");
-const index_1 = require("./index");
+const constants_1 = require("./constants");
 class Bank {
     createAccount() {
-        if (index_1.name === undefined || index_1.cpf === undefined || index_1.dateOfBith === undefined) {
+        if (constants_1.name === undefined || constants_1.cpf === undefined || constants_1.dateOfBith === undefined) {
             console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF e data de nascimento');
         }
         else {
-            const newAccount = new UserAccount_1.UserAccount(index_1.name, index_1.cpf, index_1.dateOfBith);
+            const newAccount = new UserAccount_1.UserAccount(constants_1.name, constants_1.cpf, constants_1.dateOfBith);
             if (newAccount.age < 18) {
                 console.log("\x1b[31m", 'Menores de 18 anos não tem permissão para cria conta');
             }
             else {
-                if (index_1.checksIfCpfExists()) {
+                if (constants_1.checksIfCpfExists()) {
                     console.log("\x1b[31m", 'CPF já cadastrado');
                 }
                 else {
                     try {
-                        index_1.accountsJson.push(newAccount);
-                        index_1.fileManager.writeObjectToFile(index_1.accountsJson);
+                        constants_1.accountsJson.push(newAccount);
+                        constants_1.fileManager.writeObjectToFile(constants_1.accountsJson);
                         console.log("\x1b[32m", 'Conta criada com sucesso');
                     }
                     catch (err) {
@@ -30,14 +30,14 @@ class Bank {
         }
     }
     getAllAccounts() {
-        return index_1.fileManager.getObjectFromFIle();
+        return constants_1.fileManager.getObjectFromFIle();
     }
     getAccountByCpf() {
-        if (index_1.cpfSearch === undefined) {
+        if (constants_1.cpfSearch === undefined) {
             console.log('\x1b[31m', 'Passe o parâmetro necessário: CPF');
         }
         else {
-            const accountSearched = index_1.accountsJson.filter((account) => account.cpf === index_1.cpfSearch);
+            const accountSearched = constants_1.accountsJson.filter((account) => account.cpf === constants_1.cpfSearch);
             return accountSearched[0];
         }
     }

@@ -1,7 +1,7 @@
 import { Transaction } from "./Transaction";
 import { fileManager, accountsJson, checksIfCpfExists, 
 	name, cpf, value, description, paymentDate
-} from './index'
+} from './constants'
 import * as moment from 'moment'
 
 export class UserAccount {

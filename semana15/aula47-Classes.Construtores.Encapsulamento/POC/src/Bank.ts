@@ -1,5 +1,7 @@
 import { UserAccount } from "./UserAccount";
-import { accountsJson, fileManager, checksIfCpfExists, name, cpf, cpfSearch, dateOfBith} from './index'
+import { accountsJson, fileManager, checksIfCpfExists, 
+	name, cpf, cpfSearch, dateOfBith
+} from './constants'
 
 export class Bank {
 
