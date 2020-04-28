@@ -1,5 +1,7 @@
 import { Transaction } from "./Transaction";
-import { fileManager, accountsJson, checksIfCpfExists, name, cpf, value } from './index'
+import { fileManager, accountsJson, checksIfCpfExists, 
+	name, cpf, value, description, paymentDate
+} from './index'
 import * as moment from 'moment'
 
 export class UserAccount {
@@ -69,4 +71,57 @@ export class UserAccount {
 			}
 		}
 	}
+
+	payBill(): void{
+
+		if (name === undefined || cpf === undefined || value === undefined || description === undefined) {
+			console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar e descrição')
+		}
+		else {
+			if (!checksIfCpfExists()) {
+				console.log('\x1b[31m', 'Informe um CPF válido')
+			}
+			else {
+				const accountSearched = accountsJson.filter((account: UserAccount) => account.cpf === cpf)
+				if (accountSearched[0].name !== name) {
+					console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF')
+				}
+				else {
+					const payMentInformed: moment.Moment = moment(paymentDate, "DD/MM/YYYY")
+					const today: moment.Moment = moment()
+					const diference = today.diff(payMentInformed, "days")
+					if(diference > 0){
+						console.log('\x1b[31m', 'Não é possível realizar pagamentos com datas anteriores ao dia vigente')
+					}
+					else {
+						if(Number(value) > accountSearched[0].balance){
+							console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação')
+						}
+						else {
+							let datePayment
+							if(paymentDate === undefined){
+								datePayment = today.format("DD/MM/YYYY")
+							} else {
+								datePayment = paymentDate
+							}
+
+							const newPayment: Transaction = {
+								value: Number(value),
+								description: description,
+								date: datePayment
+							}
+
+							accountSearched[0].transactions.push(newPayment)
+							fileManager.writeObjectToFile(accountsJson)
+							console.log("\x1b[32m", 'Pagamento realizado com sucesso:', '\x1b[0m', newPayment)
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+
+
 }

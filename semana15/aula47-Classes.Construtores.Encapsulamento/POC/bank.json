@@ -3,8 +3,14 @@
     "name": "Rosana Rezende",
     "cpf": "12345678910",
     "age": 33,
-    "balance": 0,
-    "transactions": []
+    "balance": 50,
+    "transactions": [
+      {
+        "value": 10,
+        "description": "teste",
+        "date": "27/04/2020"
+      }
+    ]
   },
   {
     "name": "Cleiton Dias",

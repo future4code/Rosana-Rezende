@@ -12,8 +12,10 @@ export const cpfSearch: string = process.argv[5]
 export const cpf: string = process.argv[6]
 export const dateOfBith: string = process.argv[7]
 export const value: string = process.argv[7]
-// export const paymentDate: any = process.argv[8]
-// export const description: string = process.argv[9]
+export const description: string = process.argv[8]
+export const paymentDate: any = process.argv[9]
+// export const recipientName: string = process.argv[8]
+// export const recipientCpf: string = process.argv[9]
 
 const bank = new Bank()
 const userAccount = new UserAccount(name, cpf, dateOfBith)
@@ -32,20 +34,31 @@ export function checksIfCpfExists(): boolean {
 enum Operation {
     GET_ALL_ACCOUNTS = 'getAllAccounts',
     CREATE_ACCOUNT = 'createAccount',
+    GET_ACCOUNT_BY_CPF = 'getAccountByCpf',
+
     GET_BALANCE = 'getBalance',
     ADD_BALANCE = 'addBalance',
-    GET_ACCOUNT_BY_CPF = 'getAccountByCpf'
+
+    //não fiz - não deu tempo
+    PAY_BIL = 'payBill',
+    UPDATE_BALANCE = 'updateBalance',
+    PERFORM_TRANSFER = 'performTransfer'
 }
 
 switch(operation){
 
-    case Operation.GET_ALL_ACCOUNTS: {
-        console.log(bank.getAllAccounts())
+    case Operation.CREATE_ACCOUNT: {
+        bank.createAccount()
         break
     }
 
-    case Operation.CREATE_ACCOUNT: {
-        bank.createAccount()
+    case Operation.GET_ALL_ACCOUNTS: {
+        console.log(bank.getAllAccounts())
+        break
+    }    
+
+    case Operation.GET_ACCOUNT_BY_CPF: {
+        console.log(bank.getAccountByCpf())
         break
     }
 
@@ -60,10 +73,11 @@ switch(operation){
         break
     }
 
-    case Operation.GET_ACCOUNT_BY_CPF: {
-        console.log(bank.getAccountByCpf())
+    case Operation.PAY_BIL: {
+        userAccount.payBill()
         break
     }
+    
 
     default:
         console.error('\x1b[31m', 'Faça uma operação válida')

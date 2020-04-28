@@ -60,6 +60,52 @@ class UserAccount {
             }
         }
     }
+    payBill() {
+        if (index_1.name === undefined || index_1.cpf === undefined || index_1.value === undefined || index_1.description === undefined) {
+            console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF, valor a pagar e descrição');
+        }
+        else {
+            if (!index_1.checksIfCpfExists()) {
+                console.log('\x1b[31m', 'Informe um CPF válido');
+            }
+            else {
+                const accountSearched = index_1.accountsJson.filter((account) => account.cpf === index_1.cpf);
+                if (accountSearched[0].name !== index_1.name) {
+                    console.log('\x1b[31m', 'Informe nome de usuário correspondente ao CPF');
+                }
+                else {
+                    const payMentInformed = moment(index_1.paymentDate, "DD/MM/YYYY");
+                    const today = moment();
+                    const diference = today.diff(payMentInformed, "days");
+                    if (diference > 0) {
+                        console.log('\x1b[31m', 'Não é possível realizar pagamentos com datas anteriores ao dia vigente');
+                    }
+                    else {
+                        if (Number(index_1.value) > accountSearched[0].balance) {
+                            console.log('\x1b[31m', 'Não há saldo suficiente para realizar essa operação');
+                        }
+                        else {
+                            let datePayment;
+                            if (index_1.paymentDate === undefined) {
+                                datePayment = today.format("DD/MM/YYYY");
+                            }
+                            else {
+                                datePayment = index_1.paymentDate;
+                            }
+                            const newPayment = {
+                                value: Number(index_1.value),
+                                description: index_1.description,
+                                date: datePayment
+                            };
+                            accountSearched[0].transactions.push(newPayment);
+                            index_1.fileManager.writeObjectToFile(index_1.accountsJson);
+                            console.log("\x1b[32m", 'Pagamento realizado com sucesso:', '\x1b[0m', newPayment);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 exports.UserAccount = UserAccount;
 //# sourceMappingURL=UserAccount.js.map

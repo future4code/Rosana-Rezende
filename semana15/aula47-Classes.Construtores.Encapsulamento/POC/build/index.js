@@ -12,6 +12,8 @@ exports.cpfSearch = process.argv[5];
 exports.cpf = process.argv[6];
 exports.dateOfBith = process.argv[7];
 exports.value = process.argv[7];
+exports.description = process.argv[8];
+exports.paymentDate = process.argv[9];
 const bank = new Bank_1.Bank();
 const userAccount = new UserAccount_1.UserAccount(exports.name, exports.cpf, exports.dateOfBith);
 function checksIfCpfExists() {
@@ -28,17 +30,24 @@ var Operation;
 (function (Operation) {
     Operation["GET_ALL_ACCOUNTS"] = "getAllAccounts";
     Operation["CREATE_ACCOUNT"] = "createAccount";
+    Operation["GET_ACCOUNT_BY_CPF"] = "getAccountByCpf";
     Operation["GET_BALANCE"] = "getBalance";
     Operation["ADD_BALANCE"] = "addBalance";
-    Operation["GET_ACCOUNT_BY_CPF"] = "getAccountByCpf";
+    Operation["PAY_BIL"] = "payBill";
+    Operation["UPDATE_BALANCE"] = "updateBalance";
+    Operation["PERFORM_TRANSFER"] = "performTransfer";
 })(Operation || (Operation = {}));
 switch (operation) {
+    case Operation.CREATE_ACCOUNT: {
+        bank.createAccount();
+        break;
+    }
     case Operation.GET_ALL_ACCOUNTS: {
         console.log(bank.getAllAccounts());
         break;
     }
-    case Operation.CREATE_ACCOUNT: {
-        bank.createAccount();
+    case Operation.GET_ACCOUNT_BY_CPF: {
+        console.log(bank.getAccountByCpf());
         break;
     }
     case Operation.GET_BALANCE: {
@@ -50,9 +59,11 @@ switch (operation) {
         userAccount.addBalance();
         break;
     }
-    case Operation.GET_ACCOUNT_BY_CPF: {
-        console.log(bank.getAccountByCpf());
+    case Operation.PAY_BIL: {
+        userAccount.payBill();
         break;
     }
+    default:
+        console.error('\x1b[31m', 'Faça uma operação válida');
 }
 //# sourceMappingURL=index.js.map
