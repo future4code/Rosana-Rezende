@@ -24,26 +24,35 @@ function checksIfCpfExists() {
     }
 }
 exports.checksIfCpfExists = checksIfCpfExists;
-if (operation === 'getAllAccounts') {
-    console.log(bank.getAllAccounts());
-}
-else if (operation === 'createAccount') {
-    bank.createAccount();
-}
-else if (operation === 'getBalance') {
-    const formatedBalance = userAccount.getBalance().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    console.log('Saldo:', formatedBalance);
-}
-else if (operation === 'addBalance') {
-    userAccount.addBalance();
-}
-else if (operation === 'getAccountByCpf') {
-    console.log(bank.getAccountByCpf());
-}
-else if (operation === 'xxx') {
-}
-else if (operation === 'xxx') {
-}
-else if (operation === 'xxx') {
+var Operation;
+(function (Operation) {
+    Operation["GET_ALL_ACCOUNTS"] = "getAllAccounts";
+    Operation["CREATE_ACCOUNT"] = "createAccount";
+    Operation["GET_BALANCE"] = "getBalance";
+    Operation["ADD_BALANCE"] = "addBalance";
+    Operation["GET_ACCOUNT_BY_CPF"] = "getAccountByCpf";
+})(Operation || (Operation = {}));
+switch (operation) {
+    case Operation.GET_ALL_ACCOUNTS: {
+        console.log(bank.getAllAccounts());
+        break;
+    }
+    case Operation.CREATE_ACCOUNT: {
+        bank.createAccount();
+        break;
+    }
+    case Operation.GET_BALANCE: {
+        const formatedBalance = userAccount.getBalance().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        console.log('Saldo:', formatedBalance);
+        break;
+    }
+    case Operation.ADD_BALANCE: {
+        userAccount.addBalance();
+        break;
+    }
+    case Operation.GET_ACCOUNT_BY_CPF: {
+        console.log(bank.getAccountByCpf());
+        break;
+    }
 }
 //# sourceMappingURL=index.js.map

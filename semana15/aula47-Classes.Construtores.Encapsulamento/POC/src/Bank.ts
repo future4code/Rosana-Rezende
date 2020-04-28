@@ -4,7 +4,6 @@ import { accountsJson, fileManager, checksIfCpfExists, name, cpf, cpfSearch, dat
 export class Bank {
 
 	createAccount(): void {
-
 		if (name === undefined || cpf === undefined || dateOfBith === undefined) {
 			console.log('\x1b[31m', 'Passe os parâmetros necessários: nome, CPF e data de nascimento')
 		}
@@ -30,11 +29,9 @@ export class Bank {
 		}
 	}
 
-
 	getAllAccounts(): UserAccount[] {
 		return fileManager.getObjectFromFIle() as UserAccount[]
 	}
-
 
 	getAccountByCpf(): UserAccount {
 		if(cpfSearch === undefined){
@@ -44,7 +41,6 @@ export class Bank {
 			return accountSearched[0]
 		}
 	}
-
 
 	// saveAccounts(): void {
 

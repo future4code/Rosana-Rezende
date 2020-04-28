@@ -29,35 +29,40 @@ export function checksIfCpfExists(): boolean {
     }
 }
 
-if (operation === 'getAllAccounts') {
-    console.log(bank.getAllAccounts())
+enum Operation {
+    GET_ALL_ACCOUNTS = 'getAllAccounts',
+    CREATE_ACCOUNT = 'createAccount',
+    GET_BALANCE = 'getBalance',
+    ADD_BALANCE = 'addBalance',
+    GET_ACCOUNT_BY_CPF = 'getAccountByCpf'
 }
 
-else if(operation === 'createAccount') {
-    bank.createAccount()
-}
+switch(operation){
 
-else if(operation === 'getBalance') {
-    const formatedBalance = userAccount.getBalance().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-    console.log('Saldo:', formatedBalance)
-}
+    case Operation.GET_ALL_ACCOUNTS: {
+        console.log(bank.getAllAccounts())
+        break
+    }
 
-else if(operation === 'addBalance') {
-    userAccount.addBalance()
-}
+    case Operation.CREATE_ACCOUNT: {
+        bank.createAccount()
+        break
+    }
 
-else if(operation === 'getAccountByCpf') {
-    console.log(bank.getAccountByCpf())
-}
+    case Operation.GET_BALANCE: {
+        const formatedBalance = userAccount.getBalance().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+        console.log('Saldo:', formatedBalance)
+        break
+    }
 
-else if(operation === 'xxx') {
+    case Operation.ADD_BALANCE: {
+        userAccount.addBalance()
+        break
+    }
 
-}
-
-else if(operation === 'xxx') {
-
-}
-
-else if(operation === 'xxx') {
+    case Operation.GET_ACCOUNT_BY_CPF: {
+        console.log(bank.getAccountByCpf())
+        break
+    }
 
 }
