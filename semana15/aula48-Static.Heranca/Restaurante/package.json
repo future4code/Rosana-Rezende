@@ -1,0 +1,26 @@
+{
+  "name": "restaurante",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node build/index.js --target es6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/future4code/Rosana-Rezende.git"
+  },
+  "keywords": [
+    "ts",
+    "classe",
+    "herança",
+    "static"
+  ],
+  "author": "Rosana Rezende",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/future4code/Rosana-Rezende/issues"
+  },
+  "homepage": "https://github.com/future4code/Rosana-Rezende#readme"
+}
