@@ -1,14 +1,14 @@
 import { Employee } from  './Employee'
 
 export class Seller extends Employee {
-    // totalSales: number;
+    private salesQuantity: number = 0;
 
-    // constructor(id: string, email: string, name: string, password: string, totalSales: number, baseSalary: number, admissionDate: string){
-    //     super(id, email, name, password, baseSalary, admissionDate)
-    //     // this.totalSales = totalSales
-    // }
-  
+    setSalesQuantity(quantity: number): void{
+        this.salesQuantity += quantity
+    }
 
-
+    getSalesQuantity(): number{
+        return this.salesQuantity
+    }
 
 }

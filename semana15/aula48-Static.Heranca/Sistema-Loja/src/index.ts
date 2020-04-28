@@ -101,6 +101,11 @@ const newSeller = new Seller("aiaiai", "ai@email.com", "Aiai", "iaiaia", 1000, "
 
 // // ------------------------------ EXERCÍCIO 9 ------------------------------
 
+// // a. Agora, teste o método setter, atualizando esse valor para o que você quiser. É possível, imprimir no terminal, o valor salesQuantity da instância que você criou? Por quê?
+newSeller.setSalesQuantity(5)
+console.log(`Quantidade de vendas: ${newSeller.getSalesQuantity()}`)
+
+
 
 // // ------------------------------ EXERCÍCIO 10 ------------------------------
 
