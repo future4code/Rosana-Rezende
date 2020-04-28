@@ -38,9 +38,9 @@ enum Operation {
 
     GET_BALANCE = 'getBalance',
     ADD_BALANCE = 'addBalance',
-
-    //não fiz - não deu tempo
     PAY_BIL = 'payBill',
+    
+    //não fiz - não deu tempo
     UPDATE_BALANCE = 'updateBalance',
     PERFORM_TRANSFER = 'performTransfer'
 }
