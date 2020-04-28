@@ -1,5 +1,6 @@
 import { User } from './User'
 import { Consumer } from './Consumer'
+import { Employee } from './Employee'
 
 // RESPOSTAS DOS EXERCÍCIOS DA TARDE
 
@@ -53,7 +54,16 @@ const newConsumer = new Consumer("oieoie", "oie@email.com", "Oie", "eioeio", "01
 
 // ------------------------------ EXERCÍCIO 6 ------------------------------
 
+const newEmployee = new Employee("olaola", "ola@email.com", "Olá", "aloalo", 1200, "10/01/2019")
 
+// console.log(`
+// Id: ${newEmployee.getId()}
+// Nome: ${newEmployee.getName()}
+// Email: ${newEmployee.getEmail()}
+// Data de admissão: ${newEmployee.getAdmissionDate()}
+// Salário base: ${newEmployee.getBaseSalary()}
+// `)
+// newEmployee.introduceYourself()
 
 // ------------------------------ EXERCÍCIO 7 ------------------------------
 
