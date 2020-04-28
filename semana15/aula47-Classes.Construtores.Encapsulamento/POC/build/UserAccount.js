@@ -12,6 +12,9 @@ class UserAccount {
         this.balance = balance;
         this.transactions = transactions;
     }
+    getAge() {
+        return this.age;
+    }
     getBalance() {
         if (constants_1.name === undefined || constants_1.cpf === undefined) {
             console.log('\x1b[31m', 'Passe os parâmetros necessários: nome e CPF');

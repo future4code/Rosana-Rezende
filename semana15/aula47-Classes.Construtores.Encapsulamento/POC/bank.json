@@ -29,5 +29,12 @@
         "date": "27/04/2020"
       }
     ]
+  },
+  {
+    "name": "Bananinha",
+    "cpf": "123123123123",
+    "age": 20,
+    "balance": 0,
+    "transactions": []
   }
 ]

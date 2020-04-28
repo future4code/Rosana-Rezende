@@ -11,7 +11,7 @@ export class Bank {
 		}
 		else {
 			const newAccount = new UserAccount(name, cpf, dateOfBith)
-			if (newAccount.age < 18) {
+			if (newAccount.getAge() < 18) {
 				console.log("\x1b[31m", 'Menores de 18 anos não tem permissão para cria conta')
 			}
 			else {

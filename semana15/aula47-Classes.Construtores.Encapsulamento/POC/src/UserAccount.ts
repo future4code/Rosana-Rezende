@@ -5,11 +5,11 @@ import { fileManager, accountsJson, checksIfCpfExists,
 import * as moment from 'moment'
 
 export class UserAccount {
-	name: string;
+	private name: string;
 	cpf: string;
-	age: number;
-	balance: number;
-	transactions: Transaction[]
+	private age: number;
+	private balance: number;
+	private transactions: Transaction[]
 
 	constructor(name: string, cpf: string, dateOfBith: string, balance: number = 0, transactions: Transaction[] = []) {
 		this.name = name
@@ -20,6 +20,14 @@ export class UserAccount {
 		this.balance = balance
 		this.transactions = transactions
 	}
+
+	getAge(){
+		return this.age
+	}
+
+	// getCpf(){
+	// 	return this.cpf
+	// }
 
 	getBalance(): number {
 		if (name === undefined || cpf === undefined) {
