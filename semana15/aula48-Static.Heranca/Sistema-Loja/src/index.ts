@@ -107,7 +107,7 @@ const newSeller = new Seller("aiaiai", "ai@email.com", "Aiai", "iaiaia", 1000, "
 
 
 
-// // ------------------------------ EXERCÍCIO 10 ------------------------------
+// // ------------------------------ EXERCÍCIO 10 e 11 ------------------------------
 
 const newSeller2 = new Seller("eieiei", "ei@email.com", "Eiei", "ieieie", 800, "01/01/2019")
 newSeller2.setSalesQuantity(3)
@@ -115,9 +115,4 @@ console.log(`Salário, com benefícios e comissões: ${newSeller2.calculateTotal
 
 // // a. Crie um novo vendedor. Atribua a ele um valor para a salesQuantity. Convoque a função calculateTotalSalary e  imprima no terminal o valor. O que foi impresso no terminal? Por quê?
 // // Imprimiu o valor do salário, com benefícios e comissões
-
-
-
-// // ------------------------------ EXERCÍCIO 11 ------------------------------
-
 

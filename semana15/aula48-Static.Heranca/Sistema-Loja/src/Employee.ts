@@ -4,6 +4,8 @@ export class Employee extends User {
     protected baseSalary: number;
     protected admissionDate: string;
 
+    static BENEFITS_VALUE: number = 400
+
     constructor(id: string, email: string, name: string, password: string, baseSalary: number, admissionDate: string){
         super(id, email, name, password)
         this.baseSalary = baseSalary
@@ -19,8 +21,7 @@ export class Employee extends User {
     }
 
     calculateTotalSalary(): number{
-        const benefits = 400
-        return this.baseSalary + benefits
+        return this.baseSalary + Employee.BENEFITS_VALUE
     }
 
 

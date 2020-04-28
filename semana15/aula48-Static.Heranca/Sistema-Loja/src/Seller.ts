@@ -3,6 +3,9 @@ import { Employee } from  './Employee'
 export class Seller extends Employee {
     private salesQuantity: number = 0;
 
+    static SELLING_COMMISSION: number = 5
+
+
     setSalesQuantity(quantity: number): void{
         this.salesQuantity += quantity
     }
@@ -12,9 +15,7 @@ export class Seller extends Employee {
     }
 
     calculateTotalSalary(): number{
-        const benefits = 400
-        const salesCommission = 5
-        return this.baseSalary + benefits + (salesCommission * this.salesQuantity)
+        return this.baseSalary + Employee.BENEFITS_VALUE + (Seller.SELLING_COMMISSION * this.salesQuantity)
     }
 
 }
