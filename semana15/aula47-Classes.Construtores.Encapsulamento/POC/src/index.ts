@@ -65,4 +65,7 @@ switch(operation){
         break
     }
 
+    default:
+        console.error('\x1b[31m', 'Faça uma operação válida')
+
 }
