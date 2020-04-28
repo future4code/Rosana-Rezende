@@ -15,6 +15,11 @@ export class Dish {
         return this.price - this.cost;
     }
 
+
+
+
+    // no exercício não tinha
+
     getPrice(): number {
         return this.price;
     }
