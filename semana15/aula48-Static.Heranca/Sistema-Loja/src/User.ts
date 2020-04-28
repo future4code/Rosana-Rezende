@@ -25,7 +25,7 @@ export class User {
     }
 
     introduceYourself(): void {
-        console.log('Olá, bom dia!')
+        console.log(`Olá, sou ${this.name}. Bom dia!`)
     }
 
 }
