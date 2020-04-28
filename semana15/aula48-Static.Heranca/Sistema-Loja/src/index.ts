@@ -115,4 +115,3 @@ console.log(`Salário, com benefícios e comissões: ${newSeller2.calculateTotal
 
 // // a. Crie um novo vendedor. Atribua a ele um valor para a salesQuantity. Convoque a função calculateTotalSalary e  imprima no terminal o valor. O que foi impresso no terminal? Por quê?
 // // Imprimiu o valor do salário, com benefícios e comissões
-
