@@ -102,12 +102,19 @@ const newSeller = new Seller("aiaiai", "ai@email.com", "Aiai", "iaiaia", 1000, "
 // // ------------------------------ EXERCÍCIO 9 ------------------------------
 
 // // a. Agora, teste o método setter, atualizando esse valor para o que você quiser. É possível, imprimir no terminal, o valor salesQuantity da instância que você criou? Por quê?
-newSeller.setSalesQuantity(5)
-console.log(`Quantidade de vendas: ${newSeller.getSalesQuantity()}`)
+// newSeller.setSalesQuantity(5)
+// console.log(`Quantidade de vendas: ${newSeller.getSalesQuantity()}`)
 
 
 
 // // ------------------------------ EXERCÍCIO 10 ------------------------------
+
+const newSeller2 = new Seller("eieiei", "ei@email.com", "Eiei", "ieieie", 800, "01/01/2019")
+newSeller2.setSalesQuantity(3)
+console.log(`Salário, com benefícios e comissões: ${newSeller2.calculateTotalSalary()}`)
+
+// // a. Crie um novo vendedor. Atribua a ele um valor para a salesQuantity. Convoque a função calculateTotalSalary e  imprima no terminal o valor. O que foi impresso no terminal? Por quê?
+// // Imprimiu o valor do salário, com benefícios e comissões
 
 
 

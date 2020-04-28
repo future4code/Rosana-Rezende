@@ -11,4 +11,10 @@ export class Seller extends Employee {
         return this.salesQuantity
     }
 
+    calculateTotalSalary(): number{
+        const benefits = 400
+        const salesCommission = 5
+        return this.baseSalary + benefits + (salesCommission * this.salesQuantity)
+    }
+
 }
