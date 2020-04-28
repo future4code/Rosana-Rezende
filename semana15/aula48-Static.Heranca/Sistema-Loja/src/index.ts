@@ -73,6 +73,8 @@ const newEmployee = new Employee("olaola", "ola@email.com", "Olá", "aloalo", 12
 
 // // ------------------------------ EXERCÍCIO 7 ------------------------------
 
+// console.log(`Salário, com benefícios: ${newEmployee.calculateTotalSalary()}`)
+
 
 
 // // ------------------------------ EXERCÍCIO 8 ------------------------------

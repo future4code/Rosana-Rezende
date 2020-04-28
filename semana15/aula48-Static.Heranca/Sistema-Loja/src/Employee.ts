@@ -18,6 +18,11 @@ export class Employee extends User {
         return this.baseSalary
     }
 
+    calculateTotalSalary(): number{
+        const benefits = 400
+        return this.baseSalary + benefits
+    }
+
 
 
 }
