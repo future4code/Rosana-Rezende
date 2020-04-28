@@ -1,12 +1,13 @@
-import { User } from './User'
+import { Employee } from  './Employee'
 
-export class Seller extends User {
-    totalSales: number;
+export class Seller extends Employee {
+    // totalSales: number;
 
-    constructor(id: string, email: string, name: string, password: string, totalSales: number){
-        super(id, email, name, password)
-        this.totalSales = totalSales
-    }
+    // constructor(id: string, email: string, name: string, password: string, totalSales: number, baseSalary: number, admissionDate: string){
+    //     super(id, email, name, password, baseSalary, admissionDate)
+    //     // this.totalSales = totalSales
+    // }
+  
 
 
 

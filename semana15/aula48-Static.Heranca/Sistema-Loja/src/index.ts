@@ -1,6 +1,7 @@
 import { User } from './User'
 import { Consumer } from './Consumer'
 import { Employee } from './Employee'
+import { Seller } from './Seller'
 
 // RESPOSTAS DOS EXERCÍCIOS DA TARDE
 
@@ -78,6 +79,23 @@ const newEmployee = new Employee("olaola", "ola@email.com", "Olá", "aloalo", 12
 
 
 // // ------------------------------ EXERCÍCIO 8 ------------------------------
+
+const newSeller = new Seller("aiaiai", "ai@email.com", "Aiai", "iaiaia", 1000, "01/01/2018")
+
+// // a. Crie uma instância da classe Seller. Você vai reparar que essa classe já possui um construtor, pois quando não colocamos um construtor na classe filha, ela herda o construtor da classe Pai. Quais parâmetros você teve que passar para esse construtor?
+// // Nesse caso os atributos são os mesmos que o do pai, e por isso nem foi necessário ter um constructor até o momento
+
+// // b. Imprima todas as informações da instância que você criou individualmente (ou seja, cada uma em uma linha própria). O que você conseguiu imprimir? O que não conseguiu? Por quê? 
+// // Não dá pra imprimir o método privado do avô User, password, mas os protected do pai podem, assim como ps public de todos
+// console.log(`
+// Id: ${newSeller.getId()}
+// Nome: ${newSeller.getName()}
+// Email: ${newSeller.getEmail()}
+// Data de admissão: ${newSeller.getAdmissionDate()}
+// Salário base: ${newSeller.getBaseSalary()}
+// Salário, com benefícios: ${newSeller.calculateTotalSalary()}
+// `)
+// newSeller.introduceYourself()
 
 
 
