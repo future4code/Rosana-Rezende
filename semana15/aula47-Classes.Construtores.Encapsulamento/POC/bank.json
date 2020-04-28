@@ -1,0 +1,40 @@
+[
+  {
+    "name": "Rosana Rezende",
+    "cpf": "12345678910",
+    "age": 33,
+    "balance": 50,
+    "transactions": [
+      {
+        "value": 10,
+        "description": "teste",
+        "date": "27/04/2020"
+      }
+    ]
+  },
+  {
+    "name": "Cleiton Dias",
+    "cpf": "01987654321",
+    "age": 32,
+    "balance": 50,
+    "transactions": [
+      {
+        "value": 10,
+        "description": "Depósito de dinheiro",
+        "date": "27/04/2020"
+      },
+      {
+        "value": 10,
+        "description": "Depósito de dinheiro",
+        "date": "27/04/2020"
+      }
+    ]
+  },
+  {
+    "name": "Bananinha",
+    "cpf": "123123123123",
+    "age": 20,
+    "balance": 0,
+    "transactions": []
+  }
+]
