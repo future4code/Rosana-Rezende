@@ -1,8 +1,9 @@
+// import { Place } from './abstracts/Place'
 import { Residence } from './classes/Residence'
 import { Commerce } from './classes/Commerce'
 import { Industry } from './classes/Industry'
 import { Client } from './interfaces/Client'
-import { Place } from './abstracts/Place'
+import { ResidentialClient } from './classes/ResidentialClient'
 
 // // ---------------------------------- EXERCÍCIO 1 ----------------------------------
 
@@ -57,3 +58,21 @@ const newIndustry = new Industry(5, "29902080")
 // CEP: ${newIndustry.getCep()}
 // Quantidade de máquinas: ${newIndustry.getMachinesQuantity()}
 // `)
+
+
+
+// // ---------------------------------- EXERCÍCIO 4 ----------------------------------
+
+const newResidentialClient = new ResidentialClient(3, "29902090", "Beltrano", 2, 150, "12345678910")
+// console.log(`${newResidentialClient.constructor.name}
+// CEP: ${newResidentialClient.getCep()}
+// Quantidade de moradores: ${newResidentialClient.getResidentsQuantity()}
+// Nome: ${newResidentialClient.name}
+// Número de cadastro: ${newResidentialClient.registrationNumber}
+// Energia consumida: ${newResidentialClient.consumedEnergy}
+// Valor da conta: ${newResidentialClient.calculateBill()}
+// `)
+
+// // a. Que métodos e propriedades essa classe possui? Por quê?
+// // Propriedades: name, registrationNumber, consumedEnergy, cpf, 
+// // Métodos: calculateBill, getCep e getResidentsQuantity
