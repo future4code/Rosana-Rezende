@@ -22,6 +22,9 @@ const newResidentialClient = new ResidentialClient_1.ResidentialClient(3, "29902
 const newCommercialClient = new CommercialClient_1.CommercialClient(2, "29902010", "Lojão do Povo", 2, 500, "01987654321");
 const newIndustrialClient = new IndustrialClient_1.IndustrialClient(10, "29902020", "Fábrica de Peças", 3, 2000, 1);
 const clientManager = new ClientManager_1.ClientManager();
-console.log(`
-Quantidade de clientes: ${clientManager.getClientsQuantity()}`);
+clientManager.registerClient(newResidentialClient);
+clientManager.registerClient(newCommercialClient);
+clientManager.registerClient(newIndustrialClient);
+clientManager.deleteUser(1);
+console.log(clientManager);
 //# sourceMappingURL=index.js.map

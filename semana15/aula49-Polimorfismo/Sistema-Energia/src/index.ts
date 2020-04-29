@@ -133,4 +133,20 @@ const newIndustrialClient = new IndustrialClient(10, "29902020", "Fábrica de Pe
 // // ---------------------------------- EXERCÍCIO 7 ----------------------------------
 
 const clientManager = new ClientManager()
-console.log(`Quantidade de clientes: ${clientManager.getClientsQuantity()}`)
+// console.log(`Quantidade de clientes: ${clientManager.getClientsQuantity()}`)
+
+
+
+// // ---------------------------------- EXERCÍCIO 8 ----------------------------------
+
+clientManager.registerClient(newResidentialClient)
+clientManager.registerClient(newCommercialClient)
+clientManager.registerClient(newIndustrialClient)
+// console.log(clientManager)
+
+// console.log(`Valor gasto pelo cliente 1: ${clientManager.calculateBillOfClient(1)}`)
+
+// console.log(`Valor total que a concessionária irá receber: ${clientManager.calculateTotalIncome()}`)
+
+clientManager.deleteUser(1)
+console.log(clientManager)
