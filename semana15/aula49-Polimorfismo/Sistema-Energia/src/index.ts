@@ -2,6 +2,7 @@ import { Residence } from './classes/Residence'
 import { Commerce } from './classes/Commerce'
 import { Industry } from './classes/Industry'
 import { Client } from './interfaces/Client'
+import { Place } from './abstracts/Place'
 
 const newResidence = new Residence(10, "29902060")
 // console.log(newResidence)
@@ -35,4 +36,13 @@ const clientFulano: Client = {
 
 
 // // ---------------------------------- EXERCÍCIO 2 ----------------------------------
+
+// // a. *Mesmo sabendo que não é possível, tente criar uma instância dessa classe (ou seja: `new Place(...)`). Qual foi o erro que o Typescript gerou?*
+// //  O erro gerado foi: error TS2511: Cannot create an instance of an abstract class.
+// const newPlace = new Place()
+// console.log(newPlace)
+
+
+// // b. *Pense e responda: o que precisaríamos fazer para conseguir efetivamente criar uma instância dessa classe?*
+// // É preciso criar uma classe (ex: Commerce) que extenda Place, e depois instanciar essa clacesse
 

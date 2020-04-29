@@ -14,9 +14,4 @@ const clientFulano = {
         return 2;
     }
 };
-console.log(`Nome: ${clientFulano.name}
-Número de cadastro: ${clientFulano.registrationNumber}
-Energia consumida: ${clientFulano.consumedEnergy}
-Valor da conta: ${clientFulano.calculateBill()}
-`);
 //# sourceMappingURL=index.js.map
