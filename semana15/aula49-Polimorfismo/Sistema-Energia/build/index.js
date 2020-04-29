@@ -10,7 +10,7 @@ const clientFulano = {
     name: "Fulano",
     registrationNumber: 1,
     consumedEnergy: 100,
-    calculateBill() {
+    calculateBill: () => {
         return 2;
     }
 };
