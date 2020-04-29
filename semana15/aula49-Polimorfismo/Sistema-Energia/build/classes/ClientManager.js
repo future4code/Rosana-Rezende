@@ -26,6 +26,9 @@ class ClientManager {
     deleteUser(registrationNumber) {
         return this.clients = this.clients.filter(client => client.registrationNumber !== registrationNumber);
     }
+    printClients() {
+        this.clients.map(client => (console.log(client.name + " - " + client.registrationNumber + " - " + client.consumedEnergy + " - " + client.calculateBill())));
+    }
 }
 exports.ClientManager = ClientManager;
 //# sourceMappingURL=ClientManager.js.map

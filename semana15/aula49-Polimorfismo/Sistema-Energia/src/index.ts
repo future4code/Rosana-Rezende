@@ -148,5 +148,11 @@ clientManager.registerClient(newIndustrialClient)
 
 // console.log(`Valor total que a concessionária irá receber: ${clientManager.calculateTotalIncome()}`)
 
-clientManager.deleteUser(1)
-console.log(clientManager)
+// clientManager.deleteUser(1)
+// console.log(clientManager)
+
+
+
+// // ---------------------------------- DESAFIO 1 ----------------------------------
+
+clientManager.printClients()

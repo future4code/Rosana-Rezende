@@ -27,4 +27,5 @@ clientManager.registerClient(newCommercialClient);
 clientManager.registerClient(newIndustrialClient);
 clientManager.deleteUser(1);
 console.log(clientManager);
+clientManager.printClients();
 //# sourceMappingURL=index.js.map
