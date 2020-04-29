@@ -4,6 +4,7 @@ import { Commerce } from './classes/Commerce'
 import { Industry } from './classes/Industry'
 import { Client } from './interfaces/Client'
 import { ResidentialClient } from './classes/ResidentialClient'
+import { CommercialClient } from './classes/CommercialClient'
 
 // // ---------------------------------- EXERCÍCIO 1 ----------------------------------
 
@@ -63,12 +64,13 @@ const newIndustry = new Industry(5, "29902080")
 
 // // ---------------------------------- EXERCÍCIO 4 ----------------------------------
 
-const newResidentialClient = new ResidentialClient(3, "29902090", "Beltrano", 2, 150, "12345678910")
+const newResidentialClient = new ResidentialClient(3, "29902090", "Beltrano", 1, 150, "12345678910")
 // console.log(`${newResidentialClient.constructor.name}
 // CEP: ${newResidentialClient.getCep()}
 // Quantidade de moradores: ${newResidentialClient.getResidentsQuantity()}
 // Nome: ${newResidentialClient.name}
 // Número de cadastro: ${newResidentialClient.registrationNumber}
+// CPF: ${newResidentialClient.getCpf()}
 // Energia consumida: ${newResidentialClient.consumedEnergy}
 // Valor da conta: ${newResidentialClient.calculateBill()}
 // `)
@@ -76,3 +78,25 @@ const newResidentialClient = new ResidentialClient(3, "29902090", "Beltrano", 2,
 // // a. Que métodos e propriedades essa classe possui? Por quê?
 // // Propriedades: name, registrationNumber, consumedEnergy, cpf, 
 // // Métodos: calculateBill, getCep e getResidentsQuantity
+
+
+
+// // ---------------------------------- EXERCÍCIO 5 ----------------------------------
+
+const newCommercialClient = new CommercialClient(2, "29902010", "Lojão do Povo", 2, 500, "01987654321")
+console.log(`${newCommercialClient.constructor.name}
+CEP: ${newCommercialClient.getCep()}
+Quantidade de andares: ${newCommercialClient.getFloorsQuantity()}
+Nome: ${newCommercialClient.name}
+CNPJ: ${newCommercialClient.getCnpj()}
+Número de cadastro: ${newCommercialClient.registrationNumber}
+Energia consumida: ${newCommercialClient.consumedEnergy}
+Valor da conta: ${newCommercialClient.calculateBill()}
+`)
+
+// // a. *Quais as semelhanças dessa classe com a `ResidentialClient`?*
+// // Tem os mesmos métodos e propriedades herdados de Place (cep e getCep) e Client (name, registrationNumber, consumedEnergy e calculateBill)
+
+// // b. *Quais as diferenças dessa classe com a `ResidentialClient`?*
+// // A diferença está no que herdam de sua classe pai, pois CommertialClient herdou de Commerce floorsQuantity e getFloorsQuantity, e criou cnpj e getCnpj, além de ter ter implementado calculateBill com uma regra de negócio específica
+
