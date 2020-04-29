@@ -5,6 +5,7 @@ import { Industry } from './classes/Industry'
 import { Client } from './interfaces/Client'
 import { ResidentialClient } from './classes/ResidentialClient'
 import { CommercialClient } from './classes/CommercialClient'
+import { IndustrialClient } from './classes/IndustrialClient'
 
 // // ---------------------------------- EXERCÍCIO 1 ----------------------------------
 
@@ -84,15 +85,15 @@ const newResidentialClient = new ResidentialClient(3, "29902090", "Beltrano", 1,
 // // ---------------------------------- EXERCÍCIO 5 ----------------------------------
 
 const newCommercialClient = new CommercialClient(2, "29902010", "Lojão do Povo", 2, 500, "01987654321")
-console.log(`${newCommercialClient.constructor.name}
-CEP: ${newCommercialClient.getCep()}
-Quantidade de andares: ${newCommercialClient.getFloorsQuantity()}
-Nome: ${newCommercialClient.name}
-CNPJ: ${newCommercialClient.getCnpj()}
-Número de cadastro: ${newCommercialClient.registrationNumber}
-Energia consumida: ${newCommercialClient.consumedEnergy}
-Valor da conta: ${newCommercialClient.calculateBill()}
-`)
+// console.log(`${newCommercialClient.constructor.name}
+// CEP: ${newCommercialClient.getCep()}
+// Quantidade de andares: ${newCommercialClient.getFloorsQuantity()}
+// Nome: ${newCommercialClient.name}
+// CNPJ: ${newCommercialClient.getCnpj()}
+// Número de cadastro: ${newCommercialClient.registrationNumber}
+// Energia consumida: ${newCommercialClient.consumedEnergy}
+// Valor da conta: ${newCommercialClient.calculateBill()}
+// `)
 
 // // a. *Quais as semelhanças dessa classe com a `ResidentialClient`?*
 // // Tem os mesmos métodos e propriedades herdados de Place (cep e getCep) e Client (name, registrationNumber, consumedEnergy e calculateBill)
@@ -100,3 +101,26 @@ Valor da conta: ${newCommercialClient.calculateBill()}
 // // b. *Quais as diferenças dessa classe com a `ResidentialClient`?*
 // // A diferença está no que herdam de sua classe pai, pois CommertialClient herdou de Commerce floorsQuantity e getFloorsQuantity, e criou cnpj e getCnpj, além de ter ter implementado calculateBill com uma regra de negócio específica
 
+
+
+// // ---------------------------------- EXERCÍCIO 6 ----------------------------------
+
+const newIndustrialClient = new IndustrialClient(10, "29902020", "Fábrica de Peças", 3, 2000, 1)
+// console.log(`${newIndustrialClient.constructor.name}
+// CEP: ${newIndustrialClient.getCep()}
+// Quantidade de máquinas: ${newIndustrialClient.getMachinesQuantity()}
+// Nome: ${newIndustrialClient.name}
+// Número de registro industrial: ${newIndustrialClient.getIndustrialRegistrationNumber()}
+// Número de cadastro: ${newIndustrialClient.registrationNumber}
+// Energia consumida: ${newIndustrialClient.consumedEnergy}
+// Valor da conta: ${newIndustrialClient.calculateBill()}
+// `)
+
+// // a. *De* qual classe a `IndustrialClient` deve ser filha? Por quê?*
+// // Deve ser filha de Industry, porque é um tipo industrial
+
+// // b. *Que interface a `IndustrialClient` implementa? Por quê?*
+// // Implementa a interface Client, porque precisamos acessar as propriedades e métodos a respeito dos clientes, não sendo necessário refazer tudo
+
+// // c. *Nós pedimos para criar somente os getters dessa classe. Pense num motivo para isso: por que só os getters?*
+// // Porque sua única propriedade privada, o número de registro industrial, não deve ser modificado
