@@ -6,6 +6,9 @@ import { Client } from './interfaces/Client'
 import { ResidentialClient } from './classes/ResidentialClient'
 import { CommercialClient } from './classes/CommercialClient'
 import { IndustrialClient } from './classes/IndustrialClient'
+import { ClientManager } from './classes/ClientManager'
+
+
 
 // // ---------------------------------- EXERCÍCIO 1 ----------------------------------
 
@@ -124,3 +127,10 @@ const newIndustrialClient = new IndustrialClient(10, "29902020", "Fábrica de Pe
 
 // // c. *Nós pedimos para criar somente os getters dessa classe. Pense num motivo para isso: por que só os getters?*
 // // Porque sua única propriedade privada, o número de registro industrial, não deve ser modificado
+
+
+
+// // ---------------------------------- EXERCÍCIO 7 ----------------------------------
+
+const clientManager = new ClientManager()
+console.log(`Quantidade de clientes: ${clientManager.getClientsQuantity()}`)
