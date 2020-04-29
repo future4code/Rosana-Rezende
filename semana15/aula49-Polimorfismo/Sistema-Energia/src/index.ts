@@ -155,4 +155,11 @@ clientManager.registerClient(newIndustrialClient)
 
 // // ---------------------------------- DESAFIO 1 ----------------------------------
 
-clientManager.printClients()
+// clientManager.printClients()
+
+
+
+// // ---------------------------------- DESAFIO 2 ----------------------------------
+
+const newResidentialClient2 = new ResidentialClient(10, "123", "Rosana", 4, 150, "aaa")
+// console.log(newResidentialClient2)

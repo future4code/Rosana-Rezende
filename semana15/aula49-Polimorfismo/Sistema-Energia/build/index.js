@@ -25,7 +25,7 @@ const clientManager = new ClientManager_1.ClientManager();
 clientManager.registerClient(newResidentialClient);
 clientManager.registerClient(newCommercialClient);
 clientManager.registerClient(newIndustrialClient);
-clientManager.deleteUser(1);
-console.log(clientManager);
 clientManager.printClients();
+const newResidentialClient2 = new ResidentialClient_1.ResidentialClient(10, "123", "Rosana", 4, 150, "aaa");
+console.log(newResidentialClient2);
 //# sourceMappingURL=index.js.map

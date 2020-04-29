@@ -1,5 +1,6 @@
 import { Industry } from './Industry'
 import { Client } from '../interfaces/Client'
+import { ClientPersistence } from './ClientPersistence'
 
 export class IndustrialClient extends Industry implements Client {
 
@@ -9,6 +10,16 @@ export class IndustrialClient extends Industry implements Client {
         private industrialRegistrationNumber: number
     ) {
         super(machinesQuantity, cep)
+
+        const existingClient = ClientPersistence.CLIENTS_REGISTRATION_NUMBER.find((number) => {
+            return number === registrationNumber
+        })
+
+        if (existingClient) {
+            throw new Error(`Já existe um usuário com o número ${registrationNumber}`)
+        } else {
+            ClientPersistence.ADD_REGISTRATION(registrationNumber);
+        }
     }
 
     calculateBill(): number {

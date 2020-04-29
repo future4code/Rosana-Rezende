@@ -1,5 +1,6 @@
 import { Commerce } from './Commerce'
 import { Client } from '../interfaces/Client'
+import { ClientPersistence } from './ClientPersistence'
 
 export class CommercialClient extends Commerce implements Client {
 
@@ -9,6 +10,16 @@ export class CommercialClient extends Commerce implements Client {
         private cnpj: string
     ) {
         super(floorsQuantity, cep)
+
+        const existingClient = ClientPersistence.CLIENTS_REGISTRATION_NUMBER.find((number) => {
+            return number === registrationNumber
+        })
+
+        if (existingClient) {
+            throw new Error(`Já existe um usuário com o número ${registrationNumber}`)
+        } else {
+            ClientPersistence.ADD_REGISTRATION(registrationNumber);
+        }
     }
 
     calculateBill(): number {
