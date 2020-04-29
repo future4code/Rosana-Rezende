@@ -4,16 +4,6 @@ import { Industry } from './classes/Industry'
 import { Client } from './interfaces/Client'
 import { Place } from './abstracts/Place'
 
-const newResidence = new Residence(10, "29902060")
-// console.log(newResidence)
-
-const newCommerce = new Commerce(2, "29902070")
-// console.log(newCommerce)
-
-const newIndustry = new Industry(5, "29902080")
-// console.log(newIndustry)
-
-
 // // ---------------------------------- EXERCÍCIO 1 ----------------------------------
 
 const clientFulano: Client = {
@@ -46,3 +36,24 @@ const clientFulano: Client = {
 // // b. *Pense e responda: o que precisaríamos fazer para conseguir efetivamente criar uma instância dessa classe?*
 // // É preciso criar uma classe (ex: Commerce) que extenda Place, e depois instanciar essa clacesse
 
+
+
+// // ---------------------------------- EXERCÍCIO 3 ----------------------------------
+
+const newResidence = new Residence(10, "29902060")
+// console.log(`${newResidence.constructor.name}
+// CEP: ${newResidence.getCep()}
+// Quantidade de moradores: ${newResidence.getResidentsQuantity()}
+// `)
+
+const newCommerce = new Commerce(2, "29902070")
+// console.log(`${newCommerce.constructor.name}
+// CEP: ${newCommerce.getCep()}
+// Quantidade de andares: ${newCommerce.getFloorsQuantity()}
+// `)
+
+const newIndustry = new Industry(5, "29902080")
+// console.log(`${newIndustry.constructor.name}
+// CEP: ${newIndustry.getCep()}
+// Quantidade de máquinas: ${newIndustry.getMachinesQuantity()}
+// `)

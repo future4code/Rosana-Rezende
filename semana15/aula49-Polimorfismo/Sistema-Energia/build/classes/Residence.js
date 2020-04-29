@@ -6,6 +6,9 @@ class Residence extends Place_1.Place {
         super(cep);
         this.residentsQuantity = residentsQuantity;
     }
+    getResidentsQuantity() {
+        return this.residentsQuantity;
+    }
 }
 exports.Residence = Residence;
 //# sourceMappingURL=Residence.js.map

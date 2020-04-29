@@ -5,5 +5,9 @@ export class Industry extends Place {
         super(cep);
     }
 
+    getMachinesQuantity(){
+        return this.machinesQuantity
+    }
+
     
 }

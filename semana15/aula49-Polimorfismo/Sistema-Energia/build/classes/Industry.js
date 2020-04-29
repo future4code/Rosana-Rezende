@@ -6,6 +6,9 @@ class Industry extends Place_1.Place {
         super(cep);
         this.machinesQuantity = machinesQuantity;
     }
+    getMachinesQuantity() {
+        return this.machinesQuantity;
+    }
 }
 exports.Industry = Industry;
 //# sourceMappingURL=Industry.js.map

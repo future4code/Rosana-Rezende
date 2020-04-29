@@ -6,6 +6,9 @@ class Commerce extends Place_1.Place {
         super(cep);
         this.floorsQuantity = floorsQuantity;
     }
+    getFloorsQuantity() {
+        return this.floorsQuantity;
+    }
 }
 exports.Commerce = Commerce;
 //# sourceMappingURL=Commerce.js.map
