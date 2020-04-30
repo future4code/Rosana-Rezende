@@ -7,12 +7,12 @@ export abstract class Mission {
 
     constructor(
         public id: number,
-        public name: string,
-        public startDate: string,
-        public endDate: string,
-        public teachersList: Teacher[],
-        public studentsList: Student[],
-        public currentModule?: number // ele pode ser undefined
+        private name: string,
+        private startDate: string,
+        private endDate: string,
+        public teachersList: Teacher[] = [],
+        public studentsList: Student[] = [],
+        private currentModule?: number // ele pode ser undefined
     ){
         // garantindo que o id da turma seja único
         const existingPerson = MissionPersistence.ID_NUMBERS.find(id_number => id_number === id)
@@ -42,5 +42,36 @@ export abstract class Mission {
          this.studentsList.push(student)
      }
 
+    //  getId(): number {
+    //      return this.id
+    //  }
+
+     getName(){
+         return this.name
+     }
+
+     setName(name: string){
+        this.name = name
+     }
+
+     getStartDate(){
+         return this.startDate
+     }
+
+     getEndDate(){
+         return this.endDate
+     }
+
+    //  getTeachersList(){
+    //      return this.teachersList
+    //  }
+
+    //  getStudentsList(){
+    //      return this.studentsList
+    //  }
+
+     getCurrentModule(){
+         return this.currentModule
+     }
     
 }

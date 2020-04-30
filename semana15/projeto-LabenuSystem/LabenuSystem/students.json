@@ -1,21 +1,21 @@
 [
   {
-    "id": 1,
+    "id": 7,
+    "name": "Lázaro",
+    "email": "lazaro@email.com",
+    "birthDate": "10/05/2000",
+    "hobbies": [
+      "curtir praia",
+      "jogar tênis"
+    ]
+  },
+  {
+    "id": 8,
     "name": "Rosana",
     "email": "rosana@email.com",
     "birthDate": "11/03/1987",
     "hobbies": [
-      "Maranotar Netflix",
-      "Codar"
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Jonas",
-    "email": "jonas@email.com",
-    "birthDate": "20/01/1995",
-    "hobbies": [
-      "Jogar bola"
+      "maratonar Netflix"
     ]
   }
 ]

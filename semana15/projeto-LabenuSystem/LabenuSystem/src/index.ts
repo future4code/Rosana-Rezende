@@ -5,13 +5,7 @@ import { Student } from "./classes/Student";
 import { FileManager } from './classes/fileManager/FileManager'
 import { Mission } from "./classes/abstracts/Mission";
 
-export const operation: string = process.argv[4]
-
-enum Operation {
-    ADD_MISSION = 'addMission',
-    ADD_STUDENT = 'addStudent',
-    ADD_TEACHER = 'addTeacher'
-}
+// ------------------------------ CRIANDO NA MÃO
 
 // CRIAR  2 ALUNOS
 const alunaRosana = new Student(1, "Rosana", "rosana@email.com", "11/03/1987", ["Maranotar Netflix", "Codar"])
@@ -52,41 +46,203 @@ turmaSagan.registerStudent(alunoJonas)
 // console.log(turmaSagan)
 
 
-// MEXENDO COM ARQUIVOS JSON
 
-switch(operation){
+// ---------------------------- CRIANDO COM TERMINAL
+const operation: string = process.argv[4]
+const id: string = process.argv[5]
+const name: string = process.argv[6]
 
-    case Operation.ADD_MISSION: {
-        const misisonsFile = require('path').resolve(__dirname, '../missions.json')
-        const missions = new FileManager(misisonsFile);
-        const missionsJson = missions.readFile() as Mission[]
-        missionsJson.push(turmaSagan)
-        missionsJson.push(turmaSaganNoturna)
-        missions.writeFile(missionsJson);
+// MISSÕES
+const startDate: string = process.argv[7]
+const endDate: string = process.argv[8]
+const currentModule: string = process.argv[9]
+
+// ALUNOS
+const email: string = process.argv[7]
+const birthDate: string = process.argv[8]
+const hobby1: string = process.argv[9]
+const hobby2: string = process.argv[10]
+const hobby3: string = process.argv[11]
+
+// PROFESSORES
+const speciality1: string = process.argv[8]
+const speciality2: string = process.argv[9]
+const speciality3: string = process.argv[10]
+const speciality4: string = process.argv[11]
+const speciality5: string = process.argv[12]
+const speciality6: string = process.argv[13]
+const speciality7: string = process.argv[14]
+
+// REGISTER_STUDENT
+const missionId: string = process.argv[5]
+const studentId: string = process.argv[6]
+
+// REGISTER_TEACHER
+const teacherId: string = process.argv[6]
+
+
+enum Operation {
+    CREATE_NIGHT_MISSION = 'createNightMission',
+    CREATE_FULLTIME_MISSION = 'createFullTimeMission',
+    CREATE_STUDENT = 'createStudent',
+    CREATE_TEACHER = 'createTeacher',
+    REGISTER_STUDENT = 'registerStudent',
+    REGISTER_TEACHER = 'registerTeacher'
+}
+
+
+
+// ---------------------------- MEXENDO COM ARQUIVOS JSON
+
+const misisonsFile = require('path').resolve(__dirname, '../missions.json')
+const missions = new FileManager(misisonsFile);
+const missionsJson = missions.readFile() as Mission[]
+
+const studentsFile = require('path').resolve(__dirname, '../students.json')
+const students = new FileManager(studentsFile)
+const studentsJson = students.readFile() as Student[]
+
+
+const teachersFile = require('path').resolve(__dirname, '../teachers.json')
+const teachers = new FileManager(teachersFile)
+const teachersJson = teachers.readFile() as Teacher[]
+
+
+switch (operation) {
+
+    case Operation.CREATE_NIGHT_MISSION: {
+        if (id === undefined || name === undefined || startDate === undefined || endDate === undefined) {
+            console.log('Passe os parâmetros requeridos')
+        } else {
+            const newNightMission = new NightMission(Number(id), name, startDate, endDate, [], [], Number(currentModule))
+            try {
+                missionsJson.push(newNightMission)
+                missions.writeFile(missionsJson);
+                console.log("\x1b[32m", 'Missão adicionada com sucesso')
+            } catch (err) {
+                console.error(err)
+            }
+        }
         break
     }
 
-    case Operation.ADD_STUDENT: {
-        const studentsFile = require('path').resolve(__dirname, '../students.json')
-        const students = new FileManager(studentsFile)
-        const studentsJson = students.readFile() as Student[]
-        studentsJson.push(alunaRosana)
-        studentsJson.push(alunoJonas)
-        students.writeFile(studentsJson)
+    case Operation.CREATE_FULLTIME_MISSION: {
+        if (id === undefined || name === undefined || startDate === undefined || endDate === undefined) {
+            console.log('Passe os parâmetros requeridos')
+        } else {
+            const newFullTimeMission = new FullTimetMission(Number(id), name, startDate, endDate, [], [], Number(currentModule))
+            try {
+                missionsJson.push(newFullTimeMission)
+                missions.writeFile(missionsJson);
+                console.log("\x1b[32m", 'Missão adicionada com sucesso')
+            } catch (err) {
+                console.error(err)
+            }
+        }
         break
     }
 
-    case Operation.ADD_TEACHER: {
-        const teachersFile = require('path').resolve(__dirname, '../teachers.json')
-        const teachers = new FileManager(teachersFile)
-        const teachersJson = teachers.readFile() as Teacher[]
-        teachersJson.push(profBananinha)
-        teachersJson.push(profLaranjinha)
-        teachersJson.push(profAmorzinho)
-        teachersJson.push(profZangado)
-        teachers.writeFile(teachersJson)
+    case Operation.CREATE_STUDENT: {
+        if (id === undefined || name === undefined || email === undefined || birthDate === undefined || hobby1 === undefined) {
+            console.log('Passe os parâmetros requeridos')
+        } else {
+            let hobbylist = []
+            hobbylist.push(hobby1)
+            if (hobby2) hobbylist.push(hobby2)
+            if (hobby3) hobbylist.push(hobby3)
+            const newStudent = new Student(Number(id), name, email, birthDate, hobbylist)
+            try {
+                studentsJson.push(newStudent)
+                students.writeFile(studentsJson)
+                console.log("\x1b[32m", 'Estudante adicionado com sucesso')
+            } catch (err) {
+                console.error(err)
+            }
+        }
         break
     }
+
+    case Operation.CREATE_TEACHER: {
+        if (id === undefined || name === undefined || email === undefined || speciality1 === undefined) {
+            console.log('Passe os parâmetros requeridos')
+        } else {
+            let specialitiesList = []
+            specialitiesList.push(speciality1)
+            if (speciality2) specialitiesList.push(speciality2)
+            if (speciality3) specialitiesList.push(speciality3)
+            if (speciality4) specialitiesList.push(speciality4)
+            if (speciality5) specialitiesList.push(speciality5)
+            if (speciality6) specialitiesList.push(speciality6)
+            if (speciality7) specialitiesList.push(speciality7)
+            const newTeacher = new Teacher(Number(id), name, email, specialitiesList)
+            try {
+                teachersJson.push(newTeacher)
+                teachers.writeFile(teachersJson)
+                console.log("\x1b[32m", 'Professor adicionado com sucesso')
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        break
+    }
+
+    case Operation.REGISTER_STUDENT: {
+        if (missionId === undefined || studentId === undefined) {
+            console.log('Informe o id da Missão e o id do Aluno')
+        } else {
+            const mission = missionsJson.filter(mission => mission.id === Number(missionId))[0]
+            if (!mission) {
+                console.log("Missão não encontrada")
+            } else {
+                const student = studentsJson.filter(student => student.id === Number(studentId))[0]
+                if (!student) {
+                    console.log("Estudante não encontrado")
+                } else {
+                    // se o estudante já tá na lista, não quero adicionar novamente
+                    const findStudent = mission.studentsList.find(student => student.id === Number(studentId))
+                    if(findStudent){
+                        console.log("Estudante já adicionado a lista")
+                    } else {
+                        mission.studentsList.push(student)
+                        missions.writeFile(missionsJson);
+                        console.log("\x1b[32m", 'Estudante registrado na missão com sucesso')
+                    }
+                }
+            }
+        }
+        break
+    }
+
+    case Operation.REGISTER_TEACHER: {
+        if (missionId === undefined || teacherId === undefined) {
+            console.log('Informe o id da Missão e o id do Professor')
+        } else {
+            const mission = missionsJson.filter(mission => mission.id === Number(missionId))[0]
+            if (!mission) {
+                console.log("Missão não encontrada")
+            } else {
+                const teacher = teachersJson.filter(teacher => teacher.id === Number(studentId))[0]
+                if (!teacher) {
+                    console.log("Professor não encontrado")
+                } else {
+                    const findTeacher = mission.teachersList.find(teacher => teacher.id === Number(teacherId))
+                    if(findTeacher){
+                        console.log("Professor já adicionado a lista")
+                    }
+                    else {
+                        mission.teachersList.push(teacher)
+                        missions.writeFile(missionsJson);
+                        console.log("\x1b[32m", 'Professor registrado na missão com sucesso')
+                    }
+                }
+            }
+        }
+        break
+    }
+
+    default:
+        console.log('Informe uma operação válida')
+        break
 
 }
 

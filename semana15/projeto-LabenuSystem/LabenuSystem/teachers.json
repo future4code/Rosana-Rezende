@@ -34,5 +34,14 @@
       "Programação Orientada a Objetos",
       "Backend"
     ]
+  },
+  {
+    "id": 9,
+    "name": "Maricota",
+    "email": "maricota@email.com",
+    "specialties": [
+      "React",
+      "Redux"
+    ]
   }
 ]
