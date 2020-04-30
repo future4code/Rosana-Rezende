@@ -2,7 +2,16 @@ import { NightMission } from "./classes/NightMission";
 import { FullTimetMission } from "./classes/FullTimeMission";
 import { Teacher } from "./classes/Teacher";
 import { Student } from "./classes/Student";
+import { FileManager } from './classes/fileManager/FileManager'
+import { Mission } from "./classes/abstracts/Mission";
 
+export const operation: string = process.argv[4]
+
+enum Operation {
+    ADD_MISSION = 'addMission',
+    ADD_STUDENT = 'addStudent',
+    ADD_TEACHER = 'addTeacher'
+}
 
 // CRIAR  2 ALUNOS
 const alunaRosana = new Student(1, "Rosana", "rosana@email.com", "11/03/1987", ["Maranotar Netflix", "Codar"])
@@ -41,3 +50,43 @@ turmaSagan.registerTeacher(profZangado)
 turmaSagan.registerStudent(alunaRosana)
 turmaSagan.registerStudent(alunoJonas)
 // console.log(turmaSagan)
+
+
+// MEXENDO COM ARQUIVOS JSON
+
+switch(operation){
+
+    case Operation.ADD_MISSION: {
+        const misisonsFile = require('path').resolve(__dirname, '../missions.json')
+        const missions = new FileManager(misisonsFile);
+        const missionsJson = missions.readFile() as Mission[]
+        missionsJson.push(turmaSagan)
+        missionsJson.push(turmaSaganNoturna)
+        missions.writeFile(missionsJson);
+        break
+    }
+
+    case Operation.ADD_STUDENT: {
+        const studentsFile = require('path').resolve(__dirname, '../students.json')
+        const students = new FileManager(studentsFile)
+        const studentsJson = students.readFile() as Student[]
+        studentsJson.push(alunaRosana)
+        studentsJson.push(alunoJonas)
+        students.writeFile(studentsJson)
+        break
+    }
+
+    case Operation.ADD_TEACHER: {
+        const teachersFile = require('path').resolve(__dirname, '../teachers.json')
+        const teachers = new FileManager(teachersFile)
+        const teachersJson = teachers.readFile() as Teacher[]
+        teachersJson.push(profBananinha)
+        teachersJson.push(profLaranjinha)
+        teachersJson.push(profAmorzinho)
+        teachersJson.push(profZangado)
+        teachers.writeFile(teachersJson)
+        break
+    }
+
+}
+

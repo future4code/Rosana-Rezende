@@ -1,0 +1,106 @@
+[
+  {
+    "id": 2,
+    "name": "Sagan",
+    "startDate": "01/01/2020",
+    "endDate": "06/06/2020",
+    "teachersList": [
+      {
+        "id": 3,
+        "name": "Prof Bananinha",
+        "email": "bananinha@email.com",
+        "specialties": [
+          "React"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Prof Laranjinha",
+        "email": "laranjinha@email.com",
+        "specialties": [
+          "CSS",
+          "Testes"
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Prof Amorzinho",
+        "email": "amorzinho@email.com",
+        "specialties": [
+          "React",
+          "Redux"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Prof Zangado",
+        "email": "zangado@email.com",
+        "specialties": [
+          "Typescript",
+          "Programação Orientada a Objetos",
+          "Backend"
+        ]
+      }
+    ],
+    "studentsList": [
+      {
+        "id": 1,
+        "name": "Rosana",
+        "email": "rosana@email.com",
+        "birthDate": "11/03/1987",
+        "hobbies": [
+          "Maranotar Netflix",
+          "Codar"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Jonas",
+        "email": "jonas@email.com",
+        "birthDate": "20/01/1995",
+        "hobbies": [
+          "Jogar bola"
+        ]
+      }
+    ],
+    "currentModule": 5
+  },
+  {
+    "id": 1,
+    "name": "Sagan-na-night",
+    "startDate": "30/04/2020",
+    "endDate": "12/12/2020",
+    "teachersList": [
+      {
+        "id": 3,
+        "name": "Prof Bananinha",
+        "email": "bananinha@email.com",
+        "specialties": [
+          "React"
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Prof Laranjinha",
+        "email": "laranjinha@email.com",
+        "specialties": [
+          "CSS",
+          "Testes"
+        ]
+      }
+    ],
+    "studentsList": [
+      {
+        "id": 1,
+        "name": "Rosana",
+        "email": "rosana@email.com",
+        "birthDate": "11/03/1987",
+        "hobbies": [
+          "Maranotar Netflix",
+          "Codar"
+        ]
+      }
+    ],
+    "currentModule": 1
+  }
+]

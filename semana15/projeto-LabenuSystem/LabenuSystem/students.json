@@ -1,0 +1,21 @@
+[
+  {
+    "id": 1,
+    "name": "Rosana",
+    "email": "rosana@email.com",
+    "birthDate": "11/03/1987",
+    "hobbies": [
+      "Maranotar Netflix",
+      "Codar"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Jonas",
+    "email": "jonas@email.com",
+    "birthDate": "20/01/1995",
+    "hobbies": [
+      "Jogar bola"
+    ]
+  }
+]
