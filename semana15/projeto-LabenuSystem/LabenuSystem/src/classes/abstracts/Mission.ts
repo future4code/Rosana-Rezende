@@ -32,7 +32,15 @@ export abstract class Mission {
                 throw new Error(`Escolha um número entre 1 e 7`)
             }        
         }
-
      }
+
+     registerTeacher(teacher: Teacher): void {
+         this.teachersList.push(teacher)
+     }
+
+     registerStudent(student: Student): void {
+         this.studentsList.push(student)
+     }
+
     
 }

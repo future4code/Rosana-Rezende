@@ -3,13 +3,6 @@ import { FullTimetMission } from "./classes/FullTimeMission";
 import { Teacher } from "./classes/Teacher";
 import { Student } from "./classes/Student";
 
-// CRIAR 2 TURMAS
-const turmaSaganNoturna = new NightMission(1, "Sagan-na-night", "30/04/2020", "12/12/2020", [], [], 1)
-// console.log(turmaSaganNoturna)
-
-const turmaSagan = new FullTimetMission(2, "Sagan", "01/01/2020", "06/06/2020", [], [], 5)
-// console.log(turmaSagan)
-
 
 // CRIAR  2 ALUNOS
 const alunaRosana = new Student(1, "Rosana", "rosana@email.com", "11/03/1987", ["Maranotar Netflix", "Codar"])
@@ -32,3 +25,19 @@ const profAmorzinho = new Teacher(5, "Prof Amorzinho", "amorzinho@email.com", ['
 
 const profZangado = new Teacher(6, "Prof Zangado", "zangado@email.com", ['Typescript', 'Programação Orientada a Objetos', 'Backend'])
 // console.log(profZangado)
+
+// CRIAR 2 TURMAS
+const turmaSaganNoturna = new NightMission(1, "Sagan-na-night", "30/04/2020", "12/12/2020", [], [], 1)
+turmaSaganNoturna.registerTeacher(profBananinha)
+turmaSaganNoturna.registerTeacher(profLaranjinha)
+turmaSaganNoturna.registerStudent(alunaRosana)
+// console.log(turmaSaganNoturna)
+
+const turmaSagan = new FullTimetMission(2, "Sagan", "01/01/2020", "06/06/2020", [], [], 5)
+turmaSagan.registerTeacher(profBananinha)
+turmaSagan.registerTeacher(profLaranjinha)
+turmaSagan.registerTeacher(profAmorzinho)
+turmaSagan.registerTeacher(profZangado)
+turmaSagan.registerStudent(alunaRosana)
+turmaSagan.registerStudent(alunoJonas)
+// console.log(turmaSagan)
