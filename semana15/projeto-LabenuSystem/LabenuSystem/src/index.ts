@@ -4,6 +4,7 @@ import { Teacher } from "./classes/Teacher";
 import { Student } from "./classes/Student";
 import { FileManager } from './classes/fileManager/FileManager'
 import { Mission } from "./classes/abstracts/Mission";
+import * as moment from "moment"
 
 // ------------------------------ CRIANDO NA MÃO
 
@@ -87,7 +88,8 @@ enum Operation {
     CREATE_STUDENT = 'createStudent',
     CREATE_TEACHER = 'createTeacher',
     REGISTER_STUDENT = 'registerStudent',
-    REGISTER_TEACHER = 'registerTeacher'
+    REGISTER_TEACHER = 'registerTeacher',
+    PRINT_STUDENTS = 'printStudents'
 }
 
 
@@ -237,6 +239,25 @@ switch (operation) {
                 }
             }
         }
+        break
+    }
+
+    case Operation.PRINT_STUDENTS: {
+        studentsJson.map(student => {
+            const mission = missionsJson.filter(mission => 
+                mission.studentsList.find(studentThere => 
+                    studentThere.id === student.id))[0]
+            const today: moment.Moment = moment()
+            const informedDateOfBith: moment.Moment = moment(student.birthDate, "DD/MM/YYYY")
+            const age = today.diff(informedDateOfBith, "years")
+            
+            // não entendi o que seria Curso
+            return console.log(`
+            Nome: ${student.name}
+            Email: ${student.email}
+            Turma: ${mission.name}
+            Idade: ${age}`)
+        })
         break
     }
 

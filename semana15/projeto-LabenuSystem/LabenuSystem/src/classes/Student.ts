@@ -1,7 +1,10 @@
 import { Person } from "../interfaces/Person";
 import { PersonPersistence } from "./restrictions/PersonPersistence";
+// import * as moment from "moment"
 
 export class Student implements Person {
+    age: number
+
     constructor(
         public id: number, public name: string, public email: string,
         public birthDate: string, public hobbies: string[]
@@ -13,6 +16,13 @@ export class Student implements Person {
         } else {
             PersonPersistence.ADD_ID(id)
         }
+        
     }
+
+    // getAge(): number{
+    //     const today: moment.Moment = moment()
+    //     const informedDateOfBith: moment.Moment = moment(this.birthDate, "DD/MM/YYYY")
+    //     return this.age = today.diff(informedDateOfBith, "years")
+    // }
 
 }
