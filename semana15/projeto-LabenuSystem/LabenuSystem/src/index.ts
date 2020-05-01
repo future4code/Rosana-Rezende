@@ -98,7 +98,29 @@ enum Operation {
 
 const misisonsFile = require('path').resolve(__dirname, '../missions.json')
 const missions = new FileManager(misisonsFile);
-const missionsJson = missions.readFile() as Mission[]
+const missionsJson = missions.readFile() as any[]
+const mission = missionsJson.filter(mission => {
+    const myMission = mission.name.indexOf("-na-night") !== -1 ?
+        new NightMission(
+            mission.id,
+            mission.name,
+            mission.startDate,
+            mission.endDate,
+            mission.teachersList,
+            mission.studentsList,
+            mission.currentModule)
+        :
+        new FullTimetMission(
+            mission.id,
+            mission.name,
+            mission.startDate,
+            mission.endDate,
+            mission.teachersList,
+            mission.studentsList,
+            mission.currentModule)
+    return myMission.getId() === Number(missionId)
+})[0]
+
 
 const studentsFile = require('path').resolve(__dirname, '../students.json')
 const students = new FileManager(studentsFile)
@@ -192,7 +214,7 @@ switch (operation) {
         if (missionId === undefined || studentId === undefined) {
             console.log('Informe o id da Missão e o id do Aluno')
         } else {
-            const mission = missionsJson.filter(mission => mission.id === Number(missionId))[0]
+            // const mission = missionsJson.filter((mission: any) => mission.getId() === Number(missionId))[0]
             if (!mission) {
                 console.log("Missão não encontrada")
             } else {
@@ -200,9 +222,9 @@ switch (operation) {
                 if (!student) {
                     console.log("Estudante não encontrado")
                 } else {
-                    // se o estudante já tá na lista, não quero adicionar novamente
-                    const findStudent = mission.studentsList.find(student => student.id === Number(studentId))
-                    if(findStudent){
+                    // não devia poder adicionar em outra turma tb
+                    const findStudent = mission.studentsList.find((student: any) => student.id === Number(studentId))
+                    if (findStudent) {
                         console.log("Estudante já adicionado a lista")
                     } else {
                         mission.studentsList.push(student)
@@ -219,7 +241,6 @@ switch (operation) {
         if (missionId === undefined || teacherId === undefined) {
             console.log('Informe o id da Missão e o id do Professor')
         } else {
-            const mission = missionsJson.filter(mission => mission.id === Number(missionId))[0]
             if (!mission) {
                 console.log("Missão não encontrada")
             } else {
@@ -227,8 +248,8 @@ switch (operation) {
                 if (!teacher) {
                     console.log("Professor não encontrado")
                 } else {
-                    const findTeacher = mission.teachersList.find(teacher => teacher.id === Number(teacherId))
-                    if(findTeacher){
+                    const findTeacher = mission.teachersList.find((teacher: any) => teacher.id === Number(teacherId))
+                    if (findTeacher) {
                         console.log("Professor já adicionado a lista")
                     }
                     else {
@@ -244,13 +265,13 @@ switch (operation) {
 
     case Operation.PRINT_STUDENTS: {
         studentsJson.map(student => {
-            const mission = missionsJson.filter(mission => 
-                mission.studentsList.find(studentThere => 
+            const mission = missionsJson.filter(mission =>
+                mission.studentsList.find((studentThere: any) =>
                     studentThere.id === student.id))[0]
             const today: moment.Moment = moment()
             const informedDateOfBith: moment.Moment = moment(student.birthDate, "DD/MM/YYYY")
             const age = today.diff(informedDateOfBith, "years")
-            
+
             // não entendi o que seria Curso
             return console.log(`
             Nome: ${student.name}

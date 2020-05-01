@@ -6,12 +6,12 @@ import { ModuleNumber } from "../restrictions/ModuleNumber";
 export abstract class Mission {
 
     constructor(
-        public id: number,
+        private id: number,
         public name: string,
         private startDate: string,
         private endDate: string,
-        public teachersList: Teacher[] = [],
-        public studentsList: Student[] = [],
+        private teachersList: Teacher[] = [],
+        private studentsList: Student[] = [],
         private currentModule?: number // ele pode ser undefined
     ){
         // garantindo que o id da turma seja único
@@ -42,9 +42,9 @@ export abstract class Mission {
          this.studentsList.push(student)
      }
 
-    //  getId(): number {
-    //      return this.id
-    //  }
+     getId(): number {
+         return this.id
+     }
 
      getName(){
          return this.name
@@ -62,13 +62,13 @@ export abstract class Mission {
          return this.endDate
      }
 
-    //  getTeachersList(){
-    //      return this.teachersList
-    //  }
+     getTeachersList(){
+         return this.teachersList
+     }
 
-    //  getStudentsList(){
-    //      return this.studentsList
-    //  }
+     getStudentsList(){
+         return this.studentsList
+     }
 
      getCurrentModule(){
          return this.currentModule

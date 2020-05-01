@@ -54,7 +54,26 @@
     "startDate": "10/06/2019",
     "endDate": "10/01/2020",
     "teachersList": [],
-    "studentsList": [],
+    "studentsList": [
+      {
+        "id": 8,
+        "name": "Rosana",
+        "email": "rosana@email.com",
+        "birthDate": "11/03/1987",
+        "hobbies": [
+          "maratonar Netflix"
+        ]
+      }
+    ],
     "currentModule": 3
+  },
+  {
+    "id": 10,
+    "name": "Lalala-na-night",
+    "startDate": "01/01/2001",
+    "endDate": "06/06/2001",
+    "teachersList": [],
+    "studentsList": [],
+    "currentModule": null
   }
 ]
