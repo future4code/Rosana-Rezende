@@ -1,0 +1,76 @@
+[
+    {
+        "usuario": {
+            "nome": "Cleiton Dias",
+            "CPF": "02397770504",
+            "dataDeNascimento": "27/05/1987"
+        },
+        "saldo": 35,
+        "extrato": [
+            {
+                "valor": 15,
+                "descricao": "academia",
+                "data": "23/04/2020"
+            },
+            {
+                "valor": 5,
+                "descricao": "troco",
+                "data": "20/04/2020"
+            },
+            {
+                "valor": 25,
+                "descricao": "lanche",
+                "data": "12/05/2020"
+            },
+            {
+                "valor": 10,
+                "descricao": "Dinheiro recebido por transferência",
+                "data": "24/04/2020"
+            }
+        ]
+    },
+    {
+        "usuario": {
+            "nome": "Rosana Rezende",
+            "CPF": "11820701751",
+            "dataDeNascimento": "11/03/1987"
+        },
+        "saldo": 130,
+        "extrato": [
+            {
+                "valor": 10,
+                "descricao": "energia",
+                "data": "24/04/2019"
+            },
+            {
+                "valor": 5,
+                "descricao": "balões de festa",
+                "data": "10/07/2020"
+            },
+            {
+                "valor": 15,
+                "descricao": "Depósito de dinheiro",
+                "data": "23/04/2020"
+            },
+            {
+                "valor": 10,
+                "descricao": "Depósito de dinheiro",
+                "data": "24/04/2020"
+            },
+            {
+                "valor": 10,
+                "descricao": "Dinheiro enviado por transferência",
+                "data": "24/04/2020"
+            }
+        ]
+    },
+    {
+        "usuario": {
+            "nome": "Gato de Botas",
+            "CPF": "12345678910",
+            "dataDeNascimento": "01/01/2001"
+        },
+        "saldo": 0,
+        "extrato": []
+    }
+]

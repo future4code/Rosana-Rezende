@@ -1,0 +1,30 @@
+{
+  "name": "sagan-semana14-sistema-bancario",
+  "version": "1.0.0",
+  "description": "\"Turma Sangan - Semana 14 - Projeto: Sistema Bancário\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "tsc && node build/index.js --target es6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/future4code/Rosana-Rezende.git"
+  },
+  "keywords": [
+    "sagan",
+    "node",
+    "package.json",
+    "typescript"
+  ],
+  "author": "Rosana Rezende",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/future4code/Rosana-Rezende/issues"
+  },
+  "homepage": "https://github.com/future4code/Rosana-Rezende#readme",
+  "dependencies": {
+    "@types/node": "^13.13.2",
+    "moment": "^2.24.0"
+  }
+}
