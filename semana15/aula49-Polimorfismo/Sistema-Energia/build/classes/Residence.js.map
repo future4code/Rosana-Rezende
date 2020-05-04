@@ -1,0 +1,1 @@
+{"version":3,"file":"Residence.js","sourceRoot":"","sources":["../../src/classes/Residence.ts"],"names":[],"mappings":";;AAAA,8CAA0C;AAE1C,MAAa,SAAU,SAAQ,aAAK;IAChC,YAAsB,iBAAyB,EAAE,GAAW;QACxD,KAAK,CAAC,GAAG,CAAC,CAAC;QADO,sBAAiB,GAAjB,iBAAiB,CAAQ;IAE/C,CAAC;IAED,oBAAoB;QAChB,OAAO,IAAI,CAAC,iBAAiB,CAAA;IACjC,CAAC;CAEJ;AATD,8BASC"}
