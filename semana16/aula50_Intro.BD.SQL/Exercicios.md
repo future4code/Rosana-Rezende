@@ -147,21 +147,137 @@ VALUES(
 ```
 
 O erro gerado foi: <span style="color:red">Error Code: 1292. Incorrect date value: '1950' for column 'birth_date' at row 1</span>
-
-
-
+A data de nascimento deveria estar entre aspas.
 
 <br><br>
 
 ### Exercício 3
 
+Com os dados criados, podemos nos aventurar nas queries de seleção de dados. Elas são indicadas pelo operador `SELECT`. Talvez a query mais famosa que existe é:
 
+```sql
+SELECT * FROM Actor
+```
+
+Ela faz com que se retornem todas as **colunas** (ou "informações") de todas as **linhas** (ou "entradas") da nossa tabela. 
+
+Se quisermos limitar as **colunas**, devemos indicar assim logo após o operador `SELECT`. Abaixo, está uma query que retorna somente o `id`e o `salário`de todos os atores
+
+```sql
+SELECT id, salary from Actor 
+```
+
+Agora, se quisermos colocar uma condição para retornar as **linhas** (entradas), devemos usar o operador `WHERE` e colocar a nossa condição que pode usar alguns operadores (`=`, `!=`, `>`, etc). Abaixo, está uma query que retorna somente o id e o nome dos atores.
+
+```sql
+SELECT id, name from Actor WHERE gender = "male"
+```
+
+*a. Escreva uma query que retorne todas as informações das atrizes*
+
+```sql
+SELECT id, name from Actor 
+WHERE gender = "female"
+```
+
+<br>
+
+*b. Escreva uma query que retorne o salário do ator com o nome `Tony Ramos`*
+
+```sql
+SELECT salary from Actor 
+WHERE name = "Tony Ramos";
+```
+
+<br>
+
+*c. Escreva uma query que retorne todas as informações que tenham o `gender` com o valor `"invalid"`. Explique o resultado.*
+
+```sql
+SELECT * from Actor 
+WHERE gender = "invalid";
+```
+
+<br>
+
+*d. Escreva uma query que retorne o id, nome e salário de todos que tenham o salário com o valor máximo de R$500.000*
+
+```sql
+SELECT id, name, salary from Actor 
+WHERE salary <= 500000;
+```
+
+<br>
+
+*e. Tente usar as queries abaixo. Você vai reparar que elas vão gerar um erro. Anote as mensagens de erro, traduza (pode usar o Google Tradutor diretamente) e explique porque esses erros aconteceram. Por fim, corrija individualmente cada query para que funcione, teste o comando e anote-o também como resposta*
+
+```sql
+SELECT id, nome from Actor WHERE id = "002"
+```
+
+O erro gerado foi: <span style="color:red">Error Code: 1054. Unknown column 'nome' in 'field list'</span>
+Não existe a coluna nome.
+
+Comando correto:
+```sql
+SELECT id, name from Actor WHERE id = "002"
+```
 
 <br><br>
 
 ### Exercício 4
 
+Para finalizar o nosso estudo nas tabelas de atores, vamos fazer uma query mais complexa. Queremos encontrar todos os atores e atrizes:
 
+- cujos nomes começam com "A" ou "J"; e
+- cujos salários são maiores do que R$300.000
+
+Para fazer a primeira parte, vamos usar o comparador `LIKE`, que permite comparar strings. Para verificar se uma palavra começa com a letra "A", usamos a sintaxe: `LIKE "A%"` porque `%` indica uma string genérica. O operador "ou" é indicado por `OR`. Assim, a primeira condição é indicada por: `WHERE name LIKE "A%" OR name LIKE "J%"`. 
+
+Já a segunda parte é simples: `salary > 300000`. O que pode confundir é o operador lógico "e" (`AND`). A ideia aqui é que todos os atores terão o salário maior do que R$300.000, mas seus nomes poderão começar com o "A" ou "J". Dessa forma, a query vai ficar dessa forma (preste atenção nos parênteses):
+
+```sql
+SELECT * FROM Actor
+WHERE (name LIKE "A%" OR name LIKE "J%") AND salary > 300000
+```
+
+Assim como o `LIKE` existem os operadores: 
+
+- `BETWEEN`: permite verificar se um valor está entre dois: `BETWEEN valor1 AND valor2`.
+- `NOT`: que indica uma negação de comparação. Pode ser usado antes de outros operadores como: `NOT LIKE`, `NOT BETWEEN`
+
+<br>
+
+*a. Explique com as suas palavras a query acima*
+
+A query acima primeiro pesquisa, no banco de dados de Atores, quais deles tem nome que começa com a letra A ou começa com a letra J, trazendo ambos resultados. Em seguida, filtra esse resultados para trazer apenas aqueles cujos salários sejam superiores a R$300.000.
+
+<br>
+
+*b. Escreva uma query com os atores que não comecem com a letra "A" e tenham o salário maior do que R$350.000,00*
+
+```sql
+SELECT * FROM Actor
+WHERE name NOT LIKE "A%" AND salary > 350000;
+```
+
+<br>
+
+*c. Escreva uma query com os atores que possuam "G" ou "g" em qualquer parte do nome.* 
+
+```sql
+SELECT * FROM Actor
+WHERE name LIKE "%g%" OR name LIKE "%G%";
+```
+
+<br>
+
+*d. Escreva uma query com os atores que tenham a lerta "a" ou "A" ou "g" ou "G" no nome e o salário entre R$350.000,00 e R$900.000,00*
+
+```sql
+SELECT * FROM Actor
+WHERE (name LIKE "%g%" OR name LIKE "%G%" OR name LIKE "%a%" OR name LIKE "%A%") AND salary BETWEEN 350000 AND 900000;
+```
 
 <br><br>
 
