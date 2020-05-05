@@ -235,3 +235,93 @@ FROM Actor;
 <br><br>
 
 
+
+### Exercício 5
+
+Para finalizar o que vimos na aula, temos que treinar as operações indicadas por `LIMIT`, `ORDER BY` e `GROUP BY`
+
+O `LIMIT`, como o próprio nome sugere, limita a quantidade de dados retornados. Se quisermos somente 3 atores da tabela:
+
+```sql
+SELECT * FROM Actor LIMIT 3
+```
+
+`ORDER BY` permite que ordenemos os dados dependendo de alguma coluna da tabela. Podemos dizer se queremos na ordem crescente (`ASC`) ou decrescente (`DESC`). A sintaxe é: `ORDER BY coluna ASC/DESC`. Se quisermos os atores em ordem alfabética:
+
+```sql
+SELECT * FROM Actor ORDER BY name ASC
+```
+
+Podemos juntar com o `LIMIT` e pegarmos os 4 primeiros atores (em ordem alfabética):
+
+```sql
+SELECT * FROM Actor ORDER BY name ASC LIMIT 4
+```
+
+Até pegar somente as 4 primeiras atrizes em ordem alfabética:
+
+```sql
+SELECT * FROM Actor
+ORDER BY name ASC
+LIMIT 4
+WHERE gender = 'female'
+```
+
+O último é um operador que permite agrupar os dados em relação a alguma coluna da tabela: `GROUP BY`. Ele normalmente é usado junto com algumas das funções que já vimos: `AVG`, `COUNT`, `SUM`, etc. A query abaixo retorna a quantidade de atores e atrizes na tabela (ou seja, em relação ao `gender`)
+
+```sql
+SELECT COUNT(*), gender
+FROM Actor
+GROUP BY gender
+```
+
+*a. Releia a última query. Teste-a. Explique o resultado com as suas palavras*
+
+_Resposta_: A query agrupou as pessoas por gênero e contou quantos tinha em cada um.
+
+<br>
+
+*b. Faça uma query que retorne somente o id e o nome dos atores em ordem decrescente alfabética*
+
+_Resposta_:
+```sql
+SELECT id, name
+FROM Actor
+ORDER BY name DESC;
+```
+
+<br>
+
+*c. Faça uma query que retorne todos os atores ordenados pelo salário*
+
+_Resposta_:
+```sql
+SELECT *
+FROM Actor
+ORDER BY salary ASC; -- posso omitir o ASC
+```
+
+<br>
+
+*d. Faça uma query que retorne os atores com os três maiores salarios*
+
+_Resposta_:
+```sql
+SELECT *
+FROM Actor
+ORDER BY salary DESC
+LIMIT 3;
+```
+
+<br>
+
+*e. Faça uma query que retorne a média de salário por gênero*
+
+_Resposta_:
+```sql
+SELECT gender, AVG(salary) as "Média de salário"
+FROM Actor
+GROUP BY gender;
+```
+
+<br><br>
