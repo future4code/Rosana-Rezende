@@ -69,4 +69,72 @@ _Resposta_:
 ALTER TABLE Actor CHANGE gender gender VARCHAR(100);
 ```
 
+<br><br>
+
+
+
+### Exercício 2
+
+Além de criar e ler as tabelas, é muito importante que entendamos também como atualizar e deletar. Inclusive, essas 4 operações têm um nome muito famoso que vocês com certeza irão ouvir no dia a dia do trabalho: CRUD. Quando falamos que vamos fazer um CRUD, queremos dizer que vamos fazer alguma aplicação que cria (Create), lê (Read), atualiza (Update) e deleta (Delete) algum tipo de informação.
+
+No MySQL, existem mais dois operadores que nos permitiram fazer o CRUD de qualquer coisa. O primeiro deles é o `UPDATE`. A query abaixo muda o nome do ator com id `123` para `Moacyr Franco`:
+
+```sql
+UPDATE Actor
+SET name = "Moacyr Franco"
+WHERE id = "123"
+```
+
+*a. Escreva uma query que atualize o nome e a data de nascimento do ator com o id `003`*
+
+_Resposta_:
+```sql
+UPDATE Actor
+SET 
+    name = "Daniel Radcliffe",
+    birth_date = "1989/07/23"
+WHERE id = "003";
+```
+
 <br>
+
+*b. Escreva uma query que atualize o nome da atriz `Juliana Paes` para `JULIANA PÃES`. Então, escreva outra query para voltar ao nome anterior.*
+
+_Resposta_:
+```sql
+UPDATE Actor
+SET name = "JULIANA PÃES"
+WHERE name = "Juliana Paes";
+```
+
+<br>
+
+*c. Escreva uma query que atualize todas as informações do ator com o id `005`*
+
+_Resposta_:
+```sql
+UPDATE Actor
+SET 
+	name = "Emma Watson",
+	birth_date = "1990-04-15",
+    salary = 15000000,
+    gender = "female"
+WHERE id = "005";
+```
+
+<br>
+
+*d. Escreva uma query em que você tente atualizar um dado da tabela que não existe (com um id inválido, por exemplo). Teste, anote e explique o resultado.*
+
+_Resposta_:
+```sql
+UPDATE Actor
+SET name = "Testador"
+WHERE id = "004"
+```
+
+Apareceu a seguinte mensagem: 0 row(s) affected Rows matched: 0  Changed: 0  Warnings: 0
+Nada foi alterado na tabela, já que o id não existe.
+
+<br><br>
+
