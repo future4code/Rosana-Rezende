@@ -328,7 +328,7 @@ GROUP BY gender;
 
 
 
-### Exercício 5
+### Exercício 6
 
 Você já pegou o padrão né? Primeiro fazemos algo guiado e depois deixamos você fazer a sós!
 
@@ -399,3 +399,80 @@ Não é possível alterar algo que não existe.
 <br><br>
 
 
+
+### Exercício 7
+
+Agora para treinar as funções novamente, faça uma query para responder as perguntas abaixo:
+
+*a. Quantos filmes em cartaz possuem avaliações maiores do que `7.5`?*
+
+_Resposta_: 2
+
+```sql
+SELECT COUNT(*)
+FROM Movie
+WHERE rating > 7.5;
+```
+
+<br>
+
+*b. Qual a média das avaliações dos filmes?*
+
+_Resposta_: 9.5
+
+```sql
+SELECT AVG(rating)
+FROM Movie;
+```
+
+<br>
+
+*c. Qual a quantidade de filmes em cartaz?*
+
+_Resposta_: 1
+
+```sql
+SELECT COUNT(*)
+FROM Movie
+WHERE playing_limit_date >= CURDATE();
+```
+
+<br>
+
+*d. Qual a quantidade de filmes que ainda irão lançar?*
+
+_Resposta_: 0
+
+```sql
+SELECT COUNT(*)
+FROM Movie
+WHERE release_Date > CURDATE();
+```
+
+<br>
+
+*e. Qual a maior nota dos filmes?*
+
+_Resposta_: 10
+
+```sql
+SELECT rating
+FROM Movie
+ORDER BY rating DESC
+LIMIT 1;
+```
+
+<br>
+
+*f. Qual a menor nota dos filmes?*
+
+_Resposta_: 9
+
+```sql
+SELECT rating
+FROM Movie
+ORDER BY rating
+LIMIT 1;
+```
+
+<br><br>
