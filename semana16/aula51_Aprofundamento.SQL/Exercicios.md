@@ -434,7 +434,7 @@ _Resposta_: 1
 ```sql
 SELECT COUNT(*)
 FROM Movie
-WHERE playing_limit_date >= CURDATE();
+WHERE playing_limit_date > CURDATE();
 ```
 
 <br>
@@ -446,7 +446,7 @@ _Resposta_: 0
 ```sql
 SELECT COUNT(*)
 FROM Movie
-WHERE release_Date > CURDATE();
+WHERE release_Date < CURDATE();
 ```
 
 <br>
@@ -462,6 +462,13 @@ ORDER BY rating DESC
 LIMIT 1;
 ```
 
+ou
+
+```sql
+SELECT MAX(rating) 
+FROM Movie;
+```
+
 <br>
 
 *f. Qual a menor nota dos filmes?*
@@ -475,4 +482,65 @@ ORDER BY rating
 LIMIT 1;
 ```
 
+ou
+
+```sql
+SELECT MIN(rating) 
+FROM Movie;
+```
+
 <br><br>
+
+
+
+### Exercício 8
+
+Escreva **uma** query que:
+
+*a. Retorne todos os filmes em ordem alfabética*
+
+_Resposta_: 
+```sql
+SELECT *
+FROM Movie
+ORDER BY title;
+```
+
+<br>
+
+*b. Retorne os 5 primerios filmes em ordem descrente alfabética* 
+
+_Resposta_: 
+```sql
+SELECT *
+FROM Movie
+ORDER BY title DESC
+LIMIT 5;
+```
+
+<br>
+
+*c. Retorne os 3 filmes mais recentes em cartaz*
+
+_Resposta_: 
+```sql
+SELECT *
+FROM Movie
+WHERE release_date < CURDATE() 
+ORDER BY release_date DESC
+LIMIT 3;
+```
+
+<br>
+
+*d. Retorne os 3 filmes melhor avalidos*
+
+_Resposta_: 
+```sql
+SELECT *
+FROM Movie
+ORDER BY rating DESC
+LIMIT 3;
+```
+
+<br>
