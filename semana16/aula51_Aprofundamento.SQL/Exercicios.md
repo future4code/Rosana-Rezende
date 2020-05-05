@@ -166,8 +166,72 @@ _Resposta_:
 ```sql
 DELETE FROM Actor 
 WHERE gender = "male" AND salary > 1000000;
+```
 
+<br><br>
+
+
+### Exercício 4
+
+O MySQL permite que façamos queries cujo resultado final é alguma manipulação em relação aos dados salvos. Essa manipulação é dada através de uma **função MySQL**. O exemplo mais clássico é a função COUNT, que permite contar a quantidade de elementos. Por exemplo, se quisermos contar todos os atores, poderíamos fazer assim:
+
+```sql
+SELECT COUNT(*) FROM Actor
+```
+
+Ou, então, poderíamos ver a quantidade de atrizes no nosso banco, colocando uma condição para entrar na contagem:
+
+```sql
+SELECT COUNT(*) FROM Actor WHERE gender = "female"
+```
+
+Para encerrar os nossos exemplos, vamos falar da função AVG ("Average" - média em inglês) que permite calcular a média de alguma das colunas dos nossos dados. Por exemplo, a query abaixo devolve a média dos salários dos atores
+
+```sql
+SELECT AVG(salary) FROM Actor
+```
+
+Existem outras funções, tais como: `MAX` e `MIN` que permitem determinar os valores máximos e mínimos de uma coluna.
+
+*a. Escreva uma query que pegue o maior salário de todos os atores e atrizes*
+
+_Resposta_:
+```sql
+SELECT MAX(salary) FROM Actor
 ```
 
 <br>
+
+*b. Escreva uma query que pegue o menor salário das atrizes*
+
+_Resposta_:
+```sql
+SELECT MIN(salary) 
+FROM Actor
+WHERE gender = "female";
+```
+
+<br>
+
+*c. Escreva uma query que pegue a quantidade de atrizes*
+
+_Resposta_:
+```sql
+SELECT COUNT(*) 
+FROM Actor 
+WHERE gender = "female";
+```
+
+<br>
+
+*d. Escreva uma query que pegue a soma de todos os salários*
+
+_Resposta_:
+```sql
+SELECT SUM(salary) 
+FROM Actor;
+```
+
+<br><br>
+
 
