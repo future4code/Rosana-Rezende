@@ -325,3 +325,77 @@ GROUP BY gender;
 ```
 
 <br><br>
+
+
+
+### Exercício 5
+
+Você já pegou o padrão né? Primeiro fazemos algo guiado e depois deixamos você fazer a sós!
+
+**OBS:** como eu não tinha essa tabela, criei e adicionei alguns filmes.
+
+```sql
+CREATE TABLE Movie ( 
+	id VARCHAR(255) PRIMARY KEY, 
+    title VARCHAR(255) NOT NULL UNIQUE, 
+    synopsis TEXT NOT NULL, 
+    release_Date DATE NOT NULL, 
+    rating INT NOT NULL 
+);
+
+INSERT INTO Movie (id, title, synopsis, release_Date, rating)
+VALUES
+	(1, "Harry Potter e a Pedra Filosofal", "xururu", "2001-01-01", 9),
+    (2, "Harry Potter e a Câmara Secreta", "xururu", "2002-01-01", 10),
+    (3, "Harry Potter e o Prisioneiro de Azkaban", "xururu", "2004-01-01", 8);
+```
+
+*a. Altere a tabela de `Movie` e adicione um novo parâmetro: `playing_limit_date` que indique a data limite em que o filme será passado no cinema.* 
+
+_Resposta_:
+```sql
+ALTER TABLE Movie
+ADD playing_limit_date DATE;
+```
+
+<br>
+
+*b. Altere a tabela de `Movie` para que o parâmetro `rating` possa aceitar valores não inteiros, como, por exemplo, uma avaliação `8.5`.*
+
+_Resposta_:
+```sql
+ALTER TABLE Movie
+CHANGE rating rating FLOAT;
+```
+
+<br>
+
+*c. Atualize dois filmes de tal forma que tenhamos um que ainda esteja em cartaz e um que já tenha saído*
+
+_Resposta_:
+```sql
+UPDATE Movie
+SET playing_limit_date = "2020-05-30"
+WHERE id = 1;
+
+UPDATE Movie
+SET playing_limit_date = "2003-01-01"
+WHERE id = 2;
+```
+
+<br>
+
+*d. Delete algum dos filmes, mas guarde o id. Tente fazer uma query para atualizar a sinopse desse filme que você acabou de deletar (usando o mesmo id). Anote o resultado e explique.*
+
+_Resposta_:
+```sql
+DELETE FROM Movie
+WHERE id = 3;
+```
+
+Depois de deletar, se tento alterá-lo, dá a seguinte mensagem: 0 row(s) affected Rows matched: 0  Changed: 0  Warnings: 0
+Não é possível alterar algo que não existe.
+
+<br><br>
+
+
