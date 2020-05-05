@@ -38,7 +38,7 @@ Leia os comandos abaixo e indique o que eles fazem. **Não** os rode nas tabelas
 ALTER TABLE Actors DROP COLUMN salary;
 ```
 
-_Resposta_: Remove a coluna salary da tabela Actors
+_Resposta_: Remove a coluna `salary` da tabela Actors
 
 <br>
 
@@ -48,7 +48,7 @@ _Resposta_: Remove a coluna salary da tabela Actors
 ALTER TABLE Actors CHANGE gender sex VARCHAR(6);
 ```
 
-_Resposta_: x
+_Resposta_: Altera o nome da coluna `gender` para `sex`
 
 <br>
 
@@ -58,12 +58,15 @@ _Resposta_: x
 ALTER TABLE Actors CHANGE gender gender VARCHAR(255);
 ```
 
-_Resposta_: x
+_Resposta_: Altera o tipo da coluna `gender` para VARCHAR(255), mantendo o mesmo nome.
 
 <br>
 
 *d. Agora,  altere a coluna `gender` da tabela `ACTOR` para que ele aceite strings com até 100 caracteres*
 
-_Resposta_: x
+_Resposta_:
+```sql
+ALTER TABLE Actor CHANGE gender gender VARCHAR(100);
+```
 
 <br>
