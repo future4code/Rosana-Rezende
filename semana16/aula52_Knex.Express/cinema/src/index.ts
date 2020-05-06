@@ -1,8 +1,8 @@
 import knex from "knex";
-
 import express, { Request, Response } from "express";
 import { AddressInfo } from "net";
 import dotenv from "dotenv";
+dotenv.config();
 
 const connection = knex({
   client: "mysql",
@@ -15,10 +15,18 @@ const connection = knex({
   },
 });
 
-dotenv.config();
-
 const app = express();
+app.use(express.json());
 
+// relembrando o que tem no banco
+const getAllActors = async (): Promise<any> => {
+  const result = await connection.raw(`
+    SELECT * FROM Actor
+  `)
+  return result[0]
+}
+
+// EXERCÍCIO 1
 
 const getActorById = async (id: string): Promise<any> => {
   const result = await connection.raw(`
@@ -27,13 +35,39 @@ const getActorById = async (id: string): Promise<any> => {
   return result[0][0]
 };
 
-async function main(){
-    try{
-      const data = await getActorById("001")
-      console.log(data)
-    } catch(err) {
-      console.error(err)
-    }
+const getActorByName = async (name: string): Promise<any> => {
+  const result = await connection.raw(`
+    SELECT * FROM Actor WHERE name = "${name}"
+  `)
+  return result[0][0]
+}
+
+const countByGender = async (gender: string): Promise<any> => {
+    const result = await connection.raw(`
+      SELECT COUNT(*) as count
+      FROM Actor 
+      WHERE gender = "${gender}"
+    `)
+    return result[0][0].count // se eu não coloco isso vem o objeto
+}
+
+async function main() {
+
+  // relembrando o que tem no banco
+  // const data = await getAllActors()
+  // console.log(data)
+
+  // 1-a getActorById
+  // const data = await getActorById("001")
+  // console.log(data)
+
+  // 1-b getActorByName
+  // const data = await getActorByName("Tony Ramos")
+  // console.log(data)
+
+  // 1-c countByGender
+  const data = await countByGender("male")
+  console.log(data)
 
 }
 
@@ -77,21 +111,6 @@ main();
 
 // // createActor("002", "Tony Ramos", 4000000, new Date("2020-10-05"), "male");
 
-// const searchActor = async (name: string): Promise<any> => {
-//   const result = await connection.raw(`
-//     SELECT * FROM Actor WHERE name = "${name}"
-//   `);
-//   return result;
-// };
-
-// const countActors = async (gender: string): Promise<any> => {
-//   const result = await connection.raw(`
-//     SELECT COUNT(*) as count FROM Actor WHERE gender = "${gender}"
-//   `);
-
-//   const count = result[0][0].count;
-//   return count;
-// };
 
 // const updateSalary = async (id: string, salary: number): Promise<any> => {
 //   await connection("Actor")
@@ -162,7 +181,7 @@ main();
 
 
 
-app.use(express.json());
+
 
 // const server = app.listen(process.env.PORT || 3003, () => {
 //   if (server) {

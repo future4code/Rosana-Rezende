@@ -34,18 +34,21 @@ Utilize os *raws* para criar funções de Typescript que realizem as operações
 
 *a. Explique como é a resposta que temos quando usamos o `raw`.* 
 
-_Resposta_:
-```sql
-
-```
+_Resposta_: O raw traz como resposta um array com vários arrays dentro.
+O primeiro array é o RowDataPacket, que nos interessa, por isso usamos `result[0]`, e para que a resposta venha apenas com o conteúdo/objeto, sem estar envolta em [], usamos `result[0][0]`
 
 <br>
 
 *b. Faça uma função que busque um ator pelo nome;*
 
 _Resposta_:
-```sql
-
+```ts
+const getActorByName = async (name: string): Promise<any> => {
+  const result = await connection.raw(`
+    SELECT * FROM Actor WHERE name = "${name}"
+  `)
+  return result[0][0]
+}
 ```
 
 <br>
@@ -53,8 +56,15 @@ _Resposta_:
 *c. Faça uma função que receba um `gender` retorne a quantidade de itens na tabela Actor com esse `gender`. Para atrizes, `female` e para atores `male`.*
 
 _Resposta_:
-```sql
-
+```ts
+const countByGender = async (gender: string): Promise<any> => {
+    const result = await connection.raw(`
+      SELECT COUNT(*) as count
+      FROM Actor 
+      WHERE gender = "${gender}"
+    `)
+    return result[0][0].count
+}
 ```
 
 <br><br>
