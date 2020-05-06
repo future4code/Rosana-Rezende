@@ -102,8 +102,17 @@ Utilize os *queries builders* para criar funções de Typescript que realizem as
 *a. Uma função que receba um salário e um id e realiza a atualização do salário do ator em questão*
 
 _Resposta_:
-```sql
-
+```ts
+const updateSalary = async (salary: number, id: string): Promise<void> => {
+  await connection("Actor")
+    .update({
+      salary: salary
+    })
+    .where({
+      id: id
+    })
+    console.log('Salário atualizado com sucesso')
+}
 ```
 
 <br>
@@ -111,8 +120,15 @@ _Resposta_:
 *b. Uma função que receba um id e delete um ator da tabela*
 
 _Resposta_:
-```sql
-
+```ts
+const deleteActor = async (id: string): Promise<void> => {
+  await connection("Actor")
+    .delete()
+    .where({
+      id: id
+    })
+    console.log('Ator/atriz deletado com sucesso')
+}
 ```
 
 <br>
@@ -120,8 +136,15 @@ _Resposta_:
 *c. Uma função que receba um `gender` e devolva a média dos salários de atrizes ou atores desse `gender`*
 
 _Resposta_:
-```sql
-
+```ts
+const avgByGender = async (gender: string): Promise<any> => {
+  const result = await connection("Actor")
+    .avg("salary as average")
+    .where({
+      gender: gender
+    })
+  return result[0].average
+}
 ```
 
 <br><br>
