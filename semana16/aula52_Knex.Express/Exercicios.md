@@ -354,8 +354,27 @@ Especificações do Endpoint:
 
 _Resposta_:
 
-```sql
+```ts
+const getAllMovies = async (): Promise<any> => {
+  const result = await connection.raw(`
+    SELECT * FROM Movie
+    LIMIT 15
+  `)
+  return result[0]
+}
 
+app.get("/movie/all", async (req: Request, res: Response) => {
+  try{
+    const movies = await getAllMovies()
+    res.status(200).send({
+      movies: movies
+    })
+  } catch(err){
+    res.status(400).send({
+      message: err.message
+    })
+  }
+})
 ```
 
 <br><br>

@@ -239,17 +239,6 @@ app.post("/actor", async(req: Request, res: Response) => {
 // ============================== EXERCÍCIO 5 ==============================
 
 
-// relembrando o que tem no banco Movie
-const getAllMovies = async (): Promise<any> => {
-  const result = await connection.raw(`
-    SELECT * FROM Movie
-  `)
-  return result[0]
-}
-// (async () => {
-//   console.log(await getAllMovies());
-// })();
-
 const createMovie = async (
   id: string,
   title: string,
@@ -275,6 +264,18 @@ const createMovie = async (
 // })();
 
 
+// requisição
+  // http://localhost:3000/movie
+// body
+  // {
+  // 	"id": "4",
+  // 	"title": "Harry Potter e o Cálice de Fogo",
+  // 	"synopsis": "laralara",
+  // 	"release_Date": "2005-01-01",
+  // 	"rating": 10,
+  // 	"playing_limit_date": "2021-01-01"
+  // }
+
 app.post("/movie", async(req: Request, res: Response) => {
   try{
     await createMovie(
@@ -296,6 +297,32 @@ app.post("/movie", async(req: Request, res: Response) => {
 })
 
 
+// ============================== EXERCÍCIO 6 ==============================
+
+const getAllMovies = async (): Promise<any> => {
+  const result = await connection.raw(`
+    SELECT * FROM Movie
+    LIMIT 15
+  `)
+  return result[0]
+}
+// (async () => {
+//   console.log(await getAllMovies());
+// })();
+
+
+app.get("/movie/all", async (req: Request, res: Response) => {
+  try{
+    const movies = await getAllMovies()
+    res.status(200).send({
+      movies: movies
+    })
+  } catch(err){
+    res.status(400).send({
+      message: err.message
+    })
+  }
+})
 
 
 
