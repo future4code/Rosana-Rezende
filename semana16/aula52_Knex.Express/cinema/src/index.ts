@@ -167,9 +167,72 @@ app.get("/actor", async (req: Request, res: Response) => {
 })
 
 
+// ============================== EXERCÍCIO 4 ==============================
+
+// a requisição fica 
+  // http://localhost:3000/actor
+// e no body
+  // {
+  // 	"id": "007",
+  // 	"name": "Daniel Craig",
+  // 	"salary": 2000000,
+  // 	"dateOfBirth": "1968-03-02",
+  // 	"gender": "male"
+  // }
+app.put("/actor", async (req: Request, res: Response) => {
+  try {
+    await createActor(
+      req.body.id,
+      req.body.name,
+      req.body.salary,
+      new Date(req.body.dateOfBirth),
+      req.body.gender
+    );
+    res.status(200).send();
+  } catch (err) {
+    res.status(400).send({
+      message: err.message,
+    });
+  }
+});
+
+// a requisição fica 
+  // http://localhost:3000/actor
+// e no body
+  // {
+  // 	"id": "007",
+  // 	"salary": 3000000
+  // }
+app.post("/actor", async(req: Request, res: Response) => {
+  try{
+    await updateSalary(req.body.salary, req.body.id)
+    res.status(200).send({
+      message: "Sucess"
+    })
+  } catch(err) {
+    res.status(400).send({
+      message: err.message
+    })
+  }
+})
 
 
-
+// a requisição fica
+  // http://localhost:3000/actor/001
+  app.delete("/actor/:id", async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id;
+      await deleteActor(id);
+      res.status(200).send({
+        message: "Sucess"
+      });
+    }
+    catch (err) {
+      res.status(400).send({
+        message: err.message,
+      });
+    }
+  });
 
 
 

@@ -248,8 +248,19 @@ Crie um endpoint para cada uma das especificações abaixo:
     - Simplesmente atualizar o salário do ator com id em questão
 
 _Resposta_:
-```sql
-
+```ts
+app.post("/actor", async(req: Request, res: Response) => {
+  try{
+    await updateSalary(req.body.salary, req.body.id)
+    res.status(200).send({
+      message: "Sucess"
+    })
+  } catch(err) {
+    res.status(400).send({
+      message: err.message
+    })
+  }
+})
 ```
 
 <br>
@@ -260,8 +271,21 @@ _Resposta_:
     - Simplesmente deletar o ator da tabela
 
 _Resposta_:
-```sql
-
+```ts
+  app.delete("/actor/:id", async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id;
+      await deleteActor(id);
+      res.status(200).send({
+        message: "Sucess"
+      });
+    }
+    catch (err) {
+      res.status(400).send({
+        message: err.message,
+      });
+    }
+  });
 ```
 
 <br><br>
