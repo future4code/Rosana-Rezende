@@ -325,39 +325,39 @@ app.get("/movie/all", async (req: Request, res: Response) => {
 })
 
 
+// ============================== EXERCÍCIO 7 ==============================
+
+const searchMovies = async(query: string): Promise<any> => {
+  const result = await connection.raw(`
+    SELECT * FROM Movie
+    WHERE title LIKE "%${query}%" OR synopsis LIKE "%${query}%"
+    ORDER BY release_Date;
+  `)
+  return result[0]
+}
+// (async () => {
+//   console.log(await searchMovies("Ca"));
+// })();
 
 
+// requisição
+  // http://localhost:3000/movie/search?query=Ca
+app.get("/movie/search", async(req: Request, res: Response) => {
+  try{
+    const query = req.query.query
+    const movies = await searchMovies(query as string)
+    res.status(200).send({
+      movies: movies
+    })
+  } catch(err){
+    res.status(400).send({
+      message: err.message
+    })
+  }
+})
 
 
-// const searchMovie = async (term: string): Promise<any> => {
-//   const result = await connection.raw(`
-//     SELECT * FROM Movie 
-//     WHERE title LIKE '%${term}%' OR synposis LIKE '%${term}%'
-//     ORDER BY release_date
-//   `);
-
-//   return result[0];
-// };
-
-// app.get("/movie/search", async (req: Request, res: Response) => {
-//   try {
-//     const movies = await searchMovie(req.query.query as string);
-
-//     res.status(200).send({
-//       movies: movies,
-//     });
-//   } catch (err) {
-//     res.status(400).send({
-//       message: err.message,
-//     });
-//   }
-// });
-
-
-
-
-
-
+// ====================================================================
 
 const server = app.listen(process.env.PORT || 3000, () => {
   if (server) {

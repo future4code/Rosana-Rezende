@@ -389,8 +389,27 @@ Especificações do Endpoint:
 
 _Resposta_:
 
-```sql
+```ts
+const searchMovies = async(query: string): Promise<any> => {
+  const result = await connection.raw(`
+    SELECT * FROM Movie
+    WHERE title LIKE "%${query}%" OR synopsis LIKE "%${query}%"
+    ORDER BY release_Date;
+  `)
+  return result[0]
+}
 
+app.get("/movie/search", async(req: Request, res: Response) => {
+  try{
+    const query = req.query.query
+    const movies = await searchMovies(query as string)
+    res.status(200).send({
+      movies: movies
+    })
+  } catch(err){
+    res.status(400).send({
+      message: err.message
+    })
+  }
+})
 ```
-
-<br><br>
