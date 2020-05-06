@@ -236,23 +236,71 @@ app.post("/actor", async(req: Request, res: Response) => {
 
 
 
-// const createMovie = async (
-//   id: string,
-//   title: string,
-//   synopsis: string,
-//   releaseDate: Date,
-//   playingLimitDate: Date
-// ) => {
-//   await connection
-//     .insert({
-//       id: id,
-//       title: title,
-//       synopsis: synopsis,
-//       releas_date: releaseDate,
-//       playing_limit_date: playingLimitDate,
-//     })
-//     .into("Movie");
-// };
+// ============================== EXERCÍCIO 5 ==============================
+
+
+// relembrando o que tem no banco Movie
+const getAllMovies = async (): Promise<any> => {
+  const result = await connection.raw(`
+    SELECT * FROM Movie
+  `)
+  return result[0]
+}
+// (async () => {
+//   console.log(await getAllMovies());
+// })();
+
+const createMovie = async (
+  id: string,
+  title: string,
+  synopsis: string,
+  release_Date: Date,
+  rating: number,
+  playing_limit_date: Date
+): Promise<void> => {
+  await connection
+    .insert({
+      id,
+      title,
+      synopsis,
+      release_Date,
+      rating,
+      playing_limit_date
+    })
+    .into("Movie");
+  console.log("Filme adicionado com sucesso")
+};
+// (async () => {
+//   await createMovie("3", "Harry Potter e o Prisioneiro de Azkaban", "laralara", new Date("2004-01-01"), 10, new Date("2021-01-01"));
+// })();
+
+
+app.post("/movie", async(req: Request, res: Response) => {
+  try{
+    await createMovie(
+      req.body.id,
+      req.body.title,
+      req.body.synopsis,
+      new Date(req.body.release_Date),
+      req.body.rating,
+      new Date(req.body.playing_limit_date),
+    )
+    res.status(200).send({
+      message: "Sucess"
+    });
+  } catch(err){
+    res.status(400).send({
+      message: err.message
+    })
+  }
+})
+
+
+
+
+
+
+
 
 // const searchMovie = async (term: string): Promise<any> => {
 //   const result = await connection.raw(`
