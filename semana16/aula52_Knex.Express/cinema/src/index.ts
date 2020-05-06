@@ -27,6 +27,18 @@ const getActorById = async (id: string): Promise<any> => {
   return result[0][0]
 };
 
+async function main(){
+    try{
+      const data = await getActorById("001")
+      console.log(data)
+    } catch(err) {
+      console.error(err)
+    }
+
+}
+
+main();
+
 // function getActorById(id: string) {}
 
 // app.get("/actor/:id", async (req: Request, res: Response) => {
