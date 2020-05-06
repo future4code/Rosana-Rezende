@@ -25,9 +25,13 @@ const getAllActors = async (): Promise<any> => {
   `)
   return result[0]
 }
+// (async () => {
+//   console.log(await await getAllActors());
+// })();
 
 
-// EXERCÍCIO 1
+
+// ============================== EXERCÍCIO 1 ==============================
 
 const getActorById = async (id: string): Promise<any> => {
   const result = await connection.raw(`
@@ -35,6 +39,9 @@ const getActorById = async (id: string): Promise<any> => {
   `);
   return result[0][0]
 };
+// (async () => {
+//   console.log(await await getActorById("004"));
+// })();
 
 const getActorByName = async (name: string): Promise<any> => {
   const result = await connection.raw(`
@@ -42,6 +49,9 @@ const getActorByName = async (name: string): Promise<any> => {
   `)
   return result[0][0]
 }
+// (async () => {
+//   console.log(await getActorByName("Tony Ramos"));
+// })();
 
 const countByGender = async (gender: string): Promise<any> => {
   const result = await connection.raw(`
@@ -51,6 +61,12 @@ const countByGender = async (gender: string): Promise<any> => {
     `)
   return result[0][0].count // se eu não coloco isso vem o objeto
 }
+// (async () => {
+//   console.log(await await countByGender("male"));
+// })();
+
+
+// ============================== EXERCÍCIO 2 ==============================
 
 const createActor = async (
   id: string,
@@ -70,6 +86,9 @@ const createActor = async (
     .into("Actor");
   console.log("Ator/atriz adicionado com sucesso")
 };
+// (async () => {
+//   await createActor("006", "Fernanda Souza", 15000000, new Date("1984-06-18"), "female");
+// })();
 
 const updateSalary = async (salary: number, id: string): Promise<void> => {
   await connection("Actor")
@@ -79,8 +98,11 @@ const updateSalary = async (salary: number, id: string): Promise<void> => {
     .where({
       id: id
     })
-    console.log('Salário atualizado com sucesso')
+  console.log('Salário atualizado com sucesso')
 }
+// (async () => {
+//   await updateSalary(20000000, "005");
+// })();
 
 const deleteActor = async (id: string): Promise<void> => {
   await connection("Actor")
@@ -88,10 +110,13 @@ const deleteActor = async (id: string): Promise<void> => {
     .where({
       id: id
     })
-    console.log('Ator/atriz deletado com sucesso')
+  console.log('Ator/atriz deletado com sucesso')
 }
+// (async () => {
+//   await deleteActor('002');
+// })();
 
-const avgByGender = async (gender: string): Promise<any> => {
+const avgSalaryByGender = async (gender: string): Promise<any> => {
   const result = await connection("Actor")
     .avg("salary as average")
     .where({
@@ -100,84 +125,53 @@ const avgByGender = async (gender: string): Promise<any> => {
   return result[0].average
 }
 
-async function main() {
-
-  // relembrando o que tem no banco
-  // const data = await getAllActors()
-  // console.log(data)
-
-  // 1-a getActorById
-  // const data = await getActorById("001")
-  // console.log(data)
-
-  // 1-b getActorByName
-  // const data = await getActorByName("Tony Ramos")
-  // console.log(data)
-
-  // 1-c countByGender
-  // const data = await countByGender("male")
-  // console.log(data)
-
-
-  // 2
-  // await createActor("006", "Fernanda Souza", 15000000, new Date("1984-06-18"), "female");
-
-  // 2-a
-  // await updateSalary(20000000, "005")
-
-  // 2-b
-  // await deleteActor('002')
-
-  // 2-c
-  // const data = await avgByGender('male')
-  // console.log(data)
-
-}
-
-main();
-
-// function getActorById(id: string) {}
-
-// app.get("/actor/:id", async (req: Request, res: Response) => {
-//   try {
-//     const id = req.params.id;
-//     const actor = await getActorById(id);
-
-//     res.status(200).send(actor);
-//   } catch (err) {
-//     res.status(400).send({
-//       message: err.message,
-//     });
-//   }
-// });
-
-
-
-
-
-
-// const updateSalary = async (id: string, salary: number): Promise<any> => {
-//   await connection("Actor")
-//     .update({
-//       salary: salary,
-//     })
-//     .where("id", id);
-// };
-
-// const deleteActor = async (id: string): Promise<any> => {
-//   await connection("Actor").delete().where("id", id);
-// };
-
-// const avgSalary = async (gender: string): Promise<any> => {
-//   const result = await connection("Actor")
-//     .avg("salary as average")
-//     .where({ gender });
-
-//   return result[0].average;
-// };
 // (async () => {
-//   console.log(await avgSalary("female"));
+//   console.log(await avgSalaryByGender("female"));
 // })();
+
+
+// ============================== EXERCÍCIO 3 ==============================
+
+
+// a requisição fica
+  // http://localhost:3000/actor/001
+app.get("/actor/:id", async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const actor = await getActorById(id); // a função tá lá em cima
+    res.status(200).send(actor);
+  }
+  catch (err) {
+    res.status(400).send({
+      message: err.message,
+    });
+  }
+});
+
+
+// a requisição fica 
+  // http://localhost:3000/actor?gender=female
+app.get("/actor", async (req: Request, res: Response) => {
+  try {
+    const gender = req.query.gender;
+    const count = await countByGender(gender as string); // lembrar desse detalhe
+    res.status(200).send({
+      quantity: count // dei um nome pra não trazer um número simplesmente
+    });
+  }
+  catch (err) {
+    res.status(400).send({
+      message: err.message,
+    });
+  }
+})
+
+
+
+
+
+
+
 
 // const createMovie = async (
 //   id: string,
@@ -227,11 +221,11 @@ main();
 
 
 
-// const server = app.listen(process.env.PORT || 3003, () => {
-//   if (server) {
-//     const address = server.address() as AddressInfo;
-//     console.log(`Server is running in http://localhost:${address.port}`);
-//   } else {
-//     console.error(`Failure upon starting server.`);
-//   }
-// });
+const server = app.listen(process.env.PORT || 3000, () => {
+  if (server) {
+    const address = server.address() as AddressInfo;
+    console.log(`Server is running in http://localhost:${address.port}`);
+  } else {
+    console.error(`Failure upon starting server.`);
+  }
+});

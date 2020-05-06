@@ -137,7 +137,7 @@ const deleteActor = async (id: string): Promise<void> => {
 
 _Resposta_:
 ```ts
-const avgByGender = async (gender: string): Promise<any> => {
+const avgSalaryByGender = async (gender: string): Promise<any> => {
   const result = await connection("Actor")
     .avg("salary as average")
     .where({
@@ -173,19 +173,14 @@ app.get("/actor/:id", async (req: Request, res: Response) => {
 
 *a. Por que o id está sendo lido assim: `req.params.id`?*
 
-_Resposta_:
-```sql
-
-```
+_Resposta_: Porque a requisição (req) traz várias possibilidades, dentre elas acessar os params, e nesse caso escolhemos especificamente o parâmetro id.
 
 <br>
 
 *b. O que as últimas linhas do try (`res.status(200).send(actor)`) e do cathc (`res.status(400).send({...}` ) fazem? Teste o código se precisar.*
 
-_Resposta_:
-```sql
-
-```
+_Resposta_: `res.status(200).send(actor)` tem haver com o sucesso da requisição: se tudo der certo, terá um status 200 e trará o ator solicitado.
+`res.status(400).send({...}` tem haver com erro: caso a requisição falhe, aparecerá o status 400 e uma mensagem de erro correspondente.
 
 <br>
 
@@ -196,8 +191,21 @@ _Resposta_:
 - Devolver a quantidade de atores/atrizes desse gênero
 
 _Resposta_:
-```sql
-
+```ts
+app.get("/actor", async (req: Request, res: Response) => {
+  try {
+    const gender = req.query.gender;
+    const count = await countByGender(gender as string); // lembrar desse detalhe
+    res.status(200).send({
+      quantity: count // dei um nome pra não trazer um número simplesmente
+    });
+  }
+  catch (err) {
+    res.status(400).send({
+      message: err.message,
+    });
+  }
+})
 ```
 
 <br><br>
