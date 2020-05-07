@@ -77,7 +77,7 @@ const getAllRatings = async (): Promise<any> => {
 
 
 
-const createRating = async(
+const createRating = async (
     id: string,
     comment: string,
     movie_id: string
@@ -99,7 +99,7 @@ const createRating = async(
 
 
 
-const deleteRating = async(id: string): Promise<void> => {
+const deleteRating = async (id: string): Promise<void> => {
     await connection("Rating")
         .delete()
         .where({
@@ -112,7 +112,7 @@ const deleteRating = async(id: string): Promise<void> => {
 // })();
 
 
-const deleteColum = async(table: string, column: string): Promise<void> => {
+const deleteColum = async (table: string, column: string): Promise<void> => {
     await connection.raw(`
         ALTER TABLE ${table}
         DROP COLUMN ${column}
@@ -123,7 +123,7 @@ const deleteColum = async(table: string, column: string): Promise<void> => {
 //     await deleteColum("Movie", "rating");
 // })();
 
-const deleteById = async(table: string, id: string): Promise<void> => {
+const deleteById = async (table: string, id: string): Promise<void> => {
     await connection.raw(`
         DELETE FROM ${table}
         WHERE id = "${id}"
@@ -161,7 +161,7 @@ const insertMovieCast = async (movie_id: string, actor_id: string): Promise<void
         .insert({
             movie_id,
             actor_id
-        })       
+        })
     console.log('Sucesso')
 }
 // (async () => {
@@ -202,7 +202,7 @@ const getMoviesWithRatings = async (): Promise<any> => {
 /// consertando erro na criação do Rating
 
 // inserir coluna rate
-const addColum = async(table: string, column: string): Promise<void> => {
+const addColum = async (table: string, column: string): Promise<void> => {
     await connection.raw(`
         ALTER TABLE ${table}
         ADD COLUMN ${column} FLOAT NOT NULL
@@ -214,7 +214,7 @@ const addColum = async(table: string, column: string): Promise<void> => {
 // })();
 
 // depois inserir nota em cada avaliação
-const addRandomRate = async(): Promise<void> => {
+const addRandomRate = async (): Promise<void> => {
     await connection.raw(`
         UPDATE Rating
         SET rate = FLOOR( RAND()*(10-5+1)+5 )
@@ -257,7 +257,7 @@ const getPersonalizedMoviesWithRatings2 = async (): Promise<any> => {
 
 
 // só queria que viesse só do MovieCast, sem necessariamente o filme existe
-const getMoviesAndActors = async(): Promise<any> => {
+const getMoviesAndActors = async (): Promise<any> => {
     const result = await connection.raw(`
         SELECT m.id as movie_id, m.title, mc.actor_id FROM Movie m
         RIGHT JOIN MovieCast mc ON m.id = mc.movie_id
@@ -269,7 +269,7 @@ const getMoviesAndActors = async(): Promise<any> => {
 // })()
 
 
-const avgRate = async(): Promise<any> => {
+const avgRate = async (): Promise<any> => {
     const result = await connection.raw(`
         SELECT m.title, AVG(r.rate) as average_rating FROM Movie m
         LEFT JOIN Rating r ON m.id = r.movie_id
@@ -287,7 +287,7 @@ const avgRate = async(): Promise<any> => {
 // ============================== EXERCÍCIO 5 ==============================
 
 
-const getAllMoviesAndActors = async(): Promise<any> => {
+const getAllMoviesAndActors = async (): Promise<any> => {
     const result = await connection.raw(`
         SELECT * FROM Movie m
         LEFT JOIN MovieCast mc ON m.id = mc.movie_id
@@ -300,7 +300,7 @@ const getAllMoviesAndActors = async(): Promise<any> => {
 // })()
 
 
-const getPersonalizedAllMoviesAndActors = async(): Promise<any> => {
+const getPersonalizedAllMoviesAndActors = async (): Promise<any> => {
     const result = await connection.raw(`
         SELECT m.id as movie_id, m.title, a.id as actor_id, a.name FROM Movie m
         LEFT JOIN MovieCast mc ON m.id = mc.movie_id
@@ -313,20 +313,130 @@ const getPersonalizedAllMoviesAndActors = async(): Promise<any> => {
 // })()
 
 
-const getAllMoviesAndActors2 = async(): Promise<any> => {
+const getAllMoviesAndActors2 = async (): Promise<any> => {
     const result = await connection.raw(`
         SELECT * FROM Movie m
         JOIN MovieCast mc ON m.id = mc.movie_id
-        LEFT JOIN Actor a ON a.id = mc.actor_id
+        JOIN Actor a ON a.id = mc.actor_id
         LEFT JOIN Rating r ON m.id = r.movie_id
     `)
     return result[0]
 }
-(async () => {
-    console.log(await getAllMoviesAndActors2())
-})()
+// (async () => {
+//     console.log(await getAllMoviesAndActors2())
+// })()
 
 
+
+// ============================== EXERCÍCIO 6 ==============================
+
+// criar a tabela Oscar
+const createTableOscar = async (): Promise<void> => {
+    await connection.raw(`
+        CREATE TABLE Oscar (
+            id VARCHAR(255) PRIMARY KEY,
+            arward_name VARCHAR(255) NOT NULL
+        )
+    `)
+    console.log('Tabela criada com sucesso')
+}
+// (async () => {
+//     await createTableOscar();
+// })();
+
+
+// inserir Oscars
+const insertOscar = async (id: string, arward_name: string): Promise<void> => {
+    await connection("Oscar")
+        .insert({
+            id,
+            arward_name
+        })
+    console.log("Sucesso")
+}
+// (async () => {
+//     await insertOscar("005", "Melhor trilha sonora")
+// })()
+
+// pegar todos os Oscars
+const getAllOscars = async (): Promise<any> => {
+    const result = await connection("Oscar")
+        .select("*")
+    return result
+}
+// (async () => {
+//     console.log(await getAllOscars())
+// })()
+
+
+// criar tabela de relação MoviesOscarsRelation
+const createTableMovieOscarRelation = async (): Promise<void> => {
+    await connection.raw(`
+        CREATE TABLE MovieOscarRelation (
+            movie_id VARCHAR(255),
+            oscar_id VARCHAR(255),
+            arward_year INT NOT NULL,
+            FOREIGN KEY (movie_id) REFERENCES Movie(id),
+            FOREIGN KEY (oscar_id) REFERENCES Oscar(id)
+        )
+    `)
+    console.log('Tabela criada com sucesso')
+}
+// (async () => {
+//     await createTableMovieOscarRelation();
+// })();
+
+
+const insertMovieOscar = async (
+    movie_id: string, oscar_id: string, arward_year: number
+): Promise<void> => {
+    await connection("MovieOscarRelation")
+        .insert({
+            movie_id,
+            oscar_id,
+            arward_year
+        })
+    console.log("Filme recebeu Oscar")
+}
+// (async () => {
+//     await insertMovieOscar("3", "003", 2019)
+// })()
+
+const getMovieOscarRelation = async (): Promise<any> => {
+    const result = await connection("MovieOscarRelation")
+        .select("*")
+    return result
+}
+// (async () => {
+//     console.log(await getMovieOscarRelation())
+// })()
+
+
+// deletando um Oscar inserido errado - não pode um mesmo filme ter Óscars de anos diferentes
+    // mas como bloquear isso?
+const deleteOscarToMovie = async (movie_id: string, oscar_id: string, arward_year: number): Promise<void> => {
+    await connection.raw(`
+            DELETE FROM MovieOscarRelation
+            WHERE movie_id = "${movie_id}" AND oscar_id = "${oscar_id}" AND arward_year = "${arward_year}"
+        `)
+    console.log("Sucesso!")
+}
+// (async () => {
+//     await deleteOscarToMovie("1", "002", 2019)
+// })()
+
+
+const getAllMoviesOscars = async(): Promise<void> => {
+    const result = await connection.raw(`
+        SELECT m.title, o.arward_name, mor.arward_year FROM Movie m
+        JOIN MovieOscarRelation mor ON m.id = mor.movie_id
+        JOIN Oscar o ON mor.oscar_id = o.id
+    `)
+    return result[0]
+}
+// (async () => {
+//     console.log(await getAllMoviesOscars())
+// })()
 
 
 // ====================================================================

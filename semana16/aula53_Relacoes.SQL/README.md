@@ -394,11 +394,7 @@ Para finalizar esse exercício, você vai ter que implementar, a sós, uma nova 
 
 *a. Que tipo de relação é essa?*
 
-_Resposta_:
-
-```ts
-
-```
+_Resposta_: A relação é N:M, pois um mesmo filme pode reber mais de um Óscar, assim como o mesmo Óscar pode ser entregue a filmes diferentes, desde que em anos diferentes.
 
 <br>
 
@@ -407,7 +403,34 @@ _Resposta_:
 _Resposta_:
 
 ```ts
+const createTableOscar = async (): Promise<void> => {
+    await connection.raw(`
+        CREATE TABLE Oscar (
+            id VARCHAR(255) PRIMARY KEY,
+            arward_name VARCHAR(255) NOT NULL
+        )
+    `)
+    console.log('Tabela criada com sucesso')
+}
+(async () => {
+    await createTableOscar();
+})();
 
+const createTableMovieOscarRelation = async (): Promise<void> => {
+    await connection.raw(`
+        CREATE TABLE MovieOscarRelation (
+            movie_id VARCHAR(255),
+            oscar_id VARCHAR(255),
+            arward_year INT NOT NULL,
+            FOREIGN KEY (movie_id) REFERENCES Movie(id),
+            FOREIGN KEY (oscar_id) REFERENCES Oscar(id)
+        )
+    `)
+    console.log('Tabela criada com sucesso')
+}
+(async () => {
+    await createTableMovieOscarRelation();
+})();
 ```
 
 <br>
@@ -417,7 +440,20 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const insertMovieOscar = async (
+    movie_id: string, oscar_id: string, arward_year: number
+): Promise<void> => {
+    await connection("MovieOscarRelation")
+        .insert({
+            movie_id,
+            oscar_id,
+            arward_year
+        })
+    console.log("Filme recebeu Oscar")
+}
+(async () => {
+    await insertMovieOscar("3", "003", 2019)
+})()
 ```
 
 <br>
@@ -427,7 +463,17 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const getAllMoviesOscars = async(): Promise<void> => {
+    const result = await connection.raw(`
+        SELECT m.title, o.arward_name, mor.arward_year FROM Movie m
+        JOIN MovieOscarRelation mor ON m.id = mor.movie_id
+        JOIN Oscar o ON mor.oscar_id = o.id
+    `)
+    return result[0]
+}
+(async () => {
+    console.log(await getAllMoviesOscars())
+})()
 ```
 
 <br><br>
