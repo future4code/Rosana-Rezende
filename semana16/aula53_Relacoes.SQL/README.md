@@ -30,11 +30,7 @@ CREATE TABLE Rating (
 
 *a. Explique o que é uma chave estrangeira*
 
-_Resposta_:
-
-```ts
-
-```
+_Resposta_: É uma propriedade que permite que uma tabela se relacione com outra, desde que aponte para a chave primária daquela tabela com a qual quer criar a relação.
 
 <br>
 
@@ -43,7 +39,37 @@ _Resposta_:
 _Resposta_:
 
 ```ts
+const createTableRating = async (): Promise<void> => {
+    await connection.raw(`
+        CREATE TABLE Rating (
+            id VARCHAR(255) PRIMARY KEY,
+            comment TEXT NOT NULL,
+            movie_id VARCHAR(255),
+            FOREIGN KEY (movie_id) REFERENCES Movie(id)
+        )
+    `)
+    console.log('Tabela criada com sucesso')
+}
+(async () => {
+    await createTableRating();
+})();
 
+const createRating = async(
+    id: string,
+    comment: string,
+    movie_id: string
+): Promise<void> => {
+    await connection("Rating")
+        .insert({
+            id,
+            comment,
+            movie_id
+        })
+    console.log('Avaliação criada com sucesso!')
+}
+(async () => {
+    await createRating("006", "Quero mais!!!", "4");
+})();
 ```
 
 <br>
@@ -53,8 +79,14 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+(async () => {
+    await createRating("007", "Tentativa", "5");
+})();
 ```
+
+Apresentou a seguinte mensagem de erro: *__Error__: ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`sagan_rosana_db`.`Rating`, CONSTRAINT `Rating_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `Movie` (`id`))*
+
+Não é possível criar a avaliação, pois ele não encontrou um `movie_id` correspondente.
 
 <br>
 
@@ -63,7 +95,16 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const deleteColum = async(table: string, column: string): Promise<void> => {
+    await connection.raw(`
+        ALTER TABLE ${table}
+        DROP COLUMN ${column}
+    `)
+    console.log("Coluna", column, "deletada com sucesso da tabela", table)
+}
+(async () => {
+    await deleteColum("Movie", "rating");
+})();
 ```
 
 <br>
@@ -73,8 +114,21 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const deleteById = async(table: string, id: string): Promise<void> => {
+    await connection.raw(`
+        DELETE FROM ${table}
+        WHERE id = "${id}"
+    `)
+    console.log(id, "deletado com sucesso da tabela", table)
+}
+(async () => {
+    await deleteById("Movie", "1");
+})();
 ```
+
+Apresentou o sequinte erro: *__Error__: ER_ROW_IS_REFERENCED_2: Cannot delete or update a parent row: a foreign key constraint fails (`sagan_rosana_db`.`Rating`, CONSTRAINT `Rating_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `Movie` (`id`))*
+
+Não é possível deletar o filme sem antes apagar a relação que a tabela Rating tem com esse filme.
 
 <br><br>
 
