@@ -227,13 +227,11 @@ SELECT * FROM Movie
 INNER JOIN Rating ON Movie.id = Rating.movie_id;
 ```
 
+<br>
+
 *a. Explique, com suas palavras, a query acima. O que é o operador `ON`?*
 
-_Resposta_:
-
-```ts
-
-```
+_Resposta_: Em português eu leria *onde*: significa que verificará onde o id da tabela Movie encontra um movie_id correspondente na tabela Rating.
 
 <br>
 
@@ -242,7 +240,16 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const getPersonalizedMoviesWithRatings = async (): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.title, m.id, r.rate FROM Movie m
+        INNER JOIN Rating r ON m.id = r.movie_id;
+    `)
+    return result[0]
+}
+(async () => {
+    console.log(await getPersonalizedMoviesWithRatings())
+})()
 ```
 
 <br><br>

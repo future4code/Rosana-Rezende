@@ -137,6 +137,8 @@ const deleteById = async(table: string, id: string): Promise<void> => {
 //     await deleteById("Actor", "004");
 // })();
 
+
+
 // ============================== EXERCÍCIO 2 ==============================
 
 const createTableMovieCast = async (): Promise<void> => {
@@ -181,6 +183,60 @@ const getAllMovieCast = async (): Promise<any> => {
 // })();
 
 
+
+// ============================== EXERCÍCIO 3 ==============================
+
+const getMoviesWithRatings = async (): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT * FROM Movie 
+        INNER JOIN Rating ON Movie.id = Rating.movie_id;
+    `)
+    return result[0]
+}
+// (async () => {
+//     console.log(await getMoviesWithRatings())
+// })()
+
+
+
+/// consertando erro na criação do Rating
+
+// inserir coluna rate
+const addColum = async(table: string, column: string): Promise<void> => {
+    await connection.raw(`
+        ALTER TABLE ${table}
+        ADD COLUMN ${column} FLOAT NOT NULL
+    `)
+    console.log("Coluna", column, "criada com sucesso da tabela", table)
+}
+// (async () => {
+//     await addColum("Rating", "rate");
+// })();
+
+// depois inserir nota em cada avaliação
+const addRandomRate = async(): Promise<void> => {
+    await connection.raw(`
+        UPDATE Rating
+        SET rate = FLOOR( RAND()*(10-5+1)+5 )
+    `)
+    console.log('Nota adicionada com sucesso!')
+}
+// (async () => {
+//     await addRandomRate()
+// })()
+
+
+
+const getPersonalizedMoviesWithRatings = async (): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.title, m.id, r.rate FROM Movie m
+        INNER JOIN Rating r ON m.id = r.movie_id;
+    `)
+    return result[0]
+}
+(async () => {
+    console.log(await getPersonalizedMoviesWithRatings())
+})()
 
 
 // ====================================================================
