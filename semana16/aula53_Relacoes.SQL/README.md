@@ -28,6 +28,8 @@ CREATE TABLE Rating (
 )
 ```
 
+<br>
+
 *a. Explique o que é uma chave estrangeira*
 
 _Resposta_: É uma propriedade que permite que uma tabela se relacione com outra, desde que aponte para a chave primária daquela tabela com a qual quer criar a relação.
@@ -146,14 +148,12 @@ CREATE TABLE MovieCast (
     FOREIGN KEY (actor_id) REFERENCES Actor(id)
 );
 ```
+<br>
 
 *a. Explique, com as suas palavras, essa tabela*
 
-_Resposta_:
-
-```ts
-
-```
+_Resposta_: Nessa tabela poderemos inserir diversos filmes, e em cada filme inserir diversos atores.
+Acredito que um nome melhor seria **MoviesCast**, pois é mais abrangente que o elenco de apenas um filme.
 
 <br>
 
@@ -162,7 +162,17 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const insertMovieCast = async (movie_id: string, actor_id: string): Promise<void> => {
+    await connection("MovieCast")
+        .insert({
+            movie_id,
+            actor_id
+        })       
+    console.log('Sucesso')
+}
+(async () => {
+    await insertMovieCast("4", "006");
+})();
 ```
 
 <br>
@@ -172,8 +182,14 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+(async () => {
+    await insertMovieCast("5", "006");
+})();
 ```
+
+Apresentou a seguinte mensagem de erro: *__Error__: ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`sagan_rosana_db`.`MovieCast`, CONSTRAINT `MovieCast_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `Movie` (`id`))*
+
+Não é possível inserir um dado em `MovieCast` se não existir um *movie_id* ou um *actor_id* correspondente.
 
 <br>
 
@@ -182,8 +198,21 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const deleteById = async(table: string, id: string): Promise<void> => {
+    await connection.raw(`
+        DELETE FROM ${table}
+        WHERE id = "${id}"
+    `)
+    console.log(id, "deletado com sucesso da tabela", table)
+}
+(async () => {
+    await deleteById("Actor", "004");
+})();
 ```
+
+Apareceu a seguinte mensagem de erro: *__Error__: ER_ROW_IS_REFERENCED_2: Cannot delete or update a parent row: a foreign key constraint fails (`sagan_rosana_db`.`MovieCast`, CONSTRAINT `MovieCast_ibfk_2` FOREIGN KEY (`actor_id`) REFERENCES `Actor` (`id`))*
+
+Não é possível deletar um ator enquanto ele tiver relação com alguma tabela.
 
 <br><br>
 

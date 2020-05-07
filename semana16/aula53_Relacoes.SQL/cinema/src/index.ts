@@ -133,11 +133,52 @@ const deleteById = async(table: string, id: string): Promise<void> => {
 // (async () => {
 //     await deleteById("Movie", "1");
 // })();
+// (async () => {
+//     await deleteById("Actor", "004");
+// })();
+
+// ============================== EXERCÍCIO 2 ==============================
+
+const createTableMovieCast = async (): Promise<void> => {
+    await connection.raw(`
+        CREATE TABLE MovieCast (
+            movie_id VARCHAR(255),
+            actor_id VARCHAR(255),
+            FOREIGN KEY (movie_id) REFERENCES Movie(id),
+            FOREIGN KEY (actor_id) REFERENCES Actor(id)
+        )
+    `)
+    console.log('Tabela criada com sucesso')
+}
+// (async () => {
+//     await createTableMovieCast();
+// })();
+
+const insertMovieCast = async (movie_id: string, actor_id: string): Promise<void> => {
+    await connection("MovieCast")
+        .insert({
+            movie_id,
+            actor_id
+        })       
+    console.log('Sucesso')
+}
+// (async () => {
+//     await insertMovieCast("4", "006");
+// })();
+// (async () => {
+//     await insertMovieCast("5", "006");
+// })();
 
 
-
-
-
+const getAllMovieCast = async (): Promise<any> => {
+    const result = await connection.raw(`
+      SELECT * FROM MovieCast
+    `)
+    return result[0]
+}
+// (async () => {
+//     console.log(await getAllMovieCast());
+// })();
 
 
 
