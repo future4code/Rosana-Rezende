@@ -263,7 +263,16 @@ Existem outros dois operadores do tipo `JOIN`: `LEFT JOIN` e `RIGHT JOIN`. O pri
 _Resposta_:
 
 ```ts
-
+const getPersonalizedMoviesWithRatings2 = async (): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.title, m.id, r.rate, r.comment FROM Movie m
+        LEFT JOIN Rating r ON m.id = r.movie_id;
+    `)
+    return result[0]
+}
+(async () => {
+    console.log(await getPersonalizedMoviesWithRatings2())
+})()
 ```
 
 <br>
@@ -273,7 +282,16 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const getMoviesAndActors = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.id as movie_id, m.title, mc.actor_id FROM Movie m
+        RIGHT JOIN MovieCast mc ON m.id = mc.movie_id
+    `)
+    return result[0]
+}
+(async () => {
+    console.log(await getMoviesAndActors())
+})()
 ```
 
 <br>
@@ -283,7 +301,17 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const avgRate = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.title, AVG(r.rate) as average_rating FROM Movie m
+        LEFT JOIN Rating r ON m.id = r.movie_id
+        GROUP BY (m.id)
+    `)
+    return result[0]
+}
+(async () => {
+    console.log(await avgRate())
+})()
 ```
 
 <br><br>
@@ -302,11 +330,7 @@ JOIN Actor a ON a.id = mc.actor_id;
 
 *a. Explique, com suas palavras essa query. Por que há a necessidade de dois `JOIN`?*
 
-_Resposta_:
-
-```ts
-
-```
+_Resposta_: Precisamos de informações que estão em Movie e Actor, mas a conexão entre elas não acontece diretamente, mas através da tabela MovieCast.
 
 <br>
 
@@ -315,7 +339,17 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const getPersonalizedAllMoviesAndActors = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.id as movie_id, m.title, a.id as actor_id, a.name FROM Movie m
+        LEFT JOIN MovieCast mc ON m.id = mc.movie_id
+        JOIN Actor a ON a.id = mc.actor_id;
+    `)
+    return result[0]
+}
+(async () => {
+    console.log(await getPersonalizedAllMoviesAndActors())
+})()
 ```
 
 <br>
@@ -328,11 +362,7 @@ _Resposta_:
     JOIN Actor a ON a.id = mc.actor_id;
     ```
 
-_Resposta_:
-
-```ts
-
-```
+_Resposta_: A query traz todos os filmes em que há um ator designado.
 
 <br>
 
@@ -341,7 +371,18 @@ _Resposta_:
 _Resposta_:
 
 ```ts
-
+const getAllMoviesAndActors2 = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT * FROM Movie m
+        JOIN MovieCast mc ON m.id = mc.movie_id
+        LEFT JOIN Actor a ON a.id = mc.actor_id
+        LEFT JOIN Rating r ON m.id = r.movie_id
+    `)
+    return result[0]
+}
+(async () => {
+    console.log(await getAllMoviesAndActors2())
+})()
 ```
 
 <br><br>

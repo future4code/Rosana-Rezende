@@ -108,7 +108,7 @@ const deleteRating = async(id: string): Promise<void> => {
     console.log('Avaliação deletada com sucesso!')
 }
 // (async () => {
-//     await deleteRating("001");
+//     await deleteRating("006");
 // })();
 
 
@@ -234,9 +234,99 @@ const getPersonalizedMoviesWithRatings = async (): Promise<any> => {
     `)
     return result[0]
 }
+// (async () => {
+//     console.log(await getPersonalizedMoviesWithRatings())
+// })()
+
+
+
+// ============================== EXERCÍCIO 4 ==============================
+
+
+// retorna tudo... até os que não tem comentários
+const getPersonalizedMoviesWithRatings2 = async (): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.title, m.id, r.rate, r.comment FROM Movie m
+        JOIN Rating r ON m.id = r.movie_id;
+    `)
+    return result[0]
+}
+// (async () => {
+//     console.log(await getPersonalizedMoviesWithRatings2())
+// })()
+
+
+// só queria que viesse só do MovieCast, sem necessariamente o filme existe
+const getMoviesAndActors = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.id as movie_id, m.title, mc.actor_id FROM Movie m
+        RIGHT JOIN MovieCast mc ON m.id = mc.movie_id
+    `)
+    return result[0]
+}
+// (async () => {
+//     console.log(await getMoviesAndActors())
+// })()
+
+
+const avgRate = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.title, AVG(r.rate) as average_rating FROM Movie m
+        LEFT JOIN Rating r ON m.id = r.movie_id
+        GROUP BY (m.id)
+    `)
+    return result[0]
+}
+// (async () => {
+//     console.log(await avgRate())
+// })()
+
+
+
+
+// ============================== EXERCÍCIO 5 ==============================
+
+
+const getAllMoviesAndActors = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT * FROM Movie m
+        LEFT JOIN MovieCast mc ON m.id = mc.movie_id
+        JOIN Actor a ON a.id = mc.actor_id;
+    `)
+    return result[0]
+}
+// (async () => {
+//     console.log(await getAllMoviesAndActors())
+// })()
+
+
+const getPersonalizedAllMoviesAndActors = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT m.id as movie_id, m.title, a.id as actor_id, a.name FROM Movie m
+        LEFT JOIN MovieCast mc ON m.id = mc.movie_id
+        JOIN Actor a ON a.id = mc.actor_id;
+    `)
+    return result[0]
+}
+// (async () => {
+//     console.log(await getPersonalizedAllMoviesAndActors())
+// })()
+
+
+const getAllMoviesAndActors2 = async(): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT * FROM Movie m
+        JOIN MovieCast mc ON m.id = mc.movie_id
+        LEFT JOIN Actor a ON a.id = mc.actor_id
+        LEFT JOIN Rating r ON m.id = r.movie_id
+    `)
+    return result[0]
+}
 (async () => {
-    console.log(await getPersonalizedMoviesWithRatings())
+    console.log(await getAllMoviesAndActors2())
 })()
+
+
 
 
 // ====================================================================
