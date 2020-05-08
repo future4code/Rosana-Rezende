@@ -1,5 +1,6 @@
 import knex from "knex";
 import express, { Request, Response } from "express";
+import moment from "moment";
 import { AddressInfo } from "net";
 import dotenv from "dotenv";
 dotenv.config();
@@ -167,7 +168,7 @@ app.get("/user/:id", async (req: Request, res: Response) => {
         if (user) {
             res.status(200).send(user)
         } else {
-            res.status(400).send({
+            res.status(404).send({
                 message: "Usuário não encontrado!"
             })
         }
@@ -330,31 +331,47 @@ app.put("/task", async(req: Request, res: Response) => {
 // ================================ 5 =================================
 // ====================================================================
 
-
 // pegar tarefa por Id
 const getTaskById = async (taskId: string): Promise<any> => {
-    const result = await connection("ToDoListTask")
-        .select("*")
-        .where({
-            taskId
-        })
-    return result[0]
+    const result = await connection.raw(`
+        SELECT 
+            t.id as taskId, t.title, t.description, t.limit_date as limitDate, t.status,
+            u.id as creatorUserId, u.nickname as creatorUserNickname            
+        FROM ToDoListTask t
+        JOIN ToDoListUser u ON t.creator_user_id = u.id
+        WHERE t.id = ${taskId}
+    `)
+    return result[0][0]
 }
 // (async () => {
-//   await getTaskById("001");
+//   console.log(await getTaskById("1588959096029"));
 // })();
 
+app.get("/task/:id", async(req: Request, res: Response) => {
+    try{
+        const id = req.params.id
+        if(!id){
+            res.status(400).send({
+                message: "Informe um id"
+            })
+        }
+        
+        const task = await getTaskById(id)
+        if(!task){
+            res.status(400).send({
+                message: "Informe um id da tarefa válido"
+            })
+        }
 
+        task.limitDate = moment(task.limitDate).utc().format("DD/MM/YYYY")
+        res.status(200).send(task)
 
-
-
-
-
-
-
-
-
-
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 
 
 
