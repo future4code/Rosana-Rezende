@@ -84,9 +84,9 @@ const getTableContent = async (table_name: string): Promise<any> => {
         .select("*")
     return result
 }
-(async () => {
-    console.log(await getTableContent("ToDoListUser"))
-})()
+// (async () => {
+//     console.log(await getTableContent("ToDoListUser"))
+// })()
 
 // (async () => {
 //     console.log(await getTableContent("ToDoListTask"))
@@ -224,7 +224,7 @@ app.post("/user/edit", async (req: Request, res: Response) => {
                 message: "Informe um id válido"
             })
         }
-        
+
         if(name === "" || nickname === "" || email === ""){
             res.status(400).send({
                 message: "Campo vazio não é aceito"
@@ -248,26 +248,82 @@ app.post("/user/edit", async (req: Request, res: Response) => {
 // ================================ 4 =================================
 // ====================================================================
 
-
 // criar tarefa
 const createTask = async (
+    id: string,
     title: string,
     description: string,
-    limit_date: string, // ou seria Date?
+    status: string,
+    limit_date: Date,
     creator_user_id: string
 ): Promise<void> => {
     await connection("ToDoListTask")
         .insert({
+            id,
             title,
             description,
+            status,
             limit_date,
             creator_user_id
         })
-    console.log("Tarefa criada com sucesso")
+    // console.log("Tarefa criada com sucesso")
 }
-// (async () => {
-//   await createTask("Levar Thor pra vacinar", "As vacinas estão atrasadas", "2020-05-20", "001");
-// })();
+
+app.put("/task", async(req: Request, res: Response) => {
+    try{
+        const title = req.body.title
+        const description = req.body.description
+        const status = req.body.status
+        const limit_date = req.body.limit_date
+        const creator_user_id = req.body.creator_user_id
+
+        const day = limit_date.substr(0, 2)
+        const month = limit_date.substr(3, 2)
+        const year = limit_date.substr(6, 4)
+        const newLimitDate = `${month}/${day}/${year}`
+
+        if(title === "" || description === "" || limit_date === "" || creator_user_id === ""){
+            res.status(400).send({
+                message: "Campo vazio não é aceito"
+            })
+        }
+        
+        const user = await getUserById(creator_user_id)
+        if(!user){
+            res.status(400).send({
+                message: "Informe um creator_user_id válido"
+            })
+        }
+
+        // não sei se precisava, mas fiz pra testar
+        const statusPossibles = ["to_do", "doing", "done"]
+        if(status){
+            let findStatus = statusPossibles.find(possible => possible === status)
+            if(!findStatus){
+                res.status(400).send({
+                    message: "Informe um dos status possíveis: to_do, doing, done"
+                })
+            }
+        }
+
+        await createTask(
+            new Date().getTime().toString(),
+            title,
+            description,
+            status,
+            new Date(newLimitDate),
+            creator_user_id
+        )
+        res.status(200).send({
+            message: "Success!"
+        })
+
+    } catch (err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 
 
 // ====================================================================
