@@ -84,9 +84,9 @@ const getTableContent = async (table_name: string): Promise<any> => {
         .select("*")
     return result
 }
-// (async () => {
-//     console.log(await getTableContent("ToDoListUser"))
-// })()
+(async () => {
+    console.log(await getTableContent("ToDoListUser"))
+})()
 
 // (async () => {
 //     console.log(await getTableContent("ToDoListTask"))
@@ -132,7 +132,7 @@ app.put("/user", async (req: Request, res: Response) => {
             req.body.email
         )
         res.status(200).send({
-            message: "Sucess!"
+            message: "Success!"
         })
     } catch (err) {
         res.status(400).send({
@@ -179,25 +179,68 @@ app.get("/user/:id", async (req: Request, res: Response) => {
 })
 
 
-
 // ====================================================================
 // ================================ 3 =================================
 // ====================================================================
 
-
-// editar usuário ... acho q devia ser mais genérico
-const editUser = async (name: string, nickname: string): Promise<void> => {
-    await connection("ToDoListUser")
-        .update({
-            nickname
-        })
-        .where({
-            name
-        })
+const editUser = async (id: string, name?: string, nickname?: string, email?: string): Promise<void> => {
+    if(name){
+        await connection("ToDoListUser")
+            .select("*")
+            .where({id})
+            .update({name})
+    }
+    if(nickname){
+        await connection("ToDoListUser")
+            .select("*")
+            .where({id})
+            .update({nickname})
+    }
+    if(email){
+        await connection("ToDoListUser")
+            .select("*")
+            .where({id})
+            .update({email})
+    }
 }
-// (async () => {
-//   await editUser("Rosana Rezende", "rosanarezende");
-// })();
+
+app.post("/user/edit", async (req: Request, res: Response) => {
+
+    try{
+        const id = req.body.id
+        const name = req.body.name
+        const nickname = req.body.nickname
+        const email = req.body.email
+
+        if(!id){
+            res.status(400).send({
+                message: "Informe um id"
+            })
+        }
+
+        const user = await getUserById(id)
+        if(!user){
+            res.status(400).send({
+                message: "Informe um id válido"
+            })
+        }
+        
+        if(name === "" || nickname === "" || email === ""){
+            res.status(400).send({
+                message: "Campo vazio não é aceito"
+            })
+        }
+
+        await editUser(id, name, nickname, email)   
+        res.status(200).send({
+            message: "Success!"
+        })
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 
 
 
