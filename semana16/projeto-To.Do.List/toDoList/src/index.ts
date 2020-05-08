@@ -61,7 +61,7 @@ const createTableTask = async (): Promise<void> => {
 
 
 // criar tabela de relação
-const createTableUserTaskRelation = async(): Promise<void> => {
+const createTableUserTaskRelation = async (): Promise<void> => {
     await connection.raw(`
         CREATE TABLE ToDoListUserTaskRelation (
             task_id VARCHAR(255),
@@ -79,7 +79,7 @@ const createTableUserTaskRelation = async(): Promise<void> => {
 
 
 //conferir conteúdo de tabela
-const getTableContent = async(table_name: string): Promise<any> => {
+const getTableContent = async (table_name: string): Promise<any> => {
     const result = connection(`${table_name}`)
         .select("*")
     return result
@@ -104,27 +104,27 @@ const getTableContent = async(table_name: string): Promise<any> => {
 
 
 // criar usuário
-const createUser = async(
+const createUser = async (
     id: string,
     name: string,
     nickname: string,
     email: string
-):Promise<void> => {
+): Promise<void> => {
     await connection("ToDoListUser")
-    .insert({
-        id,
-        name,
-        nickname,
-        email
-    })
+        .insert({
+            id,
+            name,
+            nickname,
+            email
+        })
     // console.log("Usuário criado com sucesso")
 }
 // (async () => {
 //   await createUser(new Date().getTime().toString(), "Rosana Rezende", "rosana", "rosana@email.com");
 // })();
 
-app.put("/user", async(req: Request, res: Response) => {
-    try{
+app.put("/user", async (req: Request, res: Response) => {
+    try {
         await createUser(
             new Date().getTime().toString(),
             req.body.name,
@@ -134,7 +134,7 @@ app.put("/user", async(req: Request, res: Response) => {
         res.status(200).send({
             message: "Sucess!"
         })
-    } catch(err) {
+    } catch (err) {
         res.status(400).send({
             message: err.message
         })
@@ -148,17 +148,36 @@ app.put("/user", async(req: Request, res: Response) => {
 
 
 // pegar usuário por Id
-const getUserById = async(id: string): Promise<any> => {
-    const result = await connection("ToDoListUser")
-        .select("*")
+const getUserById = async (id: string): Promise<any> => {
+    const result = await connection("ToDoListUser as t")
+        .select("t.id", "t.nickname")
         .where({
             id
         })
     return result[0]
 }
 // (async () => {
-//   await getUserById("001");
+//     console.log(await getUserById("001"));
 // })();
+
+app.get("/user/:id", async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id
+        const user = await getUserById(id)
+        if (user) {
+            res.status(200).send(user)
+        } else {
+            res.status(400).send({
+                message: "Usuário não encontrado!"
+            })
+        }
+    } catch (err) {
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
+
 
 
 // ====================================================================
@@ -167,7 +186,7 @@ const getUserById = async(id: string): Promise<any> => {
 
 
 // editar usuário ... acho q devia ser mais genérico
-const editUser = async(name:string, nickname: string): Promise<void> => {
+const editUser = async (name: string, nickname: string): Promise<void> => {
     await connection("ToDoListUser")
         .update({
             nickname
@@ -188,19 +207,19 @@ const editUser = async(name:string, nickname: string): Promise<void> => {
 
 
 // criar tarefa
-const createTask = async(
+const createTask = async (
     title: string,
     description: string,
     limit_date: string, // ou seria Date?
     creator_user_id: string
-):Promise<void> => {
+): Promise<void> => {
     await connection("ToDoListTask")
-    .insert({
-        title,
-        description,
-        limit_date,
-        creator_user_id
-    })
+        .insert({
+            title,
+            description,
+            limit_date,
+            creator_user_id
+        })
     console.log("Tarefa criada com sucesso")
 }
 // (async () => {
@@ -214,7 +233,7 @@ const createTask = async(
 
 
 // pegar tarefa por Id
-const getTaskById = async(taskId: string): Promise<any> => {
+const getTaskById = async (taskId: string): Promise<any> => {
     const result = await connection("ToDoListTask")
         .select("*")
         .where({
