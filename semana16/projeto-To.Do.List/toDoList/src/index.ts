@@ -26,59 +26,56 @@ const createTableUser = async (): Promise<void> => {
     await connection.raw(`
         CREATE TABLE ToDoListUser (
             id VARCHAR(255) PRIMARY KEY,
-            name VARCHAR(255),
+            name VARCHAR(255) NOT NULL,
             nickname VARCHAR(255) UNIQUE NOT NULL,
             email VARCHAR(255) UNIQUE NOT NULL
         )
     `)
+    console.log('Tabela criada com sucesso!')
 }
 // (async () => {
 //     await createTableUser()
 // })()
 
 
-
-// title: string,
-//     description: string,
-//     limitDate: string, // ou seria Date?
-//     creatorUserId: string
-
 // criar Tabela de Tarefas
 const createTableTask = async (): Promise<void> => {
     await connection.raw(`
         CREATE TABLE ToDoListTask (
             id VARCHAR(255) PRIMARY KEY,
-            title VARCHAR(255),
-            description TEXT,
-                status VARCHAR(255) NOT NULL DEFAULT "to_do",
-            limit_date DATE,
-            
-            creator_user_id VARCHAR(255),
-            FOREIGN KEY (creator_user_id) REFERENCES TodoListUser(id)
+            title VARCHAR(255) NOT NULL,
+            description TEXT NOT NULL,
+            status VARCHAR(255) NOT NULL DEFAULT "to_do",
+            limit_date DATE NOT NULL,
+            creator_user_id VARCHAR(255) NOT NULL,
+
+            FOREIGN KEY (creator_user_id) REFERENCES ToDoListUser(id)
         )
     `)
+    console.log('Tabela criada com sucesso!')
 }
 // (async () => {
 //     await createTableTask()
 // })()
 
+
+
 // criar tabela de relação
-    // pQ PRIMARY KEY(task_id, responsible_user_id) ???
 const createTableUserTaskRelation = async(): Promise<void> => {
     await connection.raw(`
         CREATE TABLE ToDoListUserTaskRelation (
             task_id VARCHAR(255),
             responsible_user_id VARCHAR(255),
-            PRIMARY KEY(task_id, responsible_user_id), 
-            FOREIGN KEY (task_id) REFERENCES TodoListTask(id),
-            FOREIGN KEY (responsible_user_id) REFERENCES TodoListUser(id)
+            
+            FOREIGN KEY (task_id) REFERENCES ToDoListTask(id),
+            FOREIGN KEY (responsible_user_id) REFERENCES ToDoListUser(id)
         )
     `)
+    console.log('Tabela criada com sucesso!')
 }
 // (async () => {
 //     await createTableUserTaskRelation()
 // })()
-
 
 
 //conferir conteúdo de tabela
@@ -88,16 +85,17 @@ const getTableContent = async(table_name: string): Promise<any> => {
     return result
 }
 // (async () => {
-//     console.log(await getTableContent("User"))
+//     console.log(await getTableContent("ToDoListUser"))
 // })()
 
 // (async () => {
-//     console.log(await getTableContent("Task"))
+//     console.log(await getTableContent("ToDoListTask"))
 // })()
 
 // (async () => {
-//     console.log(await getTableContent("UserTaskRelation"))
+//     console.log(await getTableContent("ToDoListUserTaskRelation"))
 // })()
+
 
 
 // ====================================================================
@@ -105,25 +103,43 @@ const getTableContent = async(table_name: string): Promise<any> => {
 // ====================================================================
 
 
-// criar usuário ... e o Id?????
+// criar usuário
 const createUser = async(
     id: string,
     name: string,
     nickname: string,
     email: string
 ):Promise<void> => {
-    await connection("ToDoList")
+    await connection("ToDoListUser")
     .insert({
         id,
         name,
         nickname,
         email
     })
-    console.log("Usuário criado com sucesso")
+    // console.log("Usuário criado com sucesso")
 }
 // (async () => {
-//   await createUser("Rosana Rezende", "rosana", "rosana@email.com");
+//   await createUser(new Date().getTime().toString(), "Rosana Rezende", "rosana", "rosana@email.com");
 // })();
+
+app.put("/user", async(req: Request, res: Response) => {
+    try{
+        await createUser(
+            new Date().getTime().toString(),
+            req.body.name,
+            req.body.nickname,
+            req.body.email
+        )
+        res.status(200).send({
+            message: "Sucess!"
+        })
+    } catch(err) {
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 
 
 // ====================================================================
@@ -133,7 +149,7 @@ const createUser = async(
 
 // pegar usuário por Id
 const getUserById = async(id: string): Promise<any> => {
-    const result = await connection("ToDoList")
+    const result = await connection("ToDoListUser")
         .select("*")
         .where({
             id
@@ -152,7 +168,7 @@ const getUserById = async(id: string): Promise<any> => {
 
 // editar usuário ... acho q devia ser mais genérico
 const editUser = async(name:string, nickname: string): Promise<void> => {
-    await connection("ToDoList")
+    await connection("ToDoListUser")
         .update({
             nickname
         })
@@ -178,14 +194,13 @@ const createTask = async(
     limit_date: string, // ou seria Date?
     creator_user_id: string
 ):Promise<void> => {
-    await connection
+    await connection("ToDoListTask")
     .insert({
         title,
         description,
         limit_date,
         creator_user_id
     })
-    .into("ToDoList")
     console.log("Tarefa criada com sucesso")
 }
 // (async () => {
@@ -200,7 +215,7 @@ const createTask = async(
 
 // pegar tarefa por Id
 const getTaskById = async(taskId: string): Promise<any> => {
-    const result = await connection("ToDoList")
+    const result = await connection("ToDoListTask")
         .select("*")
         .where({
             taskId
