@@ -3,7 +3,7 @@ import express, { Request, Response } from "express";
 import { AddressInfo } from "net";
 import dotenv from "dotenv";
 
-import { IdGenerator } from "./services/IdGenerator";
+import { IdGenerator } from "./service/IdGenerator";
 
 dotenv.config();
 

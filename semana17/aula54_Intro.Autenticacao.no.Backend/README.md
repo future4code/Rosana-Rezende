@@ -39,7 +39,7 @@ Por exemplo um id de 3 posições: se usarmos número teremos 100 possibilidades
 
 *b. A partir de hoje, vamos tentar isolar, ao máximo, as nossas lógicas em classes. Uma das vantagens disso é, por exemplo, utilizar a hierarquia para fazer modificações simples. Dado isso, crie uma classe que possua um um método público para gerar um id.*
 
-_Resposta_: Verificar na pasta `exercicio-tarde/src/services` a classe `IdGenerator`
+_Resposta_: Verificar na pasta `exercicio-tarde/src/service` a classe `IdGenerator`
 
 ```ts
 import { v4 } from "uuid"
