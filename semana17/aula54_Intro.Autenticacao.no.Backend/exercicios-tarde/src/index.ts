@@ -2,6 +2,9 @@ import knex from "knex";
 import express, { Request, Response } from "express";
 import { AddressInfo } from "net";
 import dotenv from "dotenv";
+
+import { IdGenerator } from "./services/IdGenerator";
+
 dotenv.config();
 
 const connection = knex({
@@ -39,7 +42,13 @@ const getTableContent = async (table_name: string): Promise<any> => {
 // })()
 
 
+// ====================================================================
+// =============================== 1 ==================================
+// ====================================================================
 
+const idGenerator = new IdGenerator()
+const id = idGenerator.generateId()
+// console.log("Generated Id: ", id)
 
 
 

@@ -28,9 +28,29 @@ const id = v4();
 console.log("Generated Id: ", id);
 ```
 
+<br>
+
 *a. Qual a sua opinião em relação a usar strings para representar os ids? Você concorda que seja melhor do que usar números?*
 
+_Resposta_: Acho mais inteligente e seguro usar string ao invés de número para representar ids, isso porque o uso de números limita a quantidade de repetições possíveis para o id, enquanto string (que permite usar qualquer caracter, incluindo números) aumenta essa possibilidade, o que torna o id mais seguro.
+Por exemplo um id de 3 posições: se usarmos número teremos 100 possibilidades (de 0 a 999), enquanto se usarmos string teremos muitas mais, já que é possível misturar letras, numéros e demais caractéres.
+
+<br>
+
 *b. A partir de hoje, vamos tentar isolar, ao máximo, as nossas lógicas em classes. Uma das vantagens disso é, por exemplo, utilizar a hierarquia para fazer modificações simples. Dado isso, crie uma classe que possua um um método público para gerar um id.*
+
+_Resposta_: Verificar na pasta `exercicio-tarde/src/services` a classe `IdGenerator`
+
+```ts
+import { v4 } from "uuid"
+
+export class IdGenerator {
+
+    public generateId(): string {
+        return v4()
+    }
+}
+```
 
 <br><br>
 
@@ -224,8 +244,13 @@ Agora, vamos criar um endpoint que retorne as informações do usuário logado. 
     	"email": "email do usuário"
     }
     ```
+<br>
 
 *a. Comece alterando a classe do banco de dados para que ela tenha um método que retorne o usuário a partir do id*
+
+_Resposta_: 
+
+<br>
 
 *b. Crie o endpoint com as especificações passadas*
 
