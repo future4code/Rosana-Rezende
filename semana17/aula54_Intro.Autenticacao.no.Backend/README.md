@@ -185,9 +185,49 @@ const generateToken = (id: string): string => {
 };
 ```
 
+<br>
+
 _a. O que a linha `as string` faz? Por que precisamos usar ela ali?_
 
+_Resposta_: Evita que nosso código quebre, pois sem o parâmetro ele fica confuso se receberá uma string ou undefined. Nesse caso estamos afirmando que irá receber uma string.
+
+<br>
+
 _b._ _Agora, crie a classe que será responsável pela autorização dos usuários com um método que gere o token. Além disso, crie uma interface a parte para representar o input desse método. Lembre-se de colocar todas as constantes em atributos da classe._
+
+_Resposta_: Verificar na pasta `exercicio-tarde/src/service` a classe `Authenticator`
+
+```ts
+import * as jwt from "jsonwebtoken"
+
+export class Authenticator {
+
+    // private static EXPIRES_IN = "1min";
+
+    private static getExpiresIn(): number {
+        return Number(process.env.ACCESS_TOKEN_EXPIRES_IN)
+    }
+
+    public generateToken(id: string): string {
+        const token = jwt.sign(
+            {
+                id
+            },
+            process.env.JWT_KEY as string,
+            {
+                // expiresIn: Authenticator.EXPIRES_IN,
+                expiresIn: Authenticator.getExpiresIn()
+            }
+        )
+        return token
+    }
+
+}
+
+interface AuthenticationData {
+    id: string;
+}
+```
 
 <br><br>
 

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 import { IdGenerator } from "./service/IdGenerator";
 import { UserDatabase } from "./data/UserDatabase";
+import { Authenticator } from "./service/Authenticator";
 
 dotenv.config();
 
@@ -55,9 +56,13 @@ const id = idGenerator.generateId()
 
 
 
+// ====================================================================
+// =============================== 3 ==================================
+// ====================================================================
 
-
-
+const authenticator = new Authenticator()
+const token = authenticator.generateToken(id)
+// console.log("token: ", token)
 
 
 
