@@ -14,7 +14,7 @@ app.use(express.json());
 
 // ====================================================================
 
-const userDataBase = new UserDatabase()
+// const userDataBase = new UserDatabase()
 
 // OBS: conferir conteúdo de tabelas já criadas
 // userDataBase.getTableContent("User")
@@ -25,8 +25,8 @@ const userDataBase = new UserDatabase()
 // =============================== 1 ==================================
 // ====================================================================
 
-const idGenerator = new IdGenerator()
-const id = idGenerator.generateId()
+// const idGenerator = new IdGenerator()
+// const id = idGenerator.generateId()
 // console.log("Generated Id: ", id)
 
 
@@ -60,35 +60,50 @@ const id = idGenerator.generateId()
 // =============================== 3 ==================================
 // ====================================================================
 
-const authenticator = new Authenticator()
-const token = authenticator.generateToken(id)
+// const authenticator = new Authenticator()
+// const token = authenticator.generateToken(id)
 // console.log("token: ", token)
 
 
 
+// ====================================================================
+// =============================== 4 ==================================
+// ====================================================================
 
+app.post("/signup", async(req: Request, res: Response) => {
+    try{
+        const email = req.body.email
+        if(email === ""){
+            throw new Error("O campo email não pode ficar vazio")
+        }
+        if(!email.includes("@")){
+            throw new Error("Informe um email válido")
+        }
 
+        const password = req.body.password
+        if(password.length < 6){
+            throw new Error("A senha deve ter no mínimo 6 caracteres")
+        }
 
+        const idGenerator = new IdGenerator()
+        const id = idGenerator.generateId()
 
+        const userDataBase = new UserDatabase()
+        await userDataBase.createUser(id, email, password)
 
+        const authenticator = new Authenticator()
+        const token = authenticator.generateToken(id)
 
+        res.status(200).send({
+            token
+        })
 
-// app.post("/signup", async(req: Request, res: Response) => {
-
-//     try{
-
-
-
-//         res.status(200).send({
-//             token: ""
-//         })
-
-//     } catch(err){
-//         res.status(400).send({
-//             message: err.message
-//         })
-//     }
-// })
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 
 
 

@@ -83,6 +83,7 @@ const createUser = async (id: string, email: string, password: string) => {
     .into(userTableName);
 };
 ```
+
 <br>
 
 _a. Explique o código acima com as suas palavras._
@@ -94,6 +95,7 @@ _Resposta_: No código acima primeiro estabelecemos a conexão com nosso banco d
 _b. Comece criando a tabela de usuários. Coloque a query que você utilizou no arquivo de respostas._
 
 _Resposta_:
+
 ```sql
 CREATE TABLE User (
   id VARCHAR(255) PRIMARY KEY,
@@ -101,6 +103,7 @@ CREATE TABLE User (
   password VARCHAR(255) NOT NULL
 )
 ```
+
 <br>
 
 _c. Pela mesma justificativa do exercício anterior, crie uma classe para ser responsável pela comunicação do usuário com a tabela de usuários. Ela deve possuir um método que cria o usuário no banco; além disso, as variáveis necessárias para realizar as queries devem ser atributos dessa classe_
@@ -111,36 +114,34 @@ _Resposta_: Verificar na pasta `exercicio-tarde/src/data` a classe `UserDatabase
 import knex from "knex";
 
 export class UserDatabase {
+  private connection() {
+    return knex({
+      client: "mysql",
+      connection: {
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT || "3306"),
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+      },
+    });
+  }
 
-    private connection() {
-        return knex({
-            client: "mysql",
-            connection: {
-                host: process.env.DB_HOST,
-                port: Number(process.env.DB_PORT || "3306"),
-                user: process.env.DB_USER,
-                password: process.env.DB_PASSWORD,
-                database: process.env.DB_NAME,
-            },
-        });
-    }
+  private static TABLE_NAME: string = "User";
 
-    private static TABLE_NAME: string = "User"
-
-    public async createUser(
-        id: string,
-        email: string,
-        password: string
-    ): Promise<void> {
-        await this.connection()
-            .insert({
-                id,
-                email,
-                password
-            })
-            .into(UserDatabase.TABLE_NAME)
-    }
-
+  public async createUser(
+    id: string,
+    email: string,
+    password: string
+  ): Promise<void> {
+    await this.connection()
+      .insert({
+        id,
+        email,
+        password,
+      })
+      .into(UserDatabase.TABLE_NAME);
+  }
 }
 ```
 
@@ -151,8 +152,8 @@ _d. Crie um usuário utilizando somente a classe que você criou_
 _Resposta_:
 
 ```ts
-const userDataBase = new UserDatabase()
-userDataBase.createUser("abc", "teste@teste.com", "123456")
+const userDataBase = new UserDatabase();
+userDataBase.createUser("abc", "teste@teste.com", "123456");
 ```
 
 <br><br>
@@ -198,34 +199,32 @@ _b._ _Agora, crie a classe que será responsável pela autorização dos usuári
 _Resposta_: Verificar na pasta `exercicio-tarde/src/service` a classe `Authenticator`
 
 ```ts
-import * as jwt from "jsonwebtoken"
+import * as jwt from "jsonwebtoken";
 
 export class Authenticator {
+  // private static EXPIRES_IN = "1min";
 
-    // private static EXPIRES_IN = "1min";
+  private static getExpiresIn(): number {
+    return Number(process.env.ACCESS_TOKEN_EXPIRES_IN);
+  }
 
-    private static getExpiresIn(): number {
-        return Number(process.env.ACCESS_TOKEN_EXPIRES_IN)
-    }
-
-    public generateToken(id: string): string {
-        const token = jwt.sign(
-            {
-                id
-            },
-            process.env.JWT_KEY as string,
-            {
-                // expiresIn: Authenticator.EXPIRES_IN,
-                expiresIn: Authenticator.getExpiresIn()
-            }
-        )
-        return token
-    }
-
+  public generateToken(id: string): string {
+    const token = jwt.sign(
+      {
+        id,
+      },
+      process.env.JWT_KEY as string,
+      {
+        // expiresIn: Authenticator.EXPIRES_IN,
+        expiresIn: Authenticator.getExpiresIn(),
+      }
+    );
+    return token;
+  }
 }
 
 interface AuthenticationData {
-    id: string;
+  id: string;
 }
 ```
 
@@ -254,11 +253,61 @@ Pronto, com essas três classes preparadas podemos criar o nosso endpoint. As in
   }
   ```
 
+<br>
+
 _a. Crie o endpoint que realize isso, com as classes que você implementou anteriormente_
+
+_Resposta_:
+
+```ts
+app.post("/signup", async (req: Request, res: Response) => {
+  try {
+    const idGenerator = new IdGenerator();
+    const id = idGenerator.generateId();
+
+    const userDataBase = new UserDatabase();
+    await userDataBase.createUser(id, req.body.email, req.body.password);
+
+    const authenticator = new Authenticator();
+    const token = authenticator.generateToken(id);
+
+    res.status(200).send({
+      token,
+    });
+  } catch (err) {
+    res.status(400).send({
+      message: err.message,
+    });
+  }
+});
+```
 
 _b. Altere o seu endpoint para ele não aceitar um email vazio ou que não possua um `"@"`_
 
+_Resposta_:
+
+```ts
+const email = req.body.email;
+if (email === "") {
+  throw new Error("O campo email não pode ficar vazio");
+}
+if (!email.includes("@")) {
+  throw new Error("Informe um email válido");
+}
+```
+
+<br>
+
 _c. Altere o seu endpoint para ele só aceitar uma senha com 6 caracteres ou mais_
+
+_Resposta_:
+
+```ts
+const password = req.body.password;
+if (password.length < 6) {
+  throw new Error("A senha deve ter no mínimo 6 caracteres");
+}
+```
 
 <br><br>
 
