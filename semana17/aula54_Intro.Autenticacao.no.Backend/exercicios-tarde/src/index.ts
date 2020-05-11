@@ -133,7 +133,7 @@ app.post("/login", async(req: Request, res: Response) => {
         }
 
         const password = req.body.password
-        
+
         const userDataBase = new UserDatabase()
         const user = await userDataBase.getUserByEmail(email)
 
@@ -153,6 +153,22 @@ app.post("/login", async(req: Request, res: Response) => {
         })
     }
 })
+
+
+
+// ====================================================================
+// =============================== 7 ==================================
+// ====================================================================
+
+// // testando
+// const authenticator = new Authenticator()
+// const data = authenticator.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM4ODI0NGI1LTMwODEtNDdmNS05M2JiLTRjYjhjYmVjYjcxMyIsImlhdCI6MTU4OTIyNzI0NiwiZXhwIjoxNTg5MjI3MzY2fQ.8DJdfUr9WkhHa4VrcZ6BGWJCqX8ij7ujfndukS74fYE")
+// console.log("data from token", data)
+// // data from token { id: 'c88244b5-3081-47f5-93bb-4cb8cbecb713' }
+
+
+
+
 
 
 // ====================================================================

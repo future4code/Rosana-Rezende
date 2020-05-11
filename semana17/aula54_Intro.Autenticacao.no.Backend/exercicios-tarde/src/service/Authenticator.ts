@@ -8,7 +8,7 @@ export class Authenticator {
         return Number(process.env.ACCESS_TOKEN_EXPIRES_IN)
     }
 
-    public generateToken(id: string): string {
+    public generateToken(id: AuthenticationData): string {
         const token = jwt.sign(
             {
                 id
@@ -21,6 +21,14 @@ export class Authenticator {
         )
         return token
     }
+
+    public verify(token: string): AuthenticationData {
+        const payload = jwt.verify(token, process.env.JWT_KEY as string) as any;
+        const result = {
+            id: payload.id,
+        };
+        return result;
+    };
 
 }
 

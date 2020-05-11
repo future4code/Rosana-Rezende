@@ -442,7 +442,27 @@ const getData = (token: string): AuthenticationData => {
 
 _a. O que a linha `as any` faz? Por que precisamos usá-la ali?_
 
+_Resposta_: Passamos `as any` para que ele aceite qualquer tipo de valor em payload, caso contrário ele não entenderá se estamos trazendo uma string ou um objeto e apresentará erro quando tentarmos acessar `payload.id`
+
+<br>
+
 _b. Altere a sua classe do JWT para que ela tenha um método que realize a mesma funcionalidade da função acima_
+
+_Resposta_:
+
+```ts
+export class Authenticator{
+  // ...
+  
+  public verify(token: string): AuthenticationData {
+        const payload = jwt.verify(token, process.env.JWT_KEY as string) as any;
+        const result = {
+            id: payload.id,
+        };
+        return result;
+    };
+}
+```
 
 <br><br>
 
