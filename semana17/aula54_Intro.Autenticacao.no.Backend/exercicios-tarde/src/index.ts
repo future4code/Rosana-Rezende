@@ -107,6 +107,52 @@ app.post("/signup", async(req: Request, res: Response) => {
 
 
 
+// ====================================================================
+// =============================== 5 ==================================
+// ====================================================================
+
+async function test(){
+    const userDataBase = new UserDatabase()
+    console.log(await userDataBase.getUserByEmail("oi@teste.com"))
+}
+// test()
+
+
+// ====================================================================
+// =============================== 6 ==================================
+// ====================================================================
+
+app.post("/login", async(req: Request, res: Response) => {
+    try{
+        const email = req.body.email
+        if(email === ""){
+            throw new Error("O campo email não pode ficar vazio")
+        }
+        if(!email.includes("@")){
+            throw new Error("Informe um email válido")
+        }
+
+        const password = req.body.password
+        
+        const userDataBase = new UserDatabase()
+        const user = await userDataBase.getUserByEmail(email)
+
+        if(user.password !== password){
+            throw new Error("Senha incorreta")
+        }
+
+        const authenticator = new Authenticator()
+        const token = authenticator.generateToken(user.id)
+
+        res.status(200).send({
+            token
+        })
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 
 
 // ====================================================================

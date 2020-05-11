@@ -317,7 +317,36 @@ Para o login, vamos precisar alterar somente a classe que se comunica com o banc
 
 _a. Altere a classe do seu banco de dados para que ele tenha um método que retorne as informações de um usuário a partir do email_
 
+_Resposta_: Incluí em `UserDatabase`
+
+```ts
+export class UserDatabase {
+  //...
+
+  public async getUserById(id: string): Promise<any> {
+    const result = await this.connection()
+      .select("*")
+      .from(UserDatabase.TABLE_NAME)
+      .where({ id });
+
+    return result[0];
+  }
+}
+```
+
+<br>
+
 _b. Teste a sua função_
+
+_Resposta_:
+
+```ts
+async function test() {
+  const userDataBase = new UserDatabase();
+  console.log(await userDataBase.getUserByEmail("oi@teste.com"));
+}
+test();
+```
 
 <br><br>
 
@@ -344,9 +373,54 @@ Agora, vamos implementar o endpoint de login, com as seguintes especificações:
   }
   ```
 
+<br>
+
 _a. Crie o endpoint que realize isso, com as classes que você implementou anteriormente_
 
+_Resposta_:
+
+```ts
+app.post("/login", async (req: Request, res: Response) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    const userDataBase = new UserDatabase();
+    const user = await userDataBase.getUserByEmail(email);
+
+    if (user.password !== password) {
+      throw new Error("Senha incorreta");
+    }
+
+    const authenticator = new Authenticator();
+    const token = authenticator.generateToken(user.id);
+
+    res.status(200).send({
+      token,
+    });
+  } catch (err) {
+    res.status(400).send({
+      message: err.message,
+    });
+  }
+});
+```
+
+<br>
+
 _b. Altere o seu endpoint para ele não aceitar um email vazio ou que não possua um `"@"`_
+
+_Resposta_:
+
+```ts
+const email = req.body.email;
+if (email === "") {
+  throw new Error("O campo email não pode ficar vazio");
+}
+if (!email.includes("@")) {
+  throw new Error("Informe um email válido");
+}
+```
 
 <br><br>
 

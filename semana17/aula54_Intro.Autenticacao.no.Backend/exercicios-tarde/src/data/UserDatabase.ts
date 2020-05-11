@@ -38,5 +38,15 @@ export class UserDatabase {
             .into(UserDatabase.TABLE_NAME)
     }
 
+
+    public async getUserByEmail(email: string): Promise<any> {
+        const result = await this.connection()
+            .select("*")
+            .from(UserDatabase.TABLE_NAME)
+            .where({email})
+        
+        return result[0]
+    }
+
     
 }
