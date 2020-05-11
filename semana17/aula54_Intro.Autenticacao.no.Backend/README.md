@@ -7,7 +7,8 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Aula 54 - Autenticação no Backend: introdução
 
-Nos exercícios vamos treinar os seguintes endpoints: 
+Nos exercícios vamos treinar os seguintes endpoints:
+
 - singup
 - login
 - user/profile
@@ -16,12 +17,12 @@ Nos exercícios vamos treinar os seguintes endpoints:
 
 ### Exercício 1
 
-Na autenticação de usuários o elemento mais fundamental talvez seja o id. É muito importante encontrar um que seja fácil de guardar e que garanta unicidade. Para isso usaremos a versão v4 do UUID, uma das mais recomendadas para isso. 
+Na autenticação de usuários o elemento mais fundamental talvez seja o id. É muito importante encontrar um que seja fácil de guardar e que garanta unicidade. Para isso usaremos a versão v4 do UUID, uma das mais recomendadas para isso.
 
 O uso dele é simples, veja abaixo:
 
 ```tsx
-import { v4 } from "uuid"
+import { v4 } from "uuid";
 
 const id = v4();
 
@@ -30,25 +31,24 @@ console.log("Generated Id: ", id);
 
 <br>
 
-*a. Qual a sua opinião em relação a usar strings para representar os ids? Você concorda que seja melhor do que usar números?*
+_a. Qual a sua opinião em relação a usar strings para representar os ids? Você concorda que seja melhor do que usar números?_
 
 _Resposta_: Acho mais inteligente e seguro usar string ao invés de número para representar ids, isso porque o uso de números limita a quantidade de repetições possíveis para o id, enquanto string (que permite usar qualquer caracter, incluindo números) aumenta essa possibilidade, o que torna o id mais seguro.
 Por exemplo um id de 3 posições: se usarmos número teremos 100 possibilidades (de 0 a 999), enquanto se usarmos string teremos muitas mais, já que é possível misturar letras, numéros e demais caractéres.
 
 <br>
 
-*b. A partir de hoje, vamos tentar isolar, ao máximo, as nossas lógicas em classes. Uma das vantagens disso é, por exemplo, utilizar a hierarquia para fazer modificações simples. Dado isso, crie uma classe que possua um um método público para gerar um id.*
+_b. A partir de hoje, vamos tentar isolar, ao máximo, as nossas lógicas em classes. Uma das vantagens disso é, por exemplo, utilizar a hierarquia para fazer modificações simples. Dado isso, crie uma classe que possua um um método público para gerar um id._
 
 _Resposta_: Verificar na pasta `exercicio-tarde/src/service` a classe `IdGenerator`
 
 ```ts
-import { v4 } from "uuid"
+import { v4 } from "uuid";
 
 export class IdGenerator {
-
-    public generateId(): string {
-        return v4()
-    }
+  public generateId(): string {
+    return v4();
+  }
 }
 ```
 
@@ -56,7 +56,7 @@ export class IdGenerator {
 
 ### Exercício 2
 
-Agora que já possuímos um id, podemos começar a modelagem do banco. O nosso usuário precisa ter um email e uma senha salva para que consigamos fazer a autenticação dele. 
+Agora que já possuímos um id, podemos começar a modelagem do banco. O nosso usuário precisa ter um email e uma senha salva para que consigamos fazer a autenticação dele.
 Na hora de salvar essas informações na tabela, é interessante que façamos uma função específica para isso. Abaixo, há um exemplo:
 
 ```tsx
@@ -83,14 +83,77 @@ const createUser = async (id: string, email: string, password: string) => {
     .into(userTableName);
 };
 ```
+<br>
 
-*a. Explique o código acima com as suas palavras.*
+_a. Explique o código acima com as suas palavras._
 
-*b. Comece criando a tabela de usuários. Coloque a query que você utilizou no arquivo de respostas.*
+_Resposta_: No código acima primeiro estabelecemos a conexão com nosso banco de dados. Em seguida, inserimos um usuário na tabela User.
 
-*c. Pela mesma justificativa do exercício anterior, crie uma classe para ser responsável pela comunicação do usuário com a tabela de usuários. Ela deve possuir um método que cria o usuário no banco; além disso, as variáveis necessárias para realizar as queries devem ser atributos dessa classe*
+<br>
 
-*d. Crie um usuário utilizando somente a classe que você criou*
+_b. Comece criando a tabela de usuários. Coloque a query que você utilizou no arquivo de respostas._
+
+_Resposta_:
+```sql
+CREATE TABLE User (
+  id VARCHAR(255) PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL
+)
+```
+<br>
+
+_c. Pela mesma justificativa do exercício anterior, crie uma classe para ser responsável pela comunicação do usuário com a tabela de usuários. Ela deve possuir um método que cria o usuário no banco; além disso, as variáveis necessárias para realizar as queries devem ser atributos dessa classe_
+
+_Resposta_: Verificar na pasta `exercicio-tarde/src/data` a classe `UserDatabase`
+
+```ts
+import knex from "knex";
+
+export class UserDatabase {
+
+    private connection() {
+        return knex({
+            client: "mysql",
+            connection: {
+                host: process.env.DB_HOST,
+                port: Number(process.env.DB_PORT || "3306"),
+                user: process.env.DB_USER,
+                password: process.env.DB_PASSWORD,
+                database: process.env.DB_NAME,
+            },
+        });
+    }
+
+    private static TABLE_NAME: string = "User"
+
+    public async createUser(
+        id: string,
+        email: string,
+        password: string
+    ): Promise<void> {
+        await this.connection()
+            .insert({
+                id,
+                email,
+                password
+            })
+            .into(UserDatabase.TABLE_NAME)
+    }
+
+}
+```
+
+<br>
+
+_d. Crie um usuário utilizando somente a classe que você criou_
+
+_Resposta_:
+
+```ts
+const userDataBase = new UserDatabase()
+userDataBase.createUser("abc", "teste@teste.com", "123456")
+```
 
 <br><br>
 
@@ -107,24 +170,24 @@ Abaixo, há uma função que faz isso, com o tempo de expiração de 1 minuto:
 ```tsx
 import * as jwt from "jsonwebtoken";
 
-const expiresIn = "1min"
+const expiresIn = "1min";
 const generateToken = (id: string): string => {
   const token = jwt.sign(
     {
-      id
+      id,
     },
     process.env.JWT_KEY as string,
     {
-      expiresIn
+      expiresIn,
     }
   );
   return token;
-}
+};
 ```
 
-*a. O que a linha `as string` faz? Por que precisamos usar ela ali?*
+_a. O que a linha `as string` faz? Por que precisamos usar ela ali?_
 
-*b.* *Agora, crie a classe que será responsável pela autorização dos usuários com um método que gere o token. Além disso, crie uma interface a parte para representar o input desse método. Lembre-se de colocar todas as constantes em atributos da classe.*
+_b._ _Agora, crie a classe que será responsável pela autorização dos usuários com um método que gere o token. Além disso, crie uma interface a parte para representar o input desse método. Lembre-se de colocar todas as constantes em atributos da classe._
 
 <br><br>
 
@@ -132,42 +195,40 @@ const generateToken = (id: string): string => {
 
 Pronto, com essas três classes preparadas podemos criar o nosso endpoint. As informações dele são:
 
-- *Verbo/Método*: POST
-- *Path*: `/signup`
-- *Input:* O body da requisição deve ser
+- _Verbo/Método_: POST
+- _Path_: `/signup`
+- _Input:_ O body da requisição deve ser
 
-    ```json
-    {
-    	"email": "email do usuário",
-    	"password": "senha do usuário"
-    }
-    ```
+  ```json
+  {
+    "email": "email do usuário",
+    "password": "senha do usuário"
+  }
+  ```
 
-- *Output*: O body da resposta deve ser
+- _Output_: O body da resposta deve ser
 
-    ```json
-    {
-    	"token": "token gerado pelo jwt"
-    }
-    ```
+  ```json
+  {
+    "token": "token gerado pelo jwt"
+  }
+  ```
 
-*a. Crie o endpoint que realize isso, com as classes que você implementou anteriormente*
+_a. Crie o endpoint que realize isso, com as classes que você implementou anteriormente_
 
-*b. Altere o seu endpoint para ele não aceitar um email vazio ou que não possua um `"@"`*
+_b. Altere o seu endpoint para ele não aceitar um email vazio ou que não possua um `"@"`_
 
-*c. Altere o seu endpoint para ele só aceitar uma senha com 6 caracteres ou mais*
-
+_c. Altere o seu endpoint para ele só aceitar uma senha com 6 caracteres ou mais_
 
 <br><br>
 
 ### Exercício 5
 
-Para o login, vamos precisar alterar somente a classe que se comunica com o banco. No login, vamos receber o email e a senha do usuário. Então, vamos precisar de um método que realize essa busca no banco de dados para gente. 
+Para o login, vamos precisar alterar somente a classe que se comunica com o banco. No login, vamos receber o email e a senha do usuário. Então, vamos precisar de um método que realize essa busca no banco de dados para gente.
 
-*a. Altere a classe do seu banco de dados para que ele tenha um método que retorne as informações de um usuário a partir do email*
+_a. Altere a classe do seu banco de dados para que ele tenha um método que retorne as informações de um usuário a partir do email_
 
-*b. Teste a sua função*
-
+_b. Teste a sua função_
 
 <br><br>
 
@@ -175,29 +236,28 @@ Para o login, vamos precisar alterar somente a classe que se comunica com o banc
 
 Agora, vamos implementar o endpoint de login, com as seguintes especificações:
 
-- *Verbo/Método*: POST
-- *Path*: `/login`
-- *Input:* O body da requisição deve ser
+- _Verbo/Método_: POST
+- _Path_: `/login`
+- _Input:_ O body da requisição deve ser
 
-    ```json
-    {
-    	"email": "email do usuário",
-    	"password": "senha do usuário"
-    }
-    ```
+  ```json
+  {
+    "email": "email do usuário",
+    "password": "senha do usuário"
+  }
+  ```
 
-- *Output*: O body da resposta deve ser
+- _Output_: O body da resposta deve ser
 
-    ```json
-    {
-    	"token": "token gerado pelo jwt"
-    }
-    ```
+  ```json
+  {
+    "token": "token gerado pelo jwt"
+  }
+  ```
 
-*a. Crie o endpoint que realize isso, com as classes que você implementou anteriormente*
+_a. Crie o endpoint que realize isso, com as classes que você implementou anteriormente_
 
-*b. Altere o seu endpoint para ele não aceitar um email vazio ou que não possua um `"@"`*
-
+_b. Altere o seu endpoint para ele não aceitar um email vazio ou que não possua um `"@"`_
 
 <br><br>
 
@@ -217,10 +277,9 @@ const getData = (token: string): AuthenticationData => {
 };
 ```
 
-*a. O que a linha `as any` faz? Por que precisamos usá-la ali?*
+_a. O que a linha `as any` faz? Por que precisamos usá-la ali?_
 
-*b. Altere a sua classe do JWT para que ela tenha um método que realize a mesma funcionalidade da função acima*
-
+_b. Altere a sua classe do JWT para que ela tenha um método que realize a mesma funcionalidade da função acima_
 
 <br><br>
 
@@ -228,44 +287,44 @@ const getData = (token: string): AuthenticationData => {
 
 Agora, vamos criar um endpoint que retorne as informações do usuário logado. As especificações dele estão abaixo:
 
-- *Verbo/Método*: GET
-- *Path*: `/user/profile`
-- *Input:* Deve receber, nos headers, o token de autenticação:
+- _Verbo/Método_: GET
+- _Path_: `/user/profile`
+- _Input:_ Deve receber, nos headers, o token de autenticação:
 
-    ```
-    Authorization: token.do.usuario
-    ```
+  ```
+  Authorization: token.do.usuario
+  ```
 
-- *Output*: O body da resposta deve ser
+- _Output_: O body da resposta deve ser
 
-    ```json
-    {
-    	"id": "id do usuário",
-    	"email": "email do usuário"
-    }
-    ```
+      ```json
+      {
+      	"id": "id do usuário",
+      	"email": "email do usuário"
+      }
+      ```
+
+  <br>
+
+_a. Comece alterando a classe do banco de dados para que ela tenha um método que retorne o usuário a partir do id_
+
+_Resposta_:
+
 <br>
 
-*a. Comece alterando a classe do banco de dados para que ela tenha um método que retorne o usuário a partir do id*
-
-_Resposta_: 
-
-<br>
-
-*b. Crie o endpoint com as especificações passadas*
+_b. Crie o endpoint com as especificações passadas_
 
 <br><br>
 
-
 ## Desafios
 
-Como podemos deixar os nossos endpoints de autenticação mais seguros? Amanhã, vamos ver como criptografar a senha. Agora, você vai tentar fazer isso sozinho. 
+Como podemos deixar os nossos endpoints de autenticação mais seguros? Amanhã, vamos ver como criptografar a senha. Agora, você vai tentar fazer isso sozinho.
 
 Documentação da lib de criptografia que vamo usar: [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 
 <br>
 
-Lembre-se do diagrama que vimos hoje em aula e altere os endpoints de *signup* e *login* para usarem a senha encriptada
+Lembre-se do diagrama que vimos hoje em aula e altere os endpoints de _signup_ e _login_ para usarem a senha encriptada
 
 **singup**
 

@@ -1,45 +1,23 @@
-import knex from "knex";
 import express, { Request, Response } from "express";
 import { AddressInfo } from "net";
 import dotenv from "dotenv";
 
 import { IdGenerator } from "./service/IdGenerator";
+import { UserDatabase } from "./data/UserDatabase";
 
 dotenv.config();
-
-const connection = knex({
-    client: "mysql",
-    connection: {
-        host: process.env.DB_HOST,
-        port: Number(process.env.DB_PORT || "3306"),
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-    },
-});
 
 const app = express();
 app.use(express.json());
 
+
 // ====================================================================
 
-//conferir conteúdo de tabelas já criadas
-const getTableContent = async (table_name: string): Promise<any> => {
-    const result = connection(`${table_name}`)
-        .select("*")
-    return result
-}
-// (async () => {
-//     console.log(await getTableContent("ToDoListUser"))
-// })()
+const userDataBase = new UserDatabase()
 
-// (async () => {
-//     console.log(await getTableContent("ToDoListTask"))
-// })()
+// OBS: conferir conteúdo de tabelas já criadas
+// userDataBase.getTableContent("User")
 
-// (async () => {
-//     console.log(await getTableContent("ToDoListUserTaskRelation"))
-// })()
 
 
 // ====================================================================
@@ -49,6 +27,63 @@ const getTableContent = async (table_name: string): Promise<any> => {
 const idGenerator = new IdGenerator()
 const id = idGenerator.generateId()
 // console.log("Generated Id: ", id)
+
+
+
+// ====================================================================
+// =============================== 2 ==================================
+// ====================================================================
+
+// // b
+// const createUserTable = async (): Promise<void> => {
+//     await connection.raw(`
+//         CREATE TABLE User (
+//             id VARCHAR(255) PRIMARY KEY,
+//             email VARCHAR(255) UNIQUE NOT NULL,
+//             password VARCHAR(255) NOT NULL
+//         )
+//     `)
+//     console.log('Tabela criada com sucesso!')
+// }
+// (async () => {
+//     await createUserTable()
+// })()
+
+
+// // d
+// userDataBase.createUser("abc", "teste@teste.com", "123456")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// app.post("/signup", async(req: Request, res: Response) => {
+
+//     try{
+
+
+
+//         res.status(200).send({
+//             token: ""
+//         })
+
+//     } catch(err){
+//         res.status(400).send({
+//             message: err.message
+//         })
+//     }
+// })
 
 
 
