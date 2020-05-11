@@ -8,7 +8,7 @@ export class Authenticator {
         return Number(process.env.ACCESS_TOKEN_EXPIRES_IN)
     }
 
-    public generateToken(id: AuthenticationData): string {
+    public generateToken(id: string): string {
         const token = jwt.sign(
             {
                 id

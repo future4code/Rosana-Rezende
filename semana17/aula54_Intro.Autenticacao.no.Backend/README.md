@@ -451,16 +451,16 @@ _b. Altere a sua classe do JWT para que ela tenha um método que realize a mesma
 _Resposta_:
 
 ```ts
-export class Authenticator{
+export class Authenticator {
   // ...
-  
+
   public verify(token: string): AuthenticationData {
-        const payload = jwt.verify(token, process.env.JWT_KEY as string) as any;
-        const result = {
-            id: payload.id,
-        };
-        return result;
+    const payload = jwt.verify(token, process.env.JWT_KEY as string) as any;
+    const result = {
+      id: payload.id,
     };
+    return result;
+  }
 }
 ```
 
@@ -493,9 +493,48 @@ _a. Comece alterando a classe do banco de dados para que ela tenha um método qu
 
 _Resposta_:
 
+```ts
+export class Authenticator {
+  // ...
+  public async getUserById(id: string): Promise<any> {
+    const result = await this.connection()
+      .select("*")
+      .from(UserDatabase.TABLE_NAME)
+      .where({ id });
+
+    return result[0];
+  }
+}
+```
+
 <br>
 
 _b. Crie o endpoint com as especificações passadas_
+
+_Resposta_:
+```ts
+app.get("/user/profile", async(req: Request, res: Response) => {
+    try{
+        const token = req.headers.authorization as string
+
+        const authenticator = new Authenticator()
+        const userAuthData = authenticator.verify(token)
+
+        const userDataBase = new UserDatabase()
+        const user = await userDataBase.getUserById(userAuthData.id)       
+
+        res.status(200).send({
+            id: user.id,
+            email: user.email
+        })
+        
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
+```
 
 <br><br>
 

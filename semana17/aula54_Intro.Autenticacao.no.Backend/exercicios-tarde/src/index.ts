@@ -164,10 +164,38 @@ app.post("/login", async(req: Request, res: Response) => {
 // const authenticator = new Authenticator()
 // const data = authenticator.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM4ODI0NGI1LTMwODEtNDdmNS05M2JiLTRjYjhjYmVjYjcxMyIsImlhdCI6MTU4OTIyNzI0NiwiZXhwIjoxNTg5MjI3MzY2fQ.8DJdfUr9WkhHa4VrcZ6BGWJCqX8ij7ujfndukS74fYE")
 // console.log("data from token", data)
+
 // // data from token { id: 'c88244b5-3081-47f5-93bb-4cb8cbecb713' }
+// // ou
+// // [ERROR] 17:06:20 TokenExpiredError: jwt expired
 
 
 
+// ====================================================================
+// =============================== 8 ==================================
+// ====================================================================
+
+app.get("/user/profile", async(req: Request, res: Response) => {
+    try{
+        const token = req.headers.authorization as string
+
+        const authenticator = new Authenticator()
+        const userAuthData = authenticator.verify(token)
+
+        const userDataBase = new UserDatabase()
+        const user = await userDataBase.getUserById(userAuthData.id)       
+
+        res.status(200).send({
+            id: user.id,
+            email: user.email
+        })
+        
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 
 
 
