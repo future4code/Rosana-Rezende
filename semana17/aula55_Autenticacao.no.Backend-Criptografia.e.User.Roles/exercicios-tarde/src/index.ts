@@ -68,15 +68,11 @@ app.use(express.json());
 // })()
 
 
-
-
-
-
-
-
+// ====================================================================
+// =============================== 1 ==================================
 // ====================================================================
 
-
+// // b
 
 app.post("/signup", async(req: Request, res: Response) => {
     try{
@@ -96,8 +92,11 @@ app.post("/signup", async(req: Request, res: Response) => {
         const idGenerator = new IdGenerator()
         const id = idGenerator.generateId()
 
+        const hashManager = new HashManager()
+        const hashPassword = await hashManager.hash(password)
+
         const userDataBase = new UserDatabase()
-        await userDataBase.createUser(id, email, password)
+        await userDataBase.createUser(id, email, hashPassword)
 
         const authenticator = new Authenticator()
         const token = authenticator.generateToken(id)
@@ -114,6 +113,8 @@ app.post("/signup", async(req: Request, res: Response) => {
 })
 
 
+// // c
+
 app.post("/login", async(req: Request, res: Response) => {
     try{
         const email = req.body.email
@@ -129,7 +130,13 @@ app.post("/login", async(req: Request, res: Response) => {
         const userDataBase = new UserDatabase()
         const user = await userDataBase.getUserByEmail(email)
 
-        if(user.password !== password){
+        const hashManager = new HashManager()
+        const compareResult = await hashManager.compare(password, user.password)
+
+        // if(user.password !== password){
+        //     throw new Error("Senha incorreta")
+        // }
+        if(!compareResult){
             throw new Error("Senha incorreta")
         }
 
@@ -145,6 +152,13 @@ app.post("/login", async(req: Request, res: Response) => {
         })
     }
 })
+
+
+
+
+
+
+
 
 app.get("/user/profile", async(req: Request, res: Response) => {
     try{

@@ -81,10 +81,7 @@ Na aula de ontem, implementamos os endpoints de *singup* e *login* sem utilizar 
 
 *a. Para realizar os testes corretamente, qual deles você deve modificar primeiro? O cadastro ou o login? Justifique.*
 
-_Resposta_:
-```ts
-
-```
+_Resposta_: Primeiro é necessário alterar o cadastro, pois só será possível realizar o login, comparando a hash com as informações do banco de dados, se essas informações já estiverem atualizadas no respectivo banco de dados.
 
 <br>
 
@@ -92,7 +89,43 @@ _Resposta_:
 
 _Resposta_:
 ```ts
+app.post("/signup", async(req: Request, res: Response) => {
+    try{
+        const email = req.body.email
+        if(email === ""){
+            throw new Error("O campo email não pode ficar vazio")
+        }
+        if(!email.includes("@")){
+            throw new Error("Informe um email válido")
+        }
 
+        const password = req.body.password
+        if(password.length < 6){
+            throw new Error("A senha deve ter no mínimo 6 caracteres")
+        }
+
+        const idGenerator = new IdGenerator()
+        const id = idGenerator.generateId()
+
+        const hashManager = new HashManager()
+        const hashPassword = await hashManager.hash(password)
+
+        const userDataBase = new UserDatabase()
+        await userDataBase.createUser(id, email, hashPassword)
+
+        const authenticator = new Authenticator()
+        const token = authenticator.generateToken(id)
+
+        res.status(200).send({
+            token
+        })
+
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 ```
 
 <br>
@@ -101,19 +134,53 @@ _Resposta_:
 
 _Resposta_:
 ```ts
+app.post("/login", async(req: Request, res: Response) => {
+    try{
+        const email = req.body.email
+        if(email === ""){
+            throw new Error("O campo email não pode ficar vazio")
+        }
+        if(!email.includes("@")){
+            throw new Error("Informe um email válido")
+        }
 
+        const password = req.body.password
+
+        const userDataBase = new UserDatabase()
+        const user = await userDataBase.getUserByEmail(email)
+
+        const hashManager = new HashManager()
+        const compareResult = await hashManager.compare(password, user.password)
+
+        // if(user.password !== password){
+        //     throw new Error("Senha incorreta")
+        // }
+        if(!compareResult){
+            throw new Error("Senha incorreta")
+        }
+
+        const authenticator = new Authenticator()
+        const token = authenticator.generateToken(user.id)
+
+        res.status(200).send({
+            token
+        })
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 ```
 
 <br>
 
 *d. No exercício de ontem, nós criamos o endpoint `user/profile`. Também temos que modificar esse endpoint devido à adição da criptografia? Justifique.*
 
-_Resposta_:
-```ts
-
-```
+_Resposta_: Acredito que não é preciso modificá-lo, uma vez que o que ele espera receber é um token, o que já é possível gerar com as modificações do login e do signup.
 
 <br><br>
+
 
 ### Exercício 3
 
