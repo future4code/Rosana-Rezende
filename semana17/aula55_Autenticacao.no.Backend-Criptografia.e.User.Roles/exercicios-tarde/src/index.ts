@@ -2,9 +2,10 @@ import express, { Request, Response } from "express";
 import { AddressInfo } from "net";
 import dotenv from "dotenv";
 
-import { IdGenerator } from "./service/IdGenerator";
+import { IdGenerator } from "./services/IdGenerator";
 import { UserDatabase } from "./data/UserDatabase";
-import { Authenticator } from "./service/Authenticator";
+import { Authenticator } from "./services/Authenticator";
+import { HashManager } from "./services/HashManager";
 
 dotenv.config();
 
@@ -43,7 +44,38 @@ app.use(express.json());
 // })()
 
 
+
 // ====================================================================
+// =============================== 1 ==================================
+// ====================================================================
+
+// // testar hashmanager
+// (async () => {
+    
+//     // conferindo a criação de hash
+//     const hashManager = new HashManager()
+//     const result = await hashManager.hash("123abc")
+//     console.log(result)
+
+//     // deve retornar true
+//     let compareResult = await hashManager.compare("123abc", result)
+//     console.log(compareResult)
+
+//     // deve retornar false
+//     let compareResult2 = await hashManager.compare("124abd", result)
+//     console.log(compareResult2)
+
+// })()
+
+
+
+
+
+
+
+
+// ====================================================================
+
 
 
 app.post("/signup", async(req: Request, res: Response) => {

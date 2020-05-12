@@ -34,10 +34,8 @@ console.log("encrypted message: ", result);
 
 *a. O que são os `round` e `salt`? Que valores são recomendados para o `round`? Que valor você usou? Por quê?*
 
-_Resposta_:
-```ts
-
-```
+_Resposta_: `Round (ou cost)` representa o fator relacionado à segurança da senha: quanto maior o custo, mais segura e também maior o tempo de execução. É preciso avaliar o quanto queremos equelibrar segurança e tempo, mas a média usada pela maior parte das libs é 12. Também usei o valor 12, pois testei na minha máquina e não atrapalhou o desempenho.
+`Salt`, por sua vez, é uma string aleatória adicionada no texto antes de criar a hash, o que confere uma camada adicional de proteção, evitando os chamados rainbow table.
 
 <br>
 
@@ -46,7 +44,14 @@ _Resposta_:
 
 _Resposta_:
 ```ts
-
+export class HashManager {
+    public async hash(plaintext: string): Promise<string> {
+        const rounds = Number(process.env.BCRYPT_COST)
+        const salt = await bcrypt.genSalt(rounds)
+        const hash = await bcrypt.hash(plaintext, salt)
+        return hash
+    }    
+}
 ```
 
 <br>
@@ -56,7 +61,13 @@ _Resposta_:
 
 _Resposta_:
 ```ts
-
+export class HashManager {
+    //...
+    public async compare(plaintext: string, hash: string): Promise<boolean> {
+        const result = await bcrypt.compare(plaintext, hash)
+        return result
+    }
+}
 ```
 
 <br><br>
