@@ -56,7 +56,7 @@ export class HashManager {
 
 <br>
 
-*c. Agora, crie a função que verifique se uma string é correspondente a um hash, use a função `verify` do bcryptjs*
+*c. Agora, crie a função que verifique se uma string é correspondente a um hash, use a função `compare` do bcryptjs*
 
 
 _Resposta_:
@@ -191,8 +191,9 @@ Agora, vamos pensar em um pouco nas funcionalidades relacionadas aos tipos de us
 *a. Altere a sua tabela de usuários para ela possuir uma coluna `role`. Considere que pode assumir os valores `normal`  e `admin`. Coloque `normal` como valor padrão.*
 
 _Resposta_:
-```ts
-
+```sql
+ALTER TABLE User
+ADD COLUMN role VARCHAR(255) DEFAULT "normal"
 ```
 
 <br>
@@ -201,7 +202,46 @@ _Resposta_:
 
 _Resposta_:
 ```ts
+import * as jwt from "jsonwebtoken"
 
+export class Authenticator {
+    // private static EXPIRES_IN = "1min";
+
+    private static getExpiresIn(): number {
+        return Number(process.env.ACCESS_TOKEN_EXPIRES_IN)
+    }
+
+    public generateToken(input: AuthenticationData): string {
+        const token = jwt.sign(
+            // input
+            {
+                id: input.id,
+                role: input.role
+            },
+            process.env.JWT_KEY as string,
+            {
+                // expiresIn: Authenticator.EXPIRES_IN,
+                expiresIn: Authenticator.getExpiresIn()
+            }
+        )
+        return token
+    }
+
+    public verify(token: string): AuthenticationData {
+        const payload = jwt.verify(token, process.env.JWT_KEY as string) as any;
+        const result = {
+            id: payload.id,
+            role: payload.role
+        };
+        return result;
+    };
+
+}
+
+interface AuthenticationData {
+    id: string, 
+    role: string
+}
 ```
 
 <br>
@@ -209,17 +249,120 @@ _Resposta_:
 *c. Altere o cadastro para receber o tipo do usuário e criar o token com essa informação*
 
 _Resposta_:
-```ts
 
+Foram 2 alterações
+
+```ts
+export class UserDatabase {
+  // ...
+  public async createUser(
+        id: string,
+        email: string,
+        password: string,
+        role: string
+    ): Promise<void> {
+        await this.connection()
+            .insert({
+                id,
+                email,
+                password,
+                role
+            })
+            .into(UserDatabase.TABLE_NAME)
+    }
+}
+```
+
+e
+
+```ts
+app.post("/signup", async(req: Request, res: Response) => {
+    try{
+        const email = req.body.email
+        if(email === ""){
+            throw new Error("O campo email não pode ficar vazio")
+        }
+        if(!email.includes("@")){
+            throw new Error("Informe um email válido")
+        }
+
+        const password = req.body.password
+        if(password.length < 6){
+            throw new Error("A senha deve ter no mínimo 6 caracteres")
+        }
+
+        const role = req.body.role
+
+        const idGenerator = new IdGenerator()
+        const id = idGenerator.generateId()
+
+        const hashManager = new HashManager()
+        const hashPassword = await hashManager.hash(password)
+
+        const userDataBase = new UserDatabase()
+        await userDataBase.createUser(id, email, hashPassword, role)
+
+        const authenticator = new Authenticator()
+        const token = authenticator.generateToken({
+            id,
+            role
+        })
+
+        res.status(200).send({
+            token
+        })
+
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 ```
 
 <br>
 
-*d. Altere o login para crair o token com o `role` do usuário*
+*d. Altere o login para criar o token com o `role` do usuário*
 
 _Resposta_:
 ```ts
+app.post("/login", async(req: Request, res: Response) => {
+    try{
+        const email = req.body.email
+        if(email === ""){
+            throw new Error("O campo email não pode ficar vazio")
+        }
+        if(!email.includes("@")){
+            throw new Error("Informe um email válido")
+        }
 
+        const password = req.body.password
+
+        const userDataBase = new UserDatabase()
+        const user = await userDataBase.getUserByEmail(email)
+
+        const hashManager = new HashManager()
+        const compareResult = await hashManager.compare(password, user.password)
+
+        if(!compareResult){
+            throw new Error("Senha incorreta")
+        }
+
+        const authenticator = new Authenticator()
+        const token = authenticator.generateToken({
+            id: user.id,
+            role: user.role
+        })
+
+        res.status(200).send({
+            token
+        })
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 ```
 
 <br><br>

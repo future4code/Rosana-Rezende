@@ -22,18 +22,28 @@ export class UserDatabase {
         return result
     }
 
+    public async addColumRole(): Promise<void> {
+        await this.connection().raw(`
+            ALTER TABLE User
+            ADD COLUMN role VARCHAR(255) DEFAULT "normal"
+        `)
+        console.log("Tabela alterada com sucesso")
+    }
+
     private static TABLE_NAME: string = "User"
 
     public async createUser(
         id: string,
         email: string,
-        password: string
+        password: string,
+        role: string
     ): Promise<void> {
         await this.connection()
             .insert({
                 id,
                 email,
-                password
+                password,
+                role
             })
             .into(UserDatabase.TABLE_NAME)
     }

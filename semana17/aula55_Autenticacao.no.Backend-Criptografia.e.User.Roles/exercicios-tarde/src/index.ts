@@ -69,11 +69,101 @@ app.use(express.json());
 
 
 // ====================================================================
-// =============================== 1 ==================================
+// =============================== 2 ==================================
 // ====================================================================
 
 // // b
 
+// app.post("/signup", async(req: Request, res: Response) => {
+//     try{
+//         const email = req.body.email
+//         if(email === ""){
+//             throw new Error("O campo email não pode ficar vazio")
+//         }
+//         if(!email.includes("@")){
+//             throw new Error("Informe um email válido")
+//         }
+
+//         const password = req.body.password
+//         if(password.length < 6){
+//             throw new Error("A senha deve ter no mínimo 6 caracteres")
+//         }
+
+//         const idGenerator = new IdGenerator()
+//         const id = idGenerator.generateId()
+
+//         const hashManager = new HashManager()
+//         const hashPassword = await hashManager.hash(password)
+
+//         const userDataBase = new UserDatabase()
+//         await userDataBase.createUser(id, email, hashPassword)
+
+//         const authenticator = new Authenticator()
+//         const token = authenticator.generateToken(id)
+
+//         res.status(200).send({
+//             token
+//         })
+
+//     } catch(err){
+//         res.status(400).send({
+//             message: err.message
+//         })
+//     }
+// })
+
+
+// // c
+
+// app.post("/login", async(req: Request, res: Response) => {
+//     try{
+//         const email = req.body.email
+//         if(email === ""){
+//             throw new Error("O campo email não pode ficar vazio")
+//         }
+//         if(!email.includes("@")){
+//             throw new Error("Informe um email válido")
+//         }
+
+//         const password = req.body.password
+
+//         const userDataBase = new UserDatabase()
+//         const user = await userDataBase.getUserByEmail(email)
+
+//         const hashManager = new HashManager()
+//         const compareResult = await hashManager.compare(password, user.password)
+
+//         // if(user.password !== password){
+//         //     throw new Error("Senha incorreta")
+//         // }
+//         if(!compareResult){
+//             throw new Error("Senha incorreta")
+//         }
+
+//         const authenticator = new Authenticator()
+//         const token = authenticator.generateToken(user.id)
+
+//         res.status(200).send({
+//             token
+//         })
+//     } catch(err){
+//         res.status(400).send({
+//             message: err.message
+//         })
+//     }
+// })
+
+
+// ====================================================================
+// =============================== 3 ==================================
+// ====================================================================
+
+// // a
+// const userDataBase = new UserDatabase()
+// userDataBase.addColumRole()
+
+
+// // c
 app.post("/signup", async(req: Request, res: Response) => {
     try{
         const email = req.body.email
@@ -89,6 +179,8 @@ app.post("/signup", async(req: Request, res: Response) => {
             throw new Error("A senha deve ter no mínimo 6 caracteres")
         }
 
+        const role = req.body.role
+
         const idGenerator = new IdGenerator()
         const id = idGenerator.generateId()
 
@@ -96,10 +188,13 @@ app.post("/signup", async(req: Request, res: Response) => {
         const hashPassword = await hashManager.hash(password)
 
         const userDataBase = new UserDatabase()
-        await userDataBase.createUser(id, email, hashPassword)
+        await userDataBase.createUser(id, email, hashPassword, role)
 
         const authenticator = new Authenticator()
-        const token = authenticator.generateToken(id)
+        const token = authenticator.generateToken({
+            id,
+            role
+        })
 
         res.status(200).send({
             token
@@ -113,7 +208,7 @@ app.post("/signup", async(req: Request, res: Response) => {
 })
 
 
-// // c
+// // d
 
 app.post("/login", async(req: Request, res: Response) => {
     try{
@@ -133,15 +228,15 @@ app.post("/login", async(req: Request, res: Response) => {
         const hashManager = new HashManager()
         const compareResult = await hashManager.compare(password, user.password)
 
-        // if(user.password !== password){
-        //     throw new Error("Senha incorreta")
-        // }
         if(!compareResult){
             throw new Error("Senha incorreta")
         }
 
         const authenticator = new Authenticator()
-        const token = authenticator.generateToken(user.id)
+        const token = authenticator.generateToken({
+            id: user.id,
+            role: user.role
+        })
 
         res.status(200).send({
             token
@@ -152,8 +247,6 @@ app.post("/login", async(req: Request, res: Response) => {
         })
     }
 })
-
-
 
 
 
