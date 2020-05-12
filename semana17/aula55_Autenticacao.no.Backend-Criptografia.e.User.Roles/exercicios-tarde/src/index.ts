@@ -1,38 +1,53 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { AddressInfo } from "net";
 import dotenv from "dotenv";
 
-import { IdGenerator } from "./services/IdGenerator";
-import { UserDatabase } from "./data/UserDatabase";
-import { Authenticator } from "./services/Authenticator";
-import { HashManager } from "./services/HashManager";
-import { BaseDatabase } from "./data/BaseDatabase";
+import { signupEndpoint } from "./endpoints/SignupEndpoint";
+import { loginEndpoint } from "./endpoints/LoginEndpoint";
+import { getProfileEndpoint } from "./endpoints/GetProfileEndpoint";
+import { deleteEndpoint } from "./endpoints/DeleteEndpoint";
+import { getUserByIdEndepoint } from "./endpoints/GetUserByIdEndepoint";
 
 dotenv.config();
-
 const app = express();
 app.use(express.json());
 
 
-// ====================================================================
+app.post("/signup", signupEndpoint)
+app.post("/login", loginEndpoint)
 
-// const idGenerator = new IdGenerator()
-// const id = idGenerator.generateId()
-// console.log("Generated Id: ", id)
+app.get("/user/profile", getProfileEndpoint)
+app.get("/user/:id", getUserByIdEndepoint)
 
-// const authenticator = new Authenticator()
-// const token = authenticator.generateToken(id)
-// console.log("token: ", token)
-
-// const data = authenticator.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM4ODI0NGI1LTMwODEtNDdmNS05M2JiLTRjYjhjYmVjYjcxMyIsImlhdCI6MTU4OTIyNzI0NiwiZXhwIjoxNTg5MjI3MzY2fQ.8DJdfUr9WkhHa4VrcZ6BGWJCqX8ij7ujfndukS74fYE")
-// console.log("data from token", data)
-
-    // // data from token { id: 'c88244b5-3081-47f5-93bb-4cb8cbecb713' }
-    // // ou
-    // // [ERROR] 17:06:20 TokenExpiredError: jwt expired
+app.delete("/user/:id", deleteEndpoint)
 
 
-    
+const server = app.listen(process.env.PORT || 3000, () => {
+    if (server) {
+        const address = server.address() as AddressInfo;
+        console.log(`Server is running in http://localhost:${address.port}`);
+    } else {
+        console.error(`Failure upon starting server.`);
+    }
+});
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////// SEM DESAFIO /////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+// import express, { Request, Response } from "express";
+// import { IdGenerator } from "./services/IdGenerator";
+// import { HashManager } from "./services/HashManager";
+// import { UserDatabase } from "./data/UserDatabase";
+// import { Authenticator } from "./services/Authenticator";
+// import { BaseDatabase } from "./data/BaseDatabase";
+
+
 // (async () => {
 //     const userDataBase = new UserDatabase()
 //     console.log(await userDataBase.getUserByEmail("oi@teste.com"))
@@ -165,95 +180,95 @@ app.use(express.json());
 
 
 // // c
-app.post("/signup", async(req: Request, res: Response) => {
-    try{
-        const email = req.body.email
-        if(email === ""){
-            throw new Error("O campo email não pode ficar vazio")
-        }
-        if(!email.includes("@")){
-            throw new Error("Informe um email válido")
-        }
+// app.post("/signup", async(req: Request, res: Response) => {
+//     try{
+//         const email = req.body.email
+//         if(email === ""){
+//             throw new Error("O campo email não pode ficar vazio")
+//         }
+//         if(!email.includes("@")){
+//             throw new Error("Informe um email válido")
+//         }
 
-        const password = req.body.password
-        if(password.length < 6){
-            throw new Error("A senha deve ter no mínimo 6 caracteres")
-        }
+//         const password = req.body.password
+//         if(password.length < 6){
+//             throw new Error("A senha deve ter no mínimo 6 caracteres")
+//         }
 
-        const role = req.body.role
+//         const role = req.body.role
 
-        const idGenerator = new IdGenerator()
-        const id = idGenerator.generateId()
+//         const idGenerator = new IdGenerator()
+//         const id = idGenerator.generateId()
 
-        const hashManager = new HashManager()
-        const hashPassword = await hashManager.hash(password)
+//         const hashManager = new HashManager()
+//         const hashPassword = await hashManager.hash(password)
 
-        const userDataBase = new UserDatabase()
-        await userDataBase.createUser(id, email, hashPassword, role)
+//         const userDataBase = new UserDatabase()
+//         await userDataBase.createUser(id, email, hashPassword, role)
 
-        const authenticator = new Authenticator()
-        const token = authenticator.generateToken({
-            id,
-            role
-        })
+//         const authenticator = new Authenticator()
+//         const token = authenticator.generateToken({
+//             id,
+//             role
+//         })
 
-        res.status(200).send({
-            token
-        })
+//         res.status(200).send({
+//             token
+//         })
 
-    } catch(err){
-        res.status(400).send({
-            message: err.message
-        })
-    }
+//     } catch(err){
+//         res.status(400).send({
+//             message: err.message
+//         })
+//     }
 
-    // 7
-    await BaseDatabase.destroyConnection()
-})
+//     // 7
+//     await BaseDatabase.destroyConnection()
+// })
 
 
 // // d
 
-app.post("/login", async(req: Request, res: Response) => {
-    try{
-        const email = req.body.email
-        if(email === ""){
-            throw new Error("O campo email não pode ficar vazio")
-        }
-        if(!email.includes("@")){
-            throw new Error("Informe um email válido")
-        }
+// app.post("/login", async(req: Request, res: Response) => {
+//     try{
+//         const email = req.body.email
+//         if(email === ""){
+//             throw new Error("O campo email não pode ficar vazio")
+//         }
+//         if(!email.includes("@")){
+//             throw new Error("Informe um email válido")
+//         }
 
-        const password = req.body.password
+//         const password = req.body.password
 
-        const userDataBase = new UserDatabase()
-        const user = await userDataBase.getUserByEmail(email)
+//         const userDataBase = new UserDatabase()
+//         const user = await userDataBase.getUserByEmail(email)
 
-        const hashManager = new HashManager()
-        const compareResult = await hashManager.compare(password, user.password)
+//         const hashManager = new HashManager()
+//         const compareResult = await hashManager.compare(password, user.password)
 
-        if(!compareResult){
-            throw new Error("Senha incorreta")
-        }
+//         if(!compareResult){
+//             throw new Error("Senha incorreta")
+//         }
 
-        const authenticator = new Authenticator()
-        const token = authenticator.generateToken({
-            id: user.id,
-            role: user.role
-        })
+//         const authenticator = new Authenticator()
+//         const token = authenticator.generateToken({
+//             id: user.id,
+//             role: user.role
+//         })
 
-        res.status(200).send({
-            token
-        })
-    } catch(err){
-        res.status(400).send({
-            message: err.message
-        })
-    }
+//         res.status(200).send({
+//             token
+//         })
+//     } catch(err){
+//         res.status(400).send({
+//             message: err.message
+//         })
+//     }
 
-    // 7
-    await BaseDatabase.destroyConnection()
-})
+//     // 7
+//     await BaseDatabase.destroyConnection()
+// })
 
 
 
@@ -262,67 +277,67 @@ app.post("/login", async(req: Request, res: Response) => {
 // ====================================================================
 
 
-app.get("/user/profile", async(req: Request, res: Response) => {
-    try{
-        const token = req.headers.authorization as string
+// app.get("/user/profile", async(req: Request, res: Response) => {
+//     try{
+//         const token = req.headers.authorization as string
 
-        const authenticator = new Authenticator()
-        const userAuthData = authenticator.verify(token)
+//         const authenticator = new Authenticator()
+//         const userAuthData = authenticator.verify(token)
 
-        if(userAuthData.role !== "normal"){
-            throw new Error("Unauthorized")
-        }
+//         if(userAuthData.role !== "normal"){
+//             throw new Error("Unauthorized")
+//         }
 
-        const userDataBase = new UserDatabase()
-        const user = await userDataBase.getUserById(userAuthData.id)       
+//         const userDataBase = new UserDatabase()
+//         const user = await userDataBase.getUserById(userAuthData.id)       
 
-        res.status(200).send({
-            id: user.id,
-            email: user.email
-        })
+//         res.status(200).send({
+//             id: user.id,
+//             email: user.email
+//         })
         
-    } catch(err){
-        res.status(400).send({
-            message: err.message
-        })
-    }
+//     } catch(err){
+//         res.status(400).send({
+//             message: err.message
+//         })
+//     }
 
-    // 7
-    await BaseDatabase.destroyConnection()
-})
+//     // 7
+//     await BaseDatabase.destroyConnection()
+// })
 
 
 // ====================================================================
 // =============================== 5 ==================================
 // ====================================================================
 
-app.delete("/user/:id", async(req: Request, res: Response) => {
-    try{
-        const token = req.headers.authorization as string
+// app.delete("/user/:id", async(req: Request, res: Response) => {
+//     try{
+//         const token = req.headers.authorization as string
 
-        const authenticator = new Authenticator()
-        const userAuthData = authenticator.verify(token)
+//         const authenticator = new Authenticator()
+//         const userAuthData = authenticator.verify(token)
 
-        if(userAuthData.role !== "admin"){
-            throw new Error("Unauthorized")
-        }
+//         if(userAuthData.role !== "admin"){
+//             throw new Error("Unauthorized")
+//         }
 
-        const id = req.params.id
+//         const id = req.params.id
 
-        const userDataBase = new UserDatabase()
-        await userDataBase.deleteUser(id) 
+//         const userDataBase = new UserDatabase()
+//         await userDataBase.deleteUser(id) 
 
-        res.sendStatus(200)
+//         res.sendStatus(200)
 
-    } catch(err){
-        res.status(400).send({
-            message: err.message
-        })
-    }
+//     } catch(err){
+//         res.status(400).send({
+//             message: err.message
+//         })
+//     }
 
-    // 7
-    await BaseDatabase.destroyConnection()
-})
+//     // 7
+//     await BaseDatabase.destroyConnection()
+// })
 
 
 
@@ -330,42 +345,42 @@ app.delete("/user/:id", async(req: Request, res: Response) => {
 // =============================== 6 ==================================
 // ====================================================================
 
-app.get("/user/:id", async(req: Request, res: Response) => {
-    try{
-        const token = req.headers.authorization as string
+// app.get("/user/:id", async(req: Request, res: Response) => {
+//     try{
+//         const token = req.headers.authorization as string
 
-        const authenticator = new Authenticator()
-        authenticator.verify(token)
+//         const authenticator = new Authenticator()
+//         authenticator.verify(token)
         
-        const id = req.params.id
+//         const id = req.params.id
 
-        const userDataBase = new UserDatabase()
-        const user = await userDataBase.getUserById(id)       
+//         const userDataBase = new UserDatabase()
+//         const user = await userDataBase.getUserById(id)       
 
-        res.status(200).send({
-            id: user.id,
-            email: user.email
-        })
+//         res.status(200).send({
+//             id: user.id,
+//             email: user.email
+//         })
         
-    } catch(err){
-        res.status(400).send({
-            message: err.message
-        })
-    }
+//     } catch(err){
+//         res.status(400).send({
+//             message: err.message
+//         })
+//     }
 
-    // 7
-    await BaseDatabase.destroyConnection()
-})
-
-
-// ====================================================================
+//     // 7
+//     await BaseDatabase.destroyConnection()
+// })
 
 
-const server = app.listen(process.env.PORT || 3000, () => {
-    if (server) {
-        const address = server.address() as AddressInfo;
-        console.log(`Server is running in http://localhost:${address.port}`);
-    } else {
-        console.error(`Failure upon starting server.`);
-    }
-});
+// // ====================================================================
+
+
+// const server = app.listen(process.env.PORT || 3000, () => {
+//     if (server) {
+//         const address = server.address() as AddressInfo;
+//         console.log(`Server is running in http://localhost:${address.port}`);
+//     } else {
+//         console.error(`Failure upon starting server.`);
+//     }
+// });
