@@ -250,7 +250,9 @@ app.post("/login", async(req: Request, res: Response) => {
 
 
 
-
+// ====================================================================
+// =============================== 4 ==================================
+// ====================================================================
 
 
 app.get("/user/profile", async(req: Request, res: Response) => {
@@ -259,6 +261,10 @@ app.get("/user/profile", async(req: Request, res: Response) => {
 
         const authenticator = new Authenticator()
         const userAuthData = authenticator.verify(token)
+
+        if(userAuthData.role !== "normal"){
+            throw new Error("Unauthorized")
+        }
 
         const userDataBase = new UserDatabase()
         const user = await userDataBase.getUserById(userAuthData.id)       
