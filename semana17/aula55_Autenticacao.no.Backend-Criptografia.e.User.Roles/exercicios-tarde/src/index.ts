@@ -6,6 +6,7 @@ import { IdGenerator } from "./services/IdGenerator";
 import { UserDatabase } from "./data/UserDatabase";
 import { Authenticator } from "./services/Authenticator";
 import { HashManager } from "./services/HashManager";
+import { BaseDatabase } from "./data/BaseDatabase";
 
 dotenv.config();
 
@@ -205,6 +206,9 @@ app.post("/signup", async(req: Request, res: Response) => {
             message: err.message
         })
     }
+
+    // 7
+    await BaseDatabase.destroyConnection()
 })
 
 
@@ -246,6 +250,9 @@ app.post("/login", async(req: Request, res: Response) => {
             message: err.message
         })
     }
+
+    // 7
+    await BaseDatabase.destroyConnection()
 })
 
 
@@ -279,6 +286,9 @@ app.get("/user/profile", async(req: Request, res: Response) => {
             message: err.message
         })
     }
+
+    // 7
+    await BaseDatabase.destroyConnection()
 })
 
 
@@ -309,6 +319,9 @@ app.delete("/user/:id", async(req: Request, res: Response) => {
             message: err.message
         })
     }
+
+    // 7
+    await BaseDatabase.destroyConnection()
 })
 
 
@@ -339,6 +352,9 @@ app.get("/user/:id", async(req: Request, res: Response) => {
             message: err.message
         })
     }
+
+    // 7
+    await BaseDatabase.destroyConnection()
 })
 
 

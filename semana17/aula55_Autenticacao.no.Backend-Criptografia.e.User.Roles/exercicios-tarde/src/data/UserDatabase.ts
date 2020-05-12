@@ -1,19 +1,20 @@
-import knex from "knex";
+// import knex from "knex";
+import { BaseDatabase } from "./BaseDatabase";
 
-export class UserDatabase {
+export class UserDatabase extends BaseDatabase {
 
-    private connection() {
-        return knex({
-            client: "mysql",
-            connection: {
-                host: process.env.DB_HOST,
-                port: Number(process.env.DB_PORT || "3306"),
-                user: process.env.DB_USER,
-                password: process.env.DB_PASSWORD,
-                database: process.env.DB_NAME,
-            },
-        });
-    }
+    // private connection() {
+    //     return knex({
+    //         client: "mysql",
+    //         connection: {
+    //             host: process.env.DB_HOST,
+    //             port: Number(process.env.DB_PORT || "3306"),
+    //             user: process.env.DB_USER,
+    //             password: process.env.DB_PASSWORD,
+    //             database: process.env.DB_NAME,
+    //         },
+    //     });
+    // }
 
     //conferir conteúdo de tabelas já criadas
     public async getTableContent(table_name: string): Promise<any> {
