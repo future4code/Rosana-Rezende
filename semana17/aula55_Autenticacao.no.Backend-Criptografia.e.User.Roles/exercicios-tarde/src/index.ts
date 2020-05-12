@@ -37,10 +37,10 @@ app.use(express.json());
 // })()
 
 // OBS: conferir conteúdo de tabelas já criadas
-(async () => {
-    const userDataBase = new UserDatabase()
-    console.log(await userDataBase.getTableContent("User"))
-})()
+// (async () => {
+//     const userDataBase = new UserDatabase()
+//     console.log(await userDataBase.getTableContent("User"))
+// })()
 
 
 // ====================================================================
