@@ -414,7 +414,30 @@ Implemente o endpoint que realizará a deleção de um usuário. As especificaç
 
 _Resposta_:
 ```ts
+app.delete("/user/:id", async(req: Request, res: Response) => {
+    try{
+        const token = req.headers.authorization as string
 
+        const authenticator = new Authenticator()
+        const userAuthData = authenticator.verify(token)
+
+        if(userAuthData.role !== "admin"){
+            throw new Error("Unauthorized")
+        }
+
+        const id = req.params.id
+
+        const userDataBase = new UserDatabase()
+        await userDataBase.deleteUser(id) 
+
+        res.sendStatus(200)
+
+    } catch(err){
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
 ```
 
 <br><br>
