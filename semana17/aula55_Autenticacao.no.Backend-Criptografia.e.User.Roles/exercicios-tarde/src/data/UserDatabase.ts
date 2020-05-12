@@ -16,10 +16,10 @@ export class UserDatabase {
     }
 
     //conferir conteúdo de tabelas já criadas
-    public async getTableContent(table_name: string): Promise<void> {
+    public async getTableContent(table_name: string): Promise<any> {
         const result = await this.connection()(`${table_name}`)
             .select("*")
-        console.log(result[0])
+        return result
     }
 
     private static TABLE_NAME: string = "User"
