@@ -7,6 +7,8 @@ Desenvolvimento de aplicações completas, incluindo frontend Web com React e ba
 
 ## Aula 62 - Testes automatizados com Typescript
 
+<br>
+
 ### Exercício 1
 
 Para começar, você deve criar um programa que verifique se um usuário pode fazer uma compra ou não. Ela deve receber um objeto `user` (com nome e saldo) e um valor de compra. Caso o saldo seja maior ou igual ao valor de compra você deve retornar um novo usuário (com o mesmo nome e o saldo atualizado depois da compra). Caso contrário, retorne `undefined`
@@ -15,11 +17,17 @@ Para começar, você deve criar um programa que verifique se um usuário pode fa
 function performPurchase(user: User, value: number): User | undefined 
 ```
 
+<br>
+
 *a. Crie uma interface para representar o usuário*
 
 _Resposta_:
 
-```tsc
+```ts
+interface User {
+    name: string,
+    balance: number
+}
 ```
 
 <br>
@@ -28,7 +36,17 @@ _Resposta_:
 
 _Resposta_:
 
-```tsc
+```ts
+function performPurchase(user: User, value: number): User | undefined {
+    if(user.balance >= value){
+        const newUser: User = {
+            name: user.name,
+            balance: user.balance - value
+        }
+        return newUser
+    }
+    return undefined
+}
 ```
 
 <br><br>
@@ -36,6 +54,8 @@ _Resposta_:
 ### Exercício 2
 
 Agora vamos criar testes para essa função. Lembre-se de criar o arquivo com o padrão `<nome>.test.ts` na pasta  `tests`
+
+<br>
 
 *a. Faça um teste com um usuário com o saldo maior do que o valor de compra*
 
