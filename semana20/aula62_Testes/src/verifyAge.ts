@@ -1,4 +1,4 @@
-function verifyAge(casino: Casino, users: User[]): Result {
+export function verifyAge(casino: Casino, users: User[]): Result {
     const allowed: User[] = [];
     const unallowed: User[] = [];
 
@@ -41,12 +41,12 @@ function verifyAge(casino: Casino, users: User[]): Result {
     return result
 }
 
-enum LOCATION {
+export enum LOCATION {
     EUA = "EUA",
     BRAZIL = "BRAZIL",
 }
 
-enum NACIONALITY {
+export enum NACIONALITY {
     BRAZILIAN = "BRAZILIAN",
     AMERICAN = "AMERICAN",
 }
