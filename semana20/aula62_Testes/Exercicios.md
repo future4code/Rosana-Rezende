@@ -563,7 +563,31 @@ Lembre-se de pegar as variáveis de ambiente, instalar e configurar o `dotenv`
 
 _Resposta_:
 
-```tsc
+```ts
+it("Should insert an post into post table", async () => {
+        const post = new Post(
+            "001", 
+            "image 1", 
+            "description 1", 
+            new Date(2020, 6, 1), 
+            "normal", 
+            "4ea0b7c0-3a2e-4f9d-8bdd-a6d8f11e7332"
+        )
+        await postDatabase.createPost(post)
+        
+        const post1 = await postDatabase.getPostById(post.getId()) // ou "001"
+        const post1Output = {
+            id: "001",
+            image: "image 1", 
+            description: "description 1", 
+            creation_date: new Date(2020, 6, 1), 
+            type: "normal", 
+            user_id: "4ea0b7c0-3a2e-4f9d-8bdd-a6d8f11e7332"
+        }
+
+        expect(post1).not.toBe(undefined)
+        expect(post1).toEqual(post1Output)
+})
 ```
 
 <br>
@@ -572,7 +596,11 @@ _Resposta_:
 
 _Resposta_:
 
-```tsc
+```ts
+afterAll(async () => {
+        await postDatabase.deletePost("001")
+        await BaseDatabase.destroyConnection()
+})
 ```
 
 <br><br>
