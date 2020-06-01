@@ -1,0 +1,293 @@
+# Labenu | Full-Stack Web Development Bootcamp
+
+Desenvolvimento de aplicações completas, incluindo frontend Web com React e backend com Node.js.
+
+![Screenshot_1](https://user-images.githubusercontent.com/45580434/79641791-06e1c100-8170-11ea-8ecf-b6c889805d55.png)
+<br>
+
+## Aula 62 - Testes automatizados com Typescript
+
+### Exercício 1
+
+Para começar, você deve criar um programa que verifique se um usuário pode fazer uma compra ou não. Ela deve receber um objeto `user` (com nome e saldo) e um valor de compra. Caso o saldo seja maior ou igual ao valor de compra você deve retornar um novo usuário (com o mesmo nome e o saldo atualizado depois da compra). Caso contrário, retorne `undefined`
+
+```tsx
+function performPurchase(user: User, value: number): User | undefined 
+```
+
+*a. Crie uma interface para representar o usuário*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*b. Implemente  a função*
+
+_Resposta_:
+
+```tsc
+```
+
+<br><br>
+
+### Exercício 2
+
+Agora vamos criar testes para essa função. Lembre-se de criar o arquivo com o padrão `<nome>.test.ts` na pasta  `tests`
+
+*a. Faça um teste com um usuário com o saldo maior do que o valor de compra*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*b. Faça um teste com um usuário com o saldo igual ao valor de compra*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*c. Faça um teste com um usuário com o saldo menor do que o valor de compra*
+
+_Resposta_:
+
+```tsc
+```
+
+<br><br>
+
+### Exercício 3
+
+Agora, vamos fazer uma função mais complexa. O contexto dela é o seguinte: fazer um sistema que identifique quais pessoas que estão em uma fila podem entrar em um cassino. A empresa que vai fazer isso quer ter filias nos EUA e no Brasil. Então, os `casino` devem possuir um nome e um lugar onde ficam (`EUA` ou `BRAZIL`).  Os usuários devem ser identificados pelo nome, pela nacionalidade (`AMERICAN` ou `BRAZILIAN`) e a idade. Se um usuário for entrar em um `casino` nos Estados Unidos, ele deve ter idade maior do que (idade igual a) 21 anos; se entrar em um no Brasil, ele deve ter idade maior do que (idade igual a) 18 anos.
+
+O retorno da função deve separar os usuários em Brasileiros e Americanos e indicar os nomes dos que tem permissão de entrar e os nomes dos que não tem. Abaixo, estão as entradas da função, a saída e a assinatura dela:
+
+**Entrada**
+
+```tsx
+enum LOCATION {
+  EUA = "EUA",
+  BRAZIL = "BRAZIL",
+}
+
+enum NACIONALITY {
+  BRAZILIAN = "BRAZILIAN",
+  AMERICAN = "AMERICAN",
+}
+
+interface User {
+  name: string;
+  age: number;
+  nacionality: NACIONALITY;
+}
+
+interface Casino {
+  name: string;
+  location: LOCATION;
+}
+```
+
+**Saída**
+
+```tsx
+interface Result {
+  brazilians: ResultItem;
+  americans: ResultItem;
+}
+
+interface ResultItem {
+  allowed: string[];
+  unallowed: string[];
+}
+```
+
+**Assinatura**
+
+```tsx
+function verifyAge(casino: Casino, users: User[]): Result
+```
+
+*a. Leia os códigos fornecidos acima com calma. Veja se não ficou com nenhuma dúvida.*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*b. Implemente a função*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*c. O que foi mais difícil de fazer?*
+
+_Resposta_:
+
+```tsc
+```
+
+<br><br>
+
+### Exercício 4
+
+Vamos escrever os testes da função do exercício 3. 
+
+*a. Escreva um teste que receba um usuário brasileiro que possa entrar em um estabelecimento no Brasil*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*b. Escreva um teste que receba um usuário americando que possa entrar em um estabelecimento no Brasil*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*c. Escreva um teste que receba dois usuários brasileiros e dois americanos. Todos devem ter a idade de 19 anos e quererem entrar em um estabelecimento nos Estados Unidos.*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*d. Escreva um teste que receba dois usuários brasileiros e dois americanos. Os brasileiros devem ter 19 anos e os americanos 21 anos. Eles querem estrar em um estabelecimento nos Estados Unidos.*
+
+_Resposta_:
+
+```tsc
+```
+
+<br><br>
+
+### Exercício 5
+
+Vamos escrever alguns testes mais complexos.
+
+*a. Escreva um teste que receba um usuário brasileiro que possa entrar em um estabelecimento no Brasil. Verifique que o **tamanho do array allowed** da propriedade **brasilians** tenha tamanho menor do que 2 e maior do que 0.*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*b. Escreva um teste que receba um usuário americano que possa entrar em um estabelecimento no Brasil.  Verifique que o **tamanho do array unallowed** da propriedade **americans** tenha tamanho igual a 0.*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*c. Escreva um teste que receba dois usuários brasileiros e dois americanos. Todos devem ter a idade de 19 anos e quererem entrar em um estabelecimento nos Estados Unidos. Verifique que os arrays **unallowed** possuam o nome de algum dos usuários que você criou*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*d. Escreva um teste que receba dois usuários brasileiros e dois americanos. Os brasileiros devem ter 19 anos e os americanos 21 anos. Verifique que o **tamanho do array unallowed** da propriedade **brasilians** tenha tamanho maior do que 1. Verifique que o **tamanho do array unallowed** da propriedade **americans** tenha tamanho menor do que 1. Verifique que o **tamanho do array allowed** da propriedade **ame** tenha tamanho igual a 2.*
+
+_Resposta_:
+
+```tsc
+```
+
+<br><br>
+
+### Exercício 6
+
+Para treinar os testes das funções assíncronas, vamos pedir para que você pegue a classe que cria um post do projeto LaBook da semana passada.
+
+Lembre-se de pegar as variáveis de ambiente, instalar e configurar o `dotenv`
+
+*a. Comece escrevendo um teste que crie um post no banco de dados e verifique se ele foi criado (fazendo uma query pelo id)*
+
+_Resposta_:
+
+```tsc
+```
+
+<br>
+
+*b. Faça a configuração do `afterAll`. O que precisamos fazer quando os testes acabam?*
+
+_Resposta_:
+
+```tsc
+```
+
+<br><br>
+
+### Exercício 7
+
+Agora, vamos fazer um teste que force um erro no nosso banco de dados. Para isso, vamos começar criando um post no banco com um id. Depois vamos tentar criar o mesmo post com o mesmo id (para que dê um erro de "chave duplicada ").
+
+Lembre-se de que colocamos o código em um `try/catch` e fazemos as validações dentro do `catch`. 
+
+*a. Implemente esse teste.*
+
+_Resposta_:
+
+```tsc
+```
+
+<br><br>
+
+### Exercício 8 (DESAFIO)
+
+Faça os testes necessários para verificar que as queries do Feed estão funcionando. 
+
+Para isso, você vai precisar verificar:
+
+- A situação em que um usuário não segue nenhum outro;
+- A situação em que um usuário só segue outro usuário;
+- A situação em que um usuário segue mais de um usuário
+
+_Resposta_:
+
+```tsc
+```
+
+<br><br>
+
+### Exercício 9 (DESAFIO)
+
+Convidamos você a implementar o seu primeiro teste *E2E.* Para isso, vamos testar as funcionalidades de cadastro e login. 
+Te damos duas dicas:
+
+1. Você vai precisar realizar o teste desde o início dos controllers, passando pela camada de business e efetivamente criando o usuário no banco e verificando as senhas salvas lá
+
+2. Pense com calma quais erros são importantes de você testar. Não escreva código desnecessário
+
+_Resposta_:
+
+```tsc
+```
