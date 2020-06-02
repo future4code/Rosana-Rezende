@@ -15,9 +15,7 @@ export function validateCharacter(input: Character): boolean {
     ){
         return false
     }
-
     return true
-    
 }
 
 interface Character {
