@@ -243,6 +243,16 @@ O comportamento dela deve ser:
 _Resposta_:
 
 ```ts
+export function performAttack(attacker: Character, defender: Character) {
+    if (!validateCharacter(attacker) || !validateCharacter(defender)) {
+        throw new Error("Invalid Character")
+    }
+
+    const result = attacker.force - defender.defense
+    if(defender.defense < attacker.force){
+        defender.life -= result
+    }
+}
 ```
 
 <br>
@@ -252,6 +262,20 @@ _Resposta_:
 _Resposta_:
 
 ```ts
+export function performAttack(
+    attacker: Character, 
+    defender: Character,
+    validator: (input: Character) => boolean
+    ) {
+    if (!validator(attacker) || !validator(defender)) {
+        throw new Error("Invalid Character")
+    }
+
+    const result = attacker.force - defender.defense
+    if(defender.defense < attacker.force){
+        defender.life -= result
+    }
+}
 ```
 
 <br>
@@ -259,9 +283,8 @@ _Resposta_:
 *c. Explique, com as suas palavras, as diferenças entre as duas implementações*
 
 _Resposta_:
-
-```ts
-```
+Na primeira implementação a função performAttack depende do funcionamento da função validateCharacter, e essa interdependência faz com que a função performAttack não possa ser testada (o teste unitário não é viável).
+Na segunda implementação retiramos essa dependência, fazemos a chamada inversão de dependência, o que permite que performAttack possa ser testada.
 
 <br><br>
 

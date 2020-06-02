@@ -18,7 +18,7 @@ export function validateCharacter(input: Character): boolean {
     return true
 }
 
-interface Character {
+export interface Character {
     name: string,
     life: number,
     defense: number,
