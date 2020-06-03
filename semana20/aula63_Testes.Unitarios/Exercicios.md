@@ -312,10 +312,8 @@ Em um arquivo de teste feito só para esse treino:
 
 *a. De qual das duas funções (`validateCharacter` ou `performAttack`)  deveremos criar um Mock nos próximos testes? Justifique.*
 
-_Resposta_:
+_Resposta_: Precisamos criar um mock da validateCharacter, já que para testar a função performAttack é necessário ter uma função que faça validação, mas não queremos criar dependência entre elas.
 
-```ts
-```
 
 <br>
 
@@ -324,6 +322,7 @@ _Resposta_:
 _Resposta_:
 
 ```ts
+const mockValidateCharacterTrue = jest.fn(() => true)
 ```
 
 <br>
@@ -333,6 +332,7 @@ _Resposta_:
 _Resposta_:
 
 ```ts
+const mockValidateCharacterFalse = jest.fn(() => false)
 ```
 
 <br><br>
