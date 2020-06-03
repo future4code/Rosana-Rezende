@@ -34,7 +34,46 @@ Body:
 
 _Resposta_:
 
+Em UserBusiness.ts
+
 ```ts
+public async getUserById(id: string){
+    const user = await this.userDatabase.getUserById(id)
+
+    if(!user){
+      throw new NotFoundError("User not found");
+    }
+
+    return {
+      id: user.getId(),
+      name: user.getName(),
+      email: user.getEmail(),
+      password: user.getPassword(),
+      role: user.getRole()
+    }
+}
+```
+
+Em UserController.ts
+
+```ts
+public async getUserById(req: Request, res: Response){
+    const { id } = req.params
+    try{
+      const user = UserController.UserBusiness.getUserById(id)
+      res.status(200).send(user)
+    } catch(err){
+      res.status(400).send({
+        message: err.message
+    })
+    }
+}
+```
+
+Em UserRouter.ts
+
+```ts
+userRouter.get("/profile/:id", new UserController().getUserById)
 ```
 
 <br><br>

@@ -73,4 +73,20 @@ export class UserBusiness {
 
     return { accessToken };
   }
+
+  public async getUserById(id: string){
+    const user = await this.userDatabase.getUserById(id)
+
+    if(!user){
+      throw new NotFoundError("User not found");
+    }
+
+    return {
+      id: user.getId(),
+      name: user.getName(),
+      email: user.getEmail(),
+      password: user.getPassword(), // pq não tem no gabarito?
+      role: user.getRole()
+    }
+  }
 }
