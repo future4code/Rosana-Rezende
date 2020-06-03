@@ -60,7 +60,6 @@ describe("Testing UserBusiness.getUserById", () => {
             id: "001",
             name: "Teste",
             email: "teste@teste.com",
-            password: "123456",
             role: UserRole.NORMAL
         })
     })

@@ -182,7 +182,58 @@ Body:
 
 _Resposta_:
 
+Em errors, criei o arquivo UnauthorizedError.ts
+
 ```ts
+import { BaseError } from "./BaseError/BaseError";
+
+export class UnauthorizedError extends BaseError {
+  constructor(message: string) {
+    super(message, 401);
+  }
+}
+```
+
+Em UserBusiness.ts
+
+```ts
+public async getAllUsers(role: string){
+    if(stringToUserRole(role) !== UserRole.ADMIN){
+      throw new UnauthorizedError("You must be an admin to access this endpoint")
+    }
+
+    const users = await this.userDatabase.getAllUsers()
+
+    return users.map(user => ({
+      id: user.getId(),
+      name: user.getName(),
+      email: user.getEmail(),
+      role: user.getRole()
+    }))
+}
+```
+
+Em UserController.ts
+
+```ts
+public async getAllUsers(req: Request, res: Response){
+    const token = req.headers.authorization as string
+    try{
+      const userData = new TokenGenerator().verify(token)
+      const users = UserController.UserBusiness.getAllUsers(userData.role)
+      res.status(200).send(users)
+    } catch(err){
+      res.status(400).send({
+        message: err.message
+    })
+    }
+}
+```
+
+Em UserRouter.ts
+
+```ts
+userRouter.get("/all", new UserController().getAllUsers)
 ```
 
 <br><br>
