@@ -365,7 +365,46 @@ Body:
 
 _Resposta_:
 
+Em UserBusiness.ts
+
 ```ts
+public async getProfile(token: string){
+    const userData = this.tokenGenerator.verify(token)
+    
+    const user = await this.userDatabase.getUserById(userData.id);
+    if (!user) {
+      throw new NotFoundError("User not found");
+    }
+
+    return {
+      id: user.getId(),
+      name: user.getName(),
+      email: user.getEmail(),
+      role: user.getRole()
+    }
+}
+```
+
+Em UserController.ts
+
+```ts
+public async getProfile(req: Request, res: Response) {
+    const token = req.headers.authorization as string
+    try {
+      const user = UserController.UserBusiness.getProfile(token)
+      res.status(200).send(user)
+    } catch (err) {
+      res.status(400).send({
+        message: err.message
+      })
+    }
+}
+```
+
+Em UserRouter.ts
+
+```ts
+userRouter.get("/profile", new UserController().getProfile)
 ```
 
 <br><br>

@@ -106,4 +106,20 @@ export class UserBusiness {
       role: user.getRole()
     }))
   }
+
+  public async getProfile(token: string){
+    const userData = this.tokenGenerator.verify(token)
+    
+    const user = await this.userDatabase.getUserById(userData.id);
+    if (!user) {
+      throw new NotFoundError("User not found");
+    }
+
+    return {
+      id: user.getId(),
+      name: user.getName(),
+      email: user.getEmail(),
+      role: user.getRole()
+    }
+  }
 }

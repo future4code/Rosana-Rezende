@@ -37,27 +37,39 @@ export class UserController {
     }
   }
 
-  public async getUserById(req: Request, res: Response){
+  public async getUserById(req: Request, res: Response) {
     const { id } = req.params
-    try{
+    try {
       const user = UserController.UserBusiness.getUserById(id)
       res.status(200).send(user)
-    } catch(err){
+    } catch (err) {
       res.status(400).send({
         message: err.message
-    })
+      })
     }
   }
 
-  public async getAllUsers(req: Request, res: Response){
+  public async getAllUsers(req: Request, res: Response) {
     const token = req.headers.authorization as string
-    try{
+    try {
       const users = UserController.UserBusiness.getAllUsers(token)
       res.status(200).send(users)
-    } catch(err){
+    } catch (err) {
       res.status(400).send({
         message: err.message
-    })
+      })
+    }
+  }
+
+  public async getProfile(req: Request, res: Response) {
+    const token = req.headers.authorization as string
+    try {
+      const user = UserController.UserBusiness.getProfile(token)
+      res.status(200).send(user)
+    } catch (err) {
+      res.status(400).send({
+        message: err.message
+      })
     }
   }
 
