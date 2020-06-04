@@ -34,7 +34,7 @@ export abstract class BaseDatabase {
     public static async destroyConnection(): Promise<void> {
         if (BaseDatabase.CONNECTION_KNEX) {
             await BaseDatabase.CONNECTION_KNEX.destroy();
-            BaseDatabase.CONNECTION_KNEX = null;
+            BaseDatabase.CONNECTION_KNEX = null; // segurança
         }
     }
 }

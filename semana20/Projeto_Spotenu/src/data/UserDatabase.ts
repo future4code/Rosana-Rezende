@@ -34,10 +34,7 @@ export class UserDatabase extends BaseDatabase {
             .into(UserDatabase.TABLE_NAME)
     }
 
-    // mas pra criar esse precisamos limitar no business - com um token
-    // createAdministratorUser(name, email, nickname, password, role, token)
-    // nem sei se coloca o role recebendo, ou já passa direto q é usertole.adm...
-
+    //2
     public async createAdministratorUser(user: User): Promise<void> {
         await super.connection()
             .insert({
@@ -46,13 +43,12 @@ export class UserDatabase extends BaseDatabase {
                 email: user.getEmail(),
                 nickname: user.getNickame(),
                 password: user.getPassword(),
-                role: UserRole.ADMINISTRATOR // acho que aqui é colocar direto administrator
+                role: user.getRole()
             })
             .into(UserDatabase.TABLE_NAME)
     }
 
     //
-
     public async createBandUser(user: User): Promise<void> {
         await super.connection()
             .insert({

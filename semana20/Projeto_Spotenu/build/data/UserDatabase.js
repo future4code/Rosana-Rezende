@@ -36,9 +36,7 @@ let UserDatabase = /** @class */ (() => {
                     .into(UserDatabase.TABLE_NAME);
             });
         }
-        // mas pra criar esse precisamos limitar no business - com um token
-        // createAdministratorUser(name, email, nickname, password, role, token)
-        // nem sei se coloca o role recebendo, ou já passa direto q é usertole.adm...
+        //2
         createAdministratorUser(user) {
             const _super = Object.create(null, {
                 connection: { get: () => super.connection }
@@ -51,7 +49,7 @@ let UserDatabase = /** @class */ (() => {
                     email: user.getEmail(),
                     nickname: user.getNickame(),
                     password: user.getPassword(),
-                    role: User_1.UserRole.ADMINISTRATOR // acho que aqui é colocar direto administrator
+                    role: user.getRole() // acho que aqui é colocar direto administrator
                 })
                     .into(UserDatabase.TABLE_NAME);
             });

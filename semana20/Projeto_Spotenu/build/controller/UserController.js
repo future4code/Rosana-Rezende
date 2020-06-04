@@ -30,6 +30,19 @@ let UserController = /** @class */ (() => {
                 }
             });
         }
+        signupAdministratorUser(req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const token = req.headers.authorization;
+                const { name, email, nickname, password } = req.body;
+                try {
+                    const result = yield UserController.UserBusiness.signupAdministratorUser(name, email, nickname, password, token);
+                    res.status(200).send(result);
+                }
+                catch (err) {
+                    res.status(err.errorCode || 400).send({ message: err.message });
+                }
+            });
+        }
     }
     UserController.UserBusiness = new UserBusiness_1.UserBusiness(new UserDatabase_1.UserDatabase(), new HashManager_1.HashManager(), new Authenticator_1.Authenticator(), new IdGenerator_1.IdGenerator());
     return UserController;

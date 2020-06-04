@@ -5,3 +5,4 @@ export const userRouter = express.Router();
 const userController = new UserController()
 
 userRouter.post("/signup/listening", userController.signupListeningUser);
+userRouter.post("/signup/administrator", userController.signupAdministratorUser);

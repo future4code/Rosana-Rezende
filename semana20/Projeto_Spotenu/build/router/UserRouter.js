@@ -10,3 +10,4 @@ const UserController_1 = require("../controller/UserController");
 exports.userRouter = express_1.default.Router();
 const userController = new UserController_1.UserController();
 exports.userRouter.post("/signup/listening", userController.signupListeningUser);
+exports.userRouter.post("/signup/administrator", userController.signupAdministratorUser);

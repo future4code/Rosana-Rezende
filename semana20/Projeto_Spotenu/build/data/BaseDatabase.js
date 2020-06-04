@@ -43,7 +43,7 @@ let BaseDatabase = /** @class */ (() => {
             return __awaiter(this, void 0, void 0, function* () {
                 if (BaseDatabase.CONNECTION_KNEX) {
                     yield BaseDatabase.CONNECTION_KNEX.destroy();
-                    BaseDatabase.CONNECTION_KNEX = null;
+                    BaseDatabase.CONNECTION_KNEX = null; // segurança
                 }
             });
         }
