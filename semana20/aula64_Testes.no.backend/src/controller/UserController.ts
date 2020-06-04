@@ -52,8 +52,7 @@ export class UserController {
   public async getAllUsers(req: Request, res: Response){
     const token = req.headers.authorization as string
     try{
-      const userData = new TokenGenerator().verify(token)
-      const users = UserController.UserBusiness.getAllUsers(userData.role)
+      const users = UserController.UserBusiness.getAllUsers(token)
       res.status(200).send(users)
     } catch(err){
       res.status(400).send({

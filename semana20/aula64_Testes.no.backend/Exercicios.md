@@ -195,8 +195,10 @@ export class UnauthorizedError extends BaseError {
 Em UserBusiness.ts
 
 ```ts
-public async getAllUsers(role: string){
-    if(stringToUserRole(role) !== UserRole.ADMIN){
+public async getAllUsers(token: string){
+    const userData = this.tokenGenerator.verify(token)
+
+    if(stringToUserRole(userData.role) !== UserRole.ADMIN){
       throw new UnauthorizedError("You must be an admin to access this endpoint")
     }
 
@@ -217,8 +219,7 @@ Em UserController.ts
 public async getAllUsers(req: Request, res: Response){
     const token = req.headers.authorization as string
     try{
-      const userData = new TokenGenerator().verify(token)
-      const users = UserController.UserBusiness.getAllUsers(userData.role)
+      const users = UserController.UserBusiness.getAllUsers(token)
       res.status(200).send(users)
     } catch(err){
       res.status(400).send({
@@ -263,8 +264,22 @@ describe("Testing UserBusiness.getUserById", () => {
 
     test("Should return throw new error 'You must be an admin to access this endpoint' when role is not 'ADMIN'.", async () => {
         expect.assertions(2)
+
+        const verify = jest.fn((token: string) => ({
+            id: "001",
+            role: "NORMAL"
+        }))
+        tokenGenerator = { verify }
+
+        userBusiness = new UserBusiness(
+            userDatabase as any,
+            hashGenerator as any,
+            tokenGenerator as any,
+            idGenerator as any
+        );
+
         try{
-            await userBusiness.getAllUsers( UserRole.NORMAL)
+            await userBusiness.getAllUsers('token')
         }
         catch(err){
             expect(err.errorCode).toBe(401)
@@ -285,7 +300,7 @@ _Resposta_:
 
 ```ts
 test("Should return a user when no error occurs", async () => {
-        const getAllUsers = jest.fn((role: string) => [
+        const getAllUsers = jest.fn((token: string) => [
             new User(
                 "002",
                 "Teste 2",
@@ -296,6 +311,12 @@ test("Should return a user when no error occurs", async () => {
         ]);
         userDatabase = { getAllUsers }
 
+        const verify = jest.fn((token: string) => ({
+            id: "002",
+            role: "ADMIN"
+        }))
+        tokenGenerator = { verify }
+
         userBusiness = new UserBusiness(
             userDatabase as any,
             hashGenerator as any,
@@ -303,7 +324,7 @@ test("Should return a user when no error occurs", async () => {
             idGenerator as any
         );
 
-        const users = await userBusiness.getAllUsers(UserRole.ADMIN)
+        const users = await userBusiness.getAllUsers('token')
 
         expect(getAllUsers).toHaveBeenCalledTimes(1)
         expect(users).toContainEqual({

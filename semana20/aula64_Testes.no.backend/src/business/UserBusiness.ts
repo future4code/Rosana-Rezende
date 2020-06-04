@@ -90,8 +90,10 @@ export class UserBusiness {
     }
   }
 
-  public async getAllUsers(role: string){
-    if(stringToUserRole(role) !== UserRole.ADMIN){
+  public async getAllUsers(token: string){
+    const userData = this.tokenGenerator.verify(token)
+
+    if(stringToUserRole(userData.role) !== UserRole.ADMIN){
       throw new UnauthorizedError("You must be an admin to access this endpoint")
     }
 

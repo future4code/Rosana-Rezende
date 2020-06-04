@@ -16,8 +16,22 @@ describe("Testing UserBusiness.getUserById", () => {
 
     test("Should return throw new error 'You must be an admin to access this endpoint' when role is not 'ADMIN'.", async () => {
         expect.assertions(2)
+
+        const verify = jest.fn((token: string) => ({
+            id: "001",
+            role: "NORMAL"
+        }))
+        tokenGenerator = { verify }
+
+        userBusiness = new UserBusiness(
+            userDatabase as any,
+            hashGenerator as any,
+            tokenGenerator as any,
+            idGenerator as any
+        );
+
         try{
-            await userBusiness.getAllUsers( UserRole.NORMAL)
+            await userBusiness.getAllUsers('token')
         }
         catch(err){
             expect(err.errorCode).toBe(401)
@@ -26,7 +40,7 @@ describe("Testing UserBusiness.getUserById", () => {
     })
 
     test("Should return a user when no error occurs", async () => {
-        const getAllUsers = jest.fn((role: string) => [
+        const getAllUsers = jest.fn((token: string) => [
             new User(
                 "002",
                 "Teste 2",
@@ -37,6 +51,12 @@ describe("Testing UserBusiness.getUserById", () => {
         ]);
         userDatabase = { getAllUsers }
 
+        const verify = jest.fn((token: string) => ({
+            id: "002",
+            role: "ADMIN"
+        }))
+        tokenGenerator = { verify }
+
         userBusiness = new UserBusiness(
             userDatabase as any,
             hashGenerator as any,
@@ -44,7 +64,7 @@ describe("Testing UserBusiness.getUserById", () => {
             idGenerator as any
         );
 
-        const users = await userBusiness.getAllUsers(UserRole.ADMIN)
+        const users = await userBusiness.getAllUsers('token')
 
         expect(getAllUsers).toHaveBeenCalledTimes(1)
         expect(users).toContainEqual({
