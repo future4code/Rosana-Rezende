@@ -48,7 +48,7 @@ export class UserBusiness {
         return { accessToken }
     }
 
-
+    //2
     public async signupAdministratorUser(
         name: string,
         email: string,
@@ -84,6 +84,39 @@ export class UserBusiness {
         const newUser = new User(id, name, email, nickname, cryptedPassword, stringToUserRole(role))
 
         await this.userDatabase.createListeningUser(newUser)
+
+        const accessToken = this.authenticator.generateToken({ id, role })
+
+        return { accessToken }
+    }
+
+    //3
+    public async signupBandUser(
+        name: string,
+        email: string,
+        nickname: string,
+        password: string,
+        description: string
+    ) {
+        if (!name || !email || !nickname || !password || !description) {
+            throw new InvalidParameterError("Missing input");
+        }
+
+        if (email.indexOf("@") === -1) {
+            throw new InvalidParameterError("Invalid email");
+        }
+
+        if (password.length < 6) {
+            throw new InvalidParameterError("Invalid password");
+        }
+
+        const id = this.idGenerator.generatorId()
+        const role = UserRole.BAND
+        const cryptedPassword = await this.hashManager.hash(password)
+
+        const user = new User(id, name, email, nickname, cryptedPassword, stringToUserRole(role), description)
+
+        await this.userDatabase.createListeningUser(user)
 
         const accessToken = this.authenticator.generateToken({ id, role })
 

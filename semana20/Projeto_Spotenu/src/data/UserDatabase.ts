@@ -14,8 +14,8 @@ export class UserDatabase extends BaseDatabase {
                 dbModel.nickname,
                 dbModel.password,
                 dbModel.role,
-                dbModel.isApproved,
-                dbModel.description
+                dbModel.description,
+                dbModel.isApproved
             )
         );
     }
@@ -57,10 +57,9 @@ export class UserDatabase extends BaseDatabase {
                 email: user.getEmail(),
                 nickname: user.getNickame(),
                 password: user.getPassword(),
-                role: UserRole.BAND,
-
+                role: user.getRole(),
                 description: user.getDescription(),
-                is_approved: super.convertBooleanToTinyint(false) // ou já coloco logo false aqui?
+                is_approved: super.convertBooleanToTinyint(false)
             })
             .into(UserDatabase.TABLE_NAME)
     }

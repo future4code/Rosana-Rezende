@@ -41,10 +41,19 @@ class UserBusiness {
             return { accessToken };
         });
     }
+    //2
     signupAdministratorUser(name, email, nickname, password, token) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!name || !email || !nickname || !password || !token) {
                 throw new InvalidParameterError_1.InvalidParameterError("Missing input");
+            }
+            const userData = this.authenticator.verify(token);
+            const user = yield this.userDatabase.getUserById(userData.id);
+            if (!user) {
+                throw new NotFoundError_1.NotFoundError("User not found");
+            }
+            if (user.getRole() !== User_1.UserRole.ADMINISTRATOR) {
+                throw new UnauthorizedError_1.UnauthorizedError("You must be an admin to access this endpoint");
             }
             if (email.indexOf("@") === -1) {
                 throw new InvalidParameterError_1.InvalidParameterError("Invalid email");
@@ -52,18 +61,31 @@ class UserBusiness {
             if (password.length < 10) {
                 throw new InvalidParameterError_1.InvalidParameterError("Invalid password");
             }
-            const userData = this.authenticator.verify(token);
-            const admin = yield this.userDatabase.getUserById(userData.id);
-            if (!admin) {
-                throw new NotFoundError_1.NotFoundError("User not found");
-            }
-            if (admin.getRole() !== User_1.UserRole.ADMINISTRATOR) {
-                throw new UnauthorizedError_1.UnauthorizedError("You must be an admin to access this endpoint");
-            }
             const role = User_1.UserRole.ADMINISTRATOR;
             const id = this.idGenerator.generatorId();
             const cryptedPassword = yield this.hashManager.hash(password);
-            const user = new User_1.User(id, name, email, nickname, cryptedPassword, User_1.stringToUserRole(role));
+            const newUser = new User_1.User(id, name, email, nickname, cryptedPassword, User_1.stringToUserRole(role));
+            yield this.userDatabase.createListeningUser(newUser);
+            const accessToken = this.authenticator.generateToken({ id, role });
+            return { accessToken };
+        });
+    }
+    //3
+    signupBandUser(name, email, nickname, password, description) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!name || !email || !nickname || !password || !description) {
+                throw new InvalidParameterError_1.InvalidParameterError("Missing input");
+            }
+            if (email.indexOf("@") === -1) {
+                throw new InvalidParameterError_1.InvalidParameterError("Invalid email");
+            }
+            if (password.length < 6) {
+                throw new InvalidParameterError_1.InvalidParameterError("Invalid password");
+            }
+            const id = this.idGenerator.generatorId();
+            const role = User_1.UserRole.BAND;
+            const cryptedPassword = yield this.hashManager.hash(password);
+            const user = new User_1.User(id, name, email, nickname, cryptedPassword, User_1.stringToUserRole(role), description);
             yield this.userDatabase.createListeningUser(user);
             const accessToken = this.authenticator.generateToken({ id, role });
             return { accessToken };

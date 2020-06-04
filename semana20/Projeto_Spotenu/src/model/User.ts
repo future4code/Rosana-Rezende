@@ -8,8 +8,8 @@ export class User {
         private nickname: string,
         private password: string,
         private role: UserRole,
-        private isApproved?: boolean,
-        private description?: string
+        private description?: string,
+        private isApproved?: boolean
     ) { }
 
     public getId(): string {

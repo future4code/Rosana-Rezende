@@ -30,12 +30,26 @@ let UserController = /** @class */ (() => {
                 }
             });
         }
+        //2
         signupAdministratorUser(req, res) {
             return __awaiter(this, void 0, void 0, function* () {
                 const token = req.headers.authorization;
                 const { name, email, nickname, password } = req.body;
                 try {
                     const result = yield UserController.UserBusiness.signupAdministratorUser(name, email, nickname, password, token);
+                    res.status(200).send(result);
+                }
+                catch (err) {
+                    res.status(err.errorCode || 400).send({ message: err.message });
+                }
+            });
+        }
+        //3
+        signupBandUser(req, res) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const { name, email, nickname, password, description } = req.body;
+                try {
+                    const result = yield UserController.UserBusiness.signupBandUser(name, email, nickname, password, description);
                     res.status(200).send(result);
                 }
                 catch (err) {

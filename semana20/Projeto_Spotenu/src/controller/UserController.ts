@@ -25,6 +25,7 @@ export class UserController {
         }
     }
 
+    //2
     public async signupAdministratorUser(req: Request, res: Response){
         const token = req.headers.authorization as string
         const { name, email, nickname, password } = req.body
@@ -37,5 +38,16 @@ export class UserController {
         }
     }
 
+    //3
+    public async signupBandUser(req: Request, res: Response){
+        const { name, email, nickname, password, description } = req.body
+        try{
+            const result = await UserController.UserBusiness.signupBandUser(name, email, nickname, password, description)
+            res.status(200).send(result)
+        } 
+        catch(err){
+            res.status(err.errorCode || 400).send({ message: err.message });
+        }
+    }
 
 }

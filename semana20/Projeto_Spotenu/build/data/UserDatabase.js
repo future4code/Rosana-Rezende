@@ -16,7 +16,7 @@ let UserDatabase = /** @class */ (() => {
     class UserDatabase extends BaseDatabase_1.BaseDatabase {
         toModel(dbModel) {
             return (dbModel &&
-                new User_1.User(dbModel.id, dbModel.name, dbModel.email, dbModel.nickname, dbModel.password, dbModel.role, dbModel.isApproved, dbModel.description));
+                new User_1.User(dbModel.id, dbModel.name, dbModel.email, dbModel.nickname, dbModel.password, dbModel.role, dbModel.description, dbModel.isApproved));
         }
         //1
         createListeningUser(user) {
@@ -49,7 +49,7 @@ let UserDatabase = /** @class */ (() => {
                     email: user.getEmail(),
                     nickname: user.getNickame(),
                     password: user.getPassword(),
-                    role: user.getRole() // acho que aqui é colocar direto administrator
+                    role: user.getRole()
                 })
                     .into(UserDatabase.TABLE_NAME);
             });
@@ -68,9 +68,9 @@ let UserDatabase = /** @class */ (() => {
                     email: user.getEmail(),
                     nickname: user.getNickame(),
                     password: user.getPassword(),
-                    role: User_1.UserRole.BAND,
+                    role: user.getRole(),
                     description: user.getDescription(),
-                    is_approved: _super.convertBooleanToTinyint.call(this, false) // ou já coloco logo false aqui?
+                    is_approved: _super.convertBooleanToTinyint.call(this, false)
                 })
                     .into(UserDatabase.TABLE_NAME);
             });
