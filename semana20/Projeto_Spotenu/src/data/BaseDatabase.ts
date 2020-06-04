@@ -6,13 +6,13 @@ dotenv.config();
 export abstract class BaseDatabase {
     private static CONNECTION_KNEX: Knex | null = null;
 
-    // protected convertTinyintToBoolean(value: number): boolean{
-    //     return value === 1
-    // }
+    protected convertTinyintToBoolean(value: number): boolean{
+        return value === 1
+    }
 
-    // protected convertBooleanToTinyint(value: boolean): number{
-    //     return value ? 1 : 0
-    // }
+    protected convertBooleanToTinyint(value: boolean): number{
+        return value ? 1 : 0
+    }
 
     protected connection(): Knex {
         if (BaseDatabase.CONNECTION_KNEX === null) {

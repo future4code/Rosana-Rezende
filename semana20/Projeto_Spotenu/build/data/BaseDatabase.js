@@ -18,12 +18,12 @@ const knex_1 = __importDefault(require("knex"));
 dotenv_1.default.config();
 let BaseDatabase = /** @class */ (() => {
     class BaseDatabase {
-        // protected convertTinyintToBoolean(value: number): boolean{
-        //     return value === 1
-        // }
-        // protected convertBooleanToTinyint(value: boolean): number{
-        //     return value ? 1 : 0
-        // }
+        convertTinyintToBoolean(value) {
+            return value === 1;
+        }
+        convertBooleanToTinyint(value) {
+            return value ? 1 : 0;
+        }
         connection() {
             if (BaseDatabase.CONNECTION_KNEX === null) {
                 BaseDatabase.CONNECTION_KNEX = knex_1.default({
