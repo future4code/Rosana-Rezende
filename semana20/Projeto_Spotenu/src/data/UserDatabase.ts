@@ -98,17 +98,13 @@ export class UserDatabase extends BaseDatabase {
         return this.toModel(result[0])
     }
 
-
-
-
-
     
-    public async getAllUsers(): Promise<User[]> {
-        const result = await super.connection()
-            .select("*")
-            .from(UserDatabase.TABLE_NAME)
-        const users = result[0].map((res: any) => this.toModel(res))
-        return users
-    }
+    // public async getAllUsers(): Promise<User[]> {
+    //     const result = await super.connection()
+    //         .select("*")
+    //         .from(UserDatabase.TABLE_NAME)
+    //     const users = result[0].map((res: any) => this.toModel(res))
+    //     return users
+    // }
 
 }

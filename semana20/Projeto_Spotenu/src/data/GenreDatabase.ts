@@ -1,0 +1,28 @@
+import { BaseDatabase } from "./BaseDatabase";
+import { Genre, GenreOption, stringToGenreOption } from "../model/Genre";
+
+export class GenreDatabase extends BaseDatabase {
+    public static TABLE_NAME: string = "SpotenuGenre";
+
+    private toModel(dbModel?: any): Genre | undefined {
+        return dbModel && new Genre(dbModel.id, dbModel.name)
+    }
+
+    public async addGenre(genre: Genre): Promise<void> {
+        await super.connection()
+            .insert({
+                id: genre.getId(),
+                name: genre.getName()
+            })
+            .into(GenreDatabase.TABLE_NAME)
+    }
+
+    public async getGenreByName(name: string): Promise<Genre | undefined> {
+        const result = await super.connection()
+            .select("*")
+            .from(GenreDatabase.TABLE_NAME)
+            .where({ name })
+        return this.toModel(result[0])
+    }
+
+}
