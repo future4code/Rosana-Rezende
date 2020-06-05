@@ -39,12 +39,24 @@ export class GenreBusiness {
             throw new GenericError("This genre has already been added")
         }
 
-
         const id = this.idGenerator.generatorId()
 
         const newGenre = new Genre(id, stringToGenreOption(name))
         await this.genreDatabase.addGenre(newGenre)
+    }
 
+    public async getAllGenres(token: string){
+        const userData = this.authenticator.verify(token)
+        const user = await this.userDatabase.getUserById(userData.id)
+        if (!user) {
+            throw new NotFoundError("User not found");
+        }
+        if (user.getRole() === UserRole.NONPAYINGLISTENER || user.getRole() === UserRole.PAYINGLISTENER) {
+            throw new UnauthorizedError("You must be an admin or band to access this endpoint")
+        }
+        
+        const genres = await this.genreDatabase.getAllGenres()
+        return genres
     }
    
 

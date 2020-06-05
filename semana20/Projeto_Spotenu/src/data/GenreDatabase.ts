@@ -25,4 +25,12 @@ export class GenreDatabase extends BaseDatabase {
         return this.toModel(result[0])
     }
 
+    public async getAllGenres(): Promise<Genre[]> {
+        const result = await super.connection().raw(`
+            SELECT *
+            FROM ${GenreDatabase.TABLE_NAME}
+        `)
+        return result[0].map((res: any) => this.toModel(res))
+    }
+
 }
