@@ -185,6 +185,10 @@ export class UserBusiness {
             throw new NotFoundError("User not found");
         }
 
+        if(user.getIsApproved() == false){
+            throw new UnauthorizedError("The band needs to be approved by an administrator to login")
+        }
+
         const isPasswordCorrect = await this.hashManager.compare(
             password,
             user.getPassword()
