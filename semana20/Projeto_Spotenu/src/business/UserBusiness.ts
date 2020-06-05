@@ -6,6 +6,7 @@ import { InvalidParameterError } from "../errors/InvalidParameterError";
 import { User, stringToUserRole, UserRole } from "../model/User";
 import { NotFoundError } from "../errors/NotFoundError";
 import { UnauthorizedError } from "../errors/UnauthorizedError";
+import { GenericError } from "../errors/GenericError";
 
 export class UserBusiness {
     constructor(
@@ -115,12 +116,8 @@ export class UserBusiness {
         const cryptedPassword = await this.hashManager.hash(password)
 
         const user = new User(id, name, email, nickname, cryptedPassword, stringToUserRole(role), description)
-        
+
         await this.userDatabase.createBandUser(user)
-
-        const accessToken = this.authenticator.generateToken({ id, role })
-
-        return { accessToken }
     }
 
     //4
@@ -135,20 +132,21 @@ export class UserBusiness {
         }
 
         const bands = await this.userDatabase.getAllBands()
-
-        return bands.map(band => ({
-            name: band.getName(),
-            email: band.getEmail(),
-            nickname: band.getNickame(),
-            isApproved: band.getIsApproved()
+        
+        return bands.map(band => {
+            const isApproved = band.getIsApproved() == true ? true : false
+            return {
+                name: band.getName(),
+                email: band.getEmail(),
+                nickname: band.getNickame(),
+                isApproved: isApproved
+            }
         }
-        ))
-
-
+        )
     }
 
     //5
-    public async aproveBand(id: string, token: string){
+    public async aproveBand(id: string, token: string) {
         const userData = this.authenticator.verify(token)
         const user = await this.userDatabase.getUserById(userData.id)
         if (!user) {
@@ -158,8 +156,15 @@ export class UserBusiness {
             throw new UnauthorizedError("You must be an admin to access this endpoint")
         }
 
-        await this.userDatabase.approveBand(id)
+        const band = await this.userDatabase.getUserById(id)
+        if (!band) {
+            throw new NotFoundError("Band not found");
+        }
+        if(band.getIsApproved() == true){
+            throw new GenericError("Band already approved")
+        }       
 
+        await this.userDatabase.approveBand(id)
     }
 
 
@@ -180,22 +185,21 @@ export class UserBusiness {
             throw new NotFoundError("User not found");
         }
 
-          const isPasswordCorrect = await this.hashManager.compare(
+        const isPasswordCorrect = await this.hashManager.compare(
             password,
             user.getPassword()
-          );
+        );
 
-          if (!isPasswordCorrect) {
+        if (!isPasswordCorrect) {
             throw new InvalidParameterError("Invalid password");
-          }
+        }
 
-          const accessToken = this.authenticator.generateToken({
+        const accessToken = this.authenticator.generateToken({
             id: user.getId(),
             role: user.getRole(),
-          });
+        });
 
-          return { accessToken };
-
+        return { accessToken };
     }
 
 

@@ -42,8 +42,10 @@ export class UserController {
     public async signupBandUser(req: Request, res: Response) {
         const { name, email, nickname, password, description } = req.body
         try {
-            const result = await UserController.UserBusiness.signupBandUser(name, email, nickname, password, description)
-            res.status(200).send(result)
+            await UserController.UserBusiness.signupBandUser(name, email, nickname, password, description)
+            res.status(200).send({
+                message: "Banda cadastrada. Aguarde a aprovação pelo administrador!"
+            })
         }
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
@@ -77,7 +79,6 @@ export class UserController {
         }
     }
 
-
     //6
     public async login(req: Request, res: Response) {
         const { email, nickname, password } = req.body
@@ -87,10 +88,9 @@ export class UserController {
                 result = await UserController.UserBusiness.login(email, password)
             }
             if (nickname) {
-                result = await UserController.UserBusiness.login(email, password)
+                result = await UserController.UserBusiness.login(nickname, password)
             }
             res.status(200).send(result)
-
         }
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });

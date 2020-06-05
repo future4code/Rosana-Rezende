@@ -62,7 +62,8 @@ export class UserDatabase extends BaseDatabase {
     //4
     public async getAllBands(): Promise<User[]> {
         const result = await super.connection().raw(`
-            SELECT * FROM ${UserDatabase.TABLE_NAME}
+            SELECT * 
+            FROM ${UserDatabase.TABLE_NAME}
             WHERE role = "BAND"
         `)
         return result[0].map((res: any) => this.toModel(res))
@@ -99,7 +100,7 @@ export class UserDatabase extends BaseDatabase {
 
 
 
-    
+
 
     
     public async getAllUsers(): Promise<User[]> {
