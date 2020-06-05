@@ -148,6 +148,19 @@ export class UserBusiness {
     }
 
     //5
+    public async aproveBand(id: string, token: string){
+        const userData = this.authenticator.verify(token)
+        const user = await this.userDatabase.getUserById(userData.id)
+        if (!user) {
+            throw new NotFoundError("User not found");
+        }
+        if (user.getRole() !== UserRole.ADMINISTRATOR) {
+            throw new UnauthorizedError("You must be an admin to access this endpoint")
+        }
+
+        await this.userDatabase.approveBand(id)
+
+    }
 
 
     //6

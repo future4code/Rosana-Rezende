@@ -70,17 +70,16 @@ export class UserDatabase extends BaseDatabase {
 
 
     // 5
-    public async aproveBand(id: string): Promise<void> {
+    public async approveBand(id: string): Promise<void> {
         await super.connection().raw(`
             UPDATE ${UserDatabase.TABLE_NAME}
             SET is_approved = 1 
-            WHERE id = ${id}
+            WHERE id = "${id}"
         `)
     }
 
 
     // 6
-
     public async getUserByEmail(email: string): Promise<User | undefined> {
         const result = await super.connection()
             .select("*")
@@ -98,6 +97,9 @@ export class UserDatabase extends BaseDatabase {
         return this.toModel(result[0])
     }
 
+
+
+    
 
     
     public async getAllUsers(): Promise<User[]> {

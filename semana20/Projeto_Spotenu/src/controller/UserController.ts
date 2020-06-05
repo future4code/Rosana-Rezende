@@ -11,73 +11,88 @@ export class UserController {
         new HashManager(),
         new Authenticator(),
         new IdGenerator()
-      );
+    );
 
     // 1
-    public async signupListeningUser(req: Request, res: Response){
+    public async signupListeningUser(req: Request, res: Response) {
         const { name, email, nickname, password, role } = req.body
-        try{
+        try {
             const result = await UserController.UserBusiness.signupListeningUser(name, email, nickname, password, role)
             res.status(200).send(result)
-        } 
-        catch(err){
+        }
+        catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
     }
 
     //2
-    public async signupAdministratorUser(req: Request, res: Response){
+    public async signupAdministratorUser(req: Request, res: Response) {
         const token = req.headers.authorization as string
         const { name, email, nickname, password } = req.body
-        try{
+        try {
             const result = await UserController.UserBusiness.signupAdministratorUser(name, email, nickname, password, token)
             res.status(200).send(result)
-        } 
-        catch(err){
+        }
+        catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
     }
 
     //3
-    public async signupBandUser(req: Request, res: Response){
+    public async signupBandUser(req: Request, res: Response) {
         const { name, email, nickname, password, description } = req.body
-        try{
+        try {
             const result = await UserController.UserBusiness.signupBandUser(name, email, nickname, password, description)
             res.status(200).send(result)
-        } 
-        catch(err){
+        }
+        catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
     }
 
     //4
-    public async getAllBands(req: Request, res: Response){
+    public async getAllBands(req: Request, res: Response) {
         const token = req.headers.authorization as string
-        try{
+        try {
             const bands = await UserController.UserBusiness.getAllBands(token)
             res.status(200).send(bands)
         }
-        catch(err){
+        catch (err) {
+            res.status(err.errorCode || 400).send({ message: err.message });
+        }
+    }
+
+    //5
+    public async aproveBand(req: Request, res: Response) {
+        const token = req.headers.authorization as string
+        const { id } = req.body
+        try {
+            await UserController.UserBusiness.aproveBand(id, token)
+            res.status(200).send({
+                message: "Banda aprovada!"
+            })
+        }
+        catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
     }
 
 
     //6
-    public async login(req: Request, res: Response){
+    public async login(req: Request, res: Response) {
         const { email, nickname, password } = req.body
-        try{
+        try {
             let result
-            if(email){
+            if (email) {
                 result = await UserController.UserBusiness.login(email, password)
             }
-            if(nickname){
+            if (nickname) {
                 result = await UserController.UserBusiness.login(email, password)
             }
             res.status(200).send(result)
 
         }
-        catch(err){
+        catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
     }
