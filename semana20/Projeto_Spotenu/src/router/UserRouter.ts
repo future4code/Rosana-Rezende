@@ -7,3 +7,6 @@ const userController = new UserController()
 userRouter.post("/signup/listening", userController.signupListeningUser);
 userRouter.post("/signup/administrator", userController.signupAdministratorUser);
 userRouter.post("/signup/band", userController.signupBandUser);
+userRouter.post("/login", userController.login)
+
+userRouter.get("/bands", userController.getAllBands)

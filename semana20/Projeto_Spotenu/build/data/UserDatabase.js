@@ -54,7 +54,19 @@ let UserDatabase = /** @class */ (() => {
                     .into(UserDatabase.TABLE_NAME);
             });
         }
-        //
+        getUserById(id) {
+            const _super = Object.create(null, {
+                connection: { get: () => super.connection }
+            });
+            return __awaiter(this, void 0, void 0, function* () {
+                const result = yield _super.connection.call(this)
+                    .select("*")
+                    .from(UserDatabase.TABLE_NAME)
+                    .where({ id });
+                return this.toModel(result[0]);
+            });
+        }
+        //3
         createBandUser(user) {
             const _super = Object.create(null, {
                 connection: { get: () => super.connection },
@@ -75,6 +87,7 @@ let UserDatabase = /** @class */ (() => {
                     .into(UserDatabase.TABLE_NAME);
             });
         }
+        //4
         getAllBands() {
             const _super = Object.create(null, {
                 connection: { get: () => super.connection }
@@ -88,7 +101,7 @@ let UserDatabase = /** @class */ (() => {
                 return users;
             });
         }
-        // não sei se 1 ou 0
+        // 5
         aproveBand(id) {
             const _super = Object.create(null, {
                 connection: { get: () => super.connection }
@@ -101,6 +114,7 @@ let UserDatabase = /** @class */ (() => {
         `);
             });
         }
+        // 6
         getUserByEmail(email) {
             const _super = Object.create(null, {
                 connection: { get: () => super.connection }
@@ -113,7 +127,7 @@ let UserDatabase = /** @class */ (() => {
                 return this.toModel(result[0]);
             });
         }
-        getUserById(id) {
+        getUserByNickname(nickname) {
             const _super = Object.create(null, {
                 connection: { get: () => super.connection }
             });
@@ -121,7 +135,7 @@ let UserDatabase = /** @class */ (() => {
                 const result = yield _super.connection.call(this)
                     .select("*")
                     .from(UserDatabase.TABLE_NAME)
-                    .where({ id });
+                    .where({ nickname });
                 return this.toModel(result[0]);
             });
         }

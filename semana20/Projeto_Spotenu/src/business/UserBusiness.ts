@@ -41,7 +41,7 @@ export class UserBusiness {
 
         const user = new User(id, name, email, nickname, cryptedPassword, stringToUserRole(role))
 
-        await this.userDatabase.createListeningUser(user)
+        await this.userDatabase.createListeningOrAdmnistrationUser(user)
 
         const accessToken = this.authenticator.generateToken({ id, role })
 
@@ -65,7 +65,7 @@ export class UserBusiness {
         if (!user) {
             throw new NotFoundError("User not found");
         }
-        if(user.getRole() !== UserRole.ADMINISTRATOR){
+        if (user.getRole() !== UserRole.ADMINISTRATOR) {
             throw new UnauthorizedError("You must be an admin to access this endpoint")
         }
 
@@ -75,15 +75,15 @@ export class UserBusiness {
 
         if (password.length < 10) {
             throw new InvalidParameterError("Invalid password");
-        }        
-        
+        }
+
         const role = UserRole.ADMINISTRATOR
         const id = this.idGenerator.generatorId()
         const cryptedPassword = await this.hashManager.hash(password)
 
         const newUser = new User(id, name, email, nickname, cryptedPassword, stringToUserRole(role))
 
-        await this.userDatabase.createListeningUser(newUser)
+        await this.userDatabase.createListeningOrAdmnistrationUser(newUser)
 
         const accessToken = this.authenticator.generateToken({ id, role })
 
@@ -115,15 +115,75 @@ export class UserBusiness {
         const cryptedPassword = await this.hashManager.hash(password)
 
         const user = new User(id, name, email, nickname, cryptedPassword, stringToUserRole(role), description)
-
-        await this.userDatabase.createListeningUser(user)
+        
+        await this.userDatabase.createBandUser(user)
 
         const accessToken = this.authenticator.generateToken({ id, role })
 
         return { accessToken }
     }
 
+    //4
+    public async getAllBands(token: string) {
+        const userData = this.authenticator.verify(token)
+        const user = await this.userDatabase.getUserById(userData.id)
+        if (!user) {
+            throw new NotFoundError("User not found");
+        }
+        if (user.getRole() !== UserRole.ADMINISTRATOR) {
+            throw new UnauthorizedError("You must be an admin to access this endpoint")
+        }
 
+        const bands = await this.userDatabase.getAllBands()
+
+        return bands.map(band => ({
+            name: band.getName(),
+            email: band.getEmail(),
+            nickname: band.getNickame(),
+            isApproved: band.getIsApproved()
+        }
+        ))
+
+
+    }
+
+    //5
+
+
+    //6
+    public async login(input: string, password: string) {
+        if (!input || !password) {
+            throw new InvalidParameterError("Missing input");
+        }
+
+        let user
+        if (input.indexOf("@") !== -1) {
+            user = await this.userDatabase.getUserByEmail(input)
+        } else {
+            user = await this.userDatabase.getUserByNickname(input)
+        }
+
+        if (!user) {
+            throw new NotFoundError("User not found");
+        }
+
+          const isPasswordCorrect = await this.hashManager.compare(
+            password,
+            user.getPassword()
+          );
+
+          if (!isPasswordCorrect) {
+            throw new InvalidParameterError("Invalid password");
+          }
+
+          const accessToken = this.authenticator.generateToken({
+            id: user.getId(),
+            role: user.getRole(),
+          });
+
+          return { accessToken };
+
+    }
 
 
 

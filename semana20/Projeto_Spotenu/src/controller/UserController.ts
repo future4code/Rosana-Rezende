@@ -50,4 +50,36 @@ export class UserController {
         }
     }
 
+    //4
+    public async getAllBands(req: Request, res: Response){
+        const token = req.headers.authorization as string
+        try{
+            const bands = await UserController.UserBusiness.getAllBands(token)
+            res.status(200).send(bands)
+        }
+        catch(err){
+            res.status(err.errorCode || 400).send({ message: err.message });
+        }
+    }
+
+
+    //6
+    public async login(req: Request, res: Response){
+        const { email, nickname, password } = req.body
+        try{
+            let result
+            if(email){
+                result = await UserController.UserBusiness.login(email, password)
+            }
+            if(nickname){
+                result = await UserController.UserBusiness.login(email, password)
+            }
+            res.status(200).send(result)
+
+        }
+        catch(err){
+            res.status(err.errorCode || 400).send({ message: err.message });
+        }
+    }
+
 }

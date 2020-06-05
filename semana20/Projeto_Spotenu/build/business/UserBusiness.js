@@ -91,5 +91,56 @@ class UserBusiness {
             return { accessToken };
         });
     }
+    //4
+    getAllBands(token) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const userData = this.authenticator.verify(token);
+            const user = yield this.userDatabase.getUserById(userData.id);
+            if (!user) {
+                throw new NotFoundError_1.NotFoundError("User not found");
+            }
+            if (user.getRole() !== User_1.UserRole.ADMINISTRATOR) {
+                throw new UnauthorizedError_1.UnauthorizedError("You must be an admin to access this endpoint");
+            }
+            const bands = yield this.userDatabase.getAllBands();
+            return bands.map(band => ({
+                nome: band.getId(),
+                email: band.getEmail(),
+                nickname: band.getNickame(),
+                isApproved: band.getIsApproved()
+            }));
+        });
+    }
+    //5
+    //6
+    login(input, password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (!input || !password) {
+                throw new InvalidParameterError_1.InvalidParameterError("Missing input");
+            }
+            let user;
+            if (input.indexOf("@") !== -1) {
+                user = yield this.userDatabase.getUserByEmail(input);
+            }
+            else {
+                user = yield this.userDatabase.getUserByNickname(input);
+            }
+            if (!user) {
+                throw new NotFoundError_1.NotFoundError("User not found");
+            }
+            //   const isPasswordCorrect = await this.hashManager.compare(
+            //     password,
+            //     user.getPassword()
+            //   );
+            //   if (!isPasswordCorrect) {
+            //     throw new InvalidParameterError("Invalid password");
+            //   }
+            const accessToken = this.authenticator.generateToken({
+                id: user.getId(),
+                role: user.getRole(),
+            });
+            return { accessToken };
+        });
+    }
 }
 exports.UserBusiness = UserBusiness;
