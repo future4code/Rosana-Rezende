@@ -4,6 +4,7 @@ import { UserDatabase } from "../data/UserDatabase";
 import { HashManager } from "../services/HashManager";
 import { Authenticator } from "../services/Authenticator";
 import { IdGenerator } from "../services/IdGenerator";
+import { BaseDatabase } from "../data/BaseDatabase";
 
 export class UserController {
     private static UserBusiness = new UserBusiness(
@@ -23,6 +24,7 @@ export class UserController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
     //2
@@ -36,6 +38,7 @@ export class UserController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
     //3
@@ -50,6 +53,7 @@ export class UserController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
     //4
@@ -62,6 +66,7 @@ export class UserController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
     //5
@@ -77,6 +82,7 @@ export class UserController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
     //6
@@ -95,6 +101,7 @@ export class UserController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
 }

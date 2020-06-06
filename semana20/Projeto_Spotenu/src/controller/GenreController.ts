@@ -4,6 +4,7 @@ import { GenreDatabase } from "../data/GenreDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { UserDatabase } from "../data/UserDatabase";
 import { Authenticator } from "../services/Authenticator";
+import { BaseDatabase } from "../data/BaseDatabase";
 
 
 export class GenreController {
@@ -24,6 +25,7 @@ export class GenreController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
     public async getAllGenres(req: Request, res: Response){
@@ -35,6 +37,7 @@ export class GenreController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
 

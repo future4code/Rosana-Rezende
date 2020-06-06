@@ -5,6 +5,7 @@ import { AlbumDatabase } from "../data/AlbumDatabase";
 import { IdGenerator } from "../services/IdGenerator";
 import { Authenticator } from "../services/Authenticator";
 import { GenreDatabase } from "../data/GenreDatabase";
+import { BaseDatabase } from "../data/BaseDatabase";
 
 export class AlbumController {
     private static AlbumBusiness = new AlbumBusiness(
@@ -25,6 +26,7 @@ export class AlbumController {
         catch (err) {
             res.status(err.errorCode || 400).send({ message: err.message });
         }
+        await BaseDatabase.destroyConnection()
     }
 
 }
