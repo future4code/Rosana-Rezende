@@ -47,7 +47,7 @@ export class UserController {
         try {
             await UserController.UserBusiness.signupBandUser(name, email, nickname, password, description)
             res.status(200).send({
-                message: "Banda cadastrada. Aguarde a aprovação pelo administrador!"
+                message: "Registered band. Wait for approval by the administrator!"
             })
         }
         catch (err) {
@@ -76,7 +76,7 @@ export class UserController {
         try {
             await UserController.UserBusiness.aproveBand(id, token)
             res.status(200).send({
-                message: "Banda aprovada!"
+                message: "Approved band!"
             })
         }
         catch (err) {
