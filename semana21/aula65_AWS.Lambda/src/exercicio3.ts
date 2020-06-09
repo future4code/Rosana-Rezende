@@ -1,10 +1,13 @@
 export const handler = async(event: any) => {
-    return "Olá mundo, sou uma mensagem da AWS"
+    return event.num1 + event.num2
 }
 
 // para testar
 // const main = async() => {
-//     const result = await handler({})
+//     const result = await handler({
+//         num1: 1,
+//         num2: 2
+//     })
 //     console.log(result)
 // }
 

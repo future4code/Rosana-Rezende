@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rn -rf build && tsc",
     "start2": "ts-node-dev ./src/exercicio2.ts",
-    "build": "rn -rf build && tsc"
+    "start3": "ts-node-dev ./src/exercicio3.ts"
   },
   "author": "Rosana Rezende",
   "license": "MIT",
