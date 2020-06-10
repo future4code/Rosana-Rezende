@@ -1,0 +1,28 @@
+{
+  "name": "aula65_aws.lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf build && tsc",
+    "start2": "ts-node-dev ./src/exercicio2.ts",
+    "start3": "ts-node-dev ./src/exercicio3.ts",
+    "start4": "ts-node-dev ./src/exercicio4.ts",
+    "start5": "ts-node-dev ./src/exercicio5.ts"
+  },
+  "author": "Rosana Rezende",
+  "license": "MIT",
+  "dependencies": {
+    "@types/knex": "^0.16.1",
+    "@types/node": "^14.0.12",
+    "@types/uuid": "^8.0.0",
+    "dotenv": "^8.2.0",
+    "knex": "^0.21.1",
+    "mysql": "^2.18.1",
+    "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.9.5",
+    "uuid": "^8.1.0"
+  }
+}
