@@ -115,6 +115,42 @@ Você pode considerar um CEP como válido se:
 - Possuir um, ao menos, 8 digitos
 - Possuir somente um `-`
 
+_Resposta_:
+
+```js
+exports.handler = async event => {
+    try {
+        const CEP = JSON.parse(event.body).CEP
+
+        if (CEP.length >= 8 && CEP.indexOf("-") !== -1) {
+            return {
+                statusCode: 200,
+                body: JSON.stringify({
+                    message: true
+                })
+            };
+        }
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify({
+                message: false
+            })
+        };
+    
+    }
+    catch (err) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({
+                message: err.message
+            })
+        };
+    }
+
+};
+```
+
 <br><br>
 
 ### Exercício 2
