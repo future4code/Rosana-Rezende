@@ -171,13 +171,13 @@ Nesse exercício, precisamos praticar o uso do template que permitirá rodarmos 
     3. Modificar a localização do handler (de `index.handler` para `lambda.handler`)
     4. Aumentar o timeout da lambda
 
-<br>
+<br><br>
 
 **Tarefa 4**
 
 Configure a sua API para sempre chamar a mesma Lambda independente do `path` utilizado, caso já não a tenha configurado assim. Para isso, lembre-se do que fizemos em aula (uso do `proxy`)
 
-_Resposta_:
+_Resposta_: Feito!
 
 <br><br>
 
@@ -185,7 +185,7 @@ _Resposta_:
 
 Crie uma tabela que represente um produto de uma loja, que deve possuir: um nome, uma foto e um preço. Faça um endpoint que permita criar um novo produto. Ao terminar, suba-o em uma lambda e realize testes utilzando o Postman.
 
-_Resposta_:
+_Resposta_: Feito!
 
 <br><br>
 
