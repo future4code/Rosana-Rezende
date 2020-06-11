@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import axios from "axios"
+import axios from "axios"
 
 import { Card, CardContent, Typography, Button } from "@material-ui/core"
 import { ContentWrapper } from "./styles"
@@ -9,13 +9,10 @@ function FileUploader() {
 
     const handleFile = async (e) => {
         setLink(undefined) // pra toda vez q alguém clica limpar a msg
-        // const data = new FormData()
-        // data.append("file", e.target.files[0])
-        // const result = await axios.put("link", data)
-        // setLink(result.data.link)
-
-        // depois apagar
-        setLink("qq link")
+        const data = new FormData()
+        data.append("file", e.target.files[0])
+        const result = await axios.put("http://localhost:3001/files/upload", data)        
+        setLink(result.data.link)
     }
 
     return (
@@ -27,7 +24,7 @@ function FileUploader() {
             </CardContent>
             <ContentWrapper>
                 <input
-                    // accept="image/*"
+                    accept="image/*"
                     style={ { display: "none"} }
                     id="contained-button-file"
                     multiple
