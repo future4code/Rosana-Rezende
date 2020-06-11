@@ -1,0 +1,31 @@
+{
+  "name": "labenu-system",
+  "version": "1.0.0",
+  "description": "\"Sistema que representa o básico da Labenu\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node build/index.js --target es6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/future4code/Rosana-Rezende.git"
+  },
+  "keywords": [
+    "labenu",
+    "system",
+    "ts"
+  ],
+  "author": "Rosana Rezende",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/future4code/Rosana-Rezende/issues"
+  },
+  "homepage": "https://github.com/future4code/Rosana-Rezende#readme",
+  "devDependencies": {
+    "@types/node": "^13.13.4"
+  },
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
+}

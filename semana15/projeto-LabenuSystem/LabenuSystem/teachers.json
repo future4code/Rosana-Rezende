@@ -1,0 +1,47 @@
+[
+  {
+    "id": 3,
+    "name": "Prof Bananinha",
+    "email": "bananinha@email.com",
+    "specialties": [
+      "React"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Prof Laranjinha",
+    "email": "laranjinha@email.com",
+    "specialties": [
+      "CSS",
+      "Testes"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Prof Amorzinho",
+    "email": "amorzinho@email.com",
+    "specialties": [
+      "React",
+      "Redux"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Prof Zangado",
+    "email": "zangado@email.com",
+    "specialties": [
+      "Typescript",
+      "Programação Orientada a Objetos",
+      "Backend"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Maricota",
+    "email": "maricota@email.com",
+    "specialties": [
+      "React",
+      "Redux"
+    ]
+  }
+]

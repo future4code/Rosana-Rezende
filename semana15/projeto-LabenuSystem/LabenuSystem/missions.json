@@ -1,0 +1,79 @@
+[
+  {
+    "id": 4,
+    "name": "Hamilton-na-night",
+    "startDate": "10/06/2019",
+    "endDate": "10/01/2020",
+    "teachersList": [
+      {
+        "id": 9,
+        "name": "Maricota",
+        "email": "maricota@email.com",
+        "specialties": [
+          "React",
+          "Redux"
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Prof Zangado",
+        "email": "zangado@email.com",
+        "specialties": [
+          "Typescript",
+          "Programação Orientada a Objetos",
+          "Backend"
+        ]
+      }
+    ],
+    "studentsList": [
+      {
+        "id": 7,
+        "name": "Lázaro",
+        "email": "lazaro@email.com",
+        "birthDate": "10/05/2000",
+        "hobbies": [
+          "curtir praia",
+          "jogar tênis"
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Rosana",
+        "email": "rosana@email.com",
+        "birthDate": "11/03/1987",
+        "hobbies": [
+          "maratonar Netflix"
+        ]
+      }
+    ],
+    "currentModule": 3
+  },
+  {
+    "id": 5,
+    "name": "Carlton",
+    "startDate": "10/06/2019",
+    "endDate": "10/01/2020",
+    "teachersList": [],
+    "studentsList": [
+      {
+        "id": 8,
+        "name": "Rosana",
+        "email": "rosana@email.com",
+        "birthDate": "11/03/1987",
+        "hobbies": [
+          "maratonar Netflix"
+        ]
+      }
+    ],
+    "currentModule": 3
+  },
+  {
+    "id": 10,
+    "name": "Lalala-na-night",
+    "startDate": "01/01/2001",
+    "endDate": "06/06/2001",
+    "teachersList": [],
+    "studentsList": [],
+    "currentModule": null
+  }
+]
