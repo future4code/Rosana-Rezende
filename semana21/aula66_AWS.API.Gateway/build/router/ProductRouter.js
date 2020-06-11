@@ -9,3 +9,4 @@ var ProductController_1 = require("../controller/ProductController");
 exports.productRouter = express_1.default.Router();
 var productController = new ProductController_1.ProductController();
 exports.productRouter.post("/create", productController.createProduct);
+exports.productRouter.get("/:id", productController.getProductById);

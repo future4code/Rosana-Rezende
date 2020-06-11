@@ -67,6 +67,30 @@ var ProductController = /** @class */ (function () {
             });
         });
     };
+    ProductController.prototype.getProductById = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, result, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        id = req.params.id;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, ProductController.ProductBusiness.getProductById(id)];
+                    case 2:
+                        result = _a.sent();
+                        res.status(200).send(result);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        err_2 = _a.sent();
+                        res.status(400).send({ message: err_2.message });
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     ProductController.ProductBusiness = new ProductBusiness_1.ProductBusiness(new ProductDatabase_1.ProductDatabase(), new IdGenerator_1.IdGenerator());
     return ProductController;
 }());

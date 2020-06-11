@@ -195,4 +195,5 @@ Agora, crie outro endpoint que deve receber um id através de pathParams e devol
 
 Responda: o que foi o mais difícil de fazer nesse processo? Por quê?
 
-_Resposta_:
+_Resposta_: Feito!
+O mais difícil foi reassitir as aulas pra entender o passo a passo. Acredito que daqui pra frente deva ficar mais fácil.

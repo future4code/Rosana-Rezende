@@ -51,22 +51,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductDatabase = void 0;
 var BaseDatabase_1 = require("./BaseDatabase");
+var Product_1 = require("../model/Product");
 var ProductDatabase = /** @class */ (function (_super) {
     __extends(ProductDatabase, _super);
     function ProductDatabase() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    // private toModel(dbModel?: any): Product | undefined {
-    //     return (
-    //         dbModel &&
-    //         new Product(
-    //             dbModel.id,
-    //             dbModel.name,
-    //             dbModel.image,
-    //             dbModel.price,
-    //         )
-    //     );
-    // }
+    ProductDatabase.prototype.toModel = function (dbModel) {
+        return (dbModel &&
+            new Product_1.Product(dbModel.id, dbModel.name, dbModel.image, dbModel.price));
+    };
     ProductDatabase.prototype.createProduct = function (product) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -82,6 +76,22 @@ var ProductDatabase = /** @class */ (function (_super) {
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ProductDatabase.prototype.getProductById = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, _super.prototype.connection.call(this)
+                            .select("*")
+                            .from(ProductDatabase.TABLE_NAME)
+                            .where({ id: id })];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, this.toModel(result[0])];
                 }
             });
         });

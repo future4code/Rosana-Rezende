@@ -23,4 +23,14 @@ export class ProductBusiness {
 
     }
 
+    public async getProductById(id: string){
+        if(!id){
+            throw new Error("Missing input");
+        }
+
+        const user = await this.productDatabase.getProductById(id)
+
+        return user
+    }
+
 }

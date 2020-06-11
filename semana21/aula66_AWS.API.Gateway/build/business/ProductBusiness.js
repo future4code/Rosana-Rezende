@@ -62,6 +62,23 @@ var ProductBusiness = /** @class */ (function () {
             });
         });
     };
+    ProductBusiness.prototype.getProductById = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!id) {
+                            throw new Error("Missing input");
+                        }
+                        return [4 /*yield*/, this.productDatabase.getProductById(id)];
+                    case 1:
+                        user = _a.sent();
+                        return [2 /*return*/, user];
+                }
+            });
+        });
+    };
     return ProductBusiness;
 }());
 exports.ProductBusiness = ProductBusiness;

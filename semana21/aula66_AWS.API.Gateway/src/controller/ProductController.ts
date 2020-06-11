@@ -21,5 +21,16 @@ export class ProductController{
         }
     }
 
+    public async getProductById(req: Request, res: Response){
+        const { id } = req.params
+        try{
+            const result = await ProductController.ProductBusiness.getProductById(id)
+            res.status(200).send(result)
+        }
+        catch(err){
+            res.status(400).send({ message: err.message })
+        }
+    }
+
 
 }
