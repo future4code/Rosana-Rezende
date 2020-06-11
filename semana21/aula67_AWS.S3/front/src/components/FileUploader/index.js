@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, CardContent, Typography, CardActions, Button } from "@material-ui/core"
-// import { ButtonWrapper } from "./styles"
+import { Card, CardContent, Typography, Button } from "@material-ui/core"
+import { ButtonWrapper } from "./styles"
 
 function FileUploader() {
     return (
@@ -10,11 +10,11 @@ function FileUploader() {
                     Selecione um arquivo para realizar o upload
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button color="primary">
-                    oi
+            <ButtonWrapper>
+                <Button color="primary" variant="contained">
+                    SELECIONAR ARQUIVO
                 </Button>
-            </CardActions>
+            </ButtonWrapper>
             <CardContent>
                 
             </CardContent>
