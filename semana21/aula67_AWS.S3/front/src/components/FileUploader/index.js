@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+// import axios from "axios"
+
 import { Card, CardContent, Typography, Button } from "@material-ui/core"
-import { ButtonWrapper } from "./styles"
+import { ContentWrapper } from "./styles"
 
 function FileUploader() {
+    const [link, setLink] = useState(undefined)
+
+    const handleFile = async (e) => {
+        setLink(undefined) // pra toda vez q alguém clica limpar a msg
+        // const data = new FormData()
+        // data.append("file", e.target.files[0])
+        // const result = await axios.put("link", data)
+        // setLink(result.data.link)
+
+        // depois apagar
+        setLink("qq link")
+    }
+
     return (
         <Card>
             <CardContent>
@@ -10,14 +25,28 @@ function FileUploader() {
                     Selecione um arquivo para realizar o upload
                 </Typography>
             </CardContent>
-            <ButtonWrapper>
-                <Button color="primary" variant="contained">
-                    SELECIONAR ARQUIVO
-                </Button>
-            </ButtonWrapper>
-            <CardContent>
-                
-            </CardContent>
+            <ContentWrapper>
+                <input
+                    // accept="image/*"
+                    style={ { display: "none"} }
+                    id="contained-button-file"
+                    multiple
+                    type="file"
+                    onChange={handleFile}
+                />
+                <label htmlFor="contained-button-file">
+                    <Button variant="contained" color="primary" component="span">
+                        Upload
+                    </Button>
+                </label>
+            </ContentWrapper>
+            {link &&
+                <ContentWrapper>
+                    <Typography>
+                        O arquivo encontra-se no link: {link}
+                    </Typography>
+                </ContentWrapper>
+            }
         </Card>
     )
 }

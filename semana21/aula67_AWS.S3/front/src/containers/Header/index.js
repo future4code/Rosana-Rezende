@@ -5,7 +5,7 @@ function Header() {
     return (
         <AppBar position="static">
             <Toolbar variant="dense">
-                <Typography variant="h6" color="inherit">
+                <Typography variant="h5" color="inherit">
                     File Upload System
                 </Typography>
             </Toolbar>
