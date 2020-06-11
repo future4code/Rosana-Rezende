@@ -11,17 +11,14 @@ export class FileController{
             if(!file){
                 throw new Error("Você precisa enviar um arquivo")
             }
-            // console.log(file)
             const result = await s3Service.uploadFile({
                 name: file.name,
                 file: file.data
             })
-            // console.log(result)
-
             res.status(200).send(result)
         }
         catch(err){
-            // console.log(err.message)
+            console.log(err.message)
             res.status(400).send({ message: err.message })
         }
     }
